@@ -1,0 +1,38 @@
+
+
+git clone https://github.com/waqarshaiiikh/IACS.git
+
+--planing for add feature--
+
+
+git checkout -b <your currently working features name>        (for creating local branch)
+
+
+--after we succesfully develop the feature push like that--
+
+---if your local exist on github repo then type this for publish --
+git push -b <branch name other than master> origin 
+
+--otherwise--
+git push --set-upstream origin <branch-name>   	(for publishing local branch to github)
+
+
+
+
+
+
+
+note: IN Feature when your current feature branch merge to master branch then type pull 
+	cammand from master branch like that,
+
+like,
+git checkout master   		(move to master branch)
+git pull 			(getting the updated master branch )
+
+note: then, if you want to add new feature do Top steps of branching methods.
+   
+
+ 
+
+
+
