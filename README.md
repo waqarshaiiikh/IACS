@@ -1,9 +1,16 @@
 
+# Master Branch
+  
+  First inspecting the dev branch then marge to master branch for release version. 
+
 # Development Branch
   
-  worspace for built version
+  Built version
+
+# Khalid Branch
   
+  Workspace for the khalid .
+
+# Waqar Branch
   
-# Waqar
-  
-  workspace for waqar .
+  Workspace for waqar .
