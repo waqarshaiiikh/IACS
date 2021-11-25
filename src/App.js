@@ -1,10 +1,11 @@
 import Introduction from "./Components/Introduction";
-
+import Dashboard from "./Components/Dashboard";
 
 function App() {
   return (
     <>
-        <Introduction />
+        {/* <Introduction /> */}
+        <Dashboard/>
     </>
   );
 }
