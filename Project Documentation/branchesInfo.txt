@@ -1,0 +1,13 @@
+--Master Branch--
+Any contributor are not allow to merge their changes to Master Branch
+
+
+--DEV Branch--
+first, development branch gets changes from other branches (through git merge or git rebase) then 
+these changes integerated to master branch.
+
+---for development of new feacture--
+create new branch for develop every features
+and before integerate to DEV branch please update your branch (by DEV branch)
+
+
