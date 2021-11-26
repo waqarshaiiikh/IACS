@@ -1,9 +1,8 @@
 
-For Clone Repo
 
 git clone https://github.com/waqarshaiiikh/IACS.git
 
---planing for add feature --
+--planing for add feature--
 
 
 git checkout -b <your currently working features name>        (for creating local branch)
