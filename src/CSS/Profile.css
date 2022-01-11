@@ -1,0 +1,35 @@
+.profile-info{
+    /* max-width: 800px; */
+    width: 90%;
+    height: 100%;
+    margin-top: 10px;
+}
+.profile-info .profile-picture{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 250px;
+}
+.profile-picture .picture{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-picture .education{
+text-align: right;
+}
+.picture img{
+    height: 150px;
+    width: 200px;
+    clip-path: circle();
+}
+
+.profile-about{
+    margin-top: 10px;
+}
+
+.profile-about .about-box{
+    margin-top: 20px;
+    text-align: justify;
+}
