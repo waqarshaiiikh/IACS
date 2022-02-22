@@ -1,7 +1,7 @@
 .navbar {
-    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-    height: 80px;
+    /* height: 65px; */
     width: 98.9vw;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,17 +11,46 @@
     z-index: 999;
     position: sticky;
     top: 0px;
+    background-color: rgba(30, 160, 253, 0.2) !important;
   }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-    max-width: 1500px;
+
+.buttonColor{
+    color: #42B6EE !important;
+    border: 2px solid #42B6EE !important;
   }
-  
-  .navbar-logo {
+  .signin{
+    text-decoration: none;
+    color: #42B6EE;
+  }
+ .buttonColor:hover{
+   color: #fff;
+   background-color: #42B6EE;
+   transition: 0.5s;
+ } 
+ .signin:hover{
+  text-decoration: none;
+  color: #fff;
+}
+.navLogo{
+  color: #42B6EE !important;
+  font-weight: bold;
+}
+.navbar-toggler{
+  border:2px solid #42B6EE !important;
+  color: #42B6EE !important;
+}
+
+.navbar-toggler-icon{
+  color: #42B6EE !important;
+}
+
+
+@media screen and (max-width: 960px) {
+  .navbar{
+    width: 100vw;
+  }
+}
+  /* .navbar-logo {
     color: #fff;
     justify-self: start;
     margin-left: 20px;
@@ -161,4 +190,4 @@
       color: #242424;
       transition: 250ms;
     }
-  }
+  } */

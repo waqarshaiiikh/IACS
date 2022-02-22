@@ -21,7 +21,7 @@ const Request = () => {
                                 id="year"
                                 select
                                 label="Request for"
-                                helperText="Please select your year"
+                                helperText="Please select your Option"
                                 required
                             >
                                 <MenuItem key="first" value="job">Job</MenuItem>
@@ -29,7 +29,7 @@ const Request = () => {
                                 <MenuItem key="third" value="scholarship">Scholarship</MenuItem>
                                 <MenuItem key="final" value="project">Project</MenuItem>
                             </TextField>
-                            <Button variant="contained">Submit</Button>
+                            <Button variant="contained" style={{backgroundColor: '#42B6EE', color: '#FFFFFF'}}>Submit</Button>
                         </div>
                     </form>
                 </div>

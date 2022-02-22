@@ -1,7 +1,11 @@
 import React from 'react';
 import '../CSS/Cards.css';
 import CardItem from './CardItem';
-
+import job from "../Images/jobServices.jpg"
+import intership from '../Images/internshipServices.jpg'
+import project from "../Images/projectService.jpg"
+import Learning from "../Images/learningService.jpg"
+import scholarship from "../Images/scholarshipService.jpg"
 function Cards() {
   return (
     <div className='cards'>
@@ -10,36 +14,36 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-9.jpg'
+              src={job}
               text='Your desire Full time, Part time Job'
               label='Job'
-              path='/services'
+              path='/signup'
             />
             <CardItem
-              src='images/img-2.jpg'
+              src={intership}
               text='Get Experience through Internship'
               label='Interhsip'
-              path='/services'
+              path='/signup'
             />
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-3.jpg'
+              src={scholarship}
               text='Set Sail in the Atlantic Ocean visiting Uncharted Waters'
               label='Scholarhsip'
-              path='/services'
+              path='/signup'
             />
             <CardItem
-              src='images/img-4.jpg'
+              src={project}
               text='Experience Football on Top of the Himilayan Mountains'
               label='Project'
-              path='/products'
+              path='/signup'
             />
             <CardItem
-              src='images/img-8.jpg'
+              src={Learning}
               text='Ride through the Sahara Desert on a guided camel tour'
               label='Learning'
-              path='/sign-up'
+              path='/signup'
             />
           </ul>
         </div>

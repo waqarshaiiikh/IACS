@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body{
+    min-height: 100vh;
+    background-color: #63a4ff;
+    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+}
+
+header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.logo{
+    height: 60px;
+    line-height: 60px;
+    color:#42B6EE;
+    font-weight: 700;
+    font-size: 2em;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 60px;
+}
+
+#toggle{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+    background: #42B6EE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#toggle::before{
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 2px;
+    background: #fff;
+    transform: translateY(-5px);
+    transition: 0.2s;
+}
+
+#toggle::after{
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 2px;
+    background: #fff;
+    transform: translateY(5px);
+    transition: 0.2s;
+}
+
+#toggle.active::before{
+    transform: translateY(0px) rotate(45deg);
+}
+
+#toggle.active::after{
+    transform: translateY(0px) rotate(-45deg);
+}
+
+#toggle.active{
+    background: #37aee9;
+}
+
+#navbar{
+    position: relative;
+    height: 60px;
+    right: 60px;
+    background: #fff;
+    transition: 0.5s;
+    
+}
+#navbar ul{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+#navbar ul li {
+    list-style: none;
+    /* My style */
+    display: flex;
+    align-items: center;
+}
+
+#navbar ul li a{
+    color: #42B6EE;
+    height: 60px;
+    line-height: 60px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin-left: 10px;
+    padding: 0 15px;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+
+#navbar ul li a:hover{
+    color: #fff;
+    background:#42B6EE;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 30px;
+}
+#navbar .join{
+    background-color: #42B6EE;
+    color: #fff;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+#navbar .join:hover{
+    background-color: #fff;
+    color: #42B6EE;
+    border: 1px solid #42B6EE;
+}
+
+#navbar .sign-in{
+    height: 35px;
+    line-height: 35px;
+    border:2px solid #42B6EE;
+    border-radius: 30px;
+    transition: 0.5s;
+}
+section{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100vh;
+    color: #000;
+}
+section .one, section .two{
+    font-size: 2rem;
+    width:700px;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section .home-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.home-description h1{
+    color: #42B6EE;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.home-description p{
+    font-size: 0.9em;
+}
+.home-description label{
+    font-size: 0.5em;
+    border-radius: 50px;
+    padding: 5px 10px;
+    background-color: #42B6EE;
+    transition: 0.5s;
+    margin-top: 20px;
+}
+
+.home-description label:hover{
+    margin-top: 30px;
+    color: #42B6EE;
+    border:solid #42B6EE;
+    background: #fff;
+    cursor: pointer;
+}
+
+section .home-image img{
+    max-width: 600px;
+    height: auto;
+    transition: 0.5s;
+}
+.home-image img:hover {
+    transform: scale(1.1);
+}
+
+.about-description {
+    text-align: justify;
+    line-height: 1.2em;
+    padding: 10px;
+}
+section .about-image img{
+    max-width: 500px;
+    height: auto;
+    transition: 0.5s;
+}
+
+.about-image img:hover{
+    transform: scale(1.1);
+}
+
+#services div{
+    width: 400px;
+    height: 500px;
+    border:2px solid #42B6EE;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+#services div:hover{
+    transform: scale(1.1);
+}
+#services div p{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    margin-top: 20px;
+    color: black;
+}
+.student-image img{
+    max-width: 200px;
+    height: auto;
+}
+
+.software-house img{
+    max-width: 300px;
+    height: auto;
+}
+
+.job-image img{
+    max-width: 250px;
+    height: auto;
+}
+
+section .contact-image img{
+    max-width: 500px;
+    height: auto;
+    transition: 0.5s;
+}
+
+.contact-image img:hover{
+    transform: scale(1.1);
+}
+
+section .contact-description{
+    flex-direction: column;
+}
+
+section .contact-description label{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+.contact-description .contact-info{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-info input, .contact-info textarea{
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.contact-info input:focus, .contact-info textarea:focus{
+    outline: none;
+}
+
+.submit{
+    font-size: 0.5em;
+    border-radius: 30px;
+    padding: 7px 20px;
+    background-color: #54a0ff;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.submit:hover{
+    color: #42B6EE;
+    background-color: #fff;
+}
+footer{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #63a4ff;
+background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+}
+/* Responisve */
+
+@media (max-width:991px){
+    #navbar{
+        position: fixed;
+        bottom: -100%;
+        right: 0;
+        width: 100%;
+        transition: 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    #navbar.active{
+        height: calc(100vh - 60px);
+        bottom: 0px;
+    }
+    #navbar ul{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #navbar .join{
+        margin-top: 10px;
+    }
+    .logo{
+        padding-left: 20px;
+    }
+    #toggle{
+        display: flex;
+    }
+    section{
+        flex-direction: column;
+        min-height: calc(100vh - 60px);
+    }
+    section .one, section .two{
+        width: 100%;
+        min-height: 70vh;
+        margin-top: 10px;
+        padding-top: 50px;
+    }
+    section .home-image img, section .about-image img, section .contact-image img{
+        max-width: 300px;
+        height: auto;
+    }
+    .home-description p{
+        font-size: 0.5em;
+        margin-bottom: 10px;
+    }
+    .home-description h1{
+        font-size: 1.1em;
+    }
+    .about-description p{
+        font-size: 18px;
+        line-height: 30px;
+    }
+    #services div{
+        margin-top: 10px;
+        height: auto;
+        max-width: 80%;
+        padding: 10px;
+    }
+    #services div p{
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+    .student-image img{
+        max-width: 150px;
+        height: auto;
+    }
+    
+    .software-house img{
+        max-width: 250px;
+        height: auto;
+    }
+    
+    .job-image img{
+        max-width: 200px;
+        height: auto;
+    }
+    
+    .contact-description .contact-info{
+        width: 300px;
+    }
+    .contact-info .submit{
+        margin-bottom: 10px;
+    }
+    footer{
+        width: 100%;
+        height: 30px;
+    }
+    footer p{
+        font-size: 12px;
+        height: 30px;
+        line-height: 30px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+}

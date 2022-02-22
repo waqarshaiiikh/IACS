@@ -7,22 +7,50 @@ video {
   }
   
   .hero-container {
-    /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
+    background: url('../Images/introduction.jpg') center center/cover no-repeat;
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 1000px rgba(30, 160, 253, 0.2);
     object-fit: contain;
   }
+
+  .aboutus-container{
+    background: url('../Images/aboutus.jpg') center center/cover no-repeat;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 0 1000px rgba(30, 160, 253, 0.2);
+    object-fit: contain;
+  }
+
   
   .hero-container > h1 {
     color: #fff;
     font-size: 80px;
     text-align: center;
     margin-top: -100px;
+  }
+
+  .aboutus-container > h2{
+    font-size: 60px;
+  }
+
+  .aboutus-container p{
+    width: 70%;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 3px;
+    line-height: 40px;
+    color: #000;
   }
   
   .hero-container > p {
@@ -44,11 +72,43 @@ video {
   .fa-play-circle {
     margin-left: 4px;
   }
+  .getStartLink{
+    text-decoration: none;
+  }
+  .getStartLink:hover{
+    text-decoration: none;
+  }
+  .getStart{
+    padding: 8px 20px;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #42B6EE;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  .getStart:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 2px solid #42B6EE;
+    transition: 0.2s;
+  }
   
   @media screen and (max-width: 960px) {
     .hero-container > h1 {
       font-size: 70px;
       margin-top: -150px;
+    }
+    .aboutus-container > h2{
+      text-align: center;
+      font-size: 40px;
+    }
+    .aboutus-container p{
+      width: 100%;
+      height: 100vh;
+      /* margin-top: 10px; */
+      font-size: 13px;
+      /* line-height: 0px; */
+      letter-spacing: normal;
     }
   }
   

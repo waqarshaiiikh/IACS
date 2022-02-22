@@ -1,10 +1,11 @@
 import React from 'react'
 import Dashboard from './Dashboard'
+import ServiceCard from './ServiceCard'
 
 const Job = () => {
     return (
         <>
-            <Dashboard field={<h1>Job</h1>}/>
+            <Dashboard field={<ServiceCard/>}/>
         </>
     )
 }

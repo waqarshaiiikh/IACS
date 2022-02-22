@@ -1,5 +1,5 @@
 import React from 'react'
-import std from "../Images/mypic.jpg"
+import std from "../Images/job.png"
 import "../CSS/Profile.css"
 
 const Profile = () => {

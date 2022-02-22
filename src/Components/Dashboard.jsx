@@ -7,7 +7,7 @@ const Dashboard = (props) => {
     const dashboard = useRef()
     useEffect(() => {
         let list = document.querySelectorAll('.list')
-        console.log(list);
+        // console.log(list);
         for (let i = 0; i < list.length; i++) {
             list[i].addEventListener('click', function (event) {
                 let j = 0;
@@ -104,7 +104,6 @@ const Dashboard = (props) => {
                         </span>
                     </div>
                     <div className="profile">
-                        <ion-icon name="person-outline"></ion-icon>
                         <label htmlFor="">Muhammad Khalid</label>
                     </div>
                 </div>

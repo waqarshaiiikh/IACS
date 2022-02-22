@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const SignUp = () => {
     return (
@@ -10,27 +12,17 @@ const SignUp = () => {
                     <label htmlFor="fullname" className="form-label">
                         Id
                     </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="fullname"
-                        placeholder="Enter Your Id"
-                    />
+                    <TextField id="email" fullWidth label="Id" variant="outlined" required />
                 </div>
                 <div className="signin-info">
                     <label htmlFor="email" className="form-label">
                         Password
                     </label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="email"
-                        placeholder="Enter Your Password"
-                    />
+                    <TextField id="outlined-basic" fullWidth label="Password" type='password' variant="outlined" required />
                 </div>
                 <div className="submit">
                     <Link to="/">
-                        Submit
+                        <Button variant="contained">Submit</Button>
                     </Link>
                 </div>
             </div>
