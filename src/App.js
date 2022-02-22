@@ -1,11 +1,14 @@
-import Introduction from "./Components/Introduction";
-import Dashboard from "./Components/Dashboard";
+import Main from "./Components/Main";
+import {BrowserRouter} from "react-router-dom";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 
 function App() {
   return (
     <>
-        {/* <Introduction /> */}
-        <Dashboard/>
+        <BrowserRouter>
+        <Main/>
+        </BrowserRouter>
     </>
   );
 }

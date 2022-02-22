@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital@0;1&display=swap');
+
+.job-tile{
+    width: 100%;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #1c1c24;
+    padding: 30px;
+    transition: transform 0.2s;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.job-tile:hover{
+    transform: scale(1.05);
+}
+.top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top img{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.rolename{
+    padding: 20px 0px;
+}
+
+.rolename span{
+    font-size: 22px;
+}
+
+.description{
+    height: 110px;
+    overflow: hidden;
+    font-size: 18px;
+    color: #96939b;
+    text-align: justify;
+    flex-grow: 1;
+}
+
+.buttons{
+    color: #000;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.button{
+    height: 40px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #2e2e39;
+    color: #93939b;
+    font-size: 14px;
+}
+
+.apply-now{
+    color: #fff;
+    background-color: #42B6EE;
+    margin-right: 15px;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:930px) {
+    .jobs-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width:600px) {
+    .jobs-container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    /* .search{
+        max-width: 350px;
+        width: 100%;
+    }
+    .button-container{
+        min-width: 50px;
+        flex: 1;
+        width: 100%;
+        font-size: 14px;
+    } */
+}

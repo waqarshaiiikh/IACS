@@ -13,9 +13,9 @@ body{
 
 .navigation{
     position: fixed;
-    top: 20px;
-    bottom: 20px;
-    left: 20px;
+    top: 0px;
+    bottom: 10px;
+    left: 0px;
     width: 70px;
     box-sizing: initial;
     border-radius: 10px;
@@ -129,9 +129,9 @@ body{
 }
 
 .toggle{
+    position: relative;
     width: 50px;
     height: 50px;
-    /* background: #42B6EE; */
     background-color: #63a4ff;
     background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
     border-radius: 20px;
@@ -143,17 +143,37 @@ body{
 }
 
 .toggle.active{
-    /* background: #ff4d89; */
     background-color: #63a4ff;
     background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
-    left: 350px;
+    left: 0px;
 }
 .toggle ion-icon{
     position: absolute;
     color: #fff;
     font-size: 34px;
-    display: none;
+    /* display: none; */
 
+}
+
+.toggle ion-icon.open, .toggle.active ion-icon.close{
+    display: block;
+}
+
+.toggle ion-icon.close,
+.toggle.active ion-icon.open{
+    display: none;
+}
+
+/* .toggle.active{
+    background-color: #63a4ff;
+    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+    left: 350px;
+}
+.dashboard-header .toggle ion-icon{
+    position: absolute;
+    color: #fff;
+    font-size: 34px;
+    display: none;
 }
 
 .toggle ion-icon.open,
@@ -164,28 +184,31 @@ body{
 .toggle ion-icon.close,
 .toggle.active ion-icon.open{
     display: none;
-}
+} */
 
 /* Dashboard */
 
 .dashboard{
     position: fixed;
-    top: 20px;
-    left: 120px;
+    top: 0px;
+    left: 90px;
     right: 20px;
     bottom: 20px;
+    max-height: 100vh;
+    height: 100%;
     transition: 0.5s;
     flex-direction: column;
     display: flex;
     align-items: center;
 }
 .dashboard.active{
-    left: 350px;
+    left: 320px;
 }
 
 .dashboard-header{
     width: 100%;
-    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -225,47 +248,40 @@ body{
 }
 
 .dashboard-content{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     width: 100%;
+    height: 100%;
+    padding: 2rem;
     background:	#ebeff5;
-    height: 100vh;
-    margin-top: 10px;
+    overflow-y: scroll;
     border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.row{
-    width: 100%;
-    margin-top: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.row .card{
-    width: 30%;
-    height: 220px;
-    border-radius: 20px;
-    color: #fff;
-    background-color: #63a4ff;
-    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    cursor: pointer;
-    transition: all .5s ease-in-out;
-}
-.card:hover{
-    transform: scale(1.1);
-    color: #333;
 }
 
-.card img{
-    width: 170px;
-}
-
-.card label{
-    font-size: 1.2em;
-}
+@media only screen and (max-width: 768px) {
+    .dashboard-content{
+        display: block;
+        width: 85vw;
+        height: 100vh;
+        margin: 0;
+        margin-right: 0px;
+        padding-top: 10px;
+    }
+    .navigation{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        width: 50px;
+    }
+    .navigation.active{
+        width: 50px;
+    }
+    .navigation ul{
+       padding-left: 0px;
+    }
+    .toggle{
+        display: none;
+    }
+  }

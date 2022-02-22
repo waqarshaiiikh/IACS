@@ -1,28 +1,18 @@
 import React from 'react'
-import "../CSS/Introduction.css"
+import "../App.css"
 import "../CSS/SignIn.css"
 import "../CSS/Dashboard.css"
-import About from '../Pages/About'
-import Contact from '../Pages/Contact'
 import Home from '../Pages/Home'
 import Navbar from '../Pages/Navbar'
-import Service from '../Pages/Service'
-import {Routes, Route} from "react-router-dom";
-import SignIn from "../Pages/SignIn"
-import SignUp from "../Pages/SignUp"
+import { Routes, Route } from "react-router-dom";
 
 const Introduction = () => {
     return (
         <div>
             <Navbar />
             <Routes>
-                <Route exact path="/signin" component={SignIn} />
-                <Route exact path="/signup" component={SignUp} />
+                <Route path='/' exact element={<Home />} />
             </Routes>
-            <Home />
-            <About />
-            <Service />
-            <Contact />
         </div>
     )
 }

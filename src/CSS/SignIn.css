@@ -20,39 +20,26 @@ body{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 600px;
-    height: 250px;
+    width: 650px;
+    height: 280px;
     background: #42B6EE;
     border: 1px solid #42B6EE;
-    border-radius: 30px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 2rem;
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .signIn-form .signin-info{
-    width: 80%;
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
+    margin-bottom: 10px;
 }
 .signin-info label{
-    width: 100px;
+    width: 200px;
     margin-right: 10px;
-}
-.signin-info input{
-    width: 80%;
-    font-size: 16px;
-    border-radius: 30px;
-    border:1px solid #fff;
-    padding: 9px 10px;
-    background: transparent;
-    transition: 0.5s;
-}
-
-.signin-info input:focus{
-    transform: scale(1.1);
-    width: 80%;
 }
 
 .signin-info input:focus{
@@ -61,19 +48,17 @@ body{
 }
 
 .submit{
-    border: 1px solid;
+    font-size: 14px;
     padding: 7px 20px;
-    border-radius: 30px;
     cursor: pointer;
     transition: 0.5s;
-}
-.submit:hover{ 
-    background: #fff;
-    color: #42B6EE;
 }
 
 @media (max-width:991px){
     .signIn-form{
-        width: 400px;
+        width: 270px;
+    }
+    .signin-info .form-label{
+        display: none;
     }
 }
