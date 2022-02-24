@@ -1,4 +1,4 @@
-import React, { useRef,useEffect} from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Link, Outlet } from "react-router-dom"
 const Dashboard = (props) => {
     // const [Dashboard, setDashboard] = useState(true)
@@ -19,6 +19,7 @@ const Dashboard = (props) => {
             })
         }
     })
+    const [hamburger, setHamburger] = useState(true)
     const menu = () => {
         menuToggle.current.classList.toggle('active')
         navigation.current.classList.toggle('active')
@@ -94,8 +95,9 @@ const Dashboard = (props) => {
             <div className="dashboard" ref={dashboard}>
                 <div className="dashboard-header">
                     <div className="toggle" ref={menuToggle} onClick={menu}>
-                        <ion-icon name="menu-outline" className="open"></ion-icon>
-                        {/* <ion-icon name="close-outline" className="close"></ion-icon> */}
+                        {
+                            hamburger ? <ion-icon name="menu-outline" className="open" onClick={() => { setHamburger(false) }}></ion-icon> : <ion-icon name="close-outline" className="close" onClick={() => { setHamburger(true) }}></ion-icon>
+                        }
                     </div>
                     <div className="search">
                         <input type="text" name="" id="" />
@@ -104,7 +106,7 @@ const Dashboard = (props) => {
                         </span>
                     </div>
                     <div className="profile">
-                        <label htmlFor="">Muhammad Khalid</label>
+                        <span>Muhammad Khalid</span>
                     </div>
                 </div>
                 <div className="dashboard-content">

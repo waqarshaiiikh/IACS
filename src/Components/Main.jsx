@@ -25,6 +25,7 @@ import ClientJob from "../Industries/ClientJob"
 import ClientInternship from '../Industries/ClientInternship';
 import ClientProject from '../Industries/ClientProject';
 import ClientScholarship from '../Industries/ClientScholarship';
+import ClientPost from "../Industries/ClientPost"
 
 const Main = () => {
     return (
@@ -49,7 +50,7 @@ const Main = () => {
                     <Route path="/clientDashboard/home" element={<ClientCard />} />
                     <Route path="/clientDashboard/profile" element={<CompanyProfile />} />
                     <Route path="/clientDashboard/password" element={<Password />} />
-                    <Route path="/clientDashboard/request" element={<Request />} />
+                    <Route path="/clientDashboard/post" element={<ClientPost />} />
                     <Route path="/clientDashboard/update" element={<ClientProfileForm />} />
                 </Route>
                 <Route path="/dashboard" element={<Dashboard />}>

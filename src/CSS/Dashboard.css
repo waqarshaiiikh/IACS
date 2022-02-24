@@ -219,10 +219,12 @@ body{
     color: #fff;
     height: 50px;
     display: flex;
-    border-radius: 20px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
     justify-content: space-around;
     align-items: center;
-    padding: 5px;
+    padding: 0 1rem;
 }
 
 .search{
@@ -283,5 +285,12 @@ body{
     }
     .toggle{
         display: none;
+    }
+    .dashboard-header{
+        flex-direction: column-reverse;
+    }
+    .dashboard-header .search{
+        width: 100%;
+        margin-top: 1rem;
     }
   }

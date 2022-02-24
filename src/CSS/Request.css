@@ -49,3 +49,11 @@
     background-color: #42B6EE;
 } */
 
+@media screen and (max-width:991px) {
+    .request-form .request-option{
+        flex-direction: column;
+    }
+    .request-container .request-box{
+        margin: 0;
+    }
+}

@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ClientDashboard from "./Industries/ClientDashboard"
  
 ReactDOM.render(
     <App />,
-    // <ClientDashboard/>,
   document.getElementById('root')
 );
 

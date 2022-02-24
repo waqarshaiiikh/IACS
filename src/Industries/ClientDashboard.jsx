@@ -1,4 +1,4 @@
-import React, { useRef,useEffect} from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Link, Outlet } from "react-router-dom"
 const ClientDashboard = (props) => {
     // const [Dashboard, setDashboard] = useState(true)
@@ -19,6 +19,8 @@ const ClientDashboard = (props) => {
             })
         }
     })
+
+    const [hamburger, setHamburger] = useState(true)
     const menu = () => {
         menuToggle.current.classList.toggle('active')
         navigation.current.classList.toggle('active')
@@ -64,9 +66,19 @@ const ClientDashboard = (props) => {
                         <b></b>
                         <Link to="/clientDashboard/password">
                             <span className="icon">
-                                <ion-icon name="lock-closed-outline"></ion-icon>
+                                <ion-icon name="bag-check-outline"></ion-icon>
                             </span>
                             <span className="title">Password</span>
+                        </Link>
+                    </li>
+                    <li className="list">
+                        <b></b>
+                        <b></b>
+                        <Link to="/clientDashboard/post">
+                            <span className="icon">
+                                <ion-icon name="cloud-upload-outline"></ion-icon>
+                            </span>
+                            <span className="title">Post</span>
                         </Link>
                     </li>
                     <li className="list">
@@ -84,8 +96,9 @@ const ClientDashboard = (props) => {
             <div className="dashboard" ref={dashboard}>
                 <div className="dashboard-header">
                     <div className="toggle" ref={menuToggle} onClick={menu}>
-                        <ion-icon name="menu-outline" className="open"></ion-icon>
-                        {/* <ion-icon name="close-outline" className="close"></ion-icon> */}
+                        {
+                            hamburger ? <ion-icon name="menu-outline" className="open" onClick={() => { setHamburger(false) }}></ion-icon> : <ion-icon name="close-outline" className="close" onClick={() => { setHamburger(true) }}></ion-icon>
+                        }
                     </div>
                     <div className="search">
                         <input type="text" name="" id="" />

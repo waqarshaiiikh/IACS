@@ -22,7 +22,7 @@ const SignIn = () => {
                 </div>
                 <div className="submit">
                     <Link to="/dashboard">
-                        <Button variant="contained">Submit</Button>
+                        <Button variant="contained">Sing In</Button>
                     </Link>
                 </div>
             </div>

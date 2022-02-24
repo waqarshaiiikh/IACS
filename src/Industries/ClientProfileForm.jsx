@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import { MenuItem, FormControl, Input } from '@mui/material';
 import Button from '@mui/material/Button';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
 import "../CSS/ProfileForm.css"
 
 const ClientProfileForm = () => {
