@@ -21,7 +21,7 @@ body{
     justify-content: space-around;
     align-items: center;
     width: 650px;
-    height: 280px;
+    /* height: 280px; */
     background: #42B6EE;
     border: 1px solid #42B6EE;
     border-radius: 10px;

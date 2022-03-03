@@ -3,23 +3,26 @@ import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const SignUp = () => {
+const IndustrySignIn = () => {
     return (
         <>
             <div className="signIn-form">
-                <h1>Student Sign Up</h1>
+                <h1>Software House Login</h1>
                 <div className="signin-info">
+                    <label htmlFor="fullname" className="form-label">
+                        Email
+                    </label>
                     <TextField id="email" fullWidth label="Email" variant="outlined" required />
                 </div>
                 <div className="signin-info">
-                    <TextField id="enrollnment" fullWidth label="Enrollnment" variant="outlined" required />
-                </div>
-                <div className="signin-info">
+                    <label htmlFor="email" className="form-label">
+                        Password
+                    </label>
                     <TextField id="password" fullWidth label="Password" type='password' variant="outlined" required />
                 </div>
                 <div className="submit">
                     <Link to="/">
-                        <Button variant="contained">Sign Up</Button>
+                        <Button variant="contained">Log In</Button>
                     </Link>
                 </div>
             </div>
@@ -27,4 +30,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default IndustrySignIn

@@ -1,56 +1,56 @@
 .navbar {
-    /* height: 65px; */
-    width: 98.9vw;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    position: sticky;
-    top: 0px;
-    background-color: rgba(30, 160, 253, 0.2) !important;
-  }
+  /* width: 98.9vw;
+  overflow-x: hidden; */
+  font-size: 1.2rem;
+  z-index: 999;
+  position: sticky;
+  top: 0px;
+  background-color: rgba(30, 160, 253, 0.2) !important;
+}
 
-.buttonColor{
-    color: #42B6EE !important;
-    border: 2px solid #42B6EE !important;
-  }
-  .signin{
-    text-decoration: none;
-    color: #42B6EE;
-  }
- .buttonColor:hover{
+button{
+  margin-left: 10px;
+}
+
+.buttonColor {
+  color: #42b6ee !important;
+  border: 2px solid #42b6ee !important;
+}
+.signin {
+  text-decoration: none;
+  color: #42b6ee;
+}
+.buttonColor:hover{
    color: #fff;
    background-color: #42B6EE;
    transition: 0.5s;
  } 
- .signin:hover{
+.signin:hover {
   text-decoration: none;
-  color: #fff;
 }
-.navLogo{
-  color: #42B6EE !important;
+.navLogo {
+  color: #42b6ee !important;
   font-weight: bold;
 }
-.navbar-toggler{
-  border:2px solid #42B6EE !important;
-  color: #42B6EE !important;
+.navbar-toggler {
+  border: 2px solid #42b6ee !important;
+  color: #42b6ee !important;
 }
 
-.navbar-toggler-icon{
-  color: #42B6EE !important;
+.navbar-toggler-icon {
+  color: #42b6ee !important;
 }
 
+a{
+  color: #42b6ee;
+}
 
 @media screen and (max-width: 960px) {
-  .navbar{
+  .navbar {
     width: 100vw;
   }
 }
-  /* .navbar-logo {
+/* .navbar-logo {
     color: #fff;
     justify-self: start;
     margin-left: 20px;
