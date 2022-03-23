@@ -3,7 +3,7 @@ import "../App.css"
 import "../CSS/SignIn.css"
 import "../CSS/Dashboard.css"
 import Home from '../Pages/Home'
-import Navbar from '../Pages/Navbar'
+import Navbar from './Navbar';
 import { Routes, Route } from "react-router-dom";
 
 const Introduction = () => {

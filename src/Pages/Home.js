@@ -6,7 +6,7 @@ import Footer from './Footer';
 import ContactUs from './ContactUs';
 import AboutUs from "./AboutUs"
 
-function Home() {
+function Home () {
   return (
     <>
       <HeroSection />

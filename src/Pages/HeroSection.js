@@ -10,9 +10,9 @@ function HeroSection() {
         <h1>DON'T BUSY BE PRODUCTIVE</h1>
         <p>What are you waiting for?</p>
         <div className='hero-btns'>
-          <Link to="/signup" className='getStartLink'>
+          <Link to="signup" className='getStartLink'>
           <span className='getStart'>
-              GET STARTED
+              POST JOBS ?
             </span>
           </Link>
         </div>

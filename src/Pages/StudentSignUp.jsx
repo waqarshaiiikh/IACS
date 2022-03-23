@@ -1,8 +1,9 @@
 import React from 'react'
+import { Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@material-ui/core';
-import { FormControl, TextField, Button, Container, Grid } from '@mui/material';
+import { MenuItem, FormControl, TextField, Button } from '@mui/material';
 
 const useStyles = makeStyles({
     button:{
@@ -14,10 +15,9 @@ const useStyles = makeStyles({
         padding: '0 30px !important',
     }
 });
+const StudentSignUp = () => {
 
-const IndustrySignUp = () => {
     const classes = useStyles();
-
     return (
         <>
             <Container sx={{m:{xs:2, lg:'none'}}}>
@@ -25,14 +25,11 @@ const IndustrySignUp = () => {
                     <Grid container spacing={3}>
                         <Grid item lg={12} xs={12} display='flex' justifyContent='center'>
                             <Typography variant='h4'>
-                                Industry SignUp 
+                                Student SignUp 
                             </Typography>
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <TextField id="cname" fullWidth label="Company Name" type="text" variant="outlined" required />
-                        </Grid>
-                        <Grid item lg={6} xs={12}>
-                            <TextField id="hrname" fullWidth label="HR Name" type='text' variant="outlined" required />
+                            <TextField id="name" fullWidth label="Full Name" type="text" variant="outlined" required />
                         </Grid>
                         <Grid item lg={6} xs={12}>
                             <TextField id="email" fullWidth label="Email" type="email" variant="outlined" required />
@@ -41,13 +38,30 @@ const IndustrySignUp = () => {
                             <TextField id="phoneNumber" fullWidth label="Phone No" type='number' variant="outlined" required />
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <TextField id="cnic" fullWidth label="CNIC / NTN" type='number' variant="outlined" required />
+                            <TextField id="enrollnment" fullWidth label="Enrollnment No" type='text' variant="outlined" required />
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <TextField id="city" fullWidth label="City" type='text' variant="outlined" required />
+                            <TextField id="univeristy" fullWidth label="University" type='text' variant="outlined" required />
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <TextField id="country" fullWidth label="Country" type='text' variant="outlined" required />
+                            <TextField id="department" fullWidth label="Department" type='text' variant="outlined" required />
+                        </Grid>
+                        <Grid item lg={6} xs={12}>
+                            <TextField id="year" fullWidth label="Year" variant="outlined" required select>
+                                <MenuItem key="first" value="first">First</MenuItem>
+                                <MenuItem key="second" value="second">Second</MenuItem>
+                                <MenuItem key="third" value="third">Third</MenuItem>
+                                <MenuItem key="final" value="final">Final</MenuItem>
+                            </TextField>
+                        </Grid>
+                        <Grid item lg={6} xs={12}>
+                            <TextField id="semester" fullWidth label="Semester" variant="outlined" required select>
+                                <MenuItem key="first" value="first">Fall / First</MenuItem>
+                                <MenuItem key="second" value="second">Spring / Second</MenuItem>
+                            </TextField>
+                        </Grid>
+                        <Grid item lg={6} xs={12}>
+                            <TextField id="gpa" fullWidth label="CGPA" type='number' variant="outlined" required />
                         </Grid>
                         <Grid item lg={6} xs={12}>
                             <TextField id="password" fullWidth label="Password" type='password' variant="outlined" required />
@@ -65,4 +79,4 @@ const IndustrySignUp = () => {
     )
 }
 
-export default IndustrySignUp
+export default StudentSignUp

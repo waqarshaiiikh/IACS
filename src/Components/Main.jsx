@@ -13,10 +13,8 @@ import Job from './Job';
 import Internship from './Internship';
 import Project from './Project';
 import Scholarship from './Scholarship';
-import SignIn from '../Pages/SignIn';
-import SignUp from '../Pages/SignUp';
-import IndustrySignIn from "../Pages/IndustrySignIn";
-import IndustrySignUp from '../Pages/IndustrySignUp';
+import Signin from '../Pages/Signin';
+import Signup from '../Pages/Signup';
 import ClientDashborad from "../Industries/ClientDashboard"
 import ClientProfileForm from '../Industries/ClientProfileForm';
 import CompanyProfile from '../Industries/CompanyProfile';
@@ -33,10 +31,8 @@ const Main = () => {
     return (
         <>
             <Routes>
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/industrysignin" element={<IndustrySignIn/>}/>
-                <Route path="/industrysignup" element={<IndustrySignUp/>}/>
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/" element={<Introduction />} />
                 <Route path='/clientsoftwarehouse' element={<ClientSoftware/>}/>
                 <Route path="/clientstudent" element={<ClientStudent />} />
