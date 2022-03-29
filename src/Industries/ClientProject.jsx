@@ -1,11 +1,13 @@
 import React from 'react'
-import ClientDashboard from './ClientDashboard'
+import ClientNavbar from "./ClientNavbar"
 import ServiceCard from '../Components/ServiceCard'
 
 const ClientProject = () => {
   return (
     <>
-        <ClientDashboard field={<ServiceCard/>} />
+        <ClientNavbar/>
+        <h1>Client Project</h1>
+        <ServiceCard/>
     </>
   )
 }

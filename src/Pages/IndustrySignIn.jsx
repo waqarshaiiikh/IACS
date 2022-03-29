@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 
 const useStyles = makeStyles({
@@ -43,7 +43,7 @@ const IndustrySignIn = () => {
                                 <TextField id="password" type='password' fullWidth label="Password" variant="outlined" required />
                             </Grid>
                             <Grid item lg={12} xs={12} sx={{display: 'flex', justifyContent: 'center' }}>
-                                <Button className={classes.button} variant="contained" component={Link} to="/dashboard">
+                                <Button className={classes.button} variant="contained" component={Link} to="/clidashboard">
                                     Log In
                                 </Button>
                             </Grid>

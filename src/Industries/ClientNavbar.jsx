@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Navbar = () => {
+const ClientNavbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const classes = useStyles();
@@ -87,22 +87,22 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/softwarehouse" >Software House</Typography>
+                <Typography textAlign="center" component={Link} to="/clistudent" >Student</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdjob" >Jobs</Typography>
+                <Typography textAlign="center" component={Link} to="/clijob" >Jobs</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdinternship">Internhsips</Typography>
+                <Typography textAlign="center" component={Link} to="/cliinternship">Internhsips</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/stdtraining">Trainings</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdproject">Projects</Typography>
+                <Typography textAlign="center" component={Link} to="/cliproject">Projects</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdscholarship">Scholarships</Typography>
+                <Typography textAlign="center" component={Link} to="/clischolarship">Scholarships</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/signup">Sign up</Typography>
@@ -122,15 +122,15 @@ const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/softwarehouse">
-              Software House
+              className={classes.button} component={Link} to="/clistudent">
+              Student
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdjob">
+              className={classes.button} component={Link} to="/clijob">
               Jobs
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdinternship">
+              className={classes.button} component={Link} to="/cliinternship">
               Internships
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
@@ -138,11 +138,11 @@ const Navbar = () => {
               Trainings
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdproject">
+              className={classes.button} component={Link} to="/cliproject">
               Projects
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdscholarship">
+              className={classes.button} component={Link} to="/clischolarship">
               Scholarships
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
@@ -178,13 +178,13 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" component={Link} to="/stddashboard">Dashboard</Typography>
+                <Typography textAlign="center" component={Link} to="/clidashboard">Dashboard</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" component={Link} to="/studentProfile">Profile</Typography>
+                <Typography textAlign="center" component={Link} to="/clientProfile">Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" component={Link} to="/studentProfile">Account</Typography>
+                <Typography textAlign="center" component={Link} to="/clientProfile">Account</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center" component={Link} to="/">Logout</Typography>
@@ -196,4 +196,4 @@ const Navbar = () => {
     </AppBar>
   );
 };
-export default Navbar;
+export default ClientNavbar;

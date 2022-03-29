@@ -1,65 +1,46 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
-import Card from './Card';
-import Dashboard from './Dashboard';
-import Password from './Password';
-import Profile from './Profile';
-import ProfileForm from './ProfileForm';
-import Request from './Request';
+import StudentDashboard from './StudentDashboard';
+import StudentProfile from './StudentProfile';
 import Introduction from './Introduction';
 import SoftwareHouse from './SoftwareHouse';
-import Student from './Student';
-import Job from './Job';
-import Internship from './Internship';
-import Project from './Project';
-import Scholarship from './Scholarship';
+import StudentJob  from './StudentJob';
+import StudentInternship from './StudentInternship';
+import StudentTraining from './StudentTraining';
+import StudentProject from './StudentProject';
+import StudentScholarship from './StudentScholarship';
 import Signin from '../Pages/Signin';
 import Signup from '../Pages/Signup';
+import ClientProfile from "../Industries/ClientProfile"
 import ClientDashborad from "../Industries/ClientDashboard"
-import ClientProfileForm from '../Industries/ClientProfileForm';
-import CompanyProfile from '../Industries/CompanyProfile';
-import ClientCard from "../Industries/ClientCard"
-import ClientSoftware from '../Industries/ClientSoftware';
 import ClientStudent from '../Industries/ClientStudent';
 import ClientJob from "../Industries/ClientJob"
 import ClientInternship from '../Industries/ClientInternship';
 import ClientProject from '../Industries/ClientProject';
 import ClientScholarship from '../Industries/ClientScholarship';
-import ClientPost from "../Industries/ClientPost"
-
 const Main = () => {
     return (
         <>
             <Routes>
+                <Route path="/" element={<Introduction />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/" element={<Introduction />} />
-                <Route path='/clientsoftwarehouse' element={<ClientSoftware/>}/>
-                <Route path="/clientstudent" element={<ClientStudent />} />
-                <Route path="/clientjob" element={<ClientJob />} />
-                <Route path="/clientinternship" element={<ClientInternship />} />
-                <Route path="/clientproject" element={<ClientProject />} />
-                <Route path="/clientscholarship" element={<ClientScholarship />} />
+                <Route path='/clidashboard' element={<ClientDashborad />}/>
+                <Route path="/clientProfile" element={<ClientProfile/>}/>
+                <Route path="/clistudent" element={<ClientStudent />} />
+                <Route path="/clijob" element={<ClientJob />} />
+                <Route path="/cliinternship" element={<ClientInternship />} />
+                <Route path="/cliproject" element={<ClientProject />} />
+                <Route path="/clischolarship" element={<ClientScholarship />} />
+                <Route path="/stddashboard" element={<StudentDashboard />}/>
+                <Route path="/studentProfile" element={<StudentProfile/>}/>
+                <Route path="/stdjob" element={<StudentJob/> }/>
                 <Route path="/softwarehouse" element={<SoftwareHouse />} />
-                <Route path="/student" element={<Student />} />
-                <Route path="/job" element={<Job />} />
-                <Route path="/internship" element={<Internship />} />
-                <Route path="/project" element={<Project />} />
-                <Route path="/scholarship" element={<Scholarship />} />
-                <Route path='/clientDashboard' element={<ClientDashborad />}>
-                    <Route path="/clientDashboard/home" element={<ClientCard />} />
-                    <Route path="/clientDashboard/profile" element={<CompanyProfile />} />
-                    <Route path="/clientDashboard/password" element={<Password />} />
-                    <Route path="/clientDashboard/post" element={<ClientPost />} />
-                    <Route path="/clientDashboard/update" element={<ClientProfileForm />} />
-                </Route>
-                <Route path="/dashboard" element={<Dashboard />}>
-                    <Route path="/dashboard/home" element={<Card />} />
-                    <Route path="/dashboard/profile" element={<Profile />} />
-                    <Route path="/dashboard/password" element={<Password />} />
-                    <Route path="/dashboard/request" element={<Request />} />
-                    <Route path="/dashboard/update" element={<ProfileForm />} />
-                </Route>
+                <Route path="/stdinternship" element={<StudentInternship/>}/>
+                <Route path="/stdtraining" element={<StudentTraining/>}/>
+                <Route path="/stdproject" element={<StudentProject/>}/>
+                <Route path="/stdscholarship" element={<StudentScholarship/>}/>
+                <Route path="/softwarehouse" element={<SoftwareHouse/>}/>
             </Routes>
         </>
     )

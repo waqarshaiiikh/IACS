@@ -5,7 +5,6 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import "../CSS/ServiceCard.css"
 
 function ServiceCard() {
-    // const [userdata, setuserData] = useState(userData);
     return (
         <div className="service-container">
             <Container >

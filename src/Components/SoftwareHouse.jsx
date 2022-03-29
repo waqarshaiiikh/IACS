@@ -1,12 +1,14 @@
 import React from 'react'
-import Dashboard from './Dashboard'
+import Navbar from './Navbar';
 import ServiceCard from './ServiceCard';
 
 const SoftwareHouse = () => {
 
     return (
-        <>
-            <Dashboard field={<ServiceCard />} />
+        <>  
+            <Navbar/>
+            <h1>Software House</h1>
+            <ServiceCard/>
         </>
     )
 }

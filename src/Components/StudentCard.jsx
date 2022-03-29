@@ -9,7 +9,7 @@ import scholarship from "../Images/scholarship.png"
 import internship from "../Images/internship.png"
 import "../CSS/DashboardCard.css"
 
-const Card = () => {
+const StudentCard = () => {
     return (
         <>
             <Container>
@@ -17,48 +17,48 @@ const Card = () => {
                     <Grid item lg={4}>
                         <div className="card">
                             <Link to="/softwarehouse" className='link'>
-                                <img src={office} alt="" />
+                                <img src={office} alt="software house" />
                                 <label htmlFor="">Software House</label>
                             </Link>
                         </div>
                     </Grid>
                     <Grid item lg={4}>
                         <div className="card">
-                            <Link to="/student" className='link'>
-                                <img src={student} alt="" />
-                                <label htmlFor="">Students</label>
-                            </Link>
-                        </div>
-                    </Grid>
-                    <Grid item lg={4}>
-                        <div className="card">
-                            <Link to="/job" className='link'>
-                                <img src={job} alt="" />
+                            <Link to="/stdjob" className='link'>
+                                <img src={job} alt="student job" />
                                 <label htmlhtmlFor="">Jobs</label>
                             </Link>
                         </div>
                     </Grid>
                     <Grid item lg={4}>
                         <div className="card">
-                            <Link to="/internship" className='link'>
-                                <img src={internship} alt="" />
+                            <Link to="/stdinternship" className='link'>
+                                <img src={internship} alt="student internship" />
                                 <label htmlFor="">Internship</label>
                             </Link>
                         </div>
                     </Grid>
                     <Grid item lg={4}>
                         <div className="card">
-                            <Link to="/project" className='link'>
-                                <img src={project} alt="" />
+                            <Link to="/stdproject" className='link'>
+                                <img src={project} alt="student project" />
                                 <label htmlFor="">Projects</label>
                             </Link>
                         </div>
                     </Grid>
                     <Grid item lg={4}>
                         <div className="card">
-                            <Link to="/scholarship" className='link'>
-                                <img src={scholarship} alt="" />
+                            <Link to="/stdscholarship" className='link'>
+                                <img src={scholarship} alt="student scholarship" />
                                 <label htmlFor="">Scholarship</label>
+                            </Link>
+                        </div>
+                    </Grid>
+                    <Grid item lg={4}>
+                        <div className="card">
+                            <Link to="/stdtraining" className='link'>
+                                <img src={student} alt="student training" />
+                                <label htmlFor="">Student Taining</label>
                             </Link>
                         </div>
                     </Grid>
@@ -68,4 +68,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default StudentCard

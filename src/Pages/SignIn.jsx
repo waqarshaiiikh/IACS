@@ -51,7 +51,7 @@ const Signin = () => {
   };
 
   return (
-    <Box  sx={{ padding: "0px", marginLeft: "8px", marginTop: "20vh", marginBottom: "7px", width: "100%", height:"90vh"}}>
+    <Box  sx={{ padding: "0px", width: "100%", height:"90vh"}}>
       <Box display="flex" justifyContent="center">
         <Tabs
           position="fixed"

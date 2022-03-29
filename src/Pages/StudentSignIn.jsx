@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom'
 
@@ -23,15 +23,15 @@ const useStyles = makeStyles({
 
 const StudentSignIn = () => {
     const classes=useStyles();
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const email = useFormInput('');
     const password = useFormInput('');
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
 
     // handle button click of login form
     const handleLogin = async () => {
-        setError(null);
-        setLoading(true);
+        // setError(null);
+        // setLoading(true);
 
         // email: email.value, password: password.value
         // const json = JSON.stringify({ email: "waqarshaiiikh", password: "225" })
@@ -45,19 +45,19 @@ const StudentSignIn = () => {
                 withCredentials: true,
             }
         ).then(response => {
-            setLoading(false);
+            // setLoading(false);
             alert(`${response.status} login successfull`);
             // setUserSession(response.data.token, response.data.user);
             // props.history.push('/dashboard');
         })
             .catch(error => {
-                setLoading(false);
+                // setLoading(false);
                 if (error.response.status === 401 || 400)
                     alert(`${error.response.status} Invalid Crediential`);
                 //    setError(error.response.data.message);
                 else
                     alert('server Fail to connect');
-                setError("Something went wrong. Please try again later.");
+                // setError("Something went wrong. Please try again later.");
             });
 
     }
@@ -87,7 +87,7 @@ const StudentSignIn = () => {
                                 <TextField id="password" type='password' {...password} fullWidth label="Password" variant="outlined" required />
                             </Grid>
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Button className={classes.button} onClick={handleLogin} variant="contained" component={Link} to="/dashboard">
+                                <Button className={classes.button} onClick={handleLogin} variant="contained" component={Link} to="/stddashboard">
                                     Log In
                                 </Button>
                             </Grid>
