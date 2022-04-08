@@ -9,8 +9,8 @@ import StudentInternship from './StudentInternship';
 import StudentTraining from './StudentTraining';
 import StudentProject from './StudentProject';
 import StudentScholarship from './StudentScholarship';
-import Signin from '../Pages/Signin';
-import Signup from '../Pages/Signup';
+import Signin from '../Pages/SignIn';
+import Signup from '../Pages/SignUp';
 import ClientProfile from "../Industries/ClientProfile"
 import ClientDashborad from "../Industries/ClientDashboard"
 import ClientStudent from '../Industries/ClientStudent';
@@ -18,6 +18,7 @@ import ClientJob from "../Industries/ClientJob"
 import ClientInternship from '../Industries/ClientInternship';
 import ClientProject from '../Industries/ClientProject';
 import ClientScholarship from '../Industries/ClientScholarship';
+
 const Main = () => {
     return (
         <>
