@@ -1,7 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React , { useState } from 'react'
+import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+
+const port = 8393;
+axios.defaults.withCredentials = true;
+
 
 const useStyles = makeStyles({
     button: {
@@ -10,7 +15,6 @@ const useStyles = makeStyles({
       fontSize: '1rem !important',
       fontWeight: 'bold',
       margin: '0px 20px !important',
-  
       '&:focus': {
         outline: 'none',
       }
@@ -20,6 +24,42 @@ const useStyles = makeStyles({
 const IndustrySignIn = () => {
 
     const classes = useStyles();
+    const [loading, setLoading] = useState(false);
+    const email = useFormInput('');
+    const password = useFormInput('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
+    // handle button click of login form
+    const handleLogin = async () => {
+        setError(null);
+        setLoading(true);
+
+        axios.post(`http://localhost:${port}/api/login`, { email: email.value, password: password.value , clientName: "industry"}, 
+            {
+                headers: {  'Content-Type': 'application/json' }
+            },
+            {
+                withCredentials: true,
+            }
+        ).then(response => {
+            setLoading(false);
+            navigate('/'); 
+        })
+        .catch(error => {
+            setLoading(false);
+                try{
+                    if(error.response.status>=400 || error.response.status<= 499 )
+                        setError("Invalid Cridential");
+                }
+                catch{
+                    setError("Something went wrong. Please try again later.")
+                }
+            });
+    }
+
+
+
     return (
         <>
             <Container>
@@ -37,14 +77,22 @@ const IndustrySignIn = () => {
                                 </Typography>
                             </Grid>
                             <Grid item lg={12} xs={12}>
-                                <TextField id="email" type='password' fullWidth label="Email" variant="outlined" required />
+                                <TextField id="email" type='text'  {...email}  fullWidth label="Email" variant="outlined" required />
                             </Grid>
                             <Grid item lg={12} xs={12}>
-                                <TextField id="password" type='password' fullWidth label="Password" variant="outlined" required />
+                                <TextField id="password" type='password'  {...password} fullWidth label="Password" variant="outlined" required />
                             </Grid>
+                            
+                            {
+                            error &&
+                            <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <> <small style={{ color: 'red' }}>{error}</small> </>
+                            </Grid>
+                            }
+
                             <Grid item lg={12} xs={12} sx={{display: 'flex', justifyContent: 'center' }}>
-                                <Button className={classes.button} variant="contained" component={Link} to="/clidashboard">
-                                    Log In
+                                <Button className={classes.button}   onClick={handleLogin} disabled={loading} variant="contained">
+                                {loading ? 'Loading...' : 'Login'}
                                 </Button>
                             </Grid>
                         </Grid>
@@ -54,5 +102,20 @@ const IndustrySignIn = () => {
         </>
     )
 }
+
+
+
+const useFormInput = initialValue => {
+    const [value, setValue] = useState(initialValue);
+
+    const handleChange = e => {
+        setValue(e.target.value);
+    }
+    return {
+        value,
+        onChange: handleChange
+    }
+}
+
 
 export default IndustrySignIn
