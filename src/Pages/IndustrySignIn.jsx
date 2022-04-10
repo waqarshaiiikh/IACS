@@ -3,10 +3,7 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-
-const port = 8393;
-axios.defaults.withCredentials = true;
-
+import apiCAll from '../integration/apiCall';
 
 const useStyles = makeStyles({
     button: {
@@ -35,14 +32,9 @@ const IndustrySignIn = () => {
         setError(null);
         setLoading(true);
 
-        axios.post(`http://localhost:${port}/api/login`, { email: email.value, password: password.value , clientName: "industry"}, 
-            {
-                headers: {  'Content-Type': 'application/json' }
-            },
-            {
-                withCredentials: true,
-            }
-        ).then(response => {
+        const reqData = { email: email.value, password: password.value , clientName: "industry"};
+        apiCAll(`/api/login`, reqData)
+        .then(response => {
             setLoading(false);
             navigate('/'); 
         })
