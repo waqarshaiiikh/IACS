@@ -1,5 +1,4 @@
 import React , { useState } from 'react'
-import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
@@ -29,6 +28,7 @@ const IndustrySignIn = () => {
 
     // handle button click of login form
     const handleLogin = async () => {
+
         setError(null);
         setLoading(true);
 
@@ -40,14 +40,14 @@ const IndustrySignIn = () => {
         })
         .catch(error => {
             setLoading(false);
-                try{
-                    if(error.response.status>=400 || error.response.status<= 499 )
-                        setError("Invalid Cridential");
-                }
-                catch{
-                    setError("Something went wrong. Please try again later.")
-                }
-            });
+            try{
+                if(error.response.status>=400 || error.response.status<= 499 )
+                    setError("Invalid Cridential");
+            }
+            catch{
+                setError("Something went wrong. Please try again later.")
+            }
+        });
     }
 
 
@@ -74,14 +74,12 @@ const IndustrySignIn = () => {
                             <Grid item lg={12} xs={12}>
                                 <TextField id="password" type='password'  {...password} fullWidth label="Password" variant="outlined" required />
                             </Grid>
-                            
                             {
                             error &&
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                             <> <small style={{ color: 'red' }}>{error}</small> </>
                             </Grid>
                             }
-
                             <Grid item lg={12} xs={12} sx={{display: 'flex', justifyContent: 'center' }}>
                                 <Button className={classes.button}   onClick={handleLogin} disabled={loading} variant="contained">
                                 {loading ? 'Loading...' : 'Login'}

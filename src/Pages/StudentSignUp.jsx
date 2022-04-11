@@ -28,18 +28,18 @@ const StudentSignUp = () => {
     const [error, setError] = useState(null);
     const navigate      = useNavigate();
 
-    const fname         = useFormInput('wee');
-    const lname         = useFormInput('wer');
-    const email         = useFormInput('adj@cloud.neduet.edu.pk');
-    const phoneNumber   = useFormInput('+923423446805');
+    const fname         = useFormInput('');
+    const lname         = useFormInput('');
+    const email         = useFormInput('@cloud.neduet.edu.pk');
+    const phoneNumber   = useFormInput('+92');
     const enrollment    = useFormInput('NED/');
     const university    = useFormInput('NEDUET');
-    const department    = useFormInput('SE');
-    const CGPA          = useFormInput('2.00');
+    const department    = useFormInput('');
+    const CGPA          = useFormInput('');
     const semester      = useFormInput('1');
     const year          = useFormInput('1');
-    const password      = useFormInput('123@waqar');
-    const cpassword     = useFormInput('123@waqar');
+    const password      = useFormInput('');
+    const cpassword     = useFormInput('');
 
 
     // handle button click of login form
