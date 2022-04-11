@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
-
+import apiCAll from '../integration/apiCall';
 
 const useStyles = makeStyles({
   navbar: {
@@ -29,6 +29,10 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const classes = useStyles();
 
+
+  const navigate = useNavigate();
+
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -42,6 +46,32 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const logoutFunction = () => {
+    setAnchorElUser(null);
+    apiCAll('/api/logout')
+    .then((res)=>{
+      if(res.status>=200 && res.status<=299 ){
+        navigate('signin'); 
+      }
+      else{
+        console.log("something went wrong");
+      }
+    })
+  };
+
+  const logoutAllfun = () => {
+    setAnchorElUser(null);
+    apiCAll('/api/logout/all')
+    .then((res)=>{
+      if(res.status>=200 && res.status<=299 ){
+        navigate('signin'); 
+      }
+      else{
+        console.log("something went wrong");
+      }
+    })
   };
 
   return (
@@ -186,8 +216,11 @@ const Navbar = () => {
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center" component={Link} to="/studentProfile">Account</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem onClick={logoutFunction}>
                 <Typography textAlign="center" component={Link} to="/">Logout</Typography>
+              </MenuItem>
+              <MenuItem onClick={logoutAllfun}>
+                <Typography textAlign="center" component={Link} to="/">Logout All</Typography>
               </MenuItem>
             </Menu>
           </Box>

@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
-import axios from 'axios';
+import React, { useState } from 'react';
+import apiCAll from '../integration/apiCall';
 import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-
-const port = 8393;
-axios.defaults.withCredentials = true;
 
 const useStyles = makeStyles({
     button: {
@@ -35,17 +32,10 @@ const StudentSignIn = () => {
         setError(null);
         setLoading(true);
 
-        // email: email.value, password: password.value
-        // const json = JSON.stringify({ email: "waqarshaiiikh", password: "225" })
-
-        axios.post(`http://localhost:${port}/api/login`, { email: email.value, password: password.value , clientName: "student"}, 
-            {
-                headers: {  'Content-Type': 'application/json' }
-            },
-            {
-                withCredentials: true,
-            }
-        ).then(response => {
+        const reqData = { email: email.value, password: password.value , clientName: "student"};
+        
+        apiCAll(`/api/login`, reqData )
+        .then(response => {
             setLoading(false);
             navigate('/'); 
         })
@@ -102,7 +92,6 @@ const StudentSignIn = () => {
                                 </Button>
                             </Grid>
                             
-
                         </Grid>
                     </Box>
                 </FormControl>
