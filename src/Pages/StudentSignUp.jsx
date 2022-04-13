@@ -148,14 +148,20 @@ const StudentSignUp = () => {
                             <TextField id="cpassword" fullWidth label="Confirm Password" type='password' {...cpassword} variant="outlined" required />
                         </Grid>
 
+                        <Grid item lg={6} xs={12}>
+                            <TextField id="otp" fullWidth label="Generate OTP" type='number' variant="outlined" required />
+                        </Grid>
+
                         {
                             error &&
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                             <> <small style={{ color: 'red' }}>{error}</small> </>
                             </Grid>
                         }
-
                         <Grid item lg={6} xs={12} display='flex' justifyContent='right' >
+                            <Button className={classes.button} outline="none" sx={{background:'42b6EE', marginRight:'10px'}}>
+                                Generate OTP
+                            </Button>
                             <Button className={classes.button} onClick={handleLogin} disabled={loading} outline="none" sx={{background:'42b6EE'}}>
                             {
                                 loading ? "uploading..." : "Sign Up" 
@@ -163,7 +169,6 @@ const StudentSignUp = () => {
                            
                             </Button>
                         </Grid>
-
                     </Grid>
                 </FormControl>
             </Container>

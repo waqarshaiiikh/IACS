@@ -51,7 +51,7 @@ const Signin = () => {
   };
 
   return (
-    <Box  sx={{ padding: "0px", width: "100%", height:"90vh"}}>
+    <Box sx={{ padding: "0px", width: "100%", height: "90vh" }}>
       <Box display="flex" justifyContent="center">
         <Tabs
           position="fixed"
@@ -61,25 +61,26 @@ const Signin = () => {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
-          sx={{width:'55%', diplay:'flex', justifyContent:'center',textAlign:'center', border:'none', outline:'none'}}
+          sx={{ width: '55%', diplay: 'flex', justifyContent: 'center', textAlign: 'center', border: 'none', outline: 'none' }}
         >
           <Tab label="Student Log In" {...a11yProps(0)} />
           <Tab label="Industry Log In" {...a11yProps(1)} />
         </Tabs>
       </Box>
-
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <StudentSignIn />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <IndustrySignIn />
-        </TabPanel>
-      </SwipeableViews>
+      <Box display="flex" justifyContent="center">
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <StudentSignIn />
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <IndustrySignIn />
+          </TabPanel>
+        </SwipeableViews>
+      </Box>
     </Box>
   );
 };
