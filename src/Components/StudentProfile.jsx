@@ -18,6 +18,7 @@ const skills = ["HTML", "CSS",
     "Node Js",
     "Express Js",
     "Oracle"]
+    
 const useStyles = makeStyles({
     typography: {
         textAlign: 'center',
