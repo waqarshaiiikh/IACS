@@ -142,6 +142,23 @@ const ClientStudent = () => {
                       </p>
                     </AccordionDetails>
                   </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="skills"
+                    >
+                      <Typography>Experience</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <p>
+                        <h4 style={{fontWeight:'bold'}}>10 Pearls</h4>
+                        <h5>Web Developer</h5>
+                        <h6>Dec-2021 to Feb-2022</h6>
+                        <p>ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore.</p>
+                      </p>
+                    </AccordionDetails>
+                  </Accordion>
                 </Box>
               </Grid>
               <Grid item lg={12}>
@@ -185,9 +202,25 @@ const ClientStudent = () => {
                       </p>
                     </AccordionDetails>
                   </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="skills"
+                    >
+                      <Typography>Experience</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <p>
+                        <h4 style={{fontWeight:'bold'}}>10 Pearls</h4>
+                        <h5>Web Developer</h5>
+                        <h6>Dec-2021 to Feb-2022</h6>
+                        <p>ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore.</p>
+                      </p>
+                    </AccordionDetails>
+                  </Accordion>
                 </Box>
               </Grid>
-              
             </Grid>
           </Grid>
         </Grid>

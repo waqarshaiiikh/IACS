@@ -31,9 +31,6 @@ const useStyles = makeStyles({
         border: '1px solid',
         borderRadius: '10px',
     },
-    studentList: {
-        // background: 'green !important',
-    },
     search_div: {
         display: 'flex',
         justifyContent: 'center',
@@ -62,12 +59,12 @@ const useStyles = makeStyles({
         alignItems: 'center',
         cursor: 'pointer'
     },
-    student_title: {
+    software_title: {
         display: 'flex',
         justifyContent: 'space-between',
 
     },
-    student_image: {
+    software_image: {
         width: '100px',
         height: '100px'
     }
@@ -101,12 +98,12 @@ const SoftwareHouse = () => {
                             }
                         </FormGroup>
                     </Grid>
-                    <Grid item lg={10} xs={12} className={classes.studentList}>
+                    <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>
                             <Grid item lg={12}>
                                 <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                    <div className={classes.student_title}>
-                                        <img className={classes.student_image} src={softwareHouse} alt="student" />
+                                    <div className={classes.software_title}>
+                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
                                         <div>
                                             <h1>10 Pearls</h1>
                                             <p>Karachi, Pakistan</p>
@@ -147,8 +144,8 @@ const SoftwareHouse = () => {
                             </Grid>
                             <Grid item lg={12}>
                                 <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                    <div className={classes.student_title}>
-                                        <img className={classes.student_image} src={softwareHouse} alt="student" />
+                                    <div className={classes.software_title}>
+                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
                                         <div>
                                             <h1>10 Pearls</h1>
                                             <p>Karachi, Pakistan</p>
