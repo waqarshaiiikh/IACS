@@ -1,11 +1,28 @@
 import React from 'react'
 import ClientNavbar from './ClientNavbar'
-import { Container, Grid, FormGroup, FormControlLabel, Checkbox, Box } from '@mui/material';
+import {
+  Container, Grid, FormGroup, FormControlLabel,
+  Checkbox, Box, Accordion, AccordionSummary,
+  AccordionDetails, Typography, Chip
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import student from "../Images/student.png";
 
-const searchSkill = ["3rd Year", "Final Year", "GPA Above 3.0", "Web developer", "Mobile App Developer", "React Developer", "MERN Stack", "Machine Learning"];
+const searchSkill = ["HTML", "CSS",
+  "JavaScript",
+  "React Js",
+  "Python",
+  "C / C++",
+  "Java",
+  "Web Developer",
+  "React Native",
+  "MongoDB",
+  "Node Js",
+  "Express Js",
+  "Oracle"]
+
 const useStyles = makeStyles({
   searching: {
     width: '100%',
@@ -43,6 +60,11 @@ const useStyles = makeStyles({
     alignItems: 'center',
     cursor: 'pointer'
   },
+  student_title: {
+    display: 'flex',
+    justifyContent: 'space-between',
+
+  },
   student_image: {
     width: '100px',
     height: '100px'
@@ -78,18 +100,94 @@ const ClientStudent = () => {
             </FormGroup>
           </Grid>
           <Grid item lg={10} xs={12} className={classes.studentList}>
-            <Grid container>
+            <Grid container spacing={2}>
               <Grid item lg={12}>
-                <Box sx={{ border: '1px solid', borderRadius: '10px' }}>
-                  <div>
+                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                  <div className={classes.student_title}>
                     <img className={classes.student_image} src={student} alt="student" />
-                    <span>Name</span>
+                    <div>
+                      <p>Muhammad Khalid</p>
+                      <p>Software Engineering</p>
+                      <p>Final Year, NEDUET</p>
+                    </div>
                   </div>
-                  <div>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis quisquam qui accusantium explicabo molestias, enim, reiciendis eum et dolor harum doloribus cumque necessitatibus unde distinctio voluptate. Itaque aperiam reprehenderit ipsa!
-                  </div>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="about"
+                    >
+                      <Typography>About</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
+                      </p>
+                    </AccordionDetails>
+                  </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="skills"
+                    >
+                      <Typography>Skills</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <p>
+                        {
+                          searchSkill && searchSkill.map((skill, i) => (
+                              <Chip label={skill} sx={{ marginRight: '10px', marginBottom:'5px'}} />))
+                        }
+                      </p>
+                    </AccordionDetails>
+                  </Accordion>
                 </Box>
               </Grid>
+              <Grid item lg={12}>
+                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                  <div className={classes.student_title}>
+                    <img className={classes.student_image} src={student} alt="student" />
+                    <div>
+                      <p>Muhammad Khalid</p>
+                      <p>Software Engineering</p>
+                      <p>Final Year, NEDUET</p>
+                    </div>
+                  </div>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="about"
+                    >
+                      <Typography>About</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
+                      </p>
+                    </AccordionDetails>
+                  </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="skills"
+                    >
+                      <Typography>Skills</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <p>
+                        {
+                          searchSkill && searchSkill.map((skill, i) => (
+                              <Chip label={skill} sx={{ marginRight: '10px', marginBottom:'5px'}} />))
+                        }
+                      </p>
+                    </AccordionDetails>
+                  </Accordion>
+                </Box>
+              </Grid>
+              
             </Grid>
           </Grid>
         </Grid>
