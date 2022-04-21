@@ -5,12 +5,10 @@ axios.defaults.withCredentials = true;
 const Domain = 'http://localhost:';
 
 
+const apiCAll=(apiAddress, reqMethod="post" , reqData = 'unknown')=>{
 
-const apiCAll=(apiAddress, reqData = 'unknown' )=>{
-
-    if(apiAddress === '/api/login'||apiAddress ===  '/api/signup'){
-        
-        return axios.post(`${Domain}${port}${apiAddress}`
+    if(reqMethod === "post"){
+        return axios[reqMethod](`${Domain}${port}${apiAddress}`
         ,{ ...reqData }
         ,{
             headers: {  'Content-Type': 'application/json' }
@@ -20,16 +18,12 @@ const apiCAll=(apiAddress, reqData = 'unknown' )=>{
         }
         );
     }
-    else if(apiAddress === '/api/logout'||'/api/logout/all'){
-        return axios.get(`${Domain}${port}${apiAddress}`
-        ,{
-            headers: {  'Content-Type': 'application/json' }
-        }
-        ,{
-                withCredentials: true,
-        }
-        )
+    else if(reqMethod === "get"){
+        return axios[reqMethod](`${Domain}${port}${apiAddress}`
+        , { headers: {  'Content-Type': 'application/json' } }
+        , {withCredentials: true })
     }
+
 }
 
 

@@ -50,7 +50,7 @@ const Navbar = () => {
 
   const logoutFunction = () => {
     setAnchorElUser(null);
-    apiCAll('/api/logout')
+    apiCAll('/api/logout','get')
     .then((res)=>{
       if(res.status>=200 && res.status<=299 ){
         navigate('signin'); 
@@ -63,7 +63,7 @@ const Navbar = () => {
 
   const logoutAllfun = () => {
     setAnchorElUser(null);
-    apiCAll('/api/logout/all')
+    apiCAll('/api/logout/all','get')
     .then((res)=>{
       if(res.status>=200 && res.status<=299 ){
         navigate('signin'); 

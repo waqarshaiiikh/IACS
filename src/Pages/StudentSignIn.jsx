@@ -34,7 +34,7 @@ const StudentSignIn = () => {
 
         const reqData = { email: email.value, password: password.value , clientName: "student"};
         
-        apiCAll(`/api/login`, reqData )
+        apiCAll(`/api/login`,'post', reqData )
         .then(response => {
             setLoading(false);
             navigate('/'); 

@@ -33,7 +33,7 @@ const IndustrySignIn = () => {
         setLoading(true);
 
         const reqData = { email: email.value, password: password.value , clientName: "industry"};
-        apiCAll(`/api/login`, reqData)
+        apiCAll(`/api/login`,'post', reqData)
         .then(response => {
             setLoading(false);
             navigate('/'); 
