@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
-import { Box, Typography, Modal, Grid, Button, TextField, MenuItem, TextareaAutosize, FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material/';
-import { DateRangePicker, LocalizationProvider} from '@mui/lab/';
+import { Box, Typography, Modal, Grid, Button, TextField, MenuItem, TextareaAutosize, FormControl, Checkbox } from '@mui/material/';
+import { DateRangePicker, LocalizationProvider } from '@mui/lab/';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import WorkIcon from '@mui/icons-material/Work';
+import apiCAll from '../integration/apiCall';
+
+
+import Autocomplete from '@mui/material/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+// import { flexbox } from '@mui/system';
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+
+const skills = [
+    { title: "HTML" },
+    { title: "CSS" },
+    { title: "JavaScript" },
+    { title: "React Js" },
+    { title: "Python" },
+    { title: "C / C++" },
+    { title: "Java" },
+    { title: "Web Developer" },
+    { title: "React Native" },      
+    { title: "MongoDB" },
+    { title: "Node Js" },
+    { title: "Express Js" },
+    { title: "Oracle" }
+];
+
+
 
 const style = {
     position: 'absolute',
@@ -32,23 +61,11 @@ const skillStyle = {
     p: { lg: 4, xs: 1 },
 }
 
-const skills = ["HTML", "CSS",
-    "JavaScript",
-    "React Js",
-    "Python",
-    "C / C++",
-    "Java",
-    "Web Developer",
-    "React Native",
-    "MongoDB",
-    "Node Js",
-    "Express Js",
-    "Oracle"]
 
 function ProfileData(props) {
     return (
         <>
-            <Modal
+            <Modal Modal
                 open={props.open}
                 onClose={props.handleClose}
                 sx={{ overflow: { xs: 'scroll' } }}
@@ -59,9 +76,6 @@ function ProfileData(props) {
                     </Typography>
                     <FormControl>
                         <Grid container spacing={1}>
-                            <Grid item lg={6} xs={12}>
-                                <TextField id="email" fullWidth label="Email" type="email" variant="outlined" required />
-                            </Grid>
                             <Grid item lg={6} xs={12}>
                                 <TextField id="phoneNumber" fullWidth label="Phone No" type='number' variant="outlined" required />
                             </Grid>
@@ -127,7 +141,10 @@ function ProfileData(props) {
     )
 }
 
+
 function SkillData(props) {
+
+
     return (
         <>
             <Modal
@@ -139,20 +156,45 @@ function SkillData(props) {
                         Update Skills <BeenhereIcon />
                     </Typography>
                     <FormControl>
-                        <FormGroup>
-                            <Grid container>
-                                {
-                                    skills.map((skill, index) => (
-                                        <Grid item lg={3}>
-                                            <FormControlLabel key={index} control={<Checkbox />} label={skill} />
-                                        </Grid>
-                                    ))
-                                }
-                                <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                    <Button variant="contained" onClick={props.handleClose}>Save</Button>
-                                </Grid>
+                        <Grid container spacing={1}>
+                            <Grid item lg={12} xs={12}>
+                                <Autocomplete
+                                    
+                                    multiple
+                                    id = "checkboxes-tags-demo"
+                                    options={skills}
+                                    disableCloseOnSelect
+                                    getOptionLabel={(option) => option.title}
+                                    defaultValue={skills}
+                                    
+                                    onChange={(event, values) => {
+                                        console.log(event);
+                                        console.log(values);
+                                    }}
+                                    
+                                    style={{ width: 'inherit' }}
+                                    
+                                    renderOption={(props, option, { selected }) => (
+                                        <li {...props}>
+                                            <Checkbox
+                                                icon={icon}
+                                                checkedIcon={checkedIcon}
+                                                style={{ marginRight: 8 }}
+                                                checked={selected}
+                                            />
+                                            {option.title}
+                                        </li>
+                                    )}
+                                    
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Skills" placeholder="Add..." />
+                                    )}
+                                />
                             </Grid>
-                        </FormGroup>
+                            <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
+                                <Button variant="contained" onClick={props.handleClose}>Save</Button>
+                            </Grid>
+                        </Grid>
                     </FormControl>
                 </Box>
             </Modal>
@@ -161,12 +203,35 @@ function SkillData(props) {
 }
 
 function ExperienceData(props) {
-    const [value, setValue] = useState([null, null]);
+    
+    const {companyName , startDate, endDate, jobRole, Description} = JSON.parse(localStorage.getItem('haveExperience'))[props.experienceObj];
+    
+    const {open , handleClose} = props; 
+    const [value, setValue] = useState([startDate, endDate]);
+
+    const companyField = useFormInput(companyName);
+    const sDateField   = useFormInput(startDate);
+    const eDateField   = useFormInput(endDate);
+    const jobField     = useFormInput(jobRole);
+    const DesField     = useFormInput(Description);
+    
+    
+    // console.log(
+    //       companyField 
+    //     , sDateField   
+    //     , eDateField
+    //     , jobField  
+    //     , DesField     
+    //     , open
+    //     , handleClose
+    // );
+
+
     return (
         <>
             <Modal
-                open={props.open}
-                onClose={props.handleClose}
+                open={open}
+                onClose={handleClose}
             >
                 <Box sx={skillStyle}>
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
@@ -175,10 +240,10 @@ function ExperienceData(props) {
                     <FormControl>
                         <Grid container spacing={1}>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="company" fullWidth label="Company Name" type="text" variant="outlined" required />
+                                <TextField id="company" fullWidth label="Company Name" {...companyField} type="text" variant="outlined" required />
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="role" fullWidth label="Job Role" type="text" variant="outlined" required />
+                                <TextField id="role" fullWidth label="Job Role" {...jobField} type="text" variant="outlined" required />
                             </Grid>
                             <Grid item lg={12} xs={12}>
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -202,8 +267,9 @@ function ExperienceData(props) {
                             <Grid item lg={12} xs={12}>
                                 <TextareaAutosize
                                     id="about"
-                                    maxRows={5}
+                                    maxRows = {5}
                                     required
+                                    {...DesField}
                                     style={{ width: '100%', padding: '10px' }}
                                     placeholder="Write Description About your Job in 200 words"
                                 />
@@ -219,6 +285,19 @@ function ExperienceData(props) {
     )
 }
 
+
+
+const useFormInput = initialValue => {
+    const [value, setValue] = useState(initialValue);
+    
+    const handleChange = e => {
+        setValue(e.target.value);
+    }
+    return {
+        value,
+        onChange: handleChange
+    }
+}
 
 
 

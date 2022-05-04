@@ -185,7 +185,7 @@ const StudentSignUp = () => {
                             <TextField id="email" fullWidth label="Email" placeholder='abc@cloud.neduet.edu.pk' {...email} type="email" variant="outlined" required />
                             <pre sx={{width:{ lg: "700px", xs: '200px' }}}>{instruction.email.clause1}</pre>
                         </Grid>
-
+                    
                         <Grid item lg={12} xs={12}>
                             <TextField id="password" fullWidth label="Password" type='password' {...password} variant="outlined" required />
                             <pre sx={{display:'block',width:{ lg: "700px", xs: '200px' }}}>{instruction.password.clause1} <br />{instruction.password.clause2} <br />{instruction.password.clause3}</pre>
