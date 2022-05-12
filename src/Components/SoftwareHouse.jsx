@@ -77,10 +77,10 @@ const SoftwareHouse = () => {
             <Navbar />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
                 <Grid container spacing={2}>
-                    <Grid item lg={4} sx={{ display: { xs: 'none', lg: 'block' } }}>
+                    <Grid item lg={3} sx={{ display: { xs: 'none', lg: 'block' } }}>
                         <h1>Software House</h1>
                     </Grid>
-                    <Grid item lg={8} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Grid item lg={9} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <div className={classes.search_div}>
                             <input type="text" id="search-student" name="search-student" className={classes.search} />
                             <div className={classes.search_icon}>
@@ -89,7 +89,7 @@ const SoftwareHouse = () => {
                         </div>
                     </Grid>
                     <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' }, textAlign: 'left' }} className={classes.searching}>
-                        <h1>Services</h1>
+                        <h3>Services</h3>
                         <FormGroup>
                             {
                                 searchService.map((services, index) => (
@@ -103,11 +103,11 @@ const SoftwareHouse = () => {
                             <Grid item lg={12}>
                                 <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                     <div className={classes.software_title}>
-                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
                                         <div>
                                             <h1>10 Pearls</h1>
                                             <p>Karachi, Pakistan</p>
                                         </div>
+                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
                                     </div>
                                     <Accordion>
                                         <AccordionSummary
@@ -145,11 +145,11 @@ const SoftwareHouse = () => {
                             <Grid item lg={12}>
                                 <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                     <div className={classes.software_title}>
-                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
                                         <div>
-                                            <h1>10 Pearls</h1>
+                                            <h1>Contour Software</h1>
                                             <p>Karachi, Pakistan</p>
                                         </div>
+                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
                                     </div>
                                     <Accordion>
                                         <AccordionSummary

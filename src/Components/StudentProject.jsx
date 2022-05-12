@@ -1,13 +1,14 @@
-import React from 'react'
-import Navbar from './Navbar'
-import ServiceCard from './ServiceCard'
+import React from 'react';
+import Navbar from './Navbar';
+import "../CSS/Utils.css";
 
 const StudentProject = () => {
     return (
         <>
             <Navbar />
-            <h1>Student Project</h1>
-            <ServiceCard />
+            <div className='center_utils'>
+                <h1 className='main_heading'>Coming Soon</h1>
+            </div>
         </>
     )
 }

@@ -1,13 +1,14 @@
 import React from 'react'
-import ServiceCard from '../Components/ServiceCard'
 import ClientNavbar from './ClientNavbar'
+import "../CSS/Utils.css"
 
 const ClientScholarship = () => {
   return (
     <>
-      <ClientNavbar/>
-      <h1>Client Scholarship</h1>
-      <ServiceCard/>
+      <ClientNavbar />
+      <div className='center_utils'>
+        <h1 className='main_heading'>Comming Soon</h1>
+      </div>
     </>
   )
 }
