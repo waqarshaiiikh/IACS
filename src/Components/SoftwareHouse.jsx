@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from './Navbar';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
-    Container, Grid, FormGroup, FormControlLabel,
-    Checkbox, Box, Accordion, AccordionSummary,
-    AccordionDetails, Typography, Chip
+    Container, Grid, Checkbox, Autocomplete, Box, Accordion, AccordionSummary,
+    AccordionDetails, Typography, Chip, MenuItem, TextField, Select
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
@@ -70,33 +71,69 @@ const useStyles = makeStyles({
     }
 });
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
 const SoftwareHouse = () => {
     const classes = useStyles();
+
+    const [search, setSearch] = useState(1);
+
+    const searchChange = (event) => {
+        setSearch(event.target.value);
+    };
     return (
         <>
             <Navbar />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
-                <Grid container spacing={2}>
-                    <Grid item lg={3} sx={{ display: { xs: 'none', lg: 'block' } }}>
+                <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
                         <h1>Software House</h1>
                     </Grid>
-                    <Grid item lg={9} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className={classes.search_div}>
-                            <input type="text" id="search-student" name="search-student" className={classes.search} />
-                            <div className={classes.search_icon}>
-                                <SearchIcon />
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' }, textAlign: 'left' }} className={classes.searching}>
-                        <h3>Services</h3>
-                        <FormGroup>
+                    <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
+                        <div>
                             {
-                                searchService.map((services, index) => (
-                                    <FormControlLabel control={<Checkbox />} label={services} key={index} />
-                                ))
+                                (search === 1) ? (
+                                    <Autocomplete
+                                        sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                        multiple
+                                        id="skill-search"
+                                        options={searchService}
+                                        disableCloseOnSelect
+                                        getOptionLabel={(option) => option}
+                                        renderOption={(props, option, { selected }) => (
+                                            <li {...props}>
+                                                <Checkbox
+                                                    icon={icon}
+                                                    checkedIcon={checkedIcon}
+                                                    style={{ marginRight: 8 }}
+                                                    checked={selected}
+                                                />
+                                                {option}
+                                            </li>
+                                        )}
+                                        style={{ width: { lg: 500, xs: 250 } }}
+                                        renderInput={(params) => (
+                                            <TextField {...params} label="Search by Services" placeholder="Favorites" size='medium' />
+                                        )}
+                                    />
+                                ) :
+                                    (
+                                        <TextField id="search" label="Search" variant="outlined" size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                                    )
                             }
-                        </FormGroup>
+                        </div>
+                        <Select
+                            value={search}
+                            onChange={searchChange}
+                            displayEmpty
+                            sx={{ width: 120, marginRight: '10px' }}
+                        >
+                            <MenuItem value={1}>Services</MenuItem>
+                            <MenuItem value={2}>Name</MenuItem>
+                            <MenuItem value={3}>City</MenuItem>
+                        </Select>
+                        <SearchIcon fontSize='large' sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
-    Container, Grid, FormGroup, FormControlLabel,
-    Checkbox, Box, Accordion, AccordionSummary,
-    AccordionDetails, Chip, Button, Typography,
-    Modal, TextField, MenuItem, TextareaAutosize, FormControl
+    Container, Grid, Checkbox, Box, Accordion, AccordionSummary,
+    AccordionDetails, Chip, Button, Typography, Autocomplete,
+    Modal, TextField, MenuItem, TextareaAutosize, FormControl, Select
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
@@ -12,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import softwareHouse from "../Images/softwareHouselogo.png";
 
 const jobSkills = [
-    "Web Development", 
+    "Web Development",
     "Mobile App Development",
     "Graphis Designing",
     "Data Analytics",
@@ -72,7 +73,7 @@ const useStyles = makeStyles({
     },
 });
 
-const requestStyle= {
+const requestStyle = {
     position: 'absolute',
     top: { lg: '50%', xs: '80%' },
     left: '50%',
@@ -99,10 +100,10 @@ const PostJob = (props) => {
                     </Typography>
                     <FormControl>
                         <Grid container spacing={1}>
-                            <Grid item lg={4} xs={12}>
+                            <Grid item lg={6} xs={12}>
                                 <TextField id="title" fullWidth label="Job Title" placeholder='Full Stack' type='text' variant="outlined" required />
                             </Grid>
-                            <Grid item lg={4} xs={12}>
+                            <Grid item lg={6} xs={12}>
                                 <TextField id="jobType" fullWidth label="Job Type" variant="outlined" required select>
                                     <MenuItem key="fulltime" value="full">Full Time</MenuItem>
                                     <MenuItem key="parttime" value="part">Part Time</MenuItem>
@@ -134,6 +135,8 @@ const PostJob = (props) => {
     )
 }
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const StudentJob = () => {
     const classes = useStyles();
@@ -141,35 +144,69 @@ const StudentJob = () => {
     const [requestJob, setRequestJob] = useState(false);
     const openRequest = () => setRequestJob(true);
     const closeRequest = () => setRequestJob(false);
+
+    const [search, setSearch] = useState(1);
+
+    const searchChange = (event) => {
+        setSearch(event.target.value);
+    };
     return (
         <>
             <Navbar />
-            <PostJob open={requestJob} handleClose={closeRequest}/>
+            <PostJob open={requestJob} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
-                <Grid container spacing={2}>
-                    <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' } }}>
+                <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Grid item lg={10} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
                         <h1>Jobs</h1>
                     </Grid>
-                    <Grid item lg={8} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className={classes.search_div}>
-                            <input type="text" id="search-student" name="search-student" className={classes.search} />
-                            <div className={classes.search_icon}>
-                                <SearchIcon />
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid item lg={2}>
-                        <Button variant='contained' sx={{ marginTop: '10px' }} onClick={openRequest}>Request Job</Button>
-                    </Grid>
-                    <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' }, textAlign: 'left' }} className={classes.searching}>
-                        <h3>Skills</h3>
-                        <FormGroup>
+                    <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
+                        <div>
                             {
-                                jobSkills.map((services, index) => (
-                                    <FormControlLabel control={<Checkbox />} label={services} key={index} />
-                                ))
+                                (search === 1) ? (
+                                    <Autocomplete
+                                        sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                        multiple
+                                        id="skill-search"
+                                        options={jobSkills}
+                                        disableCloseOnSelect
+                                        getOptionLabel={(option) => option}
+                                        renderOption={(props, option, { selected }) => (
+                                            <li {...props}>
+                                                <Checkbox
+                                                    icon={icon}
+                                                    checkedIcon={checkedIcon}
+                                                    style={{ marginRight: 8 }}
+                                                    checked={selected}
+                                                />
+                                                {option}
+                                            </li>
+                                        )}
+                                        style={{ width: { lg: 500, xs: 250 } }}
+                                        renderInput={(params) => (
+                                            <TextField {...params} label="Search by Skills" placeholder="Favorites" size='medium' />
+                                        )}
+                                    />
+                                ) :
+                                    (
+                                        <TextField id="search" label="search" variant="outlined" size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                                    )
                             }
-                        </FormGroup>
+                        </div>
+                        <Select
+                            value={search}
+                            onChange={searchChange}
+                            displayEmpty
+                            sx={{ width: 180, marginRight: '10px' }}
+                        >
+                            <MenuItem value={1}>Skill</MenuItem>
+                            <MenuItem value={2}>Title</MenuItem>
+                            <MenuItem value={3}>Software House</MenuItem>
+                            <MenuItem value={4}>City</MenuItem>
+                        </Select>
+                        <SearchIcon fontSize='large' sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                    </Grid>
+                    <Grid item lg={12} xs={12}>
+                        <Button variant='contained' sx={{ marginTop: '10px' }} onClick={openRequest}>Request Job</Button>
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>

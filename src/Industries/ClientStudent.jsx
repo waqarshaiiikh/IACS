@@ -1,16 +1,20 @@
-import React from 'react'
-import ClientNavbar from './ClientNavbar'
+import React, { useState } from 'react'
+import ClientNavbar from './ClientNavbar';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
-  Container, Grid, FormGroup, FormControlLabel,
+  Container, Grid, Autocomplete, TextField,
   Checkbox, Box, Accordion, AccordionSummary,
-  AccordionDetails, Typography, Chip
+  AccordionDetails, Typography, Chip, Select, MenuItem
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import student from "../Images/student.png";
 
-const searchSkill = ["HTML", "CSS",
+const searchSkill = [
+  "HTML",
+  "CSS",
   "JavaScript",
   "React Js",
   "Python",
@@ -21,7 +25,7 @@ const searchSkill = ["HTML", "CSS",
   "MongoDB",
   "Node Js",
   "Express Js",
-  "Oracle"]
+  "Oracle"];
 
 const useStyles = makeStyles({
   searching: {
@@ -36,8 +40,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80%',
+    width: '800px',
     height: '40px',
+    marginRight: '10px',
     border: '1px solid black',
     boxSizing: 'border-box'
   },
@@ -71,160 +76,201 @@ const useStyles = makeStyles({
   }
 });
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+
 const ClientStudent = () => {
   const classes = useStyles();
+  const [search, setSearch] = useState(1);
+
+  const searchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
   return (
     <>
       <ClientNavbar />
-      <Container maxWidth="xl" sx={{ padding: '0' }}>
-        <Grid container spacing={2}>
-          <Grid item lg={4} sx={{ display: { xs: 'none', lg: 'block' } }}>
-            <h1>Client Student</h1>
-          </Grid>
-          <Grid item lg={8} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div className={classes.search_div}>
-              <input type="text" id="search-student" name="search-student" className={classes.search} />
-              <div className={classes.search_icon}>
-                <SearchIcon />
+      <div>
+        <Container maxWidth="xl" sx={{ padding: '0' }}>
+          <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
+              <h1>Client Students</h1>
+            </Grid>
+            <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center',  marginTop: { lg: 'none', xs: "10px" } }}>
+              <div>
+                {
+                  (search === 1) ? (
+                    <Autocomplete
+                      sx={{ marginRight: '10px',  width: { lg: 500, xs: 250 } }}
+                      multiple
+                      id="skill-search"
+                      options={searchSkill}
+                      disableCloseOnSelect
+                      getOptionLabel={(option) => option}
+                      renderOption={(props, option, { selected }) => (
+                        <li {...props}>
+                          <Checkbox
+                            icon={icon}
+                            checkedIcon={checkedIcon}
+                            style={{ marginRight: 8 }}
+                            checked={selected}
+                          />
+                          {option}
+                        </li>
+                      )}
+                      style={{ width: { lg: 500, xs: 250 } }}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Search by Skills" placeholder="Favorites" size='medium' />
+                      )}
+                    />
+                  ) :
+                    (
+                      <TextField id="search" label="Search" variant="outlined" size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                    )
+                }
               </div>
-            </div>
-          </Grid>
-          <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' }, textAlign: 'left' }} className={classes.searching}>
-            <h1>Skills</h1>
-            <FormGroup>
-              {
-                searchSkill.map((skill, index) => (
-                  <FormControlLabel control={<Checkbox />} label={skill} key={index} />
-                ))
-              }
-            </FormGroup>
-          </Grid>
-          <Grid item lg={10} xs={12} className={classes.studentList}>
-            <Grid container spacing={2}>
-              <Grid item lg={12}>
-                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                  <div className={classes.student_title}>
-                    <img className={classes.student_image} src={student} alt="student" />
-                    <div>
-                      <p>Muhammad Khalid</p>
-                      <p>Software Engineering</p>
-                      <p>Final Year, NEDUET</p>
+              <Select
+                value={search}
+                onChange={searchChange}
+                displayEmpty
+                sx={{ width: 120, marginRight: '10px' }}
+              >
+                <MenuItem value={1}>Skill</MenuItem>
+                <MenuItem value={2}>University</MenuItem>
+                <MenuItem value={3}>GPA</MenuItem>
+                <MenuItem value={4}>Year</MenuItem>
+              </Select>
+              <SearchIcon fontSize='large' sx={{ color: '#42b6EE', cursor: 'pointer', marginTop:{lg:'none', xs:'10px'}, }} />
+            </Grid>
+            <Grid item lg={12} xs={12} className={classes.studentList} >
+              <Grid container spacing={3} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+                <Grid item lg={10}>
+                  <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                    <div className={classes.student_title}>
+                      <img className={classes.student_image} src={student} alt="student" />
+                      <div>
+                        <p>Muhammad Khalid</p>
+                        <p>Software Engineering</p>
+                        <p>Final Year, NEDUET</p>
+                      </div>
                     </div>
-                  </div>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="about"
-                    >
-                      <Typography>About</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
-                      </p>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="skills"
-                    >
-                      <Typography>Skills</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <p>
-                        {
-                          searchSkill && searchSkill.map((skill, i) => (
-                              <Chip label={skill} sx={{ marginRight: '10px', marginBottom:'5px'}} />))
-                        }
-                      </p>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="skills"
-                    >
-                      <Typography>Experience</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <p>
-                        <h4 style={{fontWeight:'bold'}}>10 Pearls</h4>
-                        <h5>Web Developer</h5>
-                        <h6>Dec-2021 to Feb-2022</h6>
-                        <p>ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore.</p>
-                      </p>
-                    </AccordionDetails>
-                  </Accordion>
-                </Box>
-              </Grid>
-              <Grid item lg={12}>
-                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                  <div className={classes.student_title}>
-                    <img className={classes.student_image} src={student} alt="student" />
-                    <div>
-                      <p>Muhammad Khalid</p>
-                      <p>Software Engineering</p>
-                      <p>Final Year, NEDUET</p>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="about"
+                      >
+                        <Typography>About</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
+                        </p>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="skills"
+                      >
+                        <Typography>Skills</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p>
+                          {
+                            searchSkill && searchSkill.map((skill, index) => (
+                              <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                          }
+                        </p>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="skills"
+                      >
+                        <Typography>Experience</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p>
+                          <h4 style={{ fontWeight: 'bold' }}>10 Pearls</h4>
+                          <h5>Web Developer</h5>
+                          <h6>Dec-2021 to Feb-2022</h6>
+                          <p>ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore.</p>
+                        </p>
+                      </AccordionDetails>
+                    </Accordion>
+                  </Box>
+                </Grid>
+                <Grid item lg={10}>
+                  <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                    <div className={classes.student_title}>
+                      <img className={classes.student_image} src={student} alt="student" />
+                      <div>
+                        <p>Muhammad Waqar</p>
+                        <p>Software Engineering</p>
+                        <p>Final Year, NEDUET</p>
+                      </div>
                     </div>
-                  </div>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="about"
-                    >
-                      <Typography>About</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
-                      </p>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="skills"
-                    >
-                      <Typography>Skills</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <p>
-                        {
-                          searchSkill && searchSkill.map((skill, i) => (
-                              <Chip label={skill} sx={{ marginRight: '10px', marginBottom:'5px'}} />))
-                        }
-                      </p>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="skills"
-                    >
-                      <Typography>Experience</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <p>
-                        <h4 style={{fontWeight:'bold'}}>10 Pearls</h4>
-                        <h5>Web Developer</h5>
-                        <h6>Dec-2021 to Feb-2022</h6>
-                        <p>ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore.</p>
-                      </p>
-                    </AccordionDetails>
-                  </Accordion>
-                </Box>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="about"
+                      >
+                        <Typography>About</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
+                        </p>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="skills"
+                      >
+                        <Typography>Skills</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p>
+                          {
+                            searchSkill && searchSkill.map((skill, i) => (
+                              <Chip label={skill} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                          }
+                        </p>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="skills"
+                      >
+                        <Typography>Experience</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <p>
+                          <h4 style={{ fontWeight: 'bold' }}>10 Pearls</h4>
+                          <h5>Web Developer</h5>
+                          <h6>Dec-2021 to Feb-2022</h6>
+                          <p>ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore.</p>
+                        </p>
+                      </AccordionDetails>
+                    </Accordion>
+                  </Box>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </div>
+
     </>
   )
 }

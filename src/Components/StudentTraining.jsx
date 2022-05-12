@@ -6,7 +6,7 @@ const StudentTraining = () => {
         <>
             <Navbar />
             <div className='center_utils'>
-                <h1 className='main_heading'>Coming Soon</h1>
+                <h1 className='main_heading'>Training Coming Soon</h1>
             </div>
         </>
     )

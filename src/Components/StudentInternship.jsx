@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
-    Container, Grid, FormGroup, FormControlLabel,
+    Container, Grid, Autocomplete,
     Checkbox, Box, Accordion, AccordionSummary,
     AccordionDetails, Chip, Button, Typography,
-    Modal, TextField, MenuItem, TextareaAutosize, FormControl
+    Modal, TextField, MenuItem, TextareaAutosize, FormControl, Select
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
@@ -132,6 +134,8 @@ const PostInternship = (props) => {
     )
 }
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const StudentInternship = () => {
     const classes = useStyles();
@@ -139,35 +143,69 @@ const StudentInternship = () => {
     const [requestJob, setRequestJob] = useState(false);
     const openRequest = () => setRequestJob(true);
     const closeRequest = () => setRequestJob(false);
+
+    const [search, setSearch] = useState(1);
+
+    const searchChange = (event) => {
+        setSearch(event.target.value);
+    };
     return (
         <>
             <Navbar />
             <PostInternship open={requestJob} handleClose={closeRequest}/>
-            <Container maxWidth="xl" sx={{ padding: '0' }}>
-                <Grid container spacing={2}>
-                    <Grid item lg={2} sx={{ display: {lg: 'block' }, textAlign:'center', width:{xs:'100%'} }}>
+            <Container maxWidth="xl" sx={{ padding: '0', }}>
+                <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column',  justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
                         <h1>Internship</h1>
                     </Grid>
-                    <Grid item lg={8} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className={classes.search_div}>
-                            <input type="text" id="search-student" name="search-student" className={classes.search} />
-                            <div className={classes.search_icon}>
-                                <SearchIcon />
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid item lg={2} sx={{width:{xs:'100%'}, display:'flex', justifyContent:'center', alignItems:'center'}}>
-                        <Button variant='contained' onClick={openRequest}>Request Internhsip</Button>
-                    </Grid>
-                    <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' }, textAlign: 'left' }} className={classes.searching}>
-                        <h3>Skills</h3>
-                        <FormGroup>
+                    <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
+                        <div>
                             {
-                                internshipSkills.map((services, index) => (
-                                    <FormControlLabel control={<Checkbox />} label={services} key={index} />
-                                ))
+                                (search === 1) ? (
+                                    <Autocomplete
+                                        sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                        multiple
+                                        id="skill-search"
+                                        options={internshipSkills}
+                                        disableCloseOnSelect
+                                        getOptionLabel={(option) => option}
+                                        renderOption={(props, option, { selected }) => (
+                                            <li {...props}>
+                                                <Checkbox
+                                                    icon={icon}
+                                                    checkedIcon={checkedIcon}
+                                                    style={{ marginRight: 8 }}
+                                                    checked={selected}
+                                                />
+                                                {option}
+                                            </li>
+                                        )}
+                                        style={{ width: { lg: 500, xs: 250 } }}
+                                        renderInput={(params) => (
+                                            <TextField {...params} label="Search by Skills" placeholder="Favorites" size='medium' />
+                                        )}
+                                    />
+                                ) :
+                                    (
+                                        <TextField id="search" label="Search" variant="outlined" size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                                    )
                             }
-                        </FormGroup>
+                        </div>
+                        <Select
+                            value={search}
+                            onChange={searchChange}
+                            displayEmpty
+                            sx={{ width: 180, marginRight: '10px' }}
+                        >
+                            <MenuItem value={1}>Skill</MenuItem>
+                            <MenuItem value={2}>Title</MenuItem>
+                            <MenuItem value={3}>Software House</MenuItem>
+                            <MenuItem value={4}>City</MenuItem>
+                        </Select>
+                        <SearchIcon fontSize='large' sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                    </Grid>
+                    <Grid item lg={12} sx={{width:{xs:'100%'}, display:'flex', justifyContent:'center', alignItems:'center'}}>
+                        <Button variant='contained' onClick={openRequest}>Request Internhsip</Button>
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>

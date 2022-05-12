@@ -125,7 +125,10 @@ const StudentScholarship = () => {
         <>
             <Navbar />
             <PostInternship open={requestJob} handleClose={closeRequest} />
-            <Container maxWidth="xl" sx={{ padding: '0' }}>
+            <div className='center_utils'>
+                <h1 className='main_heading'>Scholarship Coming Soon</h1>
+            </div>
+            {/* <Container maxWidth="xl" sx={{ padding: '0' }}>
                 <Grid container spacing={2}>
                     <Grid item lg={2} sx={{ display: { lg: 'block' }, textAlign: 'center', width: { xs: '100%' } }}>
                         <h1>Scholarship</h1>
@@ -141,16 +144,6 @@ const StudentScholarship = () => {
                     <Grid item lg={2} sx={{ width: { xs: '100%' }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Button variant='contained' onClick={openRequest}>Request Scholarship</Button>
                     </Grid>
-                    {/* <Grid item lg={2} sx={{ display: { xs: 'none', lg: 'block' }, textAlign: 'left' }} className={classes.searching}>
-                        <h3>Skills</h3>
-                        <FormGroup>
-                            {
-                                internshipSkills.map((services, index) => (
-                                    <FormControlLabel control={<Checkbox />} label={services} key={index} />
-                                ))
-                            }
-                        </FormGroup>
-                    </Grid> */}
                     <Grid item lg={12} xs={12} >
                         <Grid container spacing={2}>
                             <Grid item lg={6}>
@@ -231,7 +224,7 @@ const StudentScholarship = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Container>
+            </Container> */}
         </>
     )
 }
