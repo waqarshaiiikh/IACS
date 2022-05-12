@@ -35,7 +35,6 @@ const haveExperience =
     { companyName : "ab127" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" }
 ]
 
-localStorage.setItem('haveExperience', JSON.stringify(haveExperience));
 
 const useStyles = makeStyles({
     typography: {
@@ -83,9 +82,9 @@ const StudentProfile = () => {
 
     // Open Experience Form
     const [experience, setExperience] = useState(false);
-    const [experienceField, setExperienceField] = useState(null);
-    const openExperience  = (obj) =>  { setExperienceField(obj); setExperience(true); };
-    // const openExperience   = () => setExperience(true);
+    const [experienceField, setExperienceField] = useState({});
+    let status = null;
+    const openExperience  = (obj) =>  { setExperienceField(obj); setExperience(true);};
     const closeExperience  = () => setExperience(false);
 
     // Open Skills Form
@@ -95,10 +94,9 @@ const StudentProfile = () => {
     
     return (
         <>
-
             <Navbar />
             <ProfileData    open={profile}    handleClose={closeProfile}/>
-           { experience && <ExperienceData open={experience} handleClose={closeExperience} experienceObj={experienceField} />}
+            { experience && <ExperienceData open={experience} handleClose={closeExperience} experienceObj={experienceField} status={ experienceField.companyName===null ?  "Add" : "Update"} />}
             <SkillData      open={skill}      handleClose={closeSkill}/>
 
 
@@ -132,6 +130,7 @@ const StudentProfile = () => {
                             </Grid>
                         </Box>
                     </Grid>
+
                     <Grid item lg={8} xs={12}>
                         <Box sx={{
                             width: '100%',
@@ -176,7 +175,7 @@ const StudentProfile = () => {
                             <Grid item lg={12}>
                                 <Typography variant='h3'>
                                     Experience
-                                    <Button variant="text" onClick={openExperience} > ADD </Button>
+                                    <Button variant="text" onClick={ ()=> { openExperience( {companyName :null , jobRole : null, startDate :null , endDate :null , Description :null } )} } > ADD </Button>
                                 </Typography>
                             </Grid>
 
@@ -193,7 +192,7 @@ const StudentProfile = () => {
                                                 marginBottom: 3,
                                             }}>
                                             <Typography variant='h4'>
-                                                {Experience.companyName}  <EditIcon className={classes.edit} onClick={ ()=> openExperience(i)   } />
+                                                {Experience.companyName}  <EditIcon className={classes.edit} onClick={ ()=> { openExperience(Experience) }  } />
                                             </Typography>
                                             <Typography variant='h6' className={classes.experience}>
                                                 {Experience.jobRole}

@@ -204,27 +204,25 @@ function SkillData(props) {
 
 function ExperienceData(props) {
     
-    const {companyName , startDate, endDate, jobRole, Description} = JSON.parse(localStorage.getItem('haveExperience'))[props.experienceObj];
+    const {companyName , startDate, endDate, jobRole, Description} = props.experienceObj;
+    const {open , handleClose, status} = props; 
     
-    const {open , handleClose} = props; 
-    const [value, setValue] = useState([startDate, endDate]);
-
+    
+    const [duration, setDuration] = useState([startDate,endDate] );
     const companyField = useFormInput(companyName);
-    const sDateField   = useFormInput(startDate);
-    const eDateField   = useFormInput(endDate);
     const jobField     = useFormInput(jobRole);
     const DesField     = useFormInput(Description);
     
     
-    // console.log(
-    //       companyField 
-    //     , sDateField   
-    //     , eDateField
-    //     , jobField  
-    //     , DesField     
-    //     , open
-    //     , handleClose
-    // );
+    console.log(
+          companyField
+        , status 
+        , duration
+        , jobField  
+        , DesField     
+        , open
+        , handleClose
+    );
 
 
     return (
@@ -235,7 +233,7 @@ function ExperienceData(props) {
             >
                 <Box sx={skillStyle}>
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
-                        Update Experience <WorkIcon />
+                        {`${status}  Experience`} <WorkIcon />
                     </Typography>
                     <FormControl>
                         <Grid container spacing={1}>
@@ -250,9 +248,9 @@ function ExperienceData(props) {
                                     <DateRangePicker
                                         startText="Start Date"
                                         endText="End Date"
-                                        value={value}
-                                        onChange={(newValue) => {
-                                            setValue(newValue);
+                                        value={duration}
+                                        onChange={(value) => {
+                                            setDuration(value);
                                         }}
                                         renderInput={(startProps, endProps) => (
                                             <React.Fragment>

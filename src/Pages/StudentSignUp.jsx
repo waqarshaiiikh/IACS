@@ -147,6 +147,7 @@ const StudentSignUp = () => {
                 apiCAll("/api/otp/generate", "post", reqData)
                     .then(response => {
                         setLoading({ sendOTP: false });
+                        console.log(response.data.token);
                         updateToken(response.data.token);
                         updatePage(Pages.nextVal());
                     })
