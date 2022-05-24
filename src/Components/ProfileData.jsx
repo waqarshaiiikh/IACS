@@ -5,34 +5,25 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import WorkIcon from '@mui/icons-material/Work';
-import apiCAll from '../integration/apiCall';
-
-
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 // import { flexbox } from '@mui/system';
+
+// const { apiCAll } = require('../integration/apiCall');
+
+const { Api } = require('../integration/apiCall');
+const Data = Api.getApi();
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 
-const skills = [
-    { title: "HTML" },
-    { title: "CSS" },
-    { title: "JavaScript" },
-    { title: "React Js" },
-    { title: "Python" },
-    { title: "C / C++" },
-    { title: "Java" },
-    { title: "Web Developer" },
-    { title: "React Native" },      
-    { title: "MongoDB" },
-    { title: "Node Js" },
-    { title: "Express Js" },
-    { title: "Oracle" }
-];
-
+// // const skills = 
+// console.log(Data.skill.options)
+// console.log(Data.skill.client)
 
 
 const style = {
@@ -144,6 +135,12 @@ function ProfileData(props) {
 
 function SkillData(props) {
 
+    const [newSkill, addNewSkill] = useState([]);
+   
+    const saveSkill = () =>{
+       Data.skill.client = newSkill;
+       props.handleClose();
+    }
 
     return (
         <>
@@ -152,6 +149,20 @@ function SkillData(props) {
                 onClose={props.handleClose}
             >
                 <Box sx={skillStyle}>
+                    
+                    <IconButton
+                        aria-label="close"
+                        onClick={props.handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
                         Update Skills <BeenhereIcon />
                     </Typography>
@@ -162,18 +173,17 @@ function SkillData(props) {
                                     
                                     multiple
                                     id = "checkboxes-tags-demo"
-                                    options={skills}
+                                    options={Data.skill.options}
                                     disableCloseOnSelect
                                     getOptionLabel={(option) => option.title}
-                                    defaultValue={skills}
+                                    isOptionEqualToValue={(option, value) => option.title === value.title}
+                                    defaultValue={Data.skill.client}
                                     
                                     onChange={(event, values) => {
-                                        console.log(event);
-                                        console.log(values);
+                                        addNewSkill(values);
                                     }}
-                                    
+
                                     style={{ width: 'inherit' }}
-                                    
                                     renderOption={(props, option, { selected }) => (
                                         <li {...props}>
                                             <Checkbox
@@ -185,14 +195,13 @@ function SkillData(props) {
                                             {option.title}
                                         </li>
                                     )}
-                                    
                                     renderInput={(params) => (
                                         <TextField {...params} label="Skills" placeholder="Add..." />
                                     )}
                                 />
                             </Grid>
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                <Button variant="contained" onClick={props.handleClose}>Save</Button>
+                                <Button variant="contained" onClick={saveSkill} >Save</Button>
                             </Grid>
                         </Grid>
                     </FormControl>
@@ -202,9 +211,9 @@ function SkillData(props) {
     )
 }
 
+
 function ExperienceData(props) {
-    
-    const {companyName , startDate, endDate, jobRole, Description} = props.experienceObj;
+    const {eid, companyName , startDate, endDate, jobRole, Description} = props.experienceObj;
     const {open , handleClose, status} = props; 
     
     
@@ -213,16 +222,51 @@ function ExperienceData(props) {
     const jobField     = useFormInput(jobRole);
     const DesField     = useFormInput(Description);
     
+
+    function removeExperience(){
+        
+        Data.experience.remove({companyName , startDate, endDate, jobRole, Description});
+        props.handleClose();
+
+    }
     
-    console.log(
-          companyField
-        , status 
-        , duration
-        , jobField  
-        , DesField     
-        , open
-        , handleClose
-    );
+    function addExperience() {
+
+        // console.log(
+        //     companyField.value
+        //     , "\n" , `${duration[0].getDate()}/${duration[0].getMonth()}/${duration[0].getFullYear()}`
+        //     , "\n" , `${duration[1].getDate()}/${duration[1].getMonth()}/${duration[1].getFullYear()}`
+        //     , "\n" , jobField.value
+        //     , "\n" , DesField.value
+        // );
+
+     
+
+        Data.experience.client = { 
+            companyName: companyField.value, 
+            startDate:  `${duration[0].getDate()}/${duration[0].getMonth()}/${duration[0].getFullYear()}`,
+            endDate:    `${duration[1].getDate()}/${duration[1].getMonth()}/${duration[1].getFullYear()}`, 
+            jobRole: jobField.value, 
+            Description: DesField.value
+        };
+
+        props.handleClose();
+    }
+
+    function updateExperience() {
+       
+        const exp = { 
+            eid,
+            companyName: companyField.value, 
+            startDate:  `${duration[0]}`   ,
+            endDate:    `${duration[1]}`   , 
+            jobRole:     jobField.value    , 
+            Description: DesField.value
+        };
+
+        Data.experience.modify(exp);
+        props.handleClose();
+    }
 
 
     return (
@@ -232,6 +276,18 @@ function ExperienceData(props) {
                 onClose={handleClose}
             >
                 <Box sx={skillStyle}>
+                    <IconButton
+                        aria-label="close"
+                        onClick={props.handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
                         {`${status}  Experience`} <WorkIcon />
                     </Typography>
@@ -262,6 +318,7 @@ function ExperienceData(props) {
                                     />
                                 </LocalizationProvider>
                             </Grid>
+
                             <Grid item lg={12} xs={12}>
                                 <TextareaAutosize
                                     id="about"
@@ -272,9 +329,14 @@ function ExperienceData(props) {
                                     placeholder="Write Description About your Job in 200 words"
                                 />
                             </Grid>
+
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                <Button variant="contained" onClick={props.handleClose}>Save</Button>
+                            
+                                { status === "Update" && <Button variant="contained" onClick={removeExperience} style={{ marginRight: "10px" }} > Remove</Button>}
+                                <Button variant="contained" onClick={()=>{ status === "Update" ? updateExperience() :addExperience()  }}> {`${status}`}</Button>
+                                
                             </Grid>
+
                         </Grid>
                     </FormControl>
                 </Box>
@@ -286,8 +348,8 @@ function ExperienceData(props) {
 
 
 const useFormInput = initialValue => {
+
     const [value, setValue] = useState(initialValue);
-    
     const handleChange = e => {
         setValue(e.target.value);
     }
@@ -296,7 +358,6 @@ const useFormInput = initialValue => {
         onChange: handleChange
     }
 }
-
 
 
 export { ProfileData, SkillData, ExperienceData }

@@ -6,35 +6,11 @@ import { makeStyles } from '@material-ui/styles';
 import Navbar from "./Navbar";
 import std from "../Images/student.png"
 
+const { Api } = require('../integration/apiCall');
+const   Data  = Api.getApi();
 
-const haveSkills = 
-[
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "React Js",
-    "Python",
-    "C / C++",
-    "Java",
-    "Web Developer",
-    "React Native",
-    "MongoDB",
-    "Node Js",
-    "Express Js",
-    "Oracle"
-]
-
-
-const haveExperience = 
-[
-    { companyName : "abcd0" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" },
-    { companyName : "ab123" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" },
-    { companyName : "ab124" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" },
-    { companyName : "ab125" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" },
-    { companyName : "ab126" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" },
-    { companyName : "ab127" , jobRole : "Software Engineer", startDate : '11/10/2021' , endDate : '11/20/2021' , Description : "Description Data" }
-]
-
+let haveSkills     ;
+let haveExperience ;
 
 const useStyles = makeStyles({
     typography: {
@@ -70,9 +46,16 @@ const useStyles = makeStyles({
     },
 })
 
+const getData=()=>{
 
+    haveSkills       =  Data.skill.client      ;
+    haveExperience   =  Data.experience.client ;
+
+}
 
 const StudentProfile = () => {
+    getData();
+
     const classes = useStyles();
 
     // Open Update Profile Form
@@ -83,7 +66,6 @@ const StudentProfile = () => {
     // Open Experience Form
     const [experience, setExperience] = useState(false);
     const [experienceField, setExperienceField] = useState({});
-    let status = null;
     const openExperience  = (obj) =>  { setExperienceField(obj); setExperience(true);};
     const closeExperience  = () => setExperience(false);
 
@@ -98,7 +80,6 @@ const StudentProfile = () => {
             <ProfileData    open={profile}    handleClose={closeProfile}/>
             { experience && <ExperienceData open={experience} handleClose={closeExperience} experienceObj={experienceField} status={ experienceField.companyName===null ?  "Add" : "Update"} />}
             <SkillData      open={skill}      handleClose={closeSkill}/>
-
 
             <Container maxWidth="xl">
                 <Grid container>
@@ -163,7 +144,7 @@ const StudentProfile = () => {
                                     {
                                         haveSkills && haveSkills.map((skill, i) => (
                                         <Grid item>
-                                            <Chip label={skill} sx={{ marginRight: '10px', marginBottom: '5px' }} />
+                                            <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />
                                         </Grid>))
                                     }
                                 </Grid>
@@ -172,6 +153,7 @@ const StudentProfile = () => {
                     </Grid>
                     <Grid item lg={12}>
                         <Grid container spacing={2}>
+
                             <Grid item lg={12}>
                                 <Typography variant='h3'>
                                     Experience
@@ -207,6 +189,7 @@ const StudentProfile = () => {
                                 ))
                             }
                             </Grid>
+                            
                         </Grid>
                     </Grid>
 

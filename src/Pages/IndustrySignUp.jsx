@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@material-ui/core';
 import { FormControl, TextField, Button, Container, Grid, Box } from '@mui/material';
-import apiCAll from '../integration/apiCall';
 import { useNavigate } from "react-router-dom";
+// import apiCAll from '../integration/apiCall';
+const {apiCAll}= require('../integration/apiCall');
 const validator = require("validator");
 
 
@@ -50,7 +51,6 @@ const IndustrySignUp = () => {
             clause1: "  country should be Alphabetic"
         },
         otp: "Sending OTP just wait 30s, otherwise go back and regenerate OTP"
-
     };
 
 

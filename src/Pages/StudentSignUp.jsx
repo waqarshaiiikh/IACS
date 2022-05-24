@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import apiCAll from '../integration/apiCall';
 import { Container, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@material-ui/core';
 import { MenuItem, FormControl, TextField, Button, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+// import apiCAll from '../integration/apiCall';
+const {apiCAll}= require('../integration/apiCall');
 const validator = require("validator");
 
 
