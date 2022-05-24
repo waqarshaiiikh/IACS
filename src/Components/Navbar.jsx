@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
-import apiCAll from '../integration/apiCall';
+// import apiCAll from '../integration/apiCall';
+const {apiCAll}= require('../integration/apiCall');
 
 const useStyles = makeStyles({
   navbar: {
