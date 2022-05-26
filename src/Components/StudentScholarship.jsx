@@ -1,59 +1,59 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import {
-    Container, Grid, Box, Accordion, AccordionSummary,
-    AccordionDetails, Button, Typography,
+    // Container, Accordion, AccordionSummary,  AccordionDetails,
+    Grid, Box, Button, Typography,
     Modal, TextField, TextareaAutosize, FormControl
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { makeStyles } from '@material-ui/styles';
-import SearchIcon from '@mui/icons-material/Search';
-import softwareHouse from "../Images/softwareHouselogo.png";
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import { makeStyles } from '@material-ui/styles';
+// import SearchIcon from '@mui/icons-material/Search';
+// import softwareHouse from "../Images/softwareHouselogo.png";
 
-const useStyles = makeStyles({
-    searching: {
-        width: '100%',
-        border: '1px solid',
-        borderRadius: '10px',
-    },
-    search_div: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '80%',
-        height: '40px',
-        border: '1px solid black',
-        boxSizing: 'border-box'
-    },
-    search: {
-        width: '100%',
-        fontSize: '1.1rem',
-        padding: '5px',
-        border: 'none',
-        outline: 'none'
-    },
-    search_icon: {
-        margin: '0',
-        width: '50px',
-        height: '100%',
-        fontSize: '1.5rem',
-        background: 'hsl(0, 0%, 18.82%)',
-        color: 'white',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer'
-    },
-    software_title: {
-        display: 'flex',
-        justifyContent: 'space-between',
+// const useStyles = makeStyles({
+//     searching: {
+//         width: '100%',
+//         border: '1px solid',
+//         borderRadius: '10px',
+//     },
+//     search_div: {
+//         display: 'flex',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         width: '80%',
+//         height: '40px',
+//         border: '1px solid black',
+//         boxSizing: 'border-box'
+//     },
+//     search: {
+//         width: '100%',
+//         fontSize: '1.1rem',
+//         padding: '5px',
+//         border: 'none',
+//         outline: 'none'
+//     },
+//     search_icon: {
+//         margin: '0',
+//         width: '50px',
+//         height: '100%',
+//         fontSize: '1.5rem',
+//         background: 'hsl(0, 0%, 18.82%)',
+//         color: 'white',
+//         display: 'flex',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         cursor: 'pointer'
+//     },
+//     software_title: {
+//         display: 'flex',
+//         justifyContent: 'space-between',
 
-    },
-    software_image: {
-        width: '100px',
-        height: '100px'
-    },
-});
+//     },
+//     software_image: {
+//         width: '100px',
+//         height: '100px'
+//     },
+// });
 
 const requestStyle = {
     position: 'absolute',
@@ -116,10 +116,10 @@ const PostInternship = (props) => {
 
 
 const StudentScholarship = () => {
-    const classes = useStyles();
+    // const classes = useStyles();
 
     const [requestJob, setRequestJob] = useState(false);
-    const openRequest = () => setRequestJob(true);
+    // const openRequest = () => setRequestJob(true);
     const closeRequest = () => setRequestJob(false);
     return (
         <>

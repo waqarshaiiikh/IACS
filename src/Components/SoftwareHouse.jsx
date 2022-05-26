@@ -1,30 +1,16 @@
-import React, {useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar';
+import axios from "axios";
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
     Container, Grid, Checkbox, Autocomplete, Box, Accordion, AccordionSummary,
-    AccordionDetails, Typography, Chip, MenuItem, TextField, Select
+    AccordionDetails, Typography, Chip, MenuItem, TextField, Select, Pagination, CircularProgress, Backdrop
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import softwareHouse from "../Images/softwareHouselogo.png";
-
-const searchService = [
-    "Web Development", "Mobile App Development",
-    "Graphis Designing",
-    "Data Analytics",
-    "Desktop Development",
-    "Devops",
-    "SQA",
-    "Database",
-    "Digital Media Marketing",
-    "Artificial Intelligence",
-    "Blockchain",
-    "AWS",
-    "Cloud & Web Hosting"
-]
+import { searchService } from './getSoftwareHouse';
 
 const useStyles = makeStyles({
     searching: {
@@ -76,12 +62,49 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const SoftwareHouse = () => {
     const classes = useStyles();
-
     const [search, setSearch] = useState(1);
 
     const searchChange = (event) => {
         setSearch(event.target.value);
     };
+
+    const countPage = async () => {
+        const res = await axios.get(`http://localhost:3001/posts`);
+        const count = Math.ceil(res.data?.length / 5);
+        setCount(count);
+    }
+
+    const [posts, setPosts] = useState(null);
+    const [page, setPage] = useState(1);
+    const [count, setCount] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState("");
+
+    const loadPost = async () => {
+        await axios.get(`http://localhost:3001/posts?_page=${page}&_limit=5`).then((res) => {
+            setPosts(res.data);
+        }).catch((err) => {
+            console.log(err);
+        })
+        setLoading(false);
+    }
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        return await axios.get(`http://localhost:3001/posts?q=${value}`).then((res) => {
+            setPosts(res.data);
+            setValue("");
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    useEffect(() => {
+        countPage();
+        loadPost();
+        setLoading(true);
+        window.scrollTo({ top: 0 });
+    }, [page,count])
     return (
         <>
             <Navbar />
@@ -114,12 +137,22 @@ const SoftwareHouse = () => {
                                         )}
                                         style={{ width: { lg: 500, xs: 250 } }}
                                         renderInput={(params) => (
-                                            <TextField {...params} label="Search by Services" placeholder="Favorites" size='medium' />
+                                            <TextField {...params}
+                                                label="Search by Services"
+                                                placeholder="Service"
+                                                size='medium' />
                                         )}
                                     />
                                 ) :
                                     (
-                                        <TextField id="search" label="Search" variant="outlined" size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                                        <TextField
+                                            id="search"
+                                            label="Search"
+                                            variant="outlined"
+                                            size='medium'
+                                            value={value}
+                                            onChange={(e) => { setValue(e.target.value) }}
+                                            sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
                                     )
                             }
                         </div>
@@ -133,97 +166,79 @@ const SoftwareHouse = () => {
                             <MenuItem value={2}>Name</MenuItem>
                             <MenuItem value={3}>City</MenuItem>
                         </Select>
-                        <SearchIcon fontSize='large' sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                        <SearchIcon
+                            fontSize='large'
+                            onClick={handleSearch}
+                            sx={{
+                                color: '#42b6EE',
+                                cursor: 'pointer',
+                                marginTop: { lg: 'none', xs: '10px' },
+                            }} />
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>
-                            <Grid item lg={12}>
-                                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                    <div className={classes.software_title}>
-                                        <div>
-                                            <h1>10 Pearls</h1>
-                                            <p>Karachi, Pakistan</p>
-                                        </div>
-                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
-                                    </div>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="about"
-                                        >
-                                            <Typography>About</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="skills"
-                                        >
-                                            <Typography>Services</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                {
-                                                    searchService && searchService.map((services, i) => (
-                                                        <Chip label={services} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                                }
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                </Box>
-                            </Grid>
-                            <Grid item lg={12}>
-                                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                    <div className={classes.software_title}>
-                                        <div>
-                                            <h1>Contour Software</h1>
-                                            <p>Karachi, Pakistan</p>
-                                        </div>
-                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
-                                    </div>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="about"
-                                        >
-                                            <Typography>About</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="skills"
-                                        >
-                                            <Typography>Services</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                {
-                                                    searchService && searchService.map((services, i) => (
-                                                        <Chip label={services} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                                }
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                </Box>
-                            </Grid>
-
+                            {
+                                loading ? (
+                                    <Backdrop
+                                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+                                        <CircularProgress color="inherit" />
+                                    </Backdrop>
+                                ) : (
+                                    posts && posts.map((softwareHouse, index) => (
+                                        <Grid item lg={12} >
+                                            <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                                                <div className={classes.software_title}>
+                                                    <div>
+                                                        <h1>{softwareHouse.name}</h1>
+                                                        <p>{softwareHouse.city}</p>
+                                                    </div>
+                                                    <img className={classes.software_image} src={softwareHouse.image} alt="software" />
+                                                </div>
+                                                <Accordion>
+                                                    <AccordionSummary
+                                                        expandIcon={<ExpandMoreIcon />}
+                                                        aria-controls="panel1a-content"
+                                                        id="about"
+                                                    >
+                                                        <Typography>About</Typography>
+                                                    </AccordionSummary>
+                                                    <AccordionDetails>
+                                                        <p>
+                                                            {softwareHouse.about}
+                                                        </p>
+                                                    </AccordionDetails>
+                                                </Accordion>
+                                                <Accordion>
+                                                    <AccordionSummary
+                                                        expandIcon={<ExpandMoreIcon />}
+                                                        aria-controls="panel1a-content"
+                                                        id="skills"
+                                                    >
+                                                        <Typography>Services</Typography>
+                                                    </AccordionSummary>
+                                                    <AccordionDetails>
+                                                        <p>
+                                                            {
+                                                                softwareHouse.services.map((service, index) => (
+                                                                    <Chip label={service} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                                            }
+                                                        </p>
+                                                    </AccordionDetails>
+                                                </Accordion>
+                                            </Box>
+                                        </Grid>
+                                    )))
+                            }
                         </Grid>
                     </Grid>
+                    <Box sx={{ margin: '20px 0px' }}>
+                        <Pagination
+                            count={count}
+                            color="primary"
+                            defaultPage={1}
+                            onChange={(e, value) => { setPage(value); console.log(loading) }}
+                        />
+                    </Box>
                 </Grid>
             </Container>
         </>
@@ -231,3 +246,5 @@ const SoftwareHouse = () => {
 }
 
 export default SoftwareHouse
+
+

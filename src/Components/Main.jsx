@@ -20,10 +20,11 @@ import ClientProject from '../Industries/ClientProject';
 import ClientScholarship from '../Industries/ClientScholarship';
 
 const Main = () => {
+    let student = "industry";
     return (
         <>
             <Routes>
-                <Route path="/" element={<Introduction />} />
+                {student==="industry" && <Route path="//*" element={<Introduction />} />}
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path='/clidashboard' element={<ClientDashborad />}/>
