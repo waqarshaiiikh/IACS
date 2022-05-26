@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
-import { Container, Grid, Box, Typography, Button, Chip } from '@mui/material';
+import { Container, Grid, Box, Typography, Button, Chip,Avatar, IconButton, Badge } from '@mui/material';
 import {ProfileData, ExperienceData, SkillData} from "./ProfileData"
 import EditIcon from '@mui/icons-material/Edit';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/styles';
 import Navbar from "./Navbar";
-import std from "../Images/student.png"
+// import std from "../Images/IMG_20191029_175656.JPG"
+
+
+const Input = styled('input')({
+    display: 'none',
+});
+
 
 const { Api } = require('../integration/apiCall');
 const   Data  = Api.getApi();
 
+
 let haveSkills     ;
 let haveExperience ;
+
 
 const useStyles = makeStyles({
     typography: {
@@ -46,12 +56,12 @@ const useStyles = makeStyles({
     },
 })
 
-const getData=()=>{
 
+const getData=()=>{
     haveSkills       =  Data.skill.client      ;
     haveExperience   =  Data.experience.client ;
-
 }
+
 
 const StudentProfile = () => {
     getData();
@@ -74,6 +84,16 @@ const StudentProfile = () => {
     const openSkill  = () => setSkill(true);
     const closeSkill = () => setSkill(false);
     
+
+    const fd = new  FormData();
+    const [url, setUrl] = useState(null);
+    
+
+    const imageUploadHandler = event =>{
+        fd.append('image', event.target.files[0], event.target.files[0] );
+        setUrl( URL.createObjectURL(event.target.files[0])) 
+    }
+    
     return (
         <>
             <Navbar />
@@ -94,7 +114,30 @@ const StudentProfile = () => {
                         }}>
                             <Grid>
                                 <Grid item lg={12} >
-                                    <img src={std} alt="" className={classes.profile} />
+
+                                    <Badge
+                                        overlap="circular"
+                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                        badgeContent={
+                                            <label htmlFor="icon-button-file">
+                                                <Input accept="image/*" onChange={imageUploadHandler} id="icon-button-file" type="file" />
+                                                <IconButton aria-label="upload picture" component="span" variant="outlined">
+                                                    <Avatar sx={{ bgcolor: 'rgb(216, 218, 223)'}}>
+                                                        <CameraAltIcon sx={{ color: 'rgb(28, 29, 33)' }} />
+                                                    </Avatar>
+                                                </IconButton>
+                                            </label>
+                                        }
+                                    >
+                                        <Avatar
+                                            alt="Muhammad Waqar"
+                                            src={url}
+                                            sx={{ width: 170, height: 170 }}
+                                        />
+                                    </Badge>
+
+
+
                                     <Typography variant='h6' className={classes.typography}>
                                         Muhammad Khalid
                                     </Typography>
@@ -117,7 +160,7 @@ const StudentProfile = () => {
                             width: '100%',
                             height: '100%',
                             padding: {lg:5,xs:1},
-                        }}>
+                        }}> 
                             <Grid container>
                                 <Grid item lg={12}>
                                     <Typography variant='h3' >

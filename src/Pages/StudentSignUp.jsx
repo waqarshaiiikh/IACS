@@ -346,7 +346,7 @@ const StudentSignUp = () => {
 
                     <Grid item lg={6} xs={12}>
                         <TextField id="phoneNumber" fullWidth label="Phone No" {...phoneNumber} type='tel' variant="outlined" required />
-                        <pre>{instruction.phoneNumber.clause1}<br />{instruction.phoneNumber.clause2}</pre>
+                        <pre>{instruction.phoneNumber.clause1}<br/></pre>
                     </Grid>
 
                     <Grid item lg={6} xs={12}>

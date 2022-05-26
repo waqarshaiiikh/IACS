@@ -1,5 +1,6 @@
 // import { TimerSharp } from '@material-ui/icons';
 import axios from 'axios';
+// import { ProfileData } from '../Components/ProfileData';
 // import { ExperienceData } from '../Components/ProfileData';
 
 const port = 8393;
@@ -286,6 +287,93 @@ class Experience {
     
 }
 
+// class Profile {
+//     static #instance = state.empty;
+//     #client = state.empty;
+
+//     #syncCounter = 900000;
+//     #lastSync = state.empty; //update  after 15min
+//     #status = state.empty;
+
+//     static getProfile() {
+//         if (this.#instance === null) {
+//             this.#instance = new Profile();
+//         }
+//         return this.#instance;
+//     }
+
+//     constructor() {
+//         if (this.UpdateClient() && this.UpdateOptions()) {
+//             this.#lastSync = Date.now();
+//             this.#status = state.updated;
+//         }
+//     }
+
+//     get client() {
+//         this.UpdateClient();
+//         return this.#client;
+//     }
+
+//     set client(newSkill) {
+
+//         // if (JSON.stringify(this.#client) !== JSON.stringify(newSkill) ){
+//         if (`${this.#client}` !== `${newSkill}`) {
+
+//             let skills = this.normalizeSkill(newSkill);
+//             /**
+//              * 
+//              * update Database
+//              * 
+//              */
+//             let omitedSkill = [];
+//             skills.forEach((value) => { omitedSkill = (value.status !== state.deleted) ? [{ ...value }, ...omitedSkill] : omitedSkill });
+//             this.#client = omitedSkill;
+//             this.#status = state.modified;
+//         }
+//     }
+
+
+//     normalizeSkill(newSkill) {
+
+//         let oldSkill = this.#client;
+
+//         oldSkill.forEach((oSkill) => {
+//             let check =
+//                 newSkill.some((nSklll, i) => {
+//                     if (oSkill.title === nSklll.title) {
+//                         if (nSklll.status === state.Add)
+//                             newSkill[i].status = state.available;
+//                         return true
+//                     }
+//                 });
+//             if (!check) {
+//                 oSkill.status = state.deleted;
+//                 newSkill = [{ ...oSkill }, ...newSkill];
+//             }
+//         })
+//         return newSkill;
+//     }
+
+//     UpdateClient() {
+//         if ((this.#status === state.empty && this.#lastSync === state.empty) ||
+//             (this.#status === state.modified && this.#lastSync + this.#syncCounter <= Date.now())) {
+//             /**
+//             * Api Call
+//             * for getting client skill
+//             * and update the client Data
+//             * send skill options that browser have
+//             */
+//             this.#lastSync = this.#lastSync + this.#syncCounter;
+//             this.#client = skill;
+//             this.#status = state.updated;
+//         }
+//         return true;
+//     }
+
+// }
+
+
+
 
 class Api{
     // #status = "synched";
@@ -293,6 +381,7 @@ class Api{
 
     #experience = Experience.getExperience();
     #skill      = Skill.getSkill(); 
+    // #profile    = Profile.getProfile();
     
 
     static getApi(){
