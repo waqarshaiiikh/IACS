@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
-import { Box, Typography, Modal, Grid, Button, TextField, MenuItem, TextareaAutosize, FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material/';
-import { DateRangePicker, LocalizationProvider} from '@mui/lab/';
+import { Box, Typography, Modal, Grid, Button, TextField, MenuItem, TextareaAutosize, FormControl, Checkbox } from '@mui/material/';
+import { DateRangePicker, LocalizationProvider } from '@mui/lab/';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import WorkIcon from '@mui/icons-material/Work';
+import Autocomplete from '@mui/material/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+// import { flexbox } from '@mui/system';
+
+// const { apiCAll } = require('../integration/apiCall');
+
+const { Api } = require('../integration/apiCall');
+const Data = Api.getApi();
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+
+// // const skills = 
+// console.log(Data.skill.options)
+// console.log(Data.skill.client)
+
 
 const style = {
     position: 'absolute',
@@ -32,23 +52,11 @@ const skillStyle = {
     p: { lg: 4, xs: 1 },
 }
 
-const skills = ["HTML", "CSS",
-    "JavaScript",
-    "React Js",
-    "Python",
-    "C / C++",
-    "Java",
-    "Web Developer",
-    "React Native",
-    "MongoDB",
-    "Node Js",
-    "Express Js",
-    "Oracle"]
 
 function ProfileData(props) {
     return (
         <>
-            <Modal
+            <Modal Modal
                 open={props.open}
                 onClose={props.handleClose}
                 sx={{ overflow: { xs: 'scroll' } }}
@@ -59,9 +67,6 @@ function ProfileData(props) {
                     </Typography>
                     <FormControl>
                         <Grid container spacing={1}>
-                            <Grid item lg={6} xs={12}>
-                                <TextField id="email" fullWidth label="Email" type="email" variant="outlined" required />
-                            </Grid>
                             <Grid item lg={6} xs={12}>
                                 <TextField id="phoneNumber" fullWidth label="Phone No" type='number' variant="outlined" required />
                             </Grid>
@@ -127,7 +132,16 @@ function ProfileData(props) {
     )
 }
 
+
 function SkillData(props) {
+
+    const [newSkill, addNewSkill] = useState([]);
+   
+    const saveSkill = () =>{
+       Data.skill.client = newSkill;
+       props.handleClose();
+    }
+
     return (
         <>
             <Modal
@@ -135,24 +149,61 @@ function SkillData(props) {
                 onClose={props.handleClose}
             >
                 <Box sx={skillStyle}>
+                    
+                    <IconButton
+                        aria-label="close"
+                        onClick={props.handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
                         Update Skills <BeenhereIcon />
                     </Typography>
                     <FormControl>
-                        <FormGroup>
-                            <Grid container>
-                                {
-                                    skills.map((skill, index) => (
-                                        <Grid item lg={3}>
-                                            <FormControlLabel key={index} control={<Checkbox />} label={skill} />
-                                        </Grid>
-                                    ))
-                                }
-                                <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                    <Button variant="contained" onClick={props.handleClose}>Save</Button>
-                                </Grid>
+                        <Grid container spacing={1}>
+                            <Grid item lg={12} xs={12}>
+                                <Autocomplete
+                                    
+                                    multiple
+                                    id = "checkboxes-tags-demo"
+                                    options={Data.skill.options}
+                                    disableCloseOnSelect
+                                    getOptionLabel={(option) => option.title}
+                                    isOptionEqualToValue={(option, value) => option.title === value.title}
+                                    defaultValue={Data.skill.client}
+                                    
+                                    onChange={(event, values) => {
+                                        addNewSkill(values);
+                                    }}
+
+                                    style={{ width: 'inherit' }}
+                                    renderOption={(props, option, { selected }) => (
+                                        <li {...props}>
+                                            <Checkbox
+                                                icon={icon}
+                                                checkedIcon={checkedIcon}
+                                                style={{ marginRight: 8 }}
+                                                checked={selected}
+                                            />
+                                            {option.title}
+                                        </li>
+                                    )}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Skills" placeholder="Add..." />
+                                    )}
+                                />
                             </Grid>
-                        </FormGroup>
+                            <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
+                                <Button variant="contained" onClick={saveSkill} >Save</Button>
+                            </Grid>
+                        </Grid>
                     </FormControl>
                 </Box>
             </Modal>
@@ -160,34 +211,102 @@ function SkillData(props) {
     )
 }
 
+
 function ExperienceData(props) {
-    const [value, setValue] = useState([null, null]);
+    const {eid, companyName , startDate, endDate, jobRole, Description} = props.experienceObj;
+    const {open , handleClose, status} = props; 
+    
+    
+    const [duration, setDuration] = useState([startDate,endDate] );
+    const companyField = useFormInput(companyName);
+    const jobField     = useFormInput(jobRole);
+    const DesField     = useFormInput(Description);
+    
+
+    function removeExperience(){
+        
+        Data.experience.remove({companyName , startDate, endDate, jobRole, Description});
+        props.handleClose();
+
+    }
+    
+    function addExperience() {
+
+        // console.log(
+        //     companyField.value
+        //     , "\n" , `${duration[0].getDate()}/${duration[0].getMonth()}/${duration[0].getFullYear()}`
+        //     , "\n" , `${duration[1].getDate()}/${duration[1].getMonth()}/${duration[1].getFullYear()}`
+        //     , "\n" , jobField.value
+        //     , "\n" , DesField.value
+        // );
+
+     
+
+        Data.experience.client = { 
+            companyName: companyField.value, 
+            startDate:  `${duration[0].getDate()}/${duration[0].getMonth()}/${duration[0].getFullYear()}`,
+            endDate:    `${duration[1].getDate()}/${duration[1].getMonth()}/${duration[1].getFullYear()}`, 
+            jobRole: jobField.value, 
+            Description: DesField.value
+        };
+
+        props.handleClose();
+    }
+
+    function updateExperience() {
+       
+        const exp = { 
+            eid,
+            companyName: companyField.value, 
+            startDate:  `${duration[0]}`   ,
+            endDate:    `${duration[1]}`   , 
+            jobRole:     jobField.value    , 
+            Description: DesField.value
+        };
+
+        Data.experience.modify(exp);
+        props.handleClose();
+    }
+
+
     return (
         <>
             <Modal
-                open={props.open}
-                onClose={props.handleClose}
+                open={open}
+                onClose={handleClose}
             >
                 <Box sx={skillStyle}>
+                    <IconButton
+                        aria-label="close"
+                        onClick={props.handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
-                        Update Experience <WorkIcon />
+                        {`${status}  Experience`} <WorkIcon />
                     </Typography>
                     <FormControl>
                         <Grid container spacing={1}>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="company" fullWidth label="Company Name" type="text" variant="outlined" required />
+                                <TextField id="company" fullWidth label="Company Name" {...companyField} type="text" variant="outlined" required />
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="role" fullWidth label="Job Role" type="text" variant="outlined" required />
+                                <TextField id="role" fullWidth label="Job Role" {...jobField} type="text" variant="outlined" required />
                             </Grid>
                             <Grid item lg={12} xs={12}>
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
                                         startText="Start Date"
                                         endText="End Date"
-                                        value={value}
-                                        onChange={(newValue) => {
-                                            setValue(newValue);
+                                        value={duration}
+                                        onChange={(value) => {
+                                            setDuration(value);
                                         }}
                                         renderInput={(startProps, endProps) => (
                                             <React.Fragment>
@@ -199,18 +318,25 @@ function ExperienceData(props) {
                                     />
                                 </LocalizationProvider>
                             </Grid>
+
                             <Grid item lg={12} xs={12}>
                                 <TextareaAutosize
                                     id="about"
-                                    maxRows={5}
+                                    maxRows = {5}
                                     required
+                                    {...DesField}
                                     style={{ width: '100%', padding: '10px' }}
                                     placeholder="Write Description About your Job in 200 words"
                                 />
                             </Grid>
+
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                <Button variant="contained" onClick={props.handleClose}>Save</Button>
+                            
+                                { status === "Update" && <Button variant="contained" onClick={removeExperience} style={{ marginRight: "10px" }} > Remove</Button>}
+                                <Button variant="contained" onClick={()=>{ status === "Update" ? updateExperience() :addExperience()  }}> {`${status}`}</Button>
+                                
                             </Grid>
+
                         </Grid>
                     </FormControl>
                 </Box>
@@ -220,6 +346,18 @@ function ExperienceData(props) {
 }
 
 
+
+const useFormInput = initialValue => {
+
+    const [value, setValue] = useState(initialValue);
+    const handleChange = e => {
+        setValue(e.target.value);
+    }
+    return {
+        value,
+        onChange: handleChange
+    }
+}
 
 
 export { ProfileData, SkillData, ExperienceData }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import apiCAll from '../integration/apiCall';
 import { Container, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@material-ui/core';
 import { MenuItem, FormControl, TextField, Button, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+// import apiCAll from '../integration/apiCall';
+const {apiCAll}= require('../integration/apiCall');
 const validator = require("validator");
 
 
@@ -147,6 +148,7 @@ const StudentSignUp = () => {
                 apiCAll("/api/otp/generate", "post", reqData)
                     .then(response => {
                         setLoading({ sendOTP: false });
+                        console.log(response.data.token);
                         updateToken(response.data.token);
                         updatePage(Pages.nextVal());
                     })
@@ -185,7 +187,7 @@ const StudentSignUp = () => {
                             <TextField id="email" fullWidth label="Email" placeholder='abc@cloud.neduet.edu.pk' {...email} type="email" variant="outlined" required />
                             <pre sx={{width:{ lg: "700px", xs: '200px' }}}>{instruction.email.clause1}</pre>
                         </Grid>
-
+                    
                         <Grid item lg={12} xs={12}>
                             <TextField id="password" fullWidth label="Password" type='password' {...password} variant="outlined" required />
                             <pre sx={{display:'block',width:{ lg: "700px", xs: '200px' }}}>{instruction.password.clause1} <br />{instruction.password.clause2} <br />{instruction.password.clause3}</pre>

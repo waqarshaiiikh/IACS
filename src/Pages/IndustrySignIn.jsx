@@ -2,7 +2,8 @@ import React , { useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import apiCAll from '../integration/apiCall';
+// import apiCAll from '../integration/apiCall';
+const {apiCAll}= require('../integration/apiCall');
 
 const useStyles = makeStyles({
     button: {
