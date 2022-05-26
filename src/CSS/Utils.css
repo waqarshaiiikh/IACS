@@ -1,0 +1,18 @@
+.center_utils{
+    height: 80vh;
+    display:flex;
+    justify-content: center; 
+    align-items:center;
+}
+
+.main_heading{
+    font-size: 5rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.125);
+}
+
+@media screen and (max-width:600px) {
+    .main_heading{
+        font-size: 4rem;
+    }
+}

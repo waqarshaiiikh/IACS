@@ -1,0 +1,775 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "Contour Software",
+      "city": "Karachi, Pakistan",
+      "about": "Quo sint nam doloribus sapiente cumque occaecati ut ratione. Molestias architecto molestias sit eligendi quo fugiat.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/contour.jpg",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Desktop App Development",
+        "UX/UI Designing",
+        "Graphis Designing"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "10 Pearls",
+      "city": "Lahore, Pakistan",
+      "about": "Praesentium nobis corrupti quia fuga perferendis sequi autem natus reprehenderit. Voluptatem reprehenderit itaque veritatis voluptatem nostrum.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/10pearlslogo_square-1280x720.jpg",
+      "services": [
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Netsol Technology",
+      "city": "Karachi, Pakistan",
+      "about": "Et cum culpa incidunt quia eligendi eos. Nisi natus inventore possimus nemo quam aut dolore et veritatis. Rem quibusdam dolores suscipit recusandae culpa consequatur dolorem.",
+      "image": "https://pbs.twimg.com/profile_images/1100324884859756545/515ATOpK_400x400.jpg",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "AWS",
+        "Cloud & Web Hosting",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Folio 3",
+      "city": "Lahore, Pakistan",
+      "about": "Vel sequi repudiandae velit quisquam autem ducimus quo. Cum quos doloremque iusto.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHBQYi5_mBelA/company-logo_200_200/0/1605700898165?e=2147483647&v=beta&t=wQ3Xe3AmkhQOTEWrNik8O1_1nmcXIrIRXlcxeVRzaQU",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "DEVOPS",
+        "SQA"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Techlogix",
+      "city": "Karachi, Pakistan",
+      "about": "Quos illo non culpa nobis explicabo omnis sit est ut. Quibusdam et perspiciatis et cum consequatur similique voluptatem eius. Molestiae doloribus id. Ex odit omnis omnis asperiores ut ipsa possimus ut omnis.",
+      "image": "https://clutchco-static.s3.amazonaws.com/s3fs-public/logos/techlogix_logo.png?VersionId=dA1GCHSDKKrH3ZnYb.8mmTzBUF4cAw.X",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Spursol",
+      "city": "Lahore, Pakistan",
+      "about": "Corporis eos quia id. Eum sequi ipsum voluptate vitae blanditiis impedit id dolorem assumenda. Soluta rem similique dolor ex tenetur adipisci dolores voluptas similique. Esse veniam doloremque a totam aut earum consequuntur. Adipisci velit est mollitia quidem occaecati consequatur natus reiciendis.",
+      "image": "https://jscf.b8cdn.com/120x120/images/logo/00/0_logo_1549977149_n.png",
+      "services": [
+        "Desktop App Development",
+        "Web Development",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "System Ltd",
+      "city": "Karachi, Pakistan",
+      "about": "Ea eum odit. Cumque impedit in delectus quia nam nihil voluptatem. Nulla magnam cumque sunt delectus qui nostrum ab tempora. Et id consectetur.",
+      "image": "https://media-exp1.licdn.com/dms/image/C510BAQHVR9ucUJs0ig/company-logo_200_200/0/1573025512895?e=2147483647&v=beta&t=ATXBaYdKBfTUoPgmZZ6a6wYLqCew05fu-LBc5xeVqxM",
+      "services": [
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "AWS",
+        "Cloud & Web Hosting"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Afiniti",
+      "city": "Lahore, Pakistan",
+      "about": "Sed dolor quia accusantium unde repellat omnis exercitationem. Magnam qui doloremque et aut repudiandae maxime rerum. Rerum necessitatibus non temporibus recusandae harum et sed reiciendis.",
+      "image": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/wcfaprh5gvhgw5nswsjr",
+      "services": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "Data Science"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Careem",
+      "city": "Karachi, Pakistan",
+      "about": "Perferendis optio amet et qui et. Aut quia possimus. Ipsam et alias.",
+      "image": "https://cdn.iconscout.com/icon/free/png-256/careem-282317.png",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Airlift",
+      "city": "Lahore, Pakistan",
+      "about": "Suscipit placeat rerum rerum vitae eos voluptatem autem. Rerum nisi sit fugit saepe expedita non.",
+      "image": "https://cdn.wamda.com/feature-images/84b16bf6994e197.jpg",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Contour Software",
+      "city": "Karachi, Pakistan",
+      "about": "Odit ipsam sit earum temporibus. Consectetur distinctio aperiam cum officia consequuntur.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/contour.jpg",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Desktop App Development",
+        "UX/UI Designing",
+        "Graphis Designing"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "10 Pearls",
+      "city": "Lahore, Pakistan",
+      "about": "Excepturi quia omnis enim. Optio perspiciatis eum ea delectus consectetur et quidem. Magnam vero distinctio delectus. Omnis similique tempore quibusdam quo nihil unde. Nisi et totam dolore dolores.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/10pearlslogo_square-1280x720.jpg",
+      "services": [
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Netsol Technology",
+      "city": "Karachi, Pakistan",
+      "about": "Qui et quia eligendi minima harum qui et numquam sunt. Incidunt corrupti qui esse facere ut error sint. Mollitia dolor fugiat. Sint rerum commodi ad et aut alias voluptatum ipsam. Dolores voluptatem rerum nihil beatae.",
+      "image": "https://pbs.twimg.com/profile_images/1100324884859756545/515ATOpK_400x400.jpg",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "AWS",
+        "Cloud & Web Hosting",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Folio 3",
+      "city": "Lahore, Pakistan",
+      "about": "Et est architecto sunt quam dolores nemo labore accusantium sint. Voluptatum ullam rerum rerum ab.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHBQYi5_mBelA/company-logo_200_200/0/1605700898165?e=2147483647&v=beta&t=wQ3Xe3AmkhQOTEWrNik8O1_1nmcXIrIRXlcxeVRzaQU",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "DEVOPS",
+        "SQA"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Techlogix",
+      "city": "Karachi, Pakistan",
+      "about": "Nesciunt et omnis aut consequatur quia quia ut ratione. Vero minus natus nemo et et reprehenderit. Vitae maxime molestiae non repellat qui unde dolor optio aut. Et eos quo.",
+      "image": "https://clutchco-static.s3.amazonaws.com/s3fs-public/logos/techlogix_logo.png?VersionId=dA1GCHSDKKrH3ZnYb.8mmTzBUF4cAw.X",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Spursol",
+      "city": "Lahore, Pakistan",
+      "about": "Aut in minus ipsa ipsam rerum. Dolor aperiam aspernatur animi quaerat voluptatum quis est iure. Ducimus dolorum veritatis ducimus sit enim totam ut eos. Repellendus voluptas est sint totam quis.",
+      "image": "https://jscf.b8cdn.com/120x120/images/logo/00/0_logo_1549977149_n.png",
+      "services": [
+        "Desktop App Development",
+        "Web Development",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "System Ltd",
+      "city": "Karachi, Pakistan",
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
+      "image": "https://media-exp1.licdn.com/dms/image/C510BAQHVR9ucUJs0ig/company-logo_200_200/0/1573025512895?e=2147483647&v=beta&t=ATXBaYdKBfTUoPgmZZ6a6wYLqCew05fu-LBc5xeVqxM",
+      "services": [
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "AWS",
+        "Cloud & Web Hosting"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Afiniti",
+      "city": "Lahore, Pakistan",
+      "about": "Fugiat ut et inventore modi ullam quae sed eos consequuntur. Qui itaque rem optio quas ipsa minus quia maxime non. Neque perferendis atque vero fuga qui et maxime rerum non.",
+      "image": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/wcfaprh5gvhgw5nswsjr",
+      "services": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "Data Science"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Careem",
+      "city": "Karachi, Pakistan",
+      "about": "Molestias provident repudiandae culpa ex. Amet ut in. Quia earum commodi enim aliquam. Quisquam ipsam vero. Architecto quos excepturi praesentium est.",
+      "image": "https://cdn.iconscout.com/icon/free/png-256/careem-282317.png",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Airlift",
+      "city": "Lahore, Pakistan",
+      "about": "Fuga earum et illum fuga eum rerum repellat aliquam iste. Voluptatem sit quos autem et unde dolor ut quae. Maxime aut cumque quibusdam. Sint quia et numquam magni quis quidem. Quam quod fugit soluta et et animi magnam aut.",
+      "image": "https://cdn.wamda.com/feature-images/84b16bf6994e197.jpg",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Contour Software",
+      "city": "Karachi, Pakistan",
+      "about": "Aperiam accusantium voluptatem consequuntur numquam incidunt nostrum hic impedit beatae. Quos vero consequatur.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/contour.jpg",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Desktop App Development",
+        "UX/UI Designing",
+        "Graphis Designing"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "10 Pearls",
+      "city": "Lahore, Pakistan",
+      "about": "Non iste possimus omnis. Sapiente et iusto repellendus distinctio ipsa. Voluptas itaque libero ut molestiae molestiae. Officia totam saepe aliquid.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/10pearlslogo_square-1280x720.jpg",
+      "services": [
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Netsol Technology",
+      "city": "Karachi, Pakistan",
+      "about": "Numquam molestiae reprehenderit consequatur vel soluta voluptatem sunt est. Voluptatem et dolore omnis sint nemo. Et quia sit deserunt et. Quia quod aliquam sequi et.",
+      "image": "https://pbs.twimg.com/profile_images/1100324884859756545/515ATOpK_400x400.jpg",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "AWS",
+        "Cloud & Web Hosting",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Folio 3",
+      "city": "Lahore, Pakistan",
+      "about": "Mollitia ullam vero eos libero dolores. Enim inventore omnis repellat laborum commodi voluptatem quo aut. Ab assumenda pariatur inventore at nobis id dolores rerum. In non dolorum id nam ex.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHBQYi5_mBelA/company-logo_200_200/0/1605700898165?e=2147483647&v=beta&t=wQ3Xe3AmkhQOTEWrNik8O1_1nmcXIrIRXlcxeVRzaQU",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "DEVOPS",
+        "SQA"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Techlogix",
+      "city": "Karachi, Pakistan",
+      "about": "Quam cumque sed nam est. Et rerum laboriosam. Ab neque ut qui dicta consequatur.",
+      "image": "https://clutchco-static.s3.amazonaws.com/s3fs-public/logos/techlogix_logo.png?VersionId=dA1GCHSDKKrH3ZnYb.8mmTzBUF4cAw.X",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Spursol",
+      "city": "Lahore, Pakistan",
+      "about": "Mollitia quis assumenda labore iusto earum autem unde. Iure quod magni dolorem ad commodi aspernatur placeat qui. Omnis voluptates repudiandae quia laudantium. Qui pariatur non ab cum mollitia tempore quis non.",
+      "image": "https://jscf.b8cdn.com/120x120/images/logo/00/0_logo_1549977149_n.png",
+      "services": [
+        "Desktop App Development",
+        "Web Development",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "System Ltd",
+      "city": "Karachi, Pakistan",
+      "about": "Et sint placeat asperiores perferendis velit et corrupti corrupti sit. Impedit voluptatem fuga. Amet quas et reiciendis blanditiis adipisci sunt animi in.",
+      "image": "https://media-exp1.licdn.com/dms/image/C510BAQHVR9ucUJs0ig/company-logo_200_200/0/1573025512895?e=2147483647&v=beta&t=ATXBaYdKBfTUoPgmZZ6a6wYLqCew05fu-LBc5xeVqxM",
+      "services": [
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "AWS",
+        "Cloud & Web Hosting"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Afiniti",
+      "city": "Lahore, Pakistan",
+      "about": "Veritatis a voluptatem reprehenderit porro. Vitae magni dolor ut quo rem odit qui quia. Beatae sed odio aut saepe quia et. Ut modi quo ut. Sunt molestiae qui distinctio voluptas laudantium.",
+      "image": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/wcfaprh5gvhgw5nswsjr",
+      "services": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "Data Science"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Careem",
+      "city": "Karachi, Pakistan",
+      "about": "Sint et est corporis assumenda dicta fuga voluptatem. Error autem recusandae accusamus expedita facere. Sunt eveniet est dolores impedit itaque dicta nulla. Exercitationem corrupti modi id a. Dicta aliquid quaerat pariatur odio nisi et voluptatibus.",
+      "image": "https://cdn.iconscout.com/icon/free/png-256/careem-282317.png",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Airlift",
+      "city": "Lahore, Pakistan",
+      "about": "Quia suscipit nesciunt voluptatem dolorum rerum. Neque debitis culpa est ullam non et. Sapiente enim ut aut tenetur est et. Nesciunt facilis qui dolorem.",
+      "image": "https://cdn.wamda.com/feature-images/84b16bf6994e197.jpg",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Contour Software",
+      "city": "Karachi, Pakistan",
+      "about": "Enim consequatur et fugit quidem eveniet. Eius ut voluptas libero id. Aliquid corrupti quaerat sunt alias possimus laborum. Ad doloribus eos magnam tempora. Et hic est.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/contour.jpg",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Desktop App Development",
+        "UX/UI Designing",
+        "Graphis Designing"
+      ]
+    },
+    {
+      "id": 32,
+      "name": "10 Pearls",
+      "city": "Lahore, Pakistan",
+      "about": "Libero exercitationem dolor natus dolores iste tempore laboriosam dolorum fugit. Molestiae accusamus laboriosam perferendis. Maxime exercitationem ratione qui omnis occaecati maiores. Natus aperiam vel hic non velit.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/10pearlslogo_square-1280x720.jpg",
+      "services": [
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Netsol Technology",
+      "city": "Karachi, Pakistan",
+      "about": "Delectus deleniti autem. Voluptas consequatur velit aut aut molestias qui quo. Fugit et voluptatem labore quae quasi libero. Ut non accusamus sit. Minus veniam soluta.",
+      "image": "https://pbs.twimg.com/profile_images/1100324884859756545/515ATOpK_400x400.jpg",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "AWS",
+        "Cloud & Web Hosting",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Folio 3",
+      "city": "Lahore, Pakistan",
+      "about": "Aut molestiae dolores perspiciatis temporibus culpa voluptatem dolor eligendi fugit. Sint consequuntur voluptatem qui asperiores explicabo illum. Pariatur et et magni placeat labore omnis. Commodi nemo pariatur quod voluptate assumenda eius amet cumque sunt. Eius dolores illum est.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHBQYi5_mBelA/company-logo_200_200/0/1605700898165?e=2147483647&v=beta&t=wQ3Xe3AmkhQOTEWrNik8O1_1nmcXIrIRXlcxeVRzaQU",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "DEVOPS",
+        "SQA"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Techlogix",
+      "city": "Karachi, Pakistan",
+      "about": "Debitis praesentium qui quibusdam assumenda officiis optio omnis porro. Qui doloribus laudantium placeat eveniet eveniet sequi autem adipisci et. Expedita qui laboriosam aut ea provident vero. Tempore numquam amet quam iusto aut.",
+      "image": "https://clutchco-static.s3.amazonaws.com/s3fs-public/logos/techlogix_logo.png?VersionId=dA1GCHSDKKrH3ZnYb.8mmTzBUF4cAw.X",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Spursol",
+      "city": "Lahore, Pakistan",
+      "about": "Eos placeat commodi qui nemo est vero minima et deserunt. Sequi quos architecto necessitatibus fugiat voluptatibus in nesciunt voluptas. Commodi ut rerum expedita autem distinctio vero eum aut. Illum nobis magnam. Autem iure et consequatur voluptatem rerum placeat.",
+      "image": "https://jscf.b8cdn.com/120x120/images/logo/00/0_logo_1549977149_n.png",
+      "services": [
+        "Desktop App Development",
+        "Web Development",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 37,
+      "name": "System Ltd",
+      "city": "Karachi, Pakistan",
+      "about": "Ipsam quisquam qui dicta aut aut aut. Aut et sed perferendis aliquam harum similique iusto. Eius ipsa voluptatem exercitationem ducimus tenetur dolorem. Officiis rerum esse provident autem nulla eius voluptatem.",
+      "image": "https://media-exp1.licdn.com/dms/image/C510BAQHVR9ucUJs0ig/company-logo_200_200/0/1573025512895?e=2147483647&v=beta&t=ATXBaYdKBfTUoPgmZZ6a6wYLqCew05fu-LBc5xeVqxM",
+      "services": [
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "AWS",
+        "Cloud & Web Hosting"
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Afiniti",
+      "city": "Lahore, Pakistan",
+      "about": "Modi similique vero voluptatem perferendis. Iusto odit exercitationem libero vero nulla. Placeat est beatae deleniti asperiores vitae atque aut ad. Aut fugiat minima aspernatur voluptate illum. Eos vel quo.",
+      "image": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/wcfaprh5gvhgw5nswsjr",
+      "services": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "Data Science"
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Careem",
+      "city": "Karachi, Pakistan",
+      "about": "Debitis recusandae non commodi natus ut animi aut et. Id possimus voluptatem eius. Ut quia veniam.",
+      "image": "https://cdn.iconscout.com/icon/free/png-256/careem-282317.png",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS"
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Airlift",
+      "city": "Lahore, Pakistan",
+      "about": "Ratione magnam voluptate non occaecati perferendis ullam vel. Dolores dolorem accusantium neque magni sint unde est et velit. Distinctio repellat facilis et voluptatem.",
+      "image": "https://cdn.wamda.com/feature-images/84b16bf6994e197.jpg",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Contour Software",
+      "city": "Karachi, Pakistan",
+      "about": "Ad earum eligendi delectus error. Facilis repudiandae corrupti eius autem sint temporibus veritatis. Est et recusandae vitae aut doloremque. Ut praesentium debitis voluptates ratione incidunt esse hic ad et.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/contour.jpg",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Desktop App Development",
+        "UX/UI Designing",
+        "Graphis Designing"
+      ]
+    },
+    {
+      "id": 42,
+      "name": "10 Pearls",
+      "city": "Lahore, Pakistan",
+      "about": "Quam non odio vitae deserunt soluta temporibus. Qui soluta vero voluptas nobis qui iure excepturi.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/10pearlslogo_square-1280x720.jpg",
+      "services": [
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Netsol Technology",
+      "city": "Karachi, Pakistan",
+      "about": "Aliquam voluptatem harum vitae voluptatibus vel. Consequatur in rem vel cupiditate qui quibusdam aut. A sint suscipit praesentium tenetur qui. Itaque magnam esse ab officiis magnam. Ipsam ut sint quae.",
+      "image": "https://pbs.twimg.com/profile_images/1100324884859756545/515ATOpK_400x400.jpg",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "AWS",
+        "Cloud & Web Hosting",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Folio 3",
+      "city": "Lahore, Pakistan",
+      "about": "Asperiores tenetur rerum debitis. Excepturi sed tempore corporis nisi id voluptates labore illum. Nisi sed non. Et est dolore. Autem et odit consequuntur perferendis quibusdam.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHBQYi5_mBelA/company-logo_200_200/0/1605700898165?e=2147483647&v=beta&t=wQ3Xe3AmkhQOTEWrNik8O1_1nmcXIrIRXlcxeVRzaQU",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "DEVOPS",
+        "SQA"
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Techlogix",
+      "city": "Karachi, Pakistan",
+      "about": "Quia sit eligendi consequatur unde at saepe labore alias. Aut et perspiciatis nulla officiis voluptatem assumenda harum exercitationem voluptate.",
+      "image": "https://clutchco-static.s3.amazonaws.com/s3fs-public/logos/techlogix_logo.png?VersionId=dA1GCHSDKKrH3ZnYb.8mmTzBUF4cAw.X",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Spursol",
+      "city": "Lahore, Pakistan",
+      "about": "Necessitatibus vel molestiae culpa consequatur quos mollitia iusto porro qui. Sint rem adipisci. Aliquid reiciendis labore ad voluptas dolorum deleniti. Et animi occaecati ex ex suscipit quasi qui ratione. Quasi nihil quasi quia.",
+      "image": "https://jscf.b8cdn.com/120x120/images/logo/00/0_logo_1549977149_n.png",
+      "services": [
+        "Desktop App Development",
+        "Web Development",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 47,
+      "name": "System Ltd",
+      "city": "Karachi, Pakistan",
+      "about": "Sequi sit et totam assumenda commodi iste provident officiis assumenda. Fugiat eligendi neque quas eos doloribus a animi et quos. Quod iusto in reiciendis qui velit voluptatem cum. Est ipsum fuga quod enim repellat.",
+      "image": "https://media-exp1.licdn.com/dms/image/C510BAQHVR9ucUJs0ig/company-logo_200_200/0/1573025512895?e=2147483647&v=beta&t=ATXBaYdKBfTUoPgmZZ6a6wYLqCew05fu-LBc5xeVqxM",
+      "services": [
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "AWS",
+        "Cloud & Web Hosting"
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Afiniti",
+      "city": "Lahore, Pakistan",
+      "about": "Non error exercitationem consequatur iusto quo velit. Illo exercitationem minus.",
+      "image": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/wcfaprh5gvhgw5nswsjr",
+      "services": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Blockchain",
+        "Augmented/Virtual Reality",
+        "Data Science"
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Careem",
+      "city": "Karachi, Pakistan",
+      "about": "Non ut qui ipsa corrupti occaecati sequi. Dolores ab reprehenderit et dolorum consequatur quibusdam.",
+      "image": "https://cdn.iconscout.com/icon/free/png-256/careem-282317.png",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS"
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Airlift",
+      "city": "Lahore, Pakistan",
+      "about": "Fugiat aperiam dolores quia quisquam nihil occaecati expedita ut esse. Labore temporibus ea sunt est totam consectetur atque. Aperiam illo quidem possimus et non.",
+      "image": "https://cdn.wamda.com/feature-images/84b16bf6994e197.jpg",
+      "services": [
+        "Android Development",
+        "iOS Development",
+        "Data Analytics",
+        "Data Science",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    },
+    {
+      "id": 51,
+      "name": "Contour Software",
+      "city": "Karachi, Pakistan",
+      "about": "Autem officiis aut iusto. Placeat dolor aliquam explicabo minus ut. Sit nam et iusto autem praesentium vitae et incidunt sunt. Est culpa voluptas adipisci ut. Doloribus voluptatibus non nesciunt ad fugit.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/contour.jpg",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Desktop App Development",
+        "UX/UI Designing",
+        "Graphis Designing"
+      ]
+    },
+    {
+      "id": 52,
+      "name": "10 Pearls",
+      "city": "Lahore, Pakistan",
+      "about": "Et quis dolorem. Pariatur praesentium nobis. Suscipit placeat numquam quis natus aut nihil laboriosam alias quos.",
+      "image": "https://cdn.techjuice.pk/wp-content/uploads/2019/09/10pearlslogo_square-1280x720.jpg",
+      "services": [
+        "Data Analytics",
+        "Data Science",
+        "DEVOPS",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Netsol Technology",
+      "city": "Karachi, Pakistan",
+      "about": "Fugit id distinctio. Quo hic aperiam.",
+      "image": "https://pbs.twimg.com/profile_images/1100324884859756545/515ATOpK_400x400.jpg",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "AWS",
+        "Cloud & Web Hosting",
+        "Artificial Intelligence",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Folio 3",
+      "city": "Lahore, Pakistan",
+      "about": "Molestiae harum incidunt et magni sequi aspernatur dignissimos corrupti. Corrupti occaecati perspiciatis tenetur nisi qui eius minima. Iure eos vero qui.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHBQYi5_mBelA/company-logo_200_200/0/1605700898165?e=2147483647&v=beta&t=wQ3Xe3AmkhQOTEWrNik8O1_1nmcXIrIRXlcxeVRzaQU",
+      "services": [
+        "Desktop App Development",
+        "UX/UI Designing",
+        "DEVOPS",
+        "SQA"
+      ]
+    },
+    {
+      "id": 55,
+      "name": "Techlogix",
+      "city": "Karachi, Pakistan",
+      "about": "Officia in sit eveniet atque autem cupiditate vel sunt. Dolorem occaecati autem.",
+      "image": "https://clutchco-static.s3.amazonaws.com/s3fs-public/logos/techlogix_logo.png?VersionId=dA1GCHSDKKrH3ZnYb.8mmTzBUF4cAw.X",
+      "services": [
+        "Web Development",
+        "Android Development",
+        "iOS Development",
+        "Digital Media Marketing",
+        "E-Commerce"
+      ]
+    }
+  ]
+}
