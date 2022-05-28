@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar';
+import Pagination from '../Pages/Pagination';
 import axios from "axios";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
-    Container, Grid, Checkbox, Autocomplete, Box, Accordion, AccordionSummary,
-    AccordionDetails, Typography, Chip, MenuItem, TextField, Select, Pagination, CircularProgress, Backdrop
+    Container,
+    Grid,
+    Box,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Typography,
+    Chip,
+    TextField,
+    CircularProgress,
+    Backdrop
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import { searchService } from './getSoftwareHouse';
 
 const useStyles = makeStyles({
     searching: {
@@ -57,32 +64,32 @@ const useStyles = makeStyles({
     }
 });
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const SoftwareHouse = () => {
-    const classes = useStyles();
-    const [search, setSearch] = useState(1);
 
-    const searchChange = (event) => {
-        setSearch(event.target.value);
-    };
-
-    const countPage = async () => {
-        const res = await axios.get(`http://localhost:3001/posts`);
-        const count = Math.ceil(res.data?.length / 5);
-        setCount(count);
-    }
-
-    const [posts, setPosts] = useState(null);
-    const [page, setPage] = useState(1);
-    const [count, setCount] = useState(1);
+    const [softwareHouse, setSoftwareHouse] = useState(null);
+    const [postCount, setPostCount] = useState(null)
+    const [showPerPage] = useState(5)
+    const [total, setTotal] = useState(0);
+    const [pagination, setPagination] = useState({
+        start: 0,
+        end: showPerPage
+    });
     const [loading, setLoading] = useState(false);
     const [value, setValue] = useState("");
+    const classes = useStyles();
+
+    const onPaginationChange = (start, end) => {
+        setPagination({
+            start: start,
+            end: end
+        })
+    }
 
     const loadPost = async () => {
-        await axios.get(`http://localhost:3001/posts?_page=${page}&_limit=5`).then((res) => {
-            setPosts(res.data);
+        await axios.get(`http://localhost:3001/softwareHouse`).then((res) => {
+            setSoftwareHouse(res.data);
+            setTotal(res?.data.length);
         }).catch((err) => {
             console.log(err);
         })
@@ -90,21 +97,28 @@ const SoftwareHouse = () => {
     }
 
     const handleSearch = async (e) => {
-        e.preventDefault();
-        return await axios.get(`http://localhost:3001/posts?q=${value}`).then((res) => {
-            setPosts(res.data);
-            setValue("");
-        }).catch((err) => {
-            console.log(err);
-        })
+        setLoading(true)
+        e?.preventDefault();
+        if (value) {
+            await axios.get(`http://localhost:3001/softwareHouse?q=${value}`).then((res) => {
+                setSoftwareHouse(res.data);
+                setTotal(res?.data.length);
+                setValue("");
+                setPostCount(res?.data.length);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+        else {
+            alert("Enter text to search");
+        }
+        setLoading(false)
     }
 
     useEffect(() => {
-        countPage();
         loadPost();
         setLoading(true);
-        window.scrollTo({ top: 0 });
-    }, [page,count])
+    }, [])
     return (
         <>
             <Navbar />
@@ -113,59 +127,25 @@ const SoftwareHouse = () => {
                     <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
                         <h1>Software House</h1>
                     </Grid>
-                    <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
+                    <Grid item lg={12} 
+                        sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', lg: 'row' },
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginTop: { lg: 'none', xs: "10px" }
+                        }}>
                         <div>
-                            {
-                                (search === 1) ? (
-                                    <Autocomplete
-                                        sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
-                                        multiple
-                                        id="skill-search"
-                                        options={searchService}
-                                        disableCloseOnSelect
-                                        getOptionLabel={(option) => option}
-                                        renderOption={(props, option, { selected }) => (
-                                            <li {...props}>
-                                                <Checkbox
-                                                    icon={icon}
-                                                    checkedIcon={checkedIcon}
-                                                    style={{ marginRight: 8 }}
-                                                    checked={selected}
-                                                />
-                                                {option}
-                                            </li>
-                                        )}
-                                        style={{ width: { lg: 500, xs: 250 } }}
-                                        renderInput={(params) => (
-                                            <TextField {...params}
-                                                label="Search by Services"
-                                                placeholder="Service"
-                                                size='medium' />
-                                        )}
-                                    />
-                                ) :
-                                    (
-                                        <TextField
-                                            id="search"
-                                            label="Search"
-                                            variant="outlined"
-                                            size='medium'
-                                            value={value}
-                                            onChange={(e) => { setValue(e.target.value) }}
-                                            sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
-                                    )
-                            }
+                            <TextField
+                                id="search"
+                                label="Search"
+                                variant="outlined"
+                                size='medium'
+                                value={value}
+                                onChange={(e) => { setValue(e.target.value) }}
+                                sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }} />
                         </div>
-                        <Select
-                            value={search}
-                            onChange={searchChange}
-                            displayEmpty
-                            sx={{ width: 120, marginRight: '10px' }}
-                        >
-                            <MenuItem value={1}>Services</MenuItem>
-                            <MenuItem value={2}>Name</MenuItem>
-                            <MenuItem value={3}>City</MenuItem>
-                        </Select>
                         <SearchIcon
                             fontSize='large'
                             onClick={handleSearch}
@@ -183,14 +163,17 @@ const SoftwareHouse = () => {
                                         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
                                         <CircularProgress color="inherit" />
                                     </Backdrop>
-                                ) : (
-                                    posts && posts.map((softwareHouse, index) => (
-                                        <Grid item lg={12} >
+                                ) : ((postCount === 0) ?
+                                    (<div className='Post_center'>
+                                        <h1 className='main_heading'>No Result Found</h1>
+                                    </div>) :
+                                    (softwareHouse && softwareHouse.slice(pagination.start, pagination.end).map((softwareHouse, index) => (
+                                        <Grid item lg={12} xs={12} key={index}>
                                             <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                 <div className={classes.software_title}>
                                                     <div>
-                                                        <h1>{softwareHouse.name}</h1>
-                                                        <p>{softwareHouse.city}</p>
+                                                        <Typography variant='h3'>{softwareHouse.name}</Typography>
+                                                        <Typography>{softwareHouse.city}</Typography>
                                                     </div>
                                                     <img className={classes.software_image} src={softwareHouse.image} alt="software" />
                                                 </div>
@@ -203,9 +186,9 @@ const SoftwareHouse = () => {
                                                         <Typography>About</Typography>
                                                     </AccordionSummary>
                                                     <AccordionDetails>
-                                                        <p>
+                                                        <Typography>
                                                             {softwareHouse.about}
-                                                        </p>
+                                                        </Typography>
                                                     </AccordionDetails>
                                                 </Accordion>
                                                 <Accordion>
@@ -217,26 +200,25 @@ const SoftwareHouse = () => {
                                                         <Typography>Services</Typography>
                                                     </AccordionSummary>
                                                     <AccordionDetails>
-                                                        <p>
+                                                        <Typography>
                                                             {
                                                                 softwareHouse.services.map((service, index) => (
                                                                     <Chip label={service} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
                                                             }
-                                                        </p>
+                                                        </Typography>
                                                     </AccordionDetails>
                                                 </Accordion>
                                             </Box>
                                         </Grid>
                                     )))
+                                )
                             }
                         </Grid>
                     </Grid>
                     <Box sx={{ margin: '20px 0px' }}>
-                        <Pagination
-                            count={count}
-                            color="primary"
-                            defaultPage={1}
-                            onChange={(e, value) => { setPage(value); console.log(loading) }}
+                        <Pagination showPerPage={showPerPage}
+                            onPaginationChange={onPaginationChange}
+                            numberOfButtons={Math.ceil(total / showPerPage)}
                         />
                     </Box>
                 </Grid>

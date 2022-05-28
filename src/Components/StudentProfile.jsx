@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Container, Grid, Box, Typography, Button, Chip } from '@mui/material';
-import {ProfileData, ExperienceData, SkillData} from "./ProfileData"
+import { ProfileData, ExperienceData, SkillData } from "./ProfileData"
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/styles';
 import Navbar from "./Navbar";
 import std from "../Images/student.png"
 
 const { Api } = require('../integration/apiCall');
-const   Data  = Api.getApi();
+const Data = Api.getApi();
 
-let haveSkills     ;
-let haveExperience ;
+let haveSkills;
+let haveExperience;
 
 const useStyles = makeStyles({
     typography: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
         fontWeight: 'bold',
         letterSpacing: '1px !important',
     },
-    about:{
+    about: {
         textAlign: 'justify !important',
         margin: '10px',
         fontSize: '1.2rem !important',
@@ -46,10 +46,10 @@ const useStyles = makeStyles({
     },
 })
 
-const getData=()=>{
+const getData = () => {
 
-    haveSkills       =  Data.skill.client      ;
-    haveExperience   =  Data.experience.client ;
+    haveSkills = Data.skill.client;
+    haveExperience = Data.experience.client;
 
 }
 
@@ -60,26 +60,26 @@ const StudentProfile = () => {
 
     // Open Update Profile Form
     const [profile, setProfile] = useState(false);
-    const openProfile  = () => setProfile(true);
+    const openProfile = () => setProfile(true);
     const closeProfile = () => setProfile(false);
 
     // Open Experience Form
     const [experience, setExperience] = useState(false);
     const [experienceField, setExperienceField] = useState({});
-    const openExperience  = (obj) =>  { setExperienceField(obj); setExperience(true);};
-    const closeExperience  = () => setExperience(false);
+    const openExperience = (obj) => { setExperienceField(obj); setExperience(true); };
+    const closeExperience = () => setExperience(false);
 
     // Open Skills Form
     const [skill, setSkill] = useState(false);
-    const openSkill  = () => setSkill(true);
+    const openSkill = () => setSkill(true);
     const closeSkill = () => setSkill(false);
-    
+
     return (
         <>
             <Navbar />
-            <ProfileData    open={profile}    handleClose={closeProfile}/>
-            { experience && <ExperienceData open={experience} handleClose={closeExperience} experienceObj={experienceField} status={ experienceField.companyName===null ?  "Add" : "Update"} />}
-            <SkillData      open={skill}      handleClose={closeSkill}/>
+            <ProfileData open={profile} handleClose={closeProfile} />
+            {experience && <ExperienceData open={experience} handleClose={closeExperience} experienceObj={experienceField} status={experienceField.companyName === null ? "Add" : "Update"} />}
+            <SkillData open={skill} handleClose={closeSkill} />
 
             <Container maxWidth="xl">
                 <Grid container>
@@ -116,7 +116,7 @@ const StudentProfile = () => {
                         <Box sx={{
                             width: '100%',
                             height: '100%',
-                            padding: {lg:5,xs:1},
+                            padding: { lg: 5, xs: 1 },
                         }}>
                             <Grid container>
                                 <Grid item lg={12}>
@@ -136,16 +136,16 @@ const StudentProfile = () => {
                         <Grid container spacing={2} sx={{ marginBottom: '10px' }}>
                             <Grid item lg={12}>
                                 <Typography variant='h3'>
-                                    Skills <EditIcon className={classes.edit} onClick={openSkill}/>
+                                    Skills <EditIcon className={classes.edit} onClick={openSkill} />
                                 </Typography>
                             </Grid>
                             <Grid item lg={12}>
                                 <Grid container>
                                     {
                                         haveSkills && haveSkills.map((skill, i) => (
-                                        <Grid item>
-                                            <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />
-                                        </Grid>))
+                                            <Grid item>
+                                                <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />
+                                            </Grid>))
                                     }
                                 </Grid>
                             </Grid>
@@ -157,13 +157,13 @@ const StudentProfile = () => {
                             <Grid item lg={12}>
                                 <Typography variant='h3'>
                                     Experience
-                                    <Button variant="text" onClick={ ()=> { openExperience( {companyName :null , jobRole : null, startDate :null , endDate :null , Description :null } )} } > ADD </Button>
+                                    <Button variant="text" onClick={() => { openExperience({ companyName: null, jobRole: null, startDate: null, endDate: null, Description: null }) }} > ADD </Button>
                                 </Typography>
                             </Grid>
 
-                            <Grid item lg={12}>                                
-                            {
-                                haveExperience && haveExperience.map((Experience, i) => (
+                            <Grid item lg={12}>
+                                {
+                                    haveExperience && haveExperience.map((Experience, i) => (
                                         <Box
                                             sx={{
                                                 width: '100%',
@@ -174,7 +174,7 @@ const StudentProfile = () => {
                                                 marginBottom: 3,
                                             }}>
                                             <Typography variant='h4'>
-                                                {Experience.companyName}  <EditIcon className={classes.edit} onClick={ ()=> { openExperience(Experience) }  } />
+                                                {Experience.companyName}  <EditIcon className={classes.edit} onClick={() => { openExperience(Experience) }} />
                                             </Typography>
                                             <Typography variant='h6' className={classes.experience}>
                                                 {Experience.jobRole}
@@ -185,11 +185,11 @@ const StudentProfile = () => {
                                             <Typography variant='p'>
                                                 {Experience.Description}
                                             </Typography>
-                                        </Box>                                        
-                                ))
-                            }
+                                        </Box>
+                                    ))
+                                }
                             </Grid>
-                            
+
                         </Grid>
                     </Grid>
 

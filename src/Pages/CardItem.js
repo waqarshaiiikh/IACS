@@ -1,23 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 
-function CardItem(props) {
+function CardItem({image, service, description}) {
   return (
     <>
-      <li className='cards__item'>
-        <Link className='cards__item__link' to={props.path}>
-          <figure className='cards__item__pic-wrap' data-category={props.label}>
-            <img
-              className='cards__item__img'
-              alt='Travel'
-              src={props.src}
-            />
-          </figure>
-          <div className='cards__item__info'>
-            <h5 className='cards__item__text'>{props.text}</h5>
-          </div>
-        </Link>
-      </li>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="200"
+            image={image}
+            alt="service"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {service}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </>
   );
 }

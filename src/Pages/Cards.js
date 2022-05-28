@@ -1,53 +1,57 @@
 import React from 'react';
 import '../CSS/Cards.css';
+import { Grid, Container } from '@mui/material';
 import CardItem from './CardItem';
-import job from "../Images/jobServices.jpg"
-import intership from '../Images/internshipServices.jpg'
-import project from "../Images/projectService.jpg"
-import Learning from "../Images/learningService.jpg"
-import scholarship from "../Images/scholarshipService.jpg"
+import jobsService from "../Images/jobServ.png";
+import internService from "../Images/internhsipServ.png";
+import trainService from "../Images/trainingServ.png";
+import fundService from "../Images/fundingServ.png";
+import scholarService from "../Images/scholarshipServ.png";
+
 function Cards() {
+
   return (
     <div className='cards'>
       <h1>Check out these EPIC Services</h1>
-      <div className='cards__container'>
-        <div className='cards__wrapper'>
-          <ul className='cards__items'>
+      <Container>
+        <Grid container spacing={4} display="flex" justifyContent="center" alignItem="center" sx={{ marginTop: '20px' }}>
+          <Grid item lg={4} xs={8} >
             <CardItem
-              src={job}
-              text='Your desire Full time, Part time Job'
-              label='Job'
-              path='/signup'
+              image={jobsService}
+              service="Job"
+              description="We provide best job for you, that would be perfect match for your skills and help you to move forward."
             />
+          </Grid>
+          <Grid item lg={4} xs={8} >
             <CardItem
-              src={intership}
-              text='Get Experience through Internship'
-              label='Interhsip'
-              path='/signup'
+              image={internService}
+              service="Internhsip"
+              description="Students can get intenrship flexible with their university timing. They can take exposure of indsutry."
             />
-          </ul>
-          <ul className='cards__items'>
+          </Grid>
+          <Grid item lg={4} xs={8} >
             <CardItem
-              src={scholarship}
-              text='Set Sail in the Atlantic Ocean visiting Uncharted Waters'
-              label='Scholarhsip'
-              path='/signup'
+              image={trainService}
+              service="Training"
+              description="We provide exclusive training session. Student can get advanced skills through the training sessions."
             />
+          </Grid>
+          <Grid item lg={4} xs={8} >
             <CardItem
-              src={project}
-              text='Experience Football on Top of the Himilayan Mountains'
-              label='Project'
-              path='/signup'
+              image={fundService}
+              service="Project Funding"
+              description="Students can find the best invertor for financing their final year project. We help students to get enough finance for their projects."
             />
+          </Grid>
+          <Grid item lg={4} xs={8} >
             <CardItem
-              src={Learning}
-              text='Ride through the Sahara Desert on a guided camel tour'
-              label='Learning'
-              path='/signup'
+              image={scholarService}
+              service="Scholarship"
+              description="Students can get scholarships which help them in their studies. They can continue their education without problems"
             />
-          </ul>
-        </div>
-      </div>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }

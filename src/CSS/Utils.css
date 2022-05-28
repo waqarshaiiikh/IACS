@@ -11,6 +11,13 @@
     color: rgba(0, 0, 0, 0.125);
 }
 
+.Post_center{
+    height: 50vh;
+    display:flex;
+    justify-content: center; 
+    align-items:center;
+}
+
 @media screen and (max-width:600px) {
     .main_heading{
         font-size: 4rem;

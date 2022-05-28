@@ -1,25 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import Pagination from '../Pages/Pagination';
 import Navbar from './Navbar';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
-    Container, Grid, Autocomplete,
-    Checkbox, Box, Accordion, AccordionSummary,
-    AccordionDetails, Chip, Button, Typography,
-    Modal, TextField, MenuItem, TextareaAutosize, FormControl, Select
+    Accordion,
+    Autocomplete,
+    AccordionSummary,
+    AccordionDetails,
+    Box,
+    Button,
+    Backdrop,
+    Chip,
+    Checkbox,
+    Container,
+    CircularProgress,
+    FormControl,
+    Grid,
+    Modal,
+    MenuItem,
+    Typography,
+    TextField,
+    TextareaAutosize,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { makeStyles } from '@material-ui/styles';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import SearchIcon from '@mui/icons-material/Search';
-import softwareHouse from "../Images/softwareHouselogo.png";
+import { makeStyles } from '@material-ui/styles';
 
 const internshipSkills = [
-    "HTML CSS & JavaScript", 
+    "HTML CSS & JavaScript",
     "C# .Net",
+    "C / C++",
+    "Java",
+    "Swift",
     "Python",
+    "React Js",
+    "Angular",
+    "Next JS",
+    "Rest API",
+    "React Native",
+    "Flutter",
+    "Kotlin",
     "Machine Learning",
     "Artificial Intelligence",
+    "Data Science",
+    "Data Analytics",
     "MERN Stack",
+    "SQL",
+    "MongoDB",
+    "Oracle",
+    "Firebase",
+    "iOS Development",
+    "Android Development",
+    "Desktop Development",
     "Frontend Development",
     "Backned Development",
     "SQA",
@@ -64,7 +98,6 @@ const useStyles = makeStyles({
     software_title: {
         display: 'flex',
         justifyContent: 'space-between',
-
     },
     software_image: {
         width: '100px',
@@ -72,7 +105,7 @@ const useStyles = makeStyles({
     },
 });
 
-const requestStyle= {
+const requestStyle = {
     position: 'absolute',
     top: { lg: '50%', xs: '80%' },
     left: '50%',
@@ -84,6 +117,9 @@ const requestStyle= {
     boxShadow: 24,
     p: { lg: 4, xs: 1 },
 }
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const PostInternship = (props) => {
     return (
@@ -115,6 +151,29 @@ const PostInternship = (props) => {
                                 <TextField id="linkedin" fullWidth label="Linked In" type="text" variant="outlined" required />
                             </Grid>
                             <Grid item lg={12} xs={12}>
+                                <Autocomplete
+                                    multiple
+                                    id="internshipSkills"
+                                    options={internshipSkills}
+                                    disableCloseOnSelect
+                                    getOptionLabel={(option) => option}
+                                    renderOption={(props, option, { selected }) => (
+                                        <li {...props}>
+                                            <Checkbox
+                                                icon={icon}
+                                                checkedIcon={checkedIcon}
+                                                style={{ marginRight: 8 }}
+                                                checked={selected}
+                                            />
+                                            {option}
+                                        </li>
+                                    )}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Skills" placeholder="Skills" />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item lg={12} xs={12}>
                                 <TextareaAutosize
                                     id="Experience"
                                     maxRows={5}
@@ -134,9 +193,6 @@ const PostInternship = (props) => {
     )
 }
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
 const StudentInternship = () => {
     const classes = useStyles();
 
@@ -144,160 +200,152 @@ const StudentInternship = () => {
     const openRequest = () => setRequestJob(true);
     const closeRequest = () => setRequestJob(false);
 
-    const [search, setSearch] = useState(1);
+    const [internships, setInternships] = useState();
+    const [postCount, setPostCount] = useState(null);
+    const [showPerPage] = useState(4);
+    const [total, setTotal] = useState(0);
+    const [pagination, setPagination] = useState({
+        start: 0,
+        end: showPerPage
+    });
+    const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState("");
 
-    const searchChange = (event) => {
-        setSearch(event.target.value);
-    };
+    const onPaginationChange = (start, end) => {
+        setPagination({
+            start: start,
+            end: end
+        })
+    }
+
+    const loadInternship = async () => {
+        await axios.get(`http://localhost:3001/internships`).then((res) => {
+            setInternships(res.data);
+            setTotal(res?.data.length);
+        }).catch((err) => {
+            console.log(err);
+        })
+        setLoading(false)
+    }
+
+    const handleSearch = async (e) => {
+        setLoading(true);
+        e?.preventDefault();
+        if (value) {
+            await axios.get(`http://localhost:3001/internships?q=${value}`).then((res) => {
+                setInternships(res.data);
+                setTotal(res?.data.length);
+                setPostCount(res?.data.length);
+                setValue("")
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+        else {
+            alert("Please Enter text to search");
+        }
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        loadInternship();
+        setLoading(true);
+    }, [])
     return (
         <>
             <Navbar />
-            <PostInternship open={requestJob} handleClose={closeRequest}/>
+            <PostInternship open={requestJob} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0', }}>
-                <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column',  justifyContent: 'space-between', alignItems: 'center' }}>
+                <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
                         <h1>Internship</h1>
                     </Grid>
                     <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
                         <div>
-                            {
-                                (search === 1) ? (
-                                    <Autocomplete
-                                        sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
-                                        multiple
-                                        id="skill-search"
-                                        options={internshipSkills}
-                                        disableCloseOnSelect
-                                        getOptionLabel={(option) => option}
-                                        renderOption={(props, option, { selected }) => (
-                                            <li {...props}>
-                                                <Checkbox
-                                                    icon={icon}
-                                                    checkedIcon={checkedIcon}
-                                                    style={{ marginRight: 8 }}
-                                                    checked={selected}
-                                                />
-                                                {option}
-                                            </li>
-                                        )}
-                                        style={{ width: { lg: 500, xs: 250 } }}
-                                        renderInput={(params) => (
-                                            <TextField {...params} label="Search by Skills" placeholder="Favorites" size='medium' />
-                                        )}
-                                    />
-                                ) :
-                                    (
-                                        <TextField id="search" label="Search" variant="outlined" size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
-                                    )
-                            }
+                            <TextField
+                                id="search"
+                                label="Search"
+                                variant="outlined"
+                                value={value}
+                                onChange={(e) => { setValue(e.target.value) }}
+                                onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
+                                size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
                         </div>
-                        <Select
-                            value={search}
-                            onChange={searchChange}
-                            displayEmpty
-                            sx={{ width: 180, marginRight: '10px' }}
-                        >
-                            <MenuItem value={1}>Skill</MenuItem>
-                            <MenuItem value={2}>Title</MenuItem>
-                            <MenuItem value={3}>Software House</MenuItem>
-                            <MenuItem value={4}>City</MenuItem>
-                        </Select>
-                        <SearchIcon fontSize='large' sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                        <SearchIcon
+                            fontSize='large'
+                            onClick={handleSearch}
+                            sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                     </Grid>
-                    <Grid item lg={12} sx={{width:{xs:'100%'}, display:'flex', justifyContent:'center', alignItems:'center'}}>
+                    <Grid item lg={12} sx={{ width: { xs: '100%' }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Button variant='contained' onClick={openRequest}>Request Internhsip</Button>
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>
-                            <Grid item lg={12}>
-                                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                    <div className={classes.software_title}>
-                                        <div>
-                                            <h1>10 Pearls</h1>
-                                            <p>Full Stack Developer</p>
-                                            <p>Karachi, Pakistan</p>
-                                        </div>
-                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
-                                    </div>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="about"
-                                        >
-                                            <Typography>Description</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="skills"
-                                        >
-                                            <Typography>Required Skills</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                {
-                                                    internshipSkills && internshipSkills.map((services, i) => (
-                                                        <Chip label={services} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                                }
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                </Box>
-                            </Grid>
-                            <Grid item lg={12}>
-                                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                    <div className={classes.software_title}>
-                                        <div>
-                                            <h1>Contour Software</h1>
-                                            <p>Karachi, Pakistan</p>
-                                            <p>Front end Developer</p>
-                                        </div>
-                                        <img className={classes.software_image} src={softwareHouse} alt="student" />
-                                    </div>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="about"
-                                        >
-                                            <Typography>Description</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt alias impedit quasi dolorum sed provident ab et illum itaque exercitationem, obcaecati iure vero quisquam earum quo fugiat dicta? Libero, doloremque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus earum dolorum explicabo sapiente cum eius nam nemo consequatur inventore. Quam consequuntur quae facere id at voluptate quaerat dignissimos doloribus soluta?
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="skills"
-                                        >
-                                            <Typography>Required Skills</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <p>
-                                                {
-                                                    internshipSkills && internshipSkills.map((services, i) => (
-                                                        <Chip label={services} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                                }
-                                            </p>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                </Box>
-                            </Grid>
-
+                            {loading ? (
+                                <Backdrop
+                                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+                                    <CircularProgress color="inherit" />
+                                </Backdrop>
+                            ) :
+                                ((postCount === 0) ?
+                                    (<div className='Post_center'>
+                                        <h1 className='main_heading'>No Result Found</h1>
+                                    </div>) :
+                                    (internships && internships.slice(pagination.start, pagination.end).map((intern, index) => (
+                                        <Grid item lg={12} key={index}>
+                                            <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                                                <div className={classes.software_title}>
+                                                    <div>
+                                                        <Typography variant='h3'>{intern.companyName}</Typography>
+                                                        <Typography>{intern.jobRole}</Typography>
+                                                        <Typography>{intern.city}</Typography>
+                                                        <Typography>{intern.type}</Typography>
+                                                    </div>
+                                                    <img className={classes.software_image} src={intern.image} alt="student" />
+                                                </div>
+                                                <Accordion>
+                                                    <AccordionSummary
+                                                        expandIcon={<ExpandMoreIcon />}
+                                                        aria-controls="panel1a-content"
+                                                        id="about"
+                                                    >
+                                                        <Typography>Description</Typography>
+                                                    </AccordionSummary>
+                                                    <AccordionDetails>
+                                                        <p>
+                                                            {intern.description}
+                                                        </p>
+                                                    </AccordionDetails>
+                                                </Accordion>
+                                                <Accordion>
+                                                    <AccordionSummary
+                                                        expandIcon={<ExpandMoreIcon />}
+                                                        aria-controls="panel1a-content"
+                                                        id="skills"
+                                                    >
+                                                        <Typography>Required Skills</Typography>
+                                                    </AccordionSummary>
+                                                    <AccordionDetails>
+                                                        <p>
+                                                            {
+                                                                intern.requiredSkill && intern.requiredSkill.map((skills, i) => (
+                                                                    <Chip label={skills} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                                            }
+                                                        </p>
+                                                    </AccordionDetails>
+                                                </Accordion>
+                                            </Box>
+                                        </Grid>
+                                    ))))
+                            }
                         </Grid>
                     </Grid>
+                    <Box sx={{ margin: '20px 0px' }}>
+                        <Pagination showPerPage={showPerPage}
+                            onPaginationChange={onPaginationChange}
+                            numberOfButtons={Math.ceil(total / showPerPage)}
+                        />
+                    </Box>
                 </Grid>
             </Container>
         </>

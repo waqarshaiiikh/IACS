@@ -22,6 +22,13 @@ const useStyles = makeStyles({
     '&:focus': {
       outline: 'none',
     }
+  },
+  icon:{
+
+    '&:hover':{
+      color:"white !important",
+      textDecoration : 'none !important'
+    }
   }
 });
 
@@ -82,10 +89,10 @@ const Navbar = () => {
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            component={Link} to="/"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, hover:{textDecoration:'none'} }}
           >
-            <i className='fab fa-typo3' /> IACS
+            <i className= {`fab fa-typo3  ${classes.icon}`} /> IACS
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

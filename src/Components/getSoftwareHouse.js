@@ -17,7 +17,41 @@ const searchService = [
     "Augmented/Virtual Reality",
     "AWS",
     "Cloud & Web Hosting"
-]
+];
 
+const skills = [
+    "HTML CSS & JavaScript",
+    "C# .Net",
+    "C / C++",
+    "Java",
+    "Swift",
+    "Python",
+    "React Js",
+    "Angular",
+    "Next JS",
+    "Rest API",
+    "React Native",
+    "Flutter",
+    "Kotlin",
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Data Science",
+    "Data Analytics",
+    "MERN Stack",
+    "SQL",
+    "MongoDB",
+    "Oracle",
+    "Firebase",
+    "iOS Development",
+    "Android Development",
+    "Desktop Development",
+    "Frontend Development",
+    "Backned Development",
+    "SQA",
+    "Digital Media Marketing",
+    "Blockchain",
+];
 
-export { searchService };
+export default {skills};
+
+// module.exports({searchService, skills});

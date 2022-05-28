@@ -1,13 +1,17 @@
-video {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: -1;
-  }
-  
   .hero-container {
     background: url('../Images/introduction.jpg') center center/cover no-repeat;
+    height: 110vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 0 1000px rgba(30, 160, 253, 0.2);
+    object-fit: contain;
+  }
+
+  .aboutus-container {
+    background: url('../Images/about.png') center center/cover no-repeat;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -18,67 +22,71 @@ video {
     object-fit: contain;
   }
 
-  .aboutus-container{
-    background: url('../Images/aboutus.jpg') center center/cover no-repeat;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(30, 160, 253, 0.2);
-    object-fit: contain;
+  .w-100 {
+    width: 100% !important;
+    height: 91vh;
   }
 
-  
-  .hero-container > h1 {
+
+  .hero-container>h1 {
     color: #fff;
     font-size: 80px;
     text-align: center;
     margin-top: -100px;
   }
 
-  .aboutus-container > h2{
-    font-size: 60px;
+
+  .slider-image {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    max-height: 100%;
   }
 
-  .aboutus-container p{
+  .aboutus-container>h2 {
+    font-size: 50px;
+    color: #fff;
+  }
+
+  .aboutus-container p {
     width: 70%;
+    font-family: 'Poppins';
     text-align: center;
-    font-style: italic;
-    font-weight: bold;
     font-size: 20px;
     letter-spacing: 3px;
-    line-height: 40px;
-    color: #000;
+    line-height: 50px;
+    color: #fff;
   }
-  
-  .hero-container > p {
+
+  .hero-container>p {
     margin-top: 8px;
     color: #fff;
     font-size: 32px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
       'Lucida Sans', Arial, sans-serif;
   }
-  
+
   .hero-btns {
     margin-top: 32px;
   }
-  
+
   .hero-btns .btn {
     margin: 6px;
   }
-  
+
   .fa-play-circle {
     margin-left: 4px;
   }
-  .getStartLink{
+
+  .getStartLink {
     text-decoration: none;
   }
-  .getStartLink:hover{
+
+  .getStartLink:hover {
     text-decoration: none;
   }
-  .getStart{
+
+  .getStart {
     padding: 8px 20px;
     border-radius: 2px;
     color: #fff;
@@ -87,22 +95,25 @@ video {
     border-radius: 5px;
     text-decoration: none;
   }
-  .getStart:hover{
+
+  .getStart:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: 2px solid #42B6EE;
     transition: 0.2s;
   }
-  
+
   @media screen and (max-width: 960px) {
-    .hero-container > h1 {
+    .hero-container>h1 {
       font-size: 70px;
       margin-top: -150px;
     }
-    .aboutus-container > h2{
+
+    .aboutus-container>h2 {
       text-align: center;
       font-size: 40px;
     }
-    .aboutus-container p{
+
+    .aboutus-container p {
       width: 100%;
       height: 100vh;
       /* margin-top: 10px; */
@@ -110,23 +121,28 @@ video {
       /* line-height: 0px; */
       letter-spacing: normal;
     }
+
+    .slider-image {
+      width: 350px;
+      height: 250px;
+    }
   }
-  
+
   @media screen and (max-width: 768px) {
-    .hero-container > h1 {
+    .hero-container>h1 {
       font-size: 50px;
       margin-top: -100px;
     }
-  
-    .hero-container > p {
+
+    .hero-container>p {
       font-size: 30px;
     }
-  
+
     .btn-mobile {
       display: block;
       text-decoration: none;
     }
-  
+
     .btn {
       width: 100%;
     }
