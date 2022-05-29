@@ -20,6 +20,7 @@ const   Data  = Api.getApi();
 
 let haveSkills     ;
 let haveExperience ;
+let basicInfo;
 
 
 const useStyles = makeStyles({
@@ -60,6 +61,7 @@ const useStyles = makeStyles({
 const getData=()=>{
     haveSkills       =  Data.skill.client      ;
     haveExperience   =  Data.experience.client ;
+    basicInfo        =  Data.profile.client    ;
 }
 
 
@@ -90,8 +92,9 @@ const StudentProfile = () => {
     
 
     const imageUploadHandler = event =>{
-        fd.append('image', event.target.files[0], event.target.files[0] );
+        fd.append('image', event.target.files[0], event.target.files[0].name );
         setUrl( URL.createObjectURL(event.target.files[0])) 
+        
     }
     
     return (
@@ -130,7 +133,7 @@ const StudentProfile = () => {
                                         }
                                     >
                                         <Avatar
-                                            alt="Muhammad Waqar"
+                                            alt={basicInfo.username}
                                             src={url}
                                             sx={{ width: 170, height: 170 }}
                                         />
@@ -139,13 +142,13 @@ const StudentProfile = () => {
 
 
                                     <Typography variant='h6' className={classes.typography}>
-                                        Muhammad Khalid
+                                        {basicInfo.username}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
-                                        Software Engineering
+                                        {basicInfo.departmentName}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
-                                        NED University
+                                        {basicInfo.university}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
                                         <Button variant="contained" sx={{ marginTop: '10px' }} onClick={openProfile}>Update Profile</Button>
@@ -169,7 +172,7 @@ const StudentProfile = () => {
                                 </Grid>
                                 <Grid item lg={12} >
                                     <Typography variant='p' className={classes.about} >
-                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis voluptatem aliquam distinctio saepe repellendus mollitia harum temporibus ipsa sint autem inventore, amet maiores sit, excepturi exercitationem doloremque non aut sequi.
+                                        {basicInfo.aboutUs}
                                     </Typography>
                                 </Grid>
                             </Grid>

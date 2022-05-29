@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Modal, Grid, Button, TextField, MenuItem, TextareaAutosize, FormControl, Checkbox, Tooltip } from '@mui/material/';
-import { DateRangePicker, LocalizationProvider } from '@mui/lab/';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {DatePicker, DateRangePicker, LocalizationProvider } from '@mui/lab/';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
@@ -10,20 +11,12 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-// import { flexbox } from '@mui/system';
-
-// const { apiCAll } = require('../integration/apiCall');
 
 const { Api } = require('../integration/apiCall');
 const Data = Api.getApi();
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-
-// // const skills = 
-// console.log(Data.skill.options)
-// console.log(Data.skill.client)
 
 
 const style = {
@@ -54,51 +47,46 @@ const skillStyle = {
 
 
 function ProfileData(props) {
+    
+    const basicInfo         = Data.profile.client;
+    const instruction       = Data.profile.instruction;
+    
+    
+    const phoneNumber       = useFormInput( basicInfo.phoneNumber || "+92"  );
+    const enrollment        = useFormInput( basicInfo.enrollment  || "NED/"  );
+    const department        = useFormInput( basicInfo.department  || ""  );
+    const year              = useFormInput( basicInfo.year        || ""  );
+    const semester          = useFormInput( basicInfo.semester    || ""  );
+    const CGPA              = useFormInput( basicInfo.CGPA        || ""  );
+    const [DOB, setDOB]     = useState(     basicInfo.DOB         || null);
+    const gender            = useFormInput( basicInfo.gender      || ""  );
+    const address           = useFormInput( basicInfo.address     || ""  );
+    const github            = useFormInput( basicInfo.github      || "https://github.com/waqarshaiiikh"  );
+    const linkedin          = useFormInput( basicInfo.linkedin    || "https://www.linkedin.com/in/waqar-shaiiikh/"  );
+    const aboutUs           = useFormInput( basicInfo.aboutUs     || ""  );
+    
+    const [error, setError] = useState(null);
 
-    const phoneNumber = useFormInput('+923423446805');
-    const enrollment = useFormInput('NED/');
-    const department = useFormInput('SE');
-    const CGPA = useFormInput('1.0');
-    const semester = useFormInput('1');
-    const year = useFormInput('1');
-    const age = useFormInput('18');
-    const gender = useFormInput();
-    const address = useFormInput();
-    const github = useFormInput();
-    const linkedin = useFormInput();
-
-    const instruction = {
-        email: {
-            clause1: "  Only cloud Email are allowed"
-        },
-        password: {
-            clause1: "  Minimum length (8)",
-            clause2: "  Must contain alphabatic (A-Z), numeric (1-9) & special characters (!@..) ",
-            clause3: "  e.g: '#000abcd' ",
-        },
-        fname: {
-            clause1: "  First Name should be Alphabetic"
-        },
-        lname: {
-            clause1: "  Last Name should be Alphabetic"
-        },
-        enrollment: {
-            clause1: "  Please follow this pattern 'NED/XXXX/XXXX' "
-        },
-        phoneNumber: {
-            clause1: "  Must follow this pattern +923XXXXXXXXX "
-        },
-        university: {
-            clause1: "  University name should be Alphabetic"
-        },
-        otp: {
-            clause1: "  Sending OTP just wait 30s, otherwise go back and regenerate OTP"
-        },
-        cgpa: {
-            clause1: "  In Between 1 to 4"
+    function handleSave(){
+        const fieldData = {
+            phoneNumber   : phoneNumber.value, 
+            enrollment    : enrollment.value, 
+            department    : department.value, 
+            year          : year.value, 
+            semester      : semester.value, 
+            CGPA          : CGPA.value, 
+            DOB           : `${DOB}`, 
+            gender        : gender.value, 
+            address       : address.value, 
+            github        : github.value, 
+            linkedin      : linkedin.value,
+            aboutUs       : aboutUs.value,
         }
 
-    };
+
+        setError(Data.profile.setclient(fieldData));
+        error===null && props.handleClose();
+    }
     
     return (
         <>
@@ -115,13 +103,13 @@ function ProfileData(props) {
                         <Grid container spacing={1}>
 
                             <Grid item lg={6} xs={12}>
-                            <Tooltip title={instruction.phoneNumber.clause1}>
+                            <Tooltip  title={instruction.phoneNumber.clause1} arrow>
                                 <TextField id="phoneNumber" fullWidth label="Phone No" {...phoneNumber} type='tel' variant="outlined" required />
                             </Tooltip>
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title={instruction.enrollment.clause1}>
+                                <Tooltip title={instruction.enrollment.clause1} arrow>
                                     <TextField id="enrollnment" fullWidth label="Enrollnment No" {...enrollment} type='text' variant="outlined" required />
                                 </Tooltip>
                             </Grid>
@@ -148,7 +136,7 @@ function ProfileData(props) {
                                     <MenuItem key="Polymer & Petrochemical Engineering   " value="PP"     > Polymer & Petrochemical Engineering   </MenuItem>
                                     <MenuItem key="Biomedical Engineering                " value="BM"     > Biomedical Engineering                </MenuItem>
                                     <MenuItem key="Food Engineering                      " value="FD"     > Food Engineering                      </MenuItem>
-                                    <MenuItem key="Architecture                          " value="B.Arch" > Architecture                          </MenuItem>
+                                    <MenuItem key="Architecture                          " value="BArch" > Architecture                          </MenuItem>
                                     <MenuItem key="Textile Sciences                      " value="TS"     > Textile Sciences                      </MenuItem>
                                     <MenuItem key="Development Studies                   " value="DS"     > Development Studies                   </MenuItem>
                                     <MenuItem key="Management Sciences                   " value="MG"     > Management Sciences                   </MenuItem>
@@ -175,69 +163,76 @@ function ProfileData(props) {
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title={ instruction.cgpa.clause1 }>
+                                <Tooltip title={ instruction.cgpa.clause1 } arrow>
                                     <TextField id="gpa" fullWidth label="CGPA" type='number' {...CGPA} inputProps={{ inputProps: { min: 1, max: 4 } }} variant="outlined" required />
                                 </Tooltip>
                             </Grid>
 
                             <Grid item lg={4} xs={12}>
-                                <TextField id="age" fullWidth label="Age" type='number' {...age} variant="outlined" required />
-                            </Grid>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
 
-                            
+                                    <DatePicker
+                                        disableFuture
+                                        inputFormat = 'dd/MM/yyyy'
+                                        label="Date of birth"
+                                        openTo="year"
+                                        views={['year', 'month', 'day']}
+                                        value={DOB}
+                                        onChange={(newValue) => {
+                                            setDOB(Date.parse(newValue));
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
                             <Grid item lg={4} xs={12}>
                                 <TextField id="gender" fullWidth label="Gender" {...gender} variant="outlined" required select>
-                                    <MenuItem key="male" value="male">Male</MenuItem>
-                                    <MenuItem key="female" value="female">Female</MenuItem>
+                                    <MenuItem key="male"    value="M">Male</MenuItem>
+                                    <MenuItem key="female"  value="F">Female</MenuItem>
                                 </TextField>
                             </Grid>
                             <Grid item lg={12} xs={12}>
-                                <TextField id="address" {...address} fullWidth label="Address" type="text" variant="outlined" required />
+                                <Tooltip title={instruction.address.clause1} arrow>
+                                    <TextField id="address" {...address} fullWidth label="Address" type="text" variant="outlined" required />
+                                </Tooltip>
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="github" fullWidth label="Github" {...github} type="text" variant="outlined" required />
+                                <Tooltip title= { instruction.github.clause1} arrow>
+                                    <TextField id="github" fullWidth label="Github" {...github} type="text" variant="outlined" placeholder=" e.g., 'https://github.com/waqarshaiiikh' " required />
+                                </Tooltip>
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="linkedin" fullWidth label="Linked In"  {...linkedin} type="text" variant="outlined" required />
+                                <Tooltip title= { instruction.linkedin.clause1} arrow>
+                                    <TextField id="linkedin" fullWidth label="Linked In"  {...linkedin} type="text" variant="outlined" placeholder = " e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' " required />
+                                </Tooltip>
                             </Grid>
 
                             
                             <Grid item lg={12} xs={12}>
+                            <Tooltip title= { instruction.aboutUs.clause1} arrow>
+
                                 <TextareaAutosize
                                     id="about"
                                     maxRows={5}
+                                    {...aboutUs}
                                     required
                                     style={{ width: '100%', padding: '10px' }}
                                     placeholder="Write About yourself with in 200 words"
-                                />
+                                    />
+                            </Tooltip>
                             </Grid>
-{/* 
-                            <Grid item lg={6} xs={12} display='flex' justifyContent='right' >
 
-                                <Button className={classes.button} onClick={() => updatePage(Pages.preVal())} disabled={loading.StudentsDataField} outline="none" sx={{ background: '42b6EE', marginRight: '10px' }}>
-                                    Back
-                                </Button>
-
-                                <Button className={classes.button} onClick={handleLogin} disabled={loading.StudentsDataField} outline="none" sx={{ background: '42b6EE' }}>
-                                    {
-                                        loading.StudentsDataField ? "uploading..." : "Sign Up"
-                                    }
-                                </Button>
-                            </Grid> 
                             {
-                                error.StudentsDataField &&
+                                error &&
                                 <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-                                    <> <pre style={{ color: 'red' }}>{error.StudentsDataField}</pre> </>
+                                    <> <pre style={{ color: 'red' }}>{error}</pre> </>
                                 </Grid>
-                                
+
                             }
-*/}
 
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                <Button variant="contained" onClick={props.handleClose}>Save</Button>
+                                <Button variant="contained" onClick={handleSave}>Save</Button>
                             </Grid>
-
-
 
                         </Grid>
                     </FormControl>
@@ -408,7 +403,9 @@ function ExperienceData(props) {
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
                                         startText="Start Date"
-                                        endText="End Date"
+                                        inputFormat = 'dd/MM/yyyy'
+                                        endText="End Date"                                      
+                                        views={['day', 'month', 'year']}
                                         value={duration}
                                         onChange={(value) => {
                                             setDuration(value);
@@ -431,7 +428,7 @@ function ExperienceData(props) {
                                     required
                                     {...DesField}
                                     style={{ width: '100%', padding: '10px' }}
-                                    placeholder="Write Description About your Job in 200 words"
+                                    placeholder = "Write Description About your Job in 200 words"
                                 />
                             </Grid>
 
