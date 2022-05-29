@@ -197,6 +197,7 @@ class Skill {
             * and update the client Data
             * send skill options that browser have
             */
+           
             this.#lastSync = this.#lastSync + this.#syncCounter;
             this.#client  = skill;
             this.#status   = state.updated;
