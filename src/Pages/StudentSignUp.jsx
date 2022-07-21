@@ -19,7 +19,6 @@ const useStyles = makeStyles({
         height: 48,
         padding: '0 30px !important',
     }
-
 });
 
 
@@ -64,7 +63,6 @@ const StudentSignUp = () => {
 
     };
 
-
     const [pageNo, updatePageNo] = useState(0);
     let Pages = {
         page1: "sendOTP",
@@ -105,7 +103,7 @@ const StudentSignUp = () => {
     const email = useFormInput('waqar4106080@cloud.neduet.edu.pk');
     const phoneNumber = useFormInput('+923423446805');
     const enrollment = useFormInput('NED/');
-    const university = useFormInput('NEDUET');
+    const university = useFormInput('NED UNIVERSITY');
     const department = useFormInput('SE');
     const CGPA = useFormInput('1.0');
     const semester = useFormInput('1');
@@ -325,7 +323,8 @@ const StudentSignUp = () => {
 
                 setLoading({ StudentsDataField: false });
                 const ErrorData = ((isError.fname || "") + (isError.lname || "") +
-                    (isError.phoneNumber || "") + (isError.enrollment || "") + (isError.university || ""));
+                    (isError.phoneNumber || "") + (isError.enrollment || "") +(isError.CGPA || "") 
+                    + (isError.university || ""));
                 setError({ StudentsDataField: ErrorData.replaceAll('<br/>', '*\n') });
             }
         }
@@ -346,7 +345,7 @@ const StudentSignUp = () => {
 
                     <Grid item lg={6} xs={12}>
                         <TextField id="phoneNumber" fullWidth label="Phone No" {...phoneNumber} type='tel' variant="outlined" required />
-                        <pre>{instruction.phoneNumber.clause1}<br />{instruction.phoneNumber.clause2}</pre>
+                        <pre>{instruction.phoneNumber.clause1}<br/></pre>
                     </Grid>
 
                     <Grid item lg={6} xs={12}>
@@ -468,11 +467,11 @@ const StudentSignUp = () => {
                     && validator.isLength(enrollment.value, { min: 13, max: undefined })) === false) {
                     Error = { ...Error, enrollment: "Invalid Enrollnment No: <br/>" }
                 }
-                if ((validator.isAlpha(university.value) || validator.isAlphanumeric(university.value)) === false) {
+                if ((validator.isAlpha(university.value) || validator.isAlphanumeric(university.value, ['en-US'], {ignore: '-s'})) === false) {
                     Error = { ...Error, university: "Invalid university Name <br/>" }
                 }
                 if ((validator.isFloat(CGPA.value, { min: '1.0', max: '4.0' })) === false) {
-                    Error = { ...Error, university: "Invalid CGPA <br/>" }
+                    Error = { ...Error, CGPA: "Invalid CGPA <br/>" }
                 }
                 return Error;
             }
