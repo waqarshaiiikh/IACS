@@ -18,6 +18,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import MetaData from '../MetaData';
+import "../CSS/Utils.css"
 
 const useStyles = makeStyles({
     searching: {
@@ -157,6 +159,7 @@ const SoftwareHouse = () => {
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>
+                            <MetaData title="Software Houses"/>
                             {
                                 loading ? (
                                     <Backdrop
@@ -172,7 +175,7 @@ const SoftwareHouse = () => {
                                             <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                 <div className={classes.software_title}>
                                                     <div>
-                                                        <Typography variant='h3'>{softwareHouse.name}</Typography>
+                                                        <h3 className='mobileHeading'>{softwareHouse.name}</h3>
                                                         <Typography>{softwareHouse.city}</Typography>
                                                     </div>
                                                     <img className={classes.software_image} src={softwareHouse.image} alt="software" />

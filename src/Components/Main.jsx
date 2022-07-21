@@ -18,6 +18,7 @@ import ClientJob from "../Industries/ClientJob"
 import ClientInternship from '../Industries/ClientInternship';
 import ClientProject from '../Industries/ClientProject';
 import ClientScholarship from '../Industries/ClientScholarship';
+import Admin from '../Admin/Admin';
 
 const Main = () => {
     let student = "industry";
@@ -25,6 +26,7 @@ const Main = () => {
         <>
             <Routes>
                 {student==="industry" && <Route path="//*" element={<Introduction />} />}
+                <Route path='/admin' element={<Admin/>}/>
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path='/clidashboard' element={<ClientDashborad />}/>

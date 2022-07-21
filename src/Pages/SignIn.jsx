@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { Tabs, Tab, Typography, Box } from "@mui/material";
 import StudentSignIn from "./StudentSignIn";
 import IndustrySignIn from "./IndustrySignIn";
+import MetaData from "../MetaData"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,7 +51,8 @@ const Signin = () => {
     setValue(index);
   };
 
-  return (
+  return (<>
+    <MetaData title="Sign In"/>
     <Box sx={{ padding: "0px", width: "100%", height: "90vh" }}>
       <Box display="flex" justifyContent="center">
         <Tabs
@@ -82,6 +84,7 @@ const Signin = () => {
         </SwipeableViews>
       </Box>
     </Box>
+  </>
   );
 };
 

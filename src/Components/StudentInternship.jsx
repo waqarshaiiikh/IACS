@@ -27,6 +27,8 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import SearchIcon from '@mui/icons-material/Search';
 import { makeStyles } from '@material-ui/styles';
+import MetaData from '../MetaData';
+import "../CSS/Utils.css";
 
 const internshipSkills = [
     "HTML CSS & JavaScript",
@@ -253,6 +255,7 @@ const StudentInternship = () => {
     }, [])
     return (
         <>
+            <MetaData title="Internships"/>
             <Navbar />
             <PostInternship open={requestJob} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0', }}>
@@ -296,7 +299,7 @@ const StudentInternship = () => {
                                             <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                 <div className={classes.software_title}>
                                                     <div>
-                                                        <Typography variant='h3'>{intern.companyName}</Typography>
+                                                        <h3 className='mobileHeading'>{intern.companyName}</h3>
                                                         <Typography>{intern.jobRole}</Typography>
                                                         <Typography>{intern.city}</Typography>
                                                         <Typography>{intern.type}</Typography>

@@ -27,6 +27,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import MetaData from "../MetaData";
+import "../CSS/Utils.css"
 
 const internshipSkills = [
     "HTML CSS & JavaScript",
@@ -256,6 +258,7 @@ const ClientInternship = () => {
 
     return (
         <>
+            <MetaData title="Internhsips"/>
             <ClientNavbar />
             <PostInternship open={requestInternship} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
@@ -317,7 +320,7 @@ const ClientInternship = () => {
                                                     <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                         <div className={classes.software_title}>
                                                             <div>
-                                                                <Typography variant='h3'>{internship.companyName}</Typography>
+                                                                <h3 className='mobileHeading'>{internship.companyName}</h3>
                                                                 <Typography>{internship.jobRole}</Typography>
                                                                 <Typography>{internship.city}</Typography>
                                                                 <Typography>{internship.type}</Typography>

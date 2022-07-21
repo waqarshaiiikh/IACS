@@ -19,6 +19,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import studentPic from "../Images/student.png";
+import MetaData from '../MetaData';
 
 const useStyles = makeStyles({
   searching: {
@@ -123,6 +124,7 @@ const ClientStudent = () => {
   }, [])
   return (
     <>
+      <MetaData title="Students" />
       <ClientNavbar />
       <div>
         <Container maxWidth="xl" sx={{ padding: '0' }}>
@@ -213,7 +215,7 @@ const ClientStudent = () => {
                                 <AccordionDetails>
                                   {
                                     student.experience && student.experience.map((exp, index) => (
-                                      <Typography style={{marginBottom:'10px'}}>
+                                      <Typography style={{ marginBottom: '10px' }}>
                                         <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
                                         <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
                                         <Typography style={{ fontWeight: 'bold' }}>{exp.startDate} to {exp.endDate}</Typography>

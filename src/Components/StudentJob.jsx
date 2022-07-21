@@ -27,6 +27,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import MetaData from '../MetaData';
+import "../CSS/Utils.css";
 
 const jobSkills = [
     "HTML CSS & JavaScript",
@@ -256,6 +258,7 @@ const StudentJob = () => {
     }, [])
     return (
         <>
+        <MetaData title="Jobs"/>
             <Navbar />
             <PostJob open={requestJob} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
@@ -303,7 +306,7 @@ const StudentJob = () => {
                                                 <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                     <div className={classes.software_title}>
                                                         <div>
-                                                            <Typography variant='h3'>{job.companyName}</Typography>
+                                                            <h3 className='mobileHeading'>{job.companyName}</h3>
                                                             <Typography>{job.jobRole}</Typography>
                                                             <Typography>{job.city}</Typography>
                                                             <Typography>{job.type}</Typography>
