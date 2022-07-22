@@ -258,7 +258,7 @@ const ClientInternship = () => {
 
     return (
         <>
-            <MetaData title="Internhsips"/>
+            <MetaData title="Internhsips" />
             <ClientNavbar />
             <PostInternship open={requestInternship} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
@@ -285,15 +285,15 @@ const ClientInternship = () => {
                                     marginRight: '10px',
                                     width: { lg: 500, xs: 250 }
                                 }} />
+                            <SearchIcon
+                                fontSize='large'
+                                onClick={handleSearch}
+                                sx={{
+                                    color: '#42b6EE',
+                                    cursor: 'pointer',
+                                    marginTop: { lg: 'none', xs: '10px' },
+                                }} />
                         </div>
-                        <SearchIcon
-                            fontSize='large'
-                            onClick={handleSearch}
-                            sx={{
-                                color: '#42b6EE',
-                                cursor: 'pointer',
-                                marginTop: { lg: 'none', xs: '10px' },
-                            }} />
                     </Grid>
                     <Grid item lg={12}>
                         <Button variant='contained' sx={{ marginTop: '10px' }} onClick={openRequest}>Post Internship</Button>

@@ -258,7 +258,7 @@ const StudentJob = () => {
     }, [])
     return (
         <>
-        <MetaData title="Jobs"/>
+            <MetaData title="Jobs" />
             <Navbar />
             <PostJob open={requestJob} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0' }}>
@@ -277,11 +277,11 @@ const StudentJob = () => {
                                 onChange={(e) => { setValue(e.target.value) }}
                                 onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
                                 sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                            <SearchIcon
+                                fontSize='large'
+                                onClick={handleSearch}
+                                sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                         </div>
-                        <SearchIcon
-                            fontSize='large'
-                            onClick={handleSearch}
-                            sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                     </Grid>
                     <Grid item lg={12} xs={12}>
                         <Button variant='contained' sx={{ marginTop: '10px' }} onClick={openRequest}>Request Job</Button>

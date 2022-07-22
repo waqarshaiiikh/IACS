@@ -255,7 +255,7 @@ const StudentInternship = () => {
     }, [])
     return (
         <>
-            <MetaData title="Internships"/>
+            <MetaData title="Internships" />
             <Navbar />
             <PostInternship open={requestJob} handleClose={closeRequest} />
             <Container maxWidth="xl" sx={{ padding: '0', }}>
@@ -273,11 +273,11 @@ const StudentInternship = () => {
                                 onChange={(e) => { setValue(e.target.value) }}
                                 onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
                                 size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                            <SearchIcon
+                                fontSize='large'
+                                onClick={handleSearch}
+                                sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                         </div>
-                        <SearchIcon
-                            fontSize='large'
-                            onClick={handleSearch}
-                            sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                     </Grid>
                     <Grid item lg={12} sx={{ width: { xs: '100%' }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Button variant='contained' onClick={openRequest}>Request Internhsip</Button>

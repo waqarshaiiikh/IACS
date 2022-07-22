@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import ClientNavbar from './ClientNavbar';
+import React, { useState, useEffect } from 'react';
+import { styled, useTheme } from '@mui/material/styles';
+import AdminNavbar from './AdminNavbar';
 import {
   Container,
   Grid,
@@ -20,6 +21,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
+import "../CSS/Utils.css"
 
 const useStyles = makeStyles({
   searching: {
@@ -67,8 +69,51 @@ const useStyles = makeStyles({
   }
 });
 
+const drawerWidth = 200;
 
-const ClientStudent = () => {
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  }),
+);
+
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+
+
+const AdminStudents = () => {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
@@ -122,15 +167,20 @@ const ClientStudent = () => {
     loadStudent();
     setLoading(true)
   }, [])
+
   return (
-    <>
-      <MetaData title="Students" />
-      <ClientNavbar />
-      <div>
+    <Box sx={{ display: 'flex' }}>
+      <AdminNavbar open={open}
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
+        theme={theme} />
+      <Main open={open}>
+        <DrawerHeader />
+        <MetaData title="Admin Students"/>
         <Container maxWidth="xl" sx={{ padding: '0' }}>
           <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
             <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
-              <h1>Client Students</h1>
+              <h1>Students</h1>
             </Grid>
             <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
               <div>
@@ -142,10 +192,10 @@ const ClientStudent = () => {
                   onChange={(e) => { setValue(e.target.value) }}
                   onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
                   size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
-                <SearchIcon
-                  fontSize='large'
-                  onClick={handleSearch}
-                  sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+              <SearchIcon
+                fontSize='large'
+                onClick={handleSearch}
+                sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
               </div>
             </Grid>
             <Grid item lg={12} xs={12} className={classes.studentList} >
@@ -242,10 +292,9 @@ const ClientStudent = () => {
             </Box>
           </Grid>
         </Container>
-      </div>
-
-    </>
+      </Main>
+    </Box>
   )
 }
 
-export default ClientStudent
+export default AdminStudents

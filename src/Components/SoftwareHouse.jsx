@@ -129,7 +129,7 @@ const SoftwareHouse = () => {
                     <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
                         <h1>Software House</h1>
                     </Grid>
-                    <Grid item lg={12} 
+                    <Grid item lg={12}
                         sx={{
                             display: 'flex',
                             flexDirection: { xs: 'column', lg: 'row' },
@@ -147,19 +147,19 @@ const SoftwareHouse = () => {
                                 onChange={(e) => { setValue(e.target.value) }}
                                 sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
                                 onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }} />
+                            <SearchIcon
+                                fontSize='large'
+                                onClick={handleSearch}
+                                sx={{
+                                    color: '#42b6EE',
+                                    cursor: 'pointer',
+                                    marginTop: { lg: 'none', xs: '10px' },
+                                }} />
                         </div>
-                        <SearchIcon
-                            fontSize='large'
-                            onClick={handleSearch}
-                            sx={{
-                                color: '#42b6EE',
-                                cursor: 'pointer',
-                                marginTop: { lg: 'none', xs: '10px' },
-                            }} />
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>
-                            <MetaData title="Software Houses"/>
+                            <MetaData title="Software Houses" />
                             {
                                 loading ? (
                                     <Backdrop
