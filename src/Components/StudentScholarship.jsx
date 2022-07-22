@@ -5,6 +5,7 @@ import {
     Grid, Box, Button, Typography,
     Modal, TextField, TextareaAutosize, FormControl
 } from '@mui/material';
+import MetaData from '../MetaData';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import { makeStyles } from '@material-ui/styles';
 // import SearchIcon from '@mui/icons-material/Search';
@@ -123,6 +124,7 @@ const StudentScholarship = () => {
     const closeRequest = () => setRequestJob(false);
     return (
         <>
+            <MetaData title="Scholarships" />
             <Navbar />
             <PostInternship open={requestJob} handleClose={closeRequest} />
             <div className='center_utils'>

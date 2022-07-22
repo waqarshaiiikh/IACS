@@ -18,8 +18,16 @@
     align-items:center;
 }
 
+.mobileHeading{
+    font-size: 40px;
+}
+
 @media screen and (max-width:600px) {
     .main_heading{
-        font-size: 4rem;
+        font-size: 3rem;
+        text-align: center;
+    }
+    .mobileHeading{
+        font-size: 30px;
     }
 }

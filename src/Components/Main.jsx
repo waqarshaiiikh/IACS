@@ -18,6 +18,17 @@ import ClientJob from "../Industries/ClientJob"
 import ClientInternship from '../Industries/ClientInternship';
 import ClientProject from '../Industries/ClientProject';
 import ClientScholarship from '../Industries/ClientScholarship';
+import Admin from '../Admin/Admin';
+import AdminStudents from "../Admin/AdminStudents"
+import AdminSoftwareHouses from "../Admin/AdminSoftwareHouses";
+import AdminJobs from "../Admin/AdminJobs";
+import AdminInternships from "../Admin/AdminInternships";
+import AdminMessage from "../Admin/AdminMessage";
+import AdminRequest from "../Admin/AdminRequest";
+
+
+
+
 
 const Main = () => {
     let student = "industry";
@@ -25,6 +36,13 @@ const Main = () => {
         <>
             <Routes>
                 {student==="industry" && <Route path="//*" element={<Introduction />} />}
+                <Route path='/admin/Home' element={<Admin/>}/>
+                <Route path='/admin/Students' element={<AdminStudents/>}/>
+                <Route path='/admin/SoftwareHouses' element={<AdminSoftwareHouses/>}/>
+                <Route path='/admin/Jobs' element={<AdminJobs/>}/>
+                <Route path='/admin/Internships' element={<AdminInternships/>}/>
+                <Route path='/admin/Request' element={<AdminRequest/>}/>
+                <Route path='/admin/Messages' element={<AdminMessage/>}/>
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path='/clidashboard' element={<ClientDashborad />}/>

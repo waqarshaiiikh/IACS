@@ -15,17 +15,17 @@ function ContactUs() {
           <Container>
             <FormControl>
               <Grid container spacing={3}>
-                <Grid item lg={12}>
+                <Grid item lg={12} xs={12}>
                   <div className="input-box">
                     <TextField fullWidth id="name" label="Full Name" variant="standard" placeholder="Enter your Name" required />
                   </div>
                 </Grid>
-                <Grid item lg={12}>
+                <Grid item lg={12} xs={12}>
                   <div className="input-box">
                     <TextField fullWidth id="name" label="Email" variant="standard" placeholder="Enter your Name" required />
                   </div>
                 </Grid>
-                <Grid item lg={12}>
+                <Grid item lg={12} xs={12}>
                   <div className="input-box">
                     <TextField
                       id="standard-multiline-flexible"
@@ -38,7 +38,7 @@ function ContactUs() {
                     />
                   </div>
                 </Grid>
-                <Grid item lg={12} display='flex' justifyContent='right'>
+                <Grid item lg={12} xs={12} display='flex' justifyContent='right'>
                   <div className="profile-submit">
                     <Button variant="contained">Submit</Button>
                   </div>

@@ -90,7 +90,7 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component={Link} to="/"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, hover:{textDecoration:'none'} }}
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, '&:hover': {textDecoration:'none', color : 'white'} }}
           >
             <i className= {`fab fa-typo3  ${classes.icon}`} /> IACS
           </Typography>
@@ -153,8 +153,8 @@ const Navbar = () => {
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            component={Link} to="/"
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, '&:hover': {textDecoration:'none', color : 'white'} }}
           >
             <i className='fab fa-typo3' /> IACS
           </Typography>
@@ -216,19 +216,16 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" component={Link} to="/stddashboard">Dashboard</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }}  component={Link} to="/stddashboard">Dashboard</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" component={Link} to="/studentProfile">Profile</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/studentProfile">Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" component={Link} to="/studentProfile">Account</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/studentProfile">Account</Typography>
               </MenuItem>
               <MenuItem onClick={logoutFunction}>
-                <Typography textAlign="center" component={Link} to="/">Logout</Typography>
-              </MenuItem>
-              <MenuItem onClick={logoutAllfun}>
-                <Typography textAlign="center" component={Link} to="/">Logout All</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/">Logout</Typography>
               </MenuItem>
             </Menu>
           </Box>

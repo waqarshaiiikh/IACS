@@ -1,6 +1,6 @@
 import React from 'react';
-import '../CSS/Cards.css';
-import { Grid, Container } from '@mui/material';
+// import '../CSS/Cards.css';
+import { Grid, Container, Typography } from '@mui/material';
 import CardItem from './CardItem';
 import jobsService from "../Images/jobServ.png";
 import internService from "../Images/internhsipServ.png";
@@ -12,10 +12,10 @@ function Cards() {
 
   return (
     <div className='cards'>
-      <h1>Check out these EPIC Services</h1>
-      <Container>
-        <Grid container spacing={4} display="flex" justifyContent="center" alignItem="center" sx={{ marginTop: '20px' }}>
-          <Grid item lg={4} xs={8} >
+      <Typography sx={{fontSize : '2vmax', textAlign:'center', marginTop:'10px'}}>Check out these EPIC Services</Typography>
+      <Container sx={{width:"100%", marginBottom : '3vmax', padding:'2vmax'}}>
+        <Grid container spacing={4} display="flex" justifyContent="center" alignItem="center">
+          <Grid item lg={4} xs={8} sx={{ width:'100%'}}>
             <CardItem
               image={jobsService}
               service="Job"
