@@ -5,6 +5,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/styles';
 import ClientNavbar from './ClientNavbar';
 import client from "../Images/job.png"
+import MetaData from '../MetaData';
+import "../CSS/Utils.css";
 
 const services = ["Web Development", "Mobile App Development",
     "Graphis Designing",
@@ -68,6 +70,7 @@ const ClientProfile = () => {
     const closeService = () => setService(false);
     return (
         <>
+            <MetaData title="Client Profile"/>
             <ClientNavbar />
             <ProfileData open={profile} handleClose={closeProfile} />
             <ServiceData open={service} handleClose={closeService} />
@@ -106,9 +109,9 @@ const ClientProfile = () => {
                         }}>
                             <Grid container>
                                 <Grid item lg={12}>
-                                    <Typography variant='h3' >
+                                    <h3 className='mobileHeading'>
                                         About Us
-                                    </Typography>
+                                    </h3>
                                 </Grid>
                                 <Grid item lg={12} >
                                     <Typography variant='p' className={classes.about} >
@@ -124,9 +127,9 @@ const ClientProfile = () => {
                     <Grid item lg={12}>
                         <Grid container spacing={2} sx={{ marginBottom: '10px' }}>
                             <Grid item lg={12}>
-                                <Typography variant='h3'>
+                                <h3 className='mobileHeading'>
                                     Services <EditIcon className={classes.edit} onClick={openService} />
-                                </Typography>
+                                </h3>
                             </Grid>
                             <Grid item lg={12}>
                                 <Grid container>

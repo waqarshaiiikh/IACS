@@ -9,6 +9,11 @@ import { makeStyles } from '@material-ui/styles';
 import { styled } from '@material-ui/styles';
 import Navbar from "./Navbar";
 const { Api } = require('../integration/apiCall');
+import std from "../Images/student.png"
+import MetaData from '../MetaData';
+import "../CSS/Utils.css"
+// import std from "../Images/IMG_20191029_175656.JPG"
+
 
 const Input = styled('input')({
     display: 'none',
@@ -47,7 +52,7 @@ const useStyles = makeStyles({
     },
     edit: {
         cursor: 'pointer',
-    },
+    }
 })
 
 // let basicInfo       ;
@@ -132,6 +137,7 @@ const StudentProfile = () => {
 
     return (
         <>
+        <MetaData title="Student Profile"/>
             <Navbar />
             <ProfileData open={profile} handleClose={closeProfile} />
             {experience && <ExperienceData open={experience} handleClose={closeExperience} experienceObj={experienceField} status={experienceField.companyName === null ? "Add" : "Update"} />}
@@ -196,9 +202,9 @@ const StudentProfile = () => {
                         }}>
                             <Grid container>
                                 <Grid item lg={12}>
-                                    <Typography variant='h3' >
+                                    <h3 className='mobileHeading'>
                                         About Me
-                                    </Typography>
+                                    </h3>
                                 </Grid>
                                 <Grid item lg={12} >
                                     <Typography variantMapping='p' className={classes.about} >
@@ -213,9 +219,9 @@ const StudentProfile = () => {
                     <Grid item lg={12}>
                         <Grid container spacing={2} sx={{ marginBottom: '10px' }}>
                             <Grid item lg={12}>
-                                <Typography variant='h3'>
+                                <h3 className='mobileHeading'>
                                     Skills <EditIcon className={classes.edit} onClick={openSkill} />
-                                </Typography>
+                                </h3>
                             </Grid>
                             <Grid item lg={12}>
                                 <Grid container>
@@ -233,10 +239,10 @@ const StudentProfile = () => {
                         <Grid container spacing={2}>
 
                             <Grid item lg={12}>
-                                <Typography variant='h3'>
+                                <h3 className='mobileHeading'>
                                     Experience
                                     <Button variant="text" onClick={() => { openExperience({ companyName: null, jobRole: null, startDate: null, endDate: null, Description: null }) }} > ADD </Button>
-                                </Typography>
+                                </h3>
                             </Grid>
 
                             <Grid item lg={12}>

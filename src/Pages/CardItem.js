@@ -5,7 +5,7 @@ import { CardActionArea } from '@mui/material';
 function CardItem({image, service, description}) {
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{lg:{width:'auto', background:'purpule'}, sm:{width:350}}}>
         <CardActionArea>
           <CardMedia
             component="img"
