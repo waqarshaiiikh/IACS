@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Modal, Grid, Button, TextField, MenuItem, TextareaAutosize, FormControl, Checkbox, Tooltip } from '@mui/material/';
+import { Box, Typography, Modal, Grid, Button, TextField, MenuItem , TextareaAutosize, FormControl, Checkbox, Tooltip } from '@mui/material/';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {DatePicker, DateRangePicker, LocalizationProvider } from '@mui/lab/';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -11,6 +11,9 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { useEffect } from 'react';
+import { border, textAlign } from '@material-ui/system';
+
 
 const { Api } = require('../integration/apiCall');
 const Data = Api.getApi();
@@ -45,49 +48,87 @@ const skillStyle = {
     p: { lg: 4, xs: 1 },
 }
 
+function getSafe(fn, defaultVal="loading...") {
+    try {
+      return fn();
+    } catch (e) {
+      return defaultVal;
+    }
+}
 
 function ProfileData(props) {
-    
-    const basicInfo         = Data.profile.client;
-    const instruction       = Data.profile.instruction;
-    
-    
-    const phoneNumber       = useFormInput( basicInfo.phoneNumber || "+92"  );
-    const enrollment        = useFormInput( basicInfo.enrollment  || "NED/"  );
-    const department        = useFormInput( basicInfo.department  || ""  );
-    const year              = useFormInput( basicInfo.year        || ""  );
-    const semester          = useFormInput( basicInfo.semester    || ""  );
-    const CGPA              = useFormInput( basicInfo.CGPA        || ""  );
-    const [DOB, setDOB]     = useState(     basicInfo.DOB         || null);
-    const gender            = useFormInput( basicInfo.gender      || ""  );
-    const address           = useFormInput( basicInfo.address     || ""  );
-    const github            = useFormInput( basicInfo.github      || "https://github.com/waqarshaiiikh"  );
-    const linkedin          = useFormInput( basicInfo.linkedin    || "https://www.linkedin.com/in/waqar-shaiiikh/"  );
-    const aboutUs           = useFormInput( basicInfo.aboutUs     || ""  );
-    
+    // let basicInfo  ;
+
+    const [ DOB          , setDOB]           = useState( null   );
+    const [ phoneNumber  , set_phoneNumber ] = useState( "+92"  );
+    const [ enrollment   , set_enrollment  ] = useState( "NED/" );
+    const [ department   , set_department  ] = useState( ""     );
+    const [ year         , set_year        ] = useState( ""     );
+    const [ semester     , set_semester    ] = useState( ""     );
+    const [ CGPA         , set_CGPA        ] = useState( ""     );
+    const [ gender       , set_gender      ] = useState( ""     );
+    const [ address      , set_address     ] = useState( ""     );
+    const [ github       , set_github      ] = useState( ""     );
+    const [ linkedin     , set_linkedin    ] = useState( ""     );
+    const [ aboutUs      , set_aboutUs     ] = useState( ""     );
+
+    const [instruction, set_instruction] = useState( );
+
+    useEffect(()=>{
+        const  getProfileData = async ()=>{
+            const   profileData   = await Data.profile;
+            let     basicInfo     = await profileData.client;
+            const   instruction1  = await profileData.instruction;
+            set_instruction(instruction1)
+
+            setDOB          (basicInfo.DOB)
+            set_phoneNumber (basicInfo.phoneNumber)
+            set_enrollment  (basicInfo.enrollment)
+            set_department  (basicInfo.department)
+            set_year        (basicInfo.year)
+            set_semester    (basicInfo.semester)
+            set_CGPA        (basicInfo.CGPA)
+            set_gender      (basicInfo.gender)
+            set_address     (basicInfo.address)
+            set_github      (basicInfo.github)
+            set_linkedin    (basicInfo.linkedin)
+            set_aboutUs     (basicInfo.aboutUs)
+        }
+        getProfileData();
+    },[])
+        
+
     const [error, setError] = useState(null);
 
-    function handleSave(){
-        const fieldData = {
-            phoneNumber   : phoneNumber.value, 
-            enrollment    : enrollment.value, 
-            department    : department.value, 
-            year          : year.value, 
-            semester      : semester.value, 
-            CGPA          : CGPA.value, 
-            DOB           : `${DOB}`, 
-            gender        : gender.value, 
-            address       : address.value, 
-            github        : github.value, 
-            linkedin      : linkedin.value,
-            aboutUs       : aboutUs.value,
-        }
+    function handleSave() {
+        (Data.profile).then((clientUpdation) => {
+            const fieldData = {
+                phoneNumber,
+                enrollment,
+                department,
+                year,
+                semester,
+                CGPA,
+                DOB,
+                gender,
+                address,
+                github,
+                linkedin,
+                aboutUs,
+            }
+            clientUpdation.setclient(fieldData)
+                .then(
+                    error => {
+                        const errorData = error;
+                        setError(errorData);
+                        if (errorData === null)
+                            props.handleClose();
+                    }
+                );
 
-
-        setError(Data.profile.setclient(fieldData));
-        error===null && props.handleClose();
+        })
     }
-    
+
     return (
         <>
             <Modal Modal
@@ -103,19 +144,19 @@ function ProfileData(props) {
                         <Grid container spacing={1}>
 
                             <Grid item lg={6} xs={12}>
-                            <Tooltip  title={instruction.phoneNumber.clause1} arrow>
-                                <TextField id="phoneNumber" fullWidth label="Phone No" {...phoneNumber} type='tel' variant="outlined" required />
+                            <Tooltip  title={getSafe(()=>instruction.phoneNumber.clause1)} arrow>
+                                <TextField id="phoneNumber" variant="filled" fullWidth  label="Phone No" value={phoneNumber} onChange={(e)=>{set_phoneNumber(e.target.value)}} type='tel'  required />
                             </Tooltip>
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title={instruction.enrollment.clause1} arrow>
-                                    <TextField id="enrollnment" fullWidth label="Enrollnment No" {...enrollment} type='text' variant="outlined" required />
+                                <Tooltip title={getSafe(()=>instruction.enrollment.clause1)} arrow>
+                                    <TextField id="enrollnment" fullWidth label="Enrollnment No" value={enrollment} onChange={(e)=>{set_enrollment(e.target.value)}} type='text' variant="filled" required />
                                 </Tooltip>
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <TextField id="department" fullWidth label="Department" {...department} type='text' variant="outlined" required select>
+                                <TextField id="department" fullWidth label="Department"  value={department} onChange={(e)=>{set_department(e.target.value)}} type='text' variant="filled" required select>
                                     <MenuItem key="Software Engineering                  " value="SE"     > Software Engineering                  </MenuItem>
                                     <MenuItem key="Computer Science                      " value="CT"     > Computer Science                      </MenuItem>
                                     <MenuItem key="Computer Systems Engineering          " value="CS"     > Computer Systems Engineering          </MenuItem>
@@ -147,7 +188,7 @@ function ProfileData(props) {
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <TextField id="year" fullWidth label="Year" {...year} variant="outlined" required select>
+                                <TextField id="year" fullWidth label="Year" value={year} onChange={(e)=>{set_year(e.target.value)}} variant="filled" required select>
                                     <MenuItem key="first" value="1">First</MenuItem>
                                     <MenuItem key="second" value="2">Second</MenuItem>
                                     <MenuItem key="third" value="3">Third</MenuItem>
@@ -156,15 +197,15 @@ function ProfileData(props) {
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <TextField id="semester" fullWidth label="Semester" {...semester} variant="outlined" required select>
+                                <TextField id="semester" fullWidth label="Semester" value={semester} onChange={(e)=>{set_semester(e.target.value)}} variant="filled" required select>
                                     <MenuItem key="first" value="1">Fall / First</MenuItem>
                                     <MenuItem key="second" value="2">Spring / Second</MenuItem>
                                 </TextField>
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title={ instruction.cgpa.clause1 } arrow>
-                                    <TextField id="gpa" fullWidth label="CGPA" type='number' {...CGPA} inputProps={{ inputProps: { min: 1, max: 4 } }} variant="outlined" required />
+                                <Tooltip title={ getSafe(()=>instruction.cgpa.clause1) } arrow>
+                                    <TextField id="gpa" fullWidth label="CGPA" type='number'  value={CGPA} onChange={(e)=>{set_CGPA(e.target.value)}} inputProps={{ inputProps: { min: 1, max: 4 } }} variant="filled" required />
                                 </Tooltip>
                             </Grid>
 
@@ -179,42 +220,50 @@ function ProfileData(props) {
                                         views={['year', 'month', 'day']}
                                         value={DOB}
                                         onChange={(newValue) => {
-                                            setDOB(Date.parse(newValue));
+                                            
+                                            const birthday = new Date(newValue);
+                                            // const date  = birthday.getDate();
+                                            // const Month = birthday.getMonth()+1;
+                                            // const year  = birthday.getFullYear()
+                                            // console.log(`${date}-${Month}-${year}`)
+                                            // setDOB(`${date}-${Month}-${year}`);
+                                            console.log(birthday.toISOString())
+                                            setDOB(birthday.toISOString());
                                         }}
-                                        renderInput={(params) => <TextField {...params} />}
+                                        renderInput={(params) => <TextField {...params} variant="filled" />}
                                     />
                                 </LocalizationProvider>
                             </Grid>
                             <Grid item lg={4} xs={12}>
-                                <TextField id="gender" fullWidth label="Gender" {...gender} variant="outlined" required select>
+                                <TextField id="gender" fullWidth label="Gender" value={gender} onChange={(e)=>{set_gender(e.target.value)}} variant="filled" required select>
                                     <MenuItem key="male"    value="M">Male</MenuItem>
                                     <MenuItem key="female"  value="F">Female</MenuItem>
                                 </TextField>
                             </Grid>
                             <Grid item lg={12} xs={12}>
-                                <Tooltip title={instruction.address.clause1} arrow>
-                                    <TextField id="address" {...address} fullWidth label="Address" type="text" variant="outlined" required />
+                                <Tooltip title={getSafe(()=>instruction.address.clause1)} arrow>
+                                    <TextField id="address"  value={address} onChange={(e)=>{set_address(e.target.value)}}  fullWidth label="Address" type="text" variant="filled" required />
                                 </Tooltip>
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title= { instruction.github.clause1} arrow>
-                                    <TextField id="github" fullWidth label="Github" {...github} type="text" variant="outlined" placeholder=" e.g., 'https://github.com/waqarshaiiikh' " required />
+                                <Tooltip title= { getSafe(()=>instruction.github.clause1)} arrow>
+                                    <TextField id="github" fullWidth label="Github"  value={github} onChange={(e)=>{set_github(e.target.value)}}  type="text" variant="filled" placeholder=" e.g., 'https://github.com/waqarshaiiikh' " required />
                                 </Tooltip>
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title= { instruction.linkedin.clause1} arrow>
-                                    <TextField id="linkedin" fullWidth label="Linked In"  {...linkedin} type="text" variant="outlined" placeholder = " e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' " required />
+                                <Tooltip title= { getSafe(()=>instruction.linkedin.clause1)} arrow>
+                                    <TextField id="linkedin" fullWidth label="Linked In" value={linkedin} onChange={(e)=>{set_linkedin(e.target.value)}}  type="text" variant="filled" placeholder = " e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' " required />
                                 </Tooltip>
                             </Grid>
 
                             
                             <Grid item lg={12} xs={12}>
-                            <Tooltip title= { instruction.aboutUs.clause1} arrow>
+                            <Tooltip title= { getSafe(()=>instruction.aboutUs.clause1)} arrow>
 
                                 <TextareaAutosize
                                     id="about"
                                     maxRows={5}
-                                    {...aboutUs}
+                                    value={aboutUs} onChange={(e)=>{set_aboutUs(e.target.value)}} 
                                     required
                                     style={{ width: '100%', padding: '10px' }}
                                     placeholder="Write About yourself with in 200 words"
@@ -245,11 +294,32 @@ function ProfileData(props) {
 
 function SkillData(props) {
 
-    const [newSkill, addNewSkill] = useState([]);
+    const [skill_update, skill_updation] = useState([]);
+    const [options, setOptions] = useState([]);
+    const [stdSkill, setStdSkill] = useState([]);
+
+
+    useEffect(() => {
+        const getProfileData = async () => {
+
+            //getting data from basicInfo Class
+            const skillInstance = await (await Data.skill);
+            const student_skills = await skillInstance.client;
+            const skillOptions = await skillInstance.options;
+            setStdSkill(student_skills);
+            setOptions(skillOptions);
+
+        }
+        getProfileData();
+    });
+    
    
     const saveSkill = () =>{
-       Data.skill.client = newSkill;
-       props.handleClose();
+     (Data.skill).then((skill)=>{
+         skill.client = skill_update ;
+         skill_updation([{tittle: "random"}]);
+         props.handleClose();
+     });
     }
 
     return (
@@ -283,14 +353,14 @@ function SkillData(props) {
                                     
                                     multiple
                                     id = "checkboxes-tags-demo"
-                                    options={Data.skill.options}
+                                    options={options}
                                     disableCloseOnSelect
                                     getOptionLabel={(option) => option.title}
                                     isOptionEqualToValue={(option, value) => option.title === value.title}
-                                    defaultValue={Data.skill.client}
+                                    defaultValue={stdSkill}
                                     
                                     onChange={(event, values) => {
-                                        addNewSkill(values);
+                                        skill_updation(values);
                                     }}
 
                                     style={{ width: 'inherit' }}
@@ -335,39 +405,61 @@ function ExperienceData(props) {
 
     function removeExperience(){
         
-        Data.experience.remove({companyName , startDate, endDate, jobRole, Description});
-        props.handleClose();
+        (Data.experience).then((exp)=>{
+            exp.remove ({ 
+                eid,
+                companyName: companyField.value, 
+                startDate:  duration[0],
+                endDate:    duration[1], 
+                jobRole: jobField.value, 
+                Description: DesField.value
+            });
+            props.handleClose();
+
+        });
+
 
     }
     
     function addExperience() {
 
-        Data.experience.client = { 
-            companyName: companyField.value, 
-            startDate:  `${duration[0].getDate()}/${duration[0].getMonth()}/${duration[0].getFullYear()}`,
-            endDate:    `${duration[1].getDate()}/${duration[1].getMonth()}/${duration[1].getFullYear()}`, 
-            jobRole: jobField.value, 
-            Description: DesField.value
-        };
-
-        props.handleClose();
+        // console.log({ companyName: companyField.value, startDate: duration[0], endDate: duration[1], jobRole: jobField.value, Description: DesField.value })
+        
+        (Data.experience).then((exp)=>{
+            exp.client ={ 
+                companyName: companyField.value, 
+                startDate:  duration[0],
+                endDate:    duration[1], 
+                jobRole: jobField.value, 
+                Description: DesField.value
+            };
+    
+            props.handleClose();
+        });
     }
 
     function updateExperience() {
        
-        const exp = { 
-            eid,
-            companyName: companyField.value, 
-            startDate:  `${duration[0]}`   ,
-            endDate:    `${duration[1]}`   , 
-            jobRole:     jobField.value    , 
-            Description: DesField.value
-        };
+        (Data.experience).then((exp)=>{
+            exp.modify ({ 
+                eid,
+                companyName: companyField.value, 
+                startDate:  duration[0],
+                endDate:    duration[1], 
+                jobRole: jobField.value, 
+                Description: DesField.value
+            });
+            props.handleClose();
 
-        Data.experience.modify(exp);
-        props.handleClose();
+        });
+       
     }
 
+    // const onSubmit = data => console.log(data);
+    const onSubmit = (e) => { 
+        e.preventDefault();
+        status === "Update" ? updateExperience() : addExperience() 
+    }
 
     return (
         <>
@@ -375,6 +467,7 @@ function ExperienceData(props) {
                 open={open}
                 onClose={handleClose}
             >
+                
                 <Box sx={skillStyle}>
                     <IconButton
                         aria-label="close"
@@ -391,20 +484,22 @@ function ExperienceData(props) {
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
                         {`${status}  Experience`} <WorkIcon />
                     </Typography>
-                    <FormControl>
+                    <form onSubmit={onSubmit}>
                         <Grid container spacing={1}>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="company" fullWidth label="Company Name" {...companyField} type="text" variant="outlined" required />
+                                <TextField required fullWidth label="Company Name" {...companyField} type="text"  inputProps={{ maxLength: 30 , minLength: 3  }} variant="filled" />
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="role" fullWidth label="Job Role" {...jobField} type="text" variant="outlined" required />
+                                <TextField required fullWidth label="Job Role" {...jobField} type="text" inputProps={{ maxLength: 30, minLength: 3 }}variant="filled" />
                             </Grid>
+                          
                             <Grid item lg={12} xs={12}>
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DateRangePicker
+                                    <DateRangePicker            
+                                        disableFuture
                                         startText="Start Date"
-                                        inputFormat = 'dd/MM/yyyy'
-                                        endText="End Date"                                      
+                                        inputFormat='dd/MM/yyyy'
+                                        endText="End Date"
                                         views={['day', 'month', 'year']}
                                         value={duration}
                                         onChange={(value) => {
@@ -412,9 +507,17 @@ function ExperienceData(props) {
                                         }}
                                         renderInput={(startProps, endProps) => (
                                             <React.Fragment>
-                                                <TextField {...startProps} />
-                                                <Box sx={{ mx: 2 }}> to </Box>
-                                                <TextField {...endProps} />
+                                            <Grid item lg={5} xs={12}>
+                                                <TextField fullWidth {...startProps} required variant="filled"/>
+                                            </Grid>
+                                            <Grid item lg={2} sx={{ textAlign:'center'}} xs={12} >
+                                                {/* <Typography sx={{ textAlign:'center' }}> TO </Typography> */}
+                                                <Typography > TO </Typography>
+                                            </Grid>
+                                            <Grid item lg={5} xs={12}>
+                                                <TextField fullWidth {...endProps} required variant="filled"/>
+                                            </Grid>
+
                                             </React.Fragment>
                                         )}
                                     />
@@ -422,31 +525,35 @@ function ExperienceData(props) {
                             </Grid>
 
                             <Grid item lg={12} xs={12}>
-                                <TextareaAutosize
-                                    id="about"
-                                    maxRows = {5}
+                                <TextField
+                                    multiline
+                                    fullWidth
+                                    label="Job Description"
                                     required
+                                    inputProps={{
+                                        maxLength: 200,
+                                        minLength: 20
+                                    }}
+                                    variant="filled"
                                     {...DesField}
-                                    style={{ width: '100%', padding: '10px' }}
-                                    placeholder = "Write Description About your Job in 200 words"
+                                    // style={{ width: '100%', padding: '10px' }}
+                                    placeholder="Write Description About your Job in 200 words"
                                 />
                             </Grid>
 
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                            
-                                { status === "Update" && <Button variant="contained" onClick={removeExperience} style={{ marginRight: "10px" }} > Remove</Button>}
-                                <Button variant="contained" onClick={()=>{ status === "Update" ? updateExperience() :addExperience()  }}> {`${status}`}</Button>
-                                
+                                {status === "Update" && <Button variant="contained" onClick={removeExperience} style={{ marginRight: "10px" }} > Remove</Button>}
+                                {/* <input type="submit" label={`${status}`} variant="contained" onClick={() => { status === "Update" ? updateExperience() : addExperience() }}> {`${status}`}</input> */}
+                                <Button type="submit" label={`${status}`} variant="contained"> {`${status}`}</Button>
+                                {/* <Input type="submit" label={`${status}`} variant="contained" />  */}
                             </Grid>
-
                         </Grid>
-                    </FormControl>
+                        </form> 
                 </Box>
             </Modal>
         </>
     )
 }
-
 
 
 const useFormInput = initialValue => {
@@ -460,6 +567,7 @@ const useFormInput = initialValue => {
         onChange: handleChange
     }
 }
+
 
 
 export { ProfileData, SkillData, ExperienceData }

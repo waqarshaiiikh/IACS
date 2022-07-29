@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
-// import apiCAll from '../integration/apiCall';
 const {apiCAll}= require('../integration/apiCall');
+const { Api } = require('../integration/apiCall');
+// import apiCAll from '../integration/apiCall';
+const Data = Api.getApi();
 
 const useStyles = makeStyles({
   navbar: {
@@ -36,6 +38,34 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const classes = useStyles();
+  const [ username       , updateUsername       ] = React.useState("Loading...");
+  const [ url            , setUrl               ] = React.useState();
+
+
+  // const imageURL = Data.picture.url;
+  // const username = Data.profile.username;
+
+  React.useEffect(() => {
+    const getProfileData = async () => {
+
+      //getting data from basicInfo Class
+      // const basicInfo = await profileInstance.client;
+      // update_university(basicInfo.university)
+      // update_aboutUs(basicInfo.aboutUs)
+      // const departmentName = await profileInstance.departmentName;
+      // UpdatedepartmentName(departmentName || 'loading ...');
+      
+      
+      //getting data from picture class and profile class 
+      const profileInstance = await (await Data.profile);
+      const username = (await profileInstance.username);
+      updateUsername(username || "loading...");
+      const picURL = await (await Data.picture).url;
+      setUrl(picURL);
+
+    }
+    getProfileData();
+  }, []);
 
 
   const navigate = useNavigate();
@@ -196,7 +226,10 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+
+                <Avatar alt={username[0]} src={url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{username[0]}</Avatar> 
+        
+
               </IconButton>
             </Tooltip>
             <Menu

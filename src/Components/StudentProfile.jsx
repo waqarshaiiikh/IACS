@@ -1,27 +1,20 @@
-import React, { useState } from 'react'
-import { Container, Grid, Box, Typography, Button, Chip,Avatar, IconButton, Badge } from '@mui/material';
-import {ProfileData, ExperienceData, SkillData} from "./ProfileData"
+import React, { useEffect, useState } from 'react'
+import { Container, Grid, Box, Typography, Button, Chip, Avatar, IconButton, Badge } from '@mui/material';
+import { ProfileData, ExperienceData, SkillData } from "./ProfileData"
 import EditIcon from '@mui/icons-material/Edit';
+import { DateRangePicker, LocalizationProvider } from '@mui/lab/';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { makeStyles } from '@material-ui/styles';
 import { styled } from '@material-ui/styles';
 import Navbar from "./Navbar";
-// import std from "../Images/IMG_20191029_175656.JPG"
-
+const { Api } = require('../integration/apiCall');
 
 const Input = styled('input')({
     display: 'none',
 });
 
-
-const { Api } = require('../integration/apiCall');
 const Data = Api.getApi();
-
-
-let haveSkills     ;
-let haveExperience ;
-let basicInfo;
-
 
 const useStyles = makeStyles({
     typography: {
@@ -57,46 +50,86 @@ const useStyles = makeStyles({
     },
 })
 
-const getData=()=>{
-    haveSkills       =  Data.skill.client      ;
-    haveExperience   =  Data.experience.client ;
-    basicInfo        =  Data.profile.client    ;
-}
+// let basicInfo       ;
+// let username        = "loading";
+// let departmentName  = "loading...";
+
+
+
+
+// const getData = async () => {
+
+    // haveSkills = Data.skill.client;
+    // haveExperience = Data.experience.client;
+    // basicInfo      = Data.profile.client;
+    // username       = Data.profile.username;
+    // departmentName = Data.profile.departmentName;
+
+// }
 
 
 const StudentProfile = () => {
-    getData();
-
+    
+    const [ departmentName , UpdatedepartmentName ] = useState("Loading...");
+    const [ username       , updateUsername       ] = useState("Loading...");
+    const [ university     , update_university    ] = useState("Loading...");
+    const [ aboutUs        , update_aboutUs       ] = useState("Loading...");
+    const [ url            , setUrl               ] = useState();
+    const [ haveSkills     , update_haveSkills    ] = useState();
+    const [ haveExperience , update_haveExperience] = useState();
+    
     const classes = useStyles();
 
     // Open Update Profile Form
     const [profile, setProfile] = useState(false);
-    const openProfile = () => setProfile(true);
+    const openProfile  = () => setProfile(true) ;
     const closeProfile = () => setProfile(false);
-
+    
     // Open Experience Form
     const [experience, setExperience] = useState(false);
     const [experienceField, setExperienceField] = useState({});
     const openExperience = (obj) => { setExperienceField(obj); setExperience(true); };
     const closeExperience = () => setExperience(false);
-
+    
     // Open Skills Form
     const [skill, setSkill] = useState(false);
     const openSkill = () => setSkill(true);
     const closeSkill = () => setSkill(false);
-
     
-
-    const fd = new  FormData();
-    const [url, setUrl] = useState(null);
     
-
-    const imageUploadHandler = event =>{
-        fd.append('image', event.target.files[0], event.target.files[0].name );
-        setUrl( URL.createObjectURL(event.target.files[0])) 
-        
+    const imageUploadHandler = event => {
+        const picture =  URL.createObjectURL(event.target.files[0]);
+        setUrl(picture);
     }
-    
+
+    useEffect(() => {
+        const getProfileData = async () => {
+            
+            //getting data from basicInfo Class
+            const profileInstance = await (await Data.profile);
+            const basicInfo = await profileInstance.client;
+            update_university(basicInfo.university)
+            update_aboutUs(basicInfo.aboutUs)
+            const username = (await profileInstance.username);
+            updateUsername(username || "loading...");
+            const departmentName = await profileInstance.departmentName;
+            UpdatedepartmentName(departmentName || 'loading ...');
+            (Data.skill).then((skill)=>{
+                (skill.client).then(skills=>update_haveSkills(skills));
+            });
+             (Data.experience).then((exp)=>{
+                (exp.client).then(exp=>update_haveExperience(exp));
+            });
+
+
+            //getting data from picture class
+            const picURL = await (await Data.picture).url;
+            setUrl(picURL);
+
+        }
+        getProfileData();
+    }, []);
+
     return (
         <>
             <Navbar />
@@ -125,30 +158,27 @@ const StudentProfile = () => {
                                             <label htmlFor="icon-button-file">
                                                 <Input accept="image/*" onChange={imageUploadHandler} id="icon-button-file" type="file" />
                                                 <IconButton aria-label="upload picture" component="span" variant="outlined">
-                                                    <Avatar sx={{ bgcolor: 'rgb(216, 218, 223)'}}>
+                                                    <Avatar sx={{ bgcolor: 'rgb(216, 218, 223)' }}>
                                                         <CameraAltIcon sx={{ color: 'rgb(28, 29, 33)' }} />
                                                     </Avatar>
                                                 </IconButton>
                                             </label>
                                         }
                                     >
-                                        <Avatar
-                                            alt={basicInfo.username}
-                                            src={url}
-                                            sx={{ width: 170, height: 170 }}
-                                        />
+
+                                        <Avatar alt={username[0]} src={ url} sx={{ width: 170, height: 170, bgcolor: 'rgb(66, 182, 238)' }}>{username[0]}
+                                        </Avatar>
+
                                     </Badge>
 
-
-
                                     <Typography variant='h6' className={classes.typography}>
-                                        {basicInfo.username}
+                                        {username}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
-                                        {basicInfo.departmentName}
+                                        {departmentName}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
-                                        {basicInfo.university}
+                                        {university}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
                                         <Button variant="contained" sx={{ marginTop: '10px' }} onClick={openProfile}>Update Profile</Button>
@@ -171,8 +201,10 @@ const StudentProfile = () => {
                                     </Typography>
                                 </Grid>
                                 <Grid item lg={12} >
-                                    <Typography variant='p' className={classes.about} >
-                                        {basicInfo.aboutUs}
+                                    <Typography variantMapping='p' className={classes.about} >
+                                        <br />
+                                        {aboutUs}
+                                        <br />
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -189,9 +221,9 @@ const StudentProfile = () => {
                                 <Grid container>
                                     {
                                         haveSkills && haveSkills.map((skill, i) => (
-                                            <Grid item>
-                                                <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />
-                                            </Grid>))
+                                        <Grid item>
+                                            <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />
+                                        </Grid>))
                                     }
                                 </Grid>
                             </Grid>
@@ -225,9 +257,28 @@ const StudentProfile = () => {
                                             <Typography variant='h6' className={classes.experience}>
                                                 {Experience.jobRole}
                                             </Typography>
-                                            <Typography className={classes.experience}>
-                                                {Experience.startDate} to {Experience.endDate}
-                                            </Typography>
+                                            <LocalizationProvider
+                                                dateAdapter={AdapterDateFns}
+                                            >
+                                                <DateRangePicker
+                                                    disabled
+                                                    value={[Experience.startDate, Experience.endDate]}
+                                                    renderInput={(startProps, endProps) => {
+                                                        return  (
+                                                        <React.Fragment>
+                                                                <Typography className={classes.experience}>
+                                                                    {startProps.inputProps.value}  
+                                                                </Typography>
+                                                                <Box sx={{ mx: 1 }}> to </Box>
+                                                                <Typography className={classes.experience}>
+                                                                    {endProps.inputProps.value}  
+                                                                </Typography>
+                                                        </React.Fragment>
+                                                    )
+                                                }}
+                                                />
+                                            </LocalizationProvider>
+
                                             <Typography variant='p'>
                                                 {Experience.Description}
                                             </Typography>
