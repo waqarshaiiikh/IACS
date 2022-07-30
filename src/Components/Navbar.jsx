@@ -3,10 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
-const {apiCAll}= require('../integration/apiCall');
-const { Api } = require('../integration/apiCall');
-// import apiCAll from '../integration/apiCall';
-const Data = Api.getApi();
+import { useContext , useState} from 'react';
+import noteContext from '../context/notes/noteContext';
+
+
+const { apiCAll}= require('../integration/apiCall');
+
+// const Data = Api.getApi();
 
 const useStyles = makeStyles({
   navbar: {
@@ -35,37 +38,13 @@ const useStyles = makeStyles({
 });
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  
+  
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const classes = useStyles();
-  const [ username       , updateUsername       ] = React.useState("Loading...");
-  const [ url            , setUrl               ] = React.useState();
-
-
-  // const imageURL = Data.picture.url;
-  // const username = Data.profile.username;
-
-  React.useEffect(() => {
-    const getProfileData = async () => {
-
-      //getting data from basicInfo Class
-      // const basicInfo = await profileInstance.client;
-      // update_university(basicInfo.university)
-      // update_aboutUs(basicInfo.aboutUs)
-      // const departmentName = await profileInstance.departmentName;
-      // UpdatedepartmentName(departmentName || 'loading ...');
-      
-      
-      //getting data from picture class and profile class 
-      const profileInstance = await (await Data.profile);
-      const username = (await profileInstance.username);
-      updateUsername(username || "loading...");
-      const picURL = await (await Data.picture).url;
-      setUrl(picURL);
-
-    }
-    getProfileData();
-  }, []);
+  const a = useContext(noteContext)
 
 
   const navigate = useNavigate();
@@ -99,18 +78,18 @@ const Navbar = () => {
     })
   };
 
-  const logoutAllfun = () => {
-    setAnchorElUser(null);
-    apiCAll('/api/logout/all','get')
-    .then((res)=>{
-      if(res.status>=200 && res.status<=299 ){
-        navigate('signin'); 
-      }
-      else{
-        console.log("something went wrong");
-      }
-    })
-  };
+  // const logoutAllfun = () => {
+  //   setAnchorElUser(null);
+  //   apiCAll('/api/logout/all','get')
+  //   .then((res)=>{
+  //     if(res.status>=200 && res.status<=299 ){
+  //       navigate('signin'); 
+  //     }
+  //     else{
+  //       console.log("something went wrong");
+  //     }
+  //   })
+  // };
 
   return (
     <AppBar className={classes.navbar}  >
@@ -227,7 +206,7 @@ const Navbar = () => {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 
-                <Avatar alt={username[0]} src={url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{username[0]}</Avatar> 
+                <Avatar alt={a.username[0]} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a.username[0]}</Avatar> 
         
 
               </IconButton>

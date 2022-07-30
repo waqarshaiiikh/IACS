@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState , useContext} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { FormControl, TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-// import apiCAll from '../integration/apiCall';
-const {apiCAll}= require('../integration/apiCall');
+import noteContext from '../context/notes/noteContext';
+const { apiCAll } = require('../integration/apiCall');
+
 
 const useStyles = makeStyles({
     button: {
@@ -28,15 +29,21 @@ const StudentSignIn = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    const a = useContext(noteContext)
+
+
+
     // handle button click of login form
     const handleLogin = async () => {
+        
         setError(null);
         setLoading(true);
 
         const reqData = { email: email.value, password: password.value , clientName: "student"};
         
-        apiCAll(`/api/login`,'post', reqData )
-        .then(response => {
+        await apiCAll(`/api/login`,'post', reqData )
+        .then(async response => {
+            await a.gettingData();
             setLoading(false);
             navigate('/'); 
         })
@@ -44,7 +51,7 @@ const StudentSignIn = () => {
             setLoading(false);
                 try{
                     if(error.response.status>=400 || error.response.status<= 499 )
-                        setError("Invalid Cridential");
+                    setError("Invalid Cridential");
                 }
                 catch{
                     setError("Something went wrong. Please try again later.")

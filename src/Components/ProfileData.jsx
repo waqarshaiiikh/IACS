@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import { Box, Typography, Modal, Grid, Button, TextField, MenuItem , TextareaAutosize, FormControl, Checkbox, Tooltip } from '@mui/material/';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {DatePicker, DateRangePicker, LocalizationProvider } from '@mui/lab/';
@@ -12,7 +12,8 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect } from 'react';
-import { border, textAlign } from '@material-ui/system';
+import noteContext from '../context/notes/noteContext';
+
 
 
 const { Api } = require('../integration/apiCall');
@@ -57,45 +58,36 @@ function getSafe(fn, defaultVal="loading...") {
 }
 
 function ProfileData(props) {
-    // let basicInfo  ;
 
-    const [ DOB          , setDOB]           = useState( null   );
-    const [ phoneNumber  , set_phoneNumber ] = useState( "+92"  );
-    const [ enrollment   , set_enrollment  ] = useState( "NED/" );
-    const [ department   , set_department  ] = useState( ""     );
-    const [ year         , set_year        ] = useState( ""     );
-    const [ semester     , set_semester    ] = useState( ""     );
-    const [ CGPA         , set_CGPA        ] = useState( ""     );
-    const [ gender       , set_gender      ] = useState( ""     );
-    const [ address      , set_address     ] = useState( ""     );
-    const [ github       , set_github      ] = useState( ""     );
-    const [ linkedin     , set_linkedin    ] = useState( ""     );
-    const [ aboutUs      , set_aboutUs     ] = useState( ""     );
+    const a = useContext(noteContext)
 
-    const [instruction, set_instruction] = useState( );
+    const [ DOB          , setDOB]           = useState( a.DOB          );
+    const [ phoneNumber  , set_phoneNumber ] = useState( a.phoneNumber  );
+    const [ enrollment   , set_enrollment  ] = useState( a.enrollment   );
+    const [ department   , set_department  ] = useState( a.department   );
+    const [ year         , set_year        ] = useState( a.year         );
+    const [ semester     , set_semester    ] = useState( a.semester     );
+    const [ CGPA         , set_CGPA        ] = useState( a.CGPA         );
+    const [ gender       , set_gender      ] = useState( a.gender       );
+    const [ address      , set_address     ] = useState( a.address      );
+    const [ github       , set_github      ] = useState( a.github       );
+    const [ linkedin     , set_linkedin    ] = useState( a.linkedin     );
+    const [ aboutUs      , set_aboutUs     ] = useState( a.aboutUs      );
 
-    useEffect(()=>{
-        const  getProfileData = async ()=>{
-            const   profileData   = await Data.profile;
-            let     basicInfo     = await profileData.client;
-            const   instruction1  = await profileData.instruction;
-            set_instruction(instruction1)
-
-            setDOB          (basicInfo.DOB)
-            set_phoneNumber (basicInfo.phoneNumber)
-            set_enrollment  (basicInfo.enrollment)
-            set_department  (basicInfo.department)
-            set_year        (basicInfo.year)
-            set_semester    (basicInfo.semester)
-            set_CGPA        (basicInfo.CGPA)
-            set_gender      (basicInfo.gender)
-            set_address     (basicInfo.address)
-            set_github      (basicInfo.github)
-            set_linkedin    (basicInfo.linkedin)
-            set_aboutUs     (basicInfo.aboutUs)
-        }
-        getProfileData();
-    },[])
+    useEffect(()=>{        
+            setDOB          (a.DOB)
+            set_phoneNumber (a.phoneNumber)
+            set_enrollment  (a.enrollment)
+            set_department  (a.department)
+            set_year        (a.year)
+            set_semester    (a.semester)
+            set_CGPA        (a.CGPA)
+            set_gender      (a.gender)
+            set_address     (a.address)
+            set_github      (a.github)
+            set_linkedin    (a.linkedin)
+            set_aboutUs     (a.aboutUs)
+    },[a])
         
 
     const [error, setError] = useState(null);
@@ -121,8 +113,12 @@ function ProfileData(props) {
                     error => {
                         const errorData = error;
                         setError(errorData);
-                        if (errorData === null)
-                            props.handleClose();
+                        if (errorData === null){
+                            a.gettingBasicData().then(()=>{
+                                props.handleClose();
+                            }
+                            )
+                        }
                     }
                 );
 
@@ -144,13 +140,13 @@ function ProfileData(props) {
                         <Grid container spacing={1}>
 
                             <Grid item lg={6} xs={12}>
-                            <Tooltip  title={getSafe(()=>instruction.phoneNumber.clause1)} arrow>
+                            <Tooltip  title={getSafe(()=>a.instruction.phoneNumber.clause1)} arrow>
                                 <TextField id="phoneNumber" variant="filled" fullWidth  label="Phone No" value={phoneNumber} onChange={(e)=>{set_phoneNumber(e.target.value)}} type='tel'  required />
                             </Tooltip>
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title={getSafe(()=>instruction.enrollment.clause1)} arrow>
+                                <Tooltip title={getSafe(()=>a.instruction.enrollment.clause1)} arrow>
                                     <TextField id="enrollnment" fullWidth label="Enrollnment No" value={enrollment} onChange={(e)=>{set_enrollment(e.target.value)}} type='text' variant="filled" required />
                                 </Tooltip>
                             </Grid>
@@ -204,7 +200,7 @@ function ProfileData(props) {
                             </Grid>
 
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title={ getSafe(()=>instruction.cgpa.clause1) } arrow>
+                                <Tooltip title={ getSafe(()=>a.instruction.cgpa.clause1) } arrow>
                                     <TextField id="gpa" fullWidth label="CGPA" type='number'  value={CGPA} onChange={(e)=>{set_CGPA(e.target.value)}} inputProps={{ inputProps: { min: 1, max: 4 } }} variant="filled" required />
                                 </Tooltip>
                             </Grid>
@@ -241,24 +237,24 @@ function ProfileData(props) {
                                 </TextField>
                             </Grid>
                             <Grid item lg={12} xs={12}>
-                                <Tooltip title={getSafe(()=>instruction.address.clause1)} arrow>
+                                <Tooltip title={getSafe(()=>a.instruction.address.clause1)} arrow>
                                     <TextField id="address"  value={address} onChange={(e)=>{set_address(e.target.value)}}  fullWidth label="Address" type="text" variant="filled" required />
                                 </Tooltip>
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title= { getSafe(()=>instruction.github.clause1)} arrow>
+                                <Tooltip title= { getSafe(()=>a.instruction.github.clause1)} arrow>
                                     <TextField id="github" fullWidth label="Github"  value={github} onChange={(e)=>{set_github(e.target.value)}}  type="text" variant="filled" placeholder=" e.g., 'https://github.com/waqarshaiiikh' " required />
                                 </Tooltip>
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <Tooltip title= { getSafe(()=>instruction.linkedin.clause1)} arrow>
+                                <Tooltip title= { getSafe(()=>a.instruction.linkedin.clause1)} arrow>
                                     <TextField id="linkedin" fullWidth label="Linked In" value={linkedin} onChange={(e)=>{set_linkedin(e.target.value)}}  type="text" variant="filled" placeholder = " e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' " required />
                                 </Tooltip>
                             </Grid>
 
                             
                             <Grid item lg={12} xs={12}>
-                            <Tooltip title= { getSafe(()=>instruction.aboutUs.clause1)} arrow>
+                            <Tooltip title= { getSafe(()=>a.instruction.aboutUs.clause1)} arrow>
 
                                 <TextareaAutosize
                                     id="about"
@@ -295,30 +291,17 @@ function ProfileData(props) {
 function SkillData(props) {
 
     const [skill_update, skill_updation] = useState([]);
-    const [options, setOptions] = useState([]);
-    const [stdSkill, setStdSkill] = useState([]);
-
-
-    useEffect(() => {
-        const getProfileData = async () => {
-
-            //getting data from basicInfo Class
-            const skillInstance = await (await Data.skill);
-            const student_skills = await skillInstance.client;
-            const skillOptions = await skillInstance.options;
-            setStdSkill(student_skills);
-            setOptions(skillOptions);
-
-        }
-        getProfileData();
-    });
     
-   
+    const a = useContext(noteContext)
+
     const saveSkill = () =>{
      (Data.skill).then((skill)=>{
-         skill.client = skill_update ;
-         skill_updation([{tittle: "random"}]);
-         props.handleClose();
+         skill.setClient(skill_update).then((check)=>{
+            if(check){
+                a.gettingSkillData().then(()=>props.handleClose())
+                skill_updation([{tittle: "random"}]);
+            }
+         });
      });
     }
 
@@ -353,11 +336,11 @@ function SkillData(props) {
                                     
                                     multiple
                                     id = "checkboxes-tags-demo"
-                                    options={options}
+                                    options={a.options}
                                     disableCloseOnSelect
                                     getOptionLabel={(option) => option.title}
                                     isOptionEqualToValue={(option, value) => option.title === value.title}
-                                    defaultValue={stdSkill}
+                                    defaultValue={a.haveSkills}
                                     
                                     onChange={(event, values) => {
                                         skill_updation(values);
@@ -402,6 +385,7 @@ function ExperienceData(props) {
     const jobField     = useFormInput(jobRole);
     const DesField     = useFormInput(Description);
     
+    const a = useContext(noteContext)
 
     function removeExperience(){
         
@@ -413,8 +397,16 @@ function ExperienceData(props) {
                 endDate:    duration[1], 
                 jobRole: jobField.value, 
                 Description: DesField.value
+            }).then((check)=>{
+                if(check === true )
+                {
+                    a.gettingExperienceData().then(() => props.handleClose())
+                }else{
+                    // props.handleClose()
+                }  
+                    
+            
             });
-            props.handleClose();
 
         });
 
@@ -426,15 +418,23 @@ function ExperienceData(props) {
         // console.log({ companyName: companyField.value, startDate: duration[0], endDate: duration[1], jobRole: jobField.value, Description: DesField.value })
         
         (Data.experience).then((exp)=>{
-            exp.client ={ 
+            exp.addExperience ({ 
                 companyName: companyField.value, 
                 startDate:  duration[0],
                 endDate:    duration[1], 
                 jobRole: jobField.value, 
                 Description: DesField.value
-            };
+            }).then((check)=>{
+                if(check )
+                {
+                    a.gettingExperienceData().then(() => props.handleClose())
+                }else{
+                    props.handleClose()
+                }  
+                    
+            
+            });
     
-            props.handleClose();
         });
     }
 
@@ -448,8 +448,15 @@ function ExperienceData(props) {
                 endDate:    duration[1], 
                 jobRole: jobField.value, 
                 Description: DesField.value
+            }).then((check)=>{
+                console.log(check)
+                if(check )
+                {
+                    a.gettingExperienceData().then(() => props.handleClose())
+                }else{
+                    props.handleClose()
+                }  
             });
-            props.handleClose();
 
         });
        
