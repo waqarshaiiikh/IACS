@@ -11,7 +11,7 @@ class picture {
     static #instance = state.empty;
     #name     = "image";
     #fd       = state.empty  ;
-    #url      = state.empty  ;
+    #url      = JSON.parse(localStorage.getItem('picture')) || state.empty  ;
     
     #syncCounter  = 900000;
     #lastSync     = state.empty   ; //update  after 15min

@@ -29,7 +29,9 @@ const StudentSignIn = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const a = useContext(noteContext)
+    const a = useContext(noteContext);
+    const gettingData = a.gettingData;
+
 
 
 
@@ -43,7 +45,9 @@ const StudentSignIn = () => {
         
         await apiCAll(`/api/login`,'post', reqData )
         .then(async response => {
-            await a.gettingData();
+            await gettingData();
+            localStorage.setItem('Signin', JSON.stringify(true));
+            a.setSignin(true);
             setLoading(false);
             navigate('/'); 
         })

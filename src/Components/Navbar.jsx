@@ -70,7 +70,10 @@ const Navbar = () => {
     apiCAll('/api/logout','get')
     .then((res)=>{
       if(res.status>=200 && res.status<=299 ){
-        navigate('signin'); 
+        localStorage.clear();
+        // navigate("/")
+        window.location.href = "/";
+
       }
       else{
         console.log("something went wrong");
@@ -151,9 +154,11 @@ const Navbar = () => {
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/stdscholarship">Scholarships</Typography>
               </MenuItem>
+
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/signup">Sign up</Typography>
               </MenuItem>
+
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/signin">Log in</Typography>
               </MenuItem>

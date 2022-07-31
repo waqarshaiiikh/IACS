@@ -7,15 +7,35 @@ const state = { updated: "updated", modified: "modified", empty: null, available
 
 class Profile {
     static #instance = state.empty;
-    #client          = state.empty || "random";
-    #constData       = state.empty;
-    #username        = state.empty;
-    #departmentName  = state.empty;
-    #instruction     = state.empty;
+    #client          = JSON.parse(localStorage.getItem('Profile_client'))    || state.empty ;
+    #constData       = JSON.parse(localStorage.getItem('Profile_constData')) || state.empty ;
+    #instruction     = {
+        enrollment: {
+            clause1: "  Follow this pattern 'NED/XXXX/XXXX' "
+        },
+        phoneNumber: {
+            clause1: "  Follow this pattern +923XXXXXXXXX "
+        },
+        cgpa: {
+            clause1: "  In Between 1 to 4"
+        },
+        address:{
+            clause1: "  Special characters are not allowed. Excepts : , # . /"
+        },
+        github: {
+            clause1: "  e.g., 'https://github.com/waqarshaiiikh' "
+        },
+        linkedin: {
+            clause1: "  e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' "
+        },
+        aboutUs:{
+            clause1: "  Maximum limit is 400 " 
+        }
+    };
 
-    #syncCounter = 900000;
-    #lastSync = state.empty; //update  after 15min
-    #status = state.empty;
+    #syncCounter        = 900000 ;
+    #lastSync =         JSON.parse(localStorage.getItem('Profile_lastSync')) || state.empty ; //update  after 15min
+    #status   =         JSON.parse(localStorage.getItem('Profile_status'))   || state.empty ;
 
     static getProfile() {
         if (this.#instance === null) {
@@ -26,50 +46,30 @@ class Profile {
 
     constructor() {
         return new Promise((resolve,reject) => {
-
             this.UpdateClient()
             .then((check) => {
                 if(check) {
+
                     this.#lastSync = Date.now();
+                    localStorage.setItem('Profile_lastSync', JSON.stringify(this.#lastSync));
                     this.#status = state.updated;
+                    localStorage.setItem('Profile_status', JSON.stringify(this.#status));
+
                 }
-                this.#instruction = {
-                    enrollment: {
-                        clause1: "  Follow this pattern 'NED/XXXX/XXXX' "
-                    },
-                    phoneNumber: {
-                        clause1: "  Follow this pattern +923XXXXXXXXX "
-                    },
-                    cgpa: {
-                        clause1: "  In Between 1 to 4"
-                    },
-                    address:{
-                        clause1: "  Special characters are not allowed. Excepts : , # . /"
-                    },
-                    github: {
-                        clause1: "  e.g., 'https://github.com/waqarshaiiikh' "
-                    },
-                    linkedin: {
-                        clause1: "  e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' "
-                    },
-                    aboutUs:{
-                        clause1: "  Maximum limit is 400 " 
-                    }
-                };
+                
                 resolve(this);
             })
         })
         
     }
 
-    get username(){
-
-        return this.#username;
+    getUsername(basicData){
+        return `${basicData.fname} ${basicData.lname}`;
     }
 
     getDepartmentName(DpN){
-        this.#departmentName = Api.DEPARTMENT[DpN];
-        return this.#departmentName;
+        // this.#departmentName = Api.DEPARTMENT[DpN];
+        return  Api.DEPARTMENT[DpN];
     }
 
     get instruction(){
@@ -78,8 +78,9 @@ class Profile {
 
     get client() {
     //    console.log(this.UpdateClient(), this.#client)
-        this.UpdateClient()
-        return this.#client;
+        return this.UpdateClient().then(()=>{
+            return this.#client;
+        })
 
     }
 
@@ -100,10 +101,14 @@ class Profile {
                 return  apiCAll('/api/user/profile/info', 'post', { basicInfo } ).then(
                     (response) => {
                         if (response.data.isInserted) {
-
                             this.#client = { ...basicInfo };
+                            localStorage.setItem('Profile_client', JSON.stringify(this.#client));
                             this.#status = state.modified;
+                            localStorage.setItem('Profile_status', JSON.stringify(this.#status));
+                            
                             this.#lastSync = this.#lastSync + this.#syncCounter;
+                            localStorage.setItem('Profile_lastSync', JSON.stringify(this.#lastSync));
+
                             return null;
                         }    
                     }
@@ -112,30 +117,11 @@ class Profile {
                 })
             }    
 
-            return new Promise((resolve, reject) => {
-                resolve( error);
-            })
+            return Promise.resolve(error);
 
         } else {
-            return new Promise((resolve, reject) => {
-                resolve( null);
-            })
+            return Promise.resolve(null);
         }
-
-        // if (`${this.#client}` !== `${basicInfo}`) {
-            
-            //     let skills = this.checkChanges(basicInfo);
-            //     /**
-            //      * 
-            //      * update Database
-        //      * 
-        //      */
-        //     let omitedSkill = [];
-        //     skills.forEach((value) => { omitedSkill = (value.status !== state.deleted) ? [{ ...value }, ...omitedSkill] : omitedSkill });
-        //     this.#client = omitedSkill;
-        //     this.#status = state.modified;
-        // }
-        
     }
 
     checkChanges(basicInfo) {
@@ -208,34 +194,19 @@ class Profile {
         if ((this.#status === state.empty && this.#lastSync === state.empty) ||
             (this.#status === state.modified && this.#lastSync + this.#syncCounter <= Date.now())) {
 
-            /**
-            * Api Call
-            * for getting client info
-            * and update the client Data
-            */
+        
+            // getting data in this sequenc
+            // phoneNumber  enrollment   department year   semester  CGPA   DOBgender  address github  linkedin aboutUs  ...this.#constData
 
-            /***
-                     *
-                     * getting data in this sequence
-                     phoneNumber  
-                     enrollment   
-                     department   
-                     year         
-                     semester     
-                     CGPA         
-                     DOB
-                     gender       
-                     address      
-                     github       
-                     linkedin     
-                     aboutUs      
-                     ...this.#constData
-                     */
 
             return  apiCAll('/api/user/profile/info', 'get').then(
                 (basicData) => {
                     this.#status = state.updated;
+                    localStorage.setItem('Profile_status', JSON.stringify(this.#status));
+
                     this.#lastSync = this.#lastSync + this.#syncCounter;
+                    localStorage.setItem('Profile_lastSync', JSON.stringify(this.#lastSync));
+                    
 
                     basicData = basicData.data;
 
@@ -245,8 +216,9 @@ class Profile {
                         email: basicData.email || "",
                         university: basicData.university || "",
                     };
-                    
-                    this.#client = {
+                    localStorage.setItem('Profile_constData', JSON.stringify(this.#constData));
+
+                    const profile =  {
                         phoneNumber: basicData.phoneNumber || "",
                         enrollment: basicData.enrollment || "",
                         department: basicData.department || "",
@@ -262,14 +234,15 @@ class Profile {
                         ...this.#constData
                     };
 
+                    localStorage.setItem('Profile_client', JSON.stringify(profile));
+                    this.#client = profile;
                     
-                    this.#username = `${basicData.fname} ${basicData.lname}`;
                     // this.#departmentName = Api.DEPARTMENT[basicData.department];
                     return true;
                 }
             )
         }
-        return false
+        return Promise.resolve(false);
     }
 
 }

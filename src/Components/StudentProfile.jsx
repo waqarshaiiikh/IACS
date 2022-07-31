@@ -12,7 +12,7 @@ import noteContext from '../context/notes/noteContext';
 
 import MetaData from '../MetaData';
 import "../CSS/Utils.css"
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 // import std from "../Images/student.png"
 // import std from "../Images/IMG_20191029_175656.JPG"
 // const { Api } = require('../integration/apiCall');

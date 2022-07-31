@@ -2,6 +2,7 @@ import axios from 'axios';
 import { picture } from './picture';
 import { Profile } from './Profile';
 import { Skill } from './Skill';
+
 const {Experience}  = require('./Experience');
 
 const state = { updated: "updated", modified: "modified", empty: null, available: "available", deleted: "deleted", deletedAll: "deletedAll", Add: "added" }
@@ -23,12 +24,21 @@ const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
         },{
             requestType: 'stream'
         }
-        );
+        ).catch(e=>{
+            console.log(e);
+            throw e;
+        });
+        
     }
     else if(reqMethod === "get"){
         return await axios[reqMethod](`${Domain}${port}${apiAddress}`
-        , { headers: {  'Content-Type': 'application/json' } }
-        , {withCredentials: true })
+            , { headers: { 'Content-Type': 'application/json' } }
+            , { withCredentials: true }
+        ).catch(e => {
+            console.log({authentication: e.response.data.authentication});
+
+            throw e;
+        });
     }
 }
 

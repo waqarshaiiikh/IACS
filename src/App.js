@@ -9,11 +9,14 @@ function App() {
   const a = useContext(noteContext)
 
         useEffect(() => {
-        const getProfileData = async () => {
-          await a.gettingData();
-        }
-        getProfileData(); 
-        // eslint-disable-next-line
+          if(a.Signin){
+            const getProfileData = async () => {
+              await a.gettingData().catch(e=>console.log(e));
+            }
+            getProfileData(); 
+            // eslint-disable-next-line
+          }
+        
     },[]);
         
   return (

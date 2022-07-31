@@ -3,12 +3,11 @@ import { apiCAll } from './apiCall';
 const state = { updated: "updated", modified: "modified", empty: null, available: "available", deleted: "deleted", deletedAll: "deletedAll", Add: "added" }
 class Skill {
     static #instance = state.empty;
-    #client   = state.empty  ;
-    #options  = state.empty  ;
-
-    #syncCounter  = 15*60*1000;
-    #lastSync = state.empty   ; //update  after 15min
-    #status   = state.empty;
+    #client           = JSON.parse(localStorage.getItem('Skill_client'))  || state.empty  ;
+    #options          = JSON.parse(localStorage.getItem('Skill_options')) || state.empty ; 
+    #syncCounter      = 15*60*1000;
+    #lastSync         = JSON.parse(localStorage.getItem('Skill_lastSync')) || state.empty ; //update  after 15min
+    #status           = JSON.parse(localStorage.getItem('Skill_status')) || state.empty ; 
     
     static getSkill(){
         if(this.#instance===null){
@@ -28,11 +27,15 @@ class Skill {
                         (checked) => {
                             if (checked) {
                                 this.#lastSync = Date.now();
+                                localStorage.setItem('Skill_lastSync', JSON.stringify(this.#lastSync));
+
                                 this.#status = state.updated;
+                                localStorage.setItem('Skill_status', JSON.stringify(this.#status));
+
                                 resolve(this);
                             }
                             else{
-                                reject(false)
+                                resolve(this)
                             }
                         }
                     )
@@ -41,13 +44,16 @@ class Skill {
     }
 
     get options(){
-        this.UpdateOptions();
-        return this.#options;
+        return this.UpdateOptions().then(()=>{
+            return this.#options;
+        });
     }
 
     get client(){
-        this.UpdateClient();
-        return this.#client;
+        
+        return this.UpdateClient().then(()=>{
+            return this.#client;
+        });
         
     }
 
@@ -66,7 +72,11 @@ class Skill {
                             let omitedSkill = [];
                             skills.forEach((value) => { omitedSkill = (value.status !== state.deleted) ? [{ ...value }, ...omitedSkill] : omitedSkill });
                             this.#client = omitedSkill;
+                            localStorage.setItem('Skill_client', JSON.stringify(this.#client));
+
                             this.#status = state.modified;
+                            localStorage.setItem('Skill_status', JSON.stringify(this.#status));
+                            
                             resolve(true)
                         }
                         else{
@@ -117,9 +127,16 @@ class Skill {
             return  apiCAll('/api/user/profile/stdSkills', 'get').then(
                 (skillOptions) => {
                     this.#lastSync = this.#lastSync + this.#syncCounter;
+                    localStorage.setItem('Skill_lastSync', JSON.stringify(this.#lastSync));
+
                     this.#status = state.updated;
+                    localStorage.setItem('Skill_status', JSON.stringify(this.#status));
+
 
                     this.#client = skillOptions.data || [{ tittle: null }];
+                    localStorage.setItem('Skill_client', JSON.stringify(this.#client));
+                    
+
                     // console.log(this.#client);
                     // this.#status = state.updated;
                     // this.#lastSync = this.#lastSync + this.#syncCounter;
@@ -131,7 +148,6 @@ class Skill {
             resolve( false);
         });
     }
-    // console.log((this.#lastSync + this.#syncCounter), Date.now(), this.#lastSync + this.#syncCounter <= Date.now() )
     
     UpdateOptions(){
         
@@ -147,6 +163,8 @@ class Skill {
              return  apiCAll('/api/user/profile/skillOption', 'get').then(
                 (skillOptions) => {
                     this.#options = skillOptions.data || [{ tittle: null }];   
+                    localStorage.setItem('Skill_options', JSON.stringify(this.#options));
+
                     // console.log(skillOptions,this.#options);
                     // this.#status = state.updated;
                     // this.#lastSync = this.#lastSync + this.#syncCounter;

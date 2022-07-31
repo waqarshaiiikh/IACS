@@ -2,16 +2,22 @@ import noteContext from "./noteContext";
 import React, { useState } from "react";
 import { Api } from "../../integration/apiCall";
 
+
+
 const NoteState=(props)=>{
  
-    const LOADING =  "Loading..." ;
-    const [url, setUrl] = useState();
-    const [username, setUsername] = useState( LOADING );
-    const [university, setUniversity] = useState( LOADING );
-    const [departmentName, setDepartmentName] = useState( LOADING );
-    const [haveExperience, setHaveExperience] = useState([]);
-    const [aboutUs, setAboutUs] = useState( LOADING );
-    const [Signin, setSignin] = useState(true);
+    // const  =  "Loading..." ;
+
+    const [url              , setUrl            ] = useState();
+    const [username         , setUsername       ] = useState("");
+    const [university       , setUniversity     ] = useState(  );
+    const [departmentName   , setDepartmentName ] = useState(  );
+    const [haveExperience   , setHaveExperience ] = useState([]);
+    const [aboutUs          , setAboutUs        ] = useState(  );
+    
+    
+    
+    const [Signin, setSignin] = useState(JSON.parse(localStorage.getItem('Signin')));
     const [DATA, setDATA] = useState();
 
     //states used in Profile Data js file
@@ -59,7 +65,6 @@ const NoteState=(props)=>{
 
     const gettingExperienceData =async ()=>{
         const experience = await (await Data.experience).client;
-        console.log(experience)
         setHaveExperience(experience);
     }
 
@@ -67,7 +72,7 @@ const NoteState=(props)=>{
 
         const profileInstance = await (await Data.profile);
         const basicInfo = await profileInstance.client;
-        const username =      (await profileInstance.username);
+        const username =      (await profileInstance.getUsername(basicInfo));
         const departmentName = await profileInstance.getDepartmentName(basicInfo.department);
         const instruction1  = await profileInstance.instruction;
         setUniversity    (basicInfo.university)
@@ -83,7 +88,7 @@ const NoteState=(props)=>{
         set_address      (basicInfo.address)
         set_github       (basicInfo.github)
         set_linkedin     (basicInfo.linkedin)
-        setUsername      (username  ||  LOADING );
+        setUsername      (username  );
         setDepartmentName(departmentName);
         set_instruction  (instruction1)
 
