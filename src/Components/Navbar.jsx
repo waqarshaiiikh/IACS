@@ -81,6 +81,9 @@ const Navbar = () => {
     })
   };
 
+  const handleTo = (link)=>{
+     return a.Signin ? link :"/signin";
+  }
   // const logoutAllfun = () => {
   //   setAnchorElUser(null);
   //   apiCAll('/api/logout/all','get')
@@ -137,82 +140,93 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/softwarehouse" >Software House</Typography>
+                <Typography textAlign="center" component={Link} to={handleTo("/softwarehouse")} > Software House</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdjob" >Jobs</Typography>
+                <Typography textAlign="center" component={Link} to={handleTo("/stdjob")} > Jobs</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdinternship">Internhsips</Typography>
+                <Typography textAlign="center" component={Link} to={handleTo("/stdinternship")}> Internhsips</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdtraining">Trainings</Typography>
+                <Typography textAlign="center" component={Link} to={handleTo("/stdtraining")}> Trainings</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdproject">Projects</Typography>
+                <Typography textAlign="center" component={Link} to={handleTo("/stdproject")}> Projects</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/stdscholarship">Scholarships</Typography>
+                <Typography textAlign="center" component={Link} to={handleTo("/stdscholarship")} >Scholarships</Typography>
               </MenuItem>
+              {!a.Signin &&
 
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/signup">Sign up</Typography>
-              </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" component={Link} to="/signup">Sign up</Typography>
+                </MenuItem>
+              }
+              {!a.Signin &&
 
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/signin">Log in</Typography>
-              </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" component={Link} to="/signin">Log in</Typography>
+                </MenuItem>
+              }
             </Menu>
           </Box>
           <Typography
             variant="h6"
             noWrap
             component={Link} to="/"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, '&:hover': {textDecoration:'none', color : 'white'} }}
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, '&:hover': { textDecoration: 'none', color: 'white' } }}
           >
             <i className='fab fa-typo3' /> IACS
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/softwarehouse">
+              className={classes.button} component={Link} to={handleTo("/softwarehouse")}>
               Software House
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdjob">
+              className={classes.button} component={Link} to={handleTo("/stdjob")}>
               Jobs
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdinternship">
+              className={classes.button} component={Link} to={handleTo("/stdinternship")}>
               Internships
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdtraining">
+              className={classes.button} component={Link} to={handleTo("/stdtraining")}>
               Trainings
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdproject">
+              className={classes.button} component={Link} to={handleTo("/stdproject")}>
               Projects
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/stdscholarship">
+              className={classes.button} component={Link} to={handleTo("/stdscholarship")}>
               Scholarships
             </Button>
-            <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/signup">
-              Sign up
-            </Button>
-            <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/signin">
-              Log in
-            </Button>
+            {!a.Signin &&
+
+              <Button x={{ my: 2, color: 'white', display: 'block' }}
+                className={classes.button} component={Link} to="/signup">
+                Sign up
+              </Button>
+            }
+            {!a.Signin &&
+
+              <Button x={{ my: 2, color: 'white', display: 'block' }}
+                className={classes.button} component={Link} to="/signin">
+                Log in
+              </Button>
+
+            }
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 
-                <Avatar alt={a.username[0]} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a.username[0]}</Avatar> 
-        
+                <Avatar alt={a.username[0]} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a.username[0]}</Avatar>
+
 
               </IconButton>
             </Tooltip>
@@ -233,17 +247,21 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }}  component={Link} to="/stddashboard">Dashboard</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }}  component={Link} to={handleTo("/stddashboard")}>Dashboard</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/studentProfile">Profile</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to={handleTo("/studentProfile")}>Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/studentProfile">Account</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to={handleTo("/studentProfile")}>Account</Typography>
               </MenuItem>
+            {a.Signin &&
+              
               <MenuItem onClick={logoutFunction}>
                 <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/">Logout</Typography>
               </MenuItem>
+              
+            }
             </Menu>
           </Box>
         </Toolbar>

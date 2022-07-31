@@ -87,41 +87,7 @@ const StudentProfile = () => {
         a.setUrl(picture);
     }
 
-    // useEffect(() => {
-    //     a.setDepartmentName(a.departmentName);
-    // }, [a.departmentName])
-    
 
-    // console.log(a.haveExperience)
-    // console.log(a.haveSkills)
-
-    // useEffect(() => {
-    //     const getProfileData = async () => {
-            
-    //         // //getting data from basicInfo Class
-    //         // const profileInstance = await (await Data.profile);
-    //         // const basicInfo = await profileInstance.client;
-    //         // update_university(basicInfo.university)
-    //         // update_aboutUs(basicInfo.aboutUs)
-    //         // const username = (await profileInstance.username);
-    //         // updateUsername(username || "loading...");
-    //         // const departmentName = await profileInstance.departmentName;
-    //         // UpdatedepartmentName(departmentName || 'loading ...');
-    //         // (Data.skill).then((skill)=>{
-    //         //     (skill.client).then(skills=>update_haveSkills(skills));
-    //         // });
-    //         //  (Data.experience).then((exp)=>{
-    //         //     (exp.client).then(exp=>update_haveExperience(exp));
-    //         // });
-
-
-    //         // //getting data from picture class
-    //         // const picURL = await (await Data.picture).url;
-    //         // setUrl(picURL);
-
-    //     }
-    //     getProfileData();
-    // }, []);
 
     return (     
         <>

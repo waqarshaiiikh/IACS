@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState , useContext} from 'react';
 import { Container, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@material-ui/core';
 import { MenuItem, FormControl, TextField, Button, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import noteContext from '../context/notes/noteContext';
 // import apiCAll from '../integration/apiCall';
 const {apiCAll}= require('../integration/apiCall');
 const validator = require("validator");
 
 
-const useStyles = makeStyles({
 
+
+
+const useStyles = makeStyles({
+    
     button: {
         background: '#42b6EE !important',
         border: '0 !important',
@@ -27,7 +31,9 @@ const StudentSignUp = () => {
     // const CGPA          = useFormInput('2.76');
     // const semester      = useFormInput('1');
     // const year          = useFormInput('1');
-
+    
+    const a = useContext(noteContext);
+    const gettingData = a.gettingData;
 
     const classes = useStyles();
     const instruction = {
@@ -98,18 +104,18 @@ const StudentSignUp = () => {
 
     const navigate = useNavigate();
     const clientName = "student";
-    const fname = useFormInput('Muhammad');
-    const lname = useFormInput('Waqar');
-    const email = useFormInput('waqar4106080@cloud.neduet.edu.pk');
-    const phoneNumber = useFormInput('+923423446805');
+    const fname = useFormInput('');
+    const lname = useFormInput('');
+    const email = useFormInput('');
+    const phoneNumber = useFormInput('');
     const enrollment = useFormInput('NED/');
-    const university = useFormInput('NED UNIVERSITY');
-    const department = useFormInput('SE');
-    const CGPA = useFormInput('1.0');
-    const semester = useFormInput('1');
-    const year = useFormInput('1');
-    const password = useFormInput('123@waqar');
-    const cpassword = useFormInput('123@waqar');
+    const university = useFormInput('');
+    const department = useFormInput('');
+    const CGPA = useFormInput('');
+    const semester = useFormInput('');
+    const year = useFormInput('');
+    const password = useFormInput('');
+    const cpassword = useFormInput('');
     const otpField = useFormInput('');
     const [token, updateToken] = useState('');
 
@@ -302,7 +308,10 @@ const StudentSignUp = () => {
 
             if (!isError) {
                 apiCAll(`/api/signup`, 'post', reqData)
-                    .then(response => {
+                    .then(async response => {
+                        await gettingData();
+                        localStorage.setItem('Signin', JSON.stringify(true));
+                        a.setSignin(true);
                         setLoading({ StudentsDataField: false });
                         navigate('/');
                     })
@@ -311,7 +320,7 @@ const StudentSignUp = () => {
                         try {
                             if (error.response.status >= 400 || error.response.status <= 499) {
                                 console.log({ ...error.response });
-                                setError({ StudentsDataField: "Invalid Data" });
+                                setError({ StudentsDataField: error.response.data });
                             }
                         }
                         catch {
