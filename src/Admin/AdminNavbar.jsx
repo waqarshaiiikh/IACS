@@ -82,11 +82,11 @@ const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
                 anchor="left"
                 open={open}
             >
-                <DrawerHeader>
+                {/* <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
-                </DrawerHeader>
+                </DrawerHeader> */}
                 <Divider />
                 <List>
                     {

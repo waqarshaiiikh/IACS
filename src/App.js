@@ -10,11 +10,22 @@ function App() {
 
         useEffect(() => {
           if(a.Signin){
+
             const getProfileData = async () => {
-              await a.gettingData().catch(e=>console.log(e));
+
+              if(a.UserType === "student")
+                await a.gettingData().catch(e => console.log(e));
+              
+              else if (a.UserType === "industry")
+                await a.industry.gettingIndData().catch(e => console.log(e));
+             
+              else if (a.UserType === "admin")
+                await a.admin.gettingIndData().catch(e => console.log(e));
+
             }
             getProfileData(); 
             // eslint-disable-next-line
+
           }
         
     },[]);

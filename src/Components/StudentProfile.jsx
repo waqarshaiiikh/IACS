@@ -2,21 +2,22 @@ import React, { useContext, useState } from 'react'
 import { Container, Grid, Box, Typography, Button, Chip, Avatar, IconButton, Badge } from '@mui/material';
 import { ProfileData, ExperienceData, SkillData } from "./ProfileData"
 import EditIcon from '@mui/icons-material/Edit';
+import { makeStyles } from '@material-ui/styles';
+import MetaData from '../MetaData';
+import "../CSS/Utils.css";
 import { DateRangePicker, LocalizationProvider } from '@mui/lab/';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import { makeStyles } from '@material-ui/styles';
 import { styled } from '@material-ui/styles';
 import Navbar from "./Navbar";
 import noteContext from '../context/notes/noteContext';
 
-import MetaData from '../MetaData';
-import "../CSS/Utils.css"
 // import { useEffect } from 'react';
 // import std from "../Images/student.png"
 // import std from "../Images/IMG_20191029_175656.JPG"
-// const { Api } = require('../integration/apiCall');
-// const Data = Api.getApi();
+const { Api } = require('../integration/apiCall');
+const Data = Api.getApi();
 
 
 const Input = styled('input')({
@@ -61,7 +62,7 @@ const useStyles = makeStyles({
 
 const StudentProfile = () => {
     
-    const a = useContext(noteContext)
+    const a = useContext(noteContext);
     
     const classes = useStyles();
 
@@ -83,8 +84,21 @@ const StudentProfile = () => {
     
     
     const imageUploadHandler = event => {
-        const picture =  URL.createObjectURL(event.target.files[0]);
-        a.setUrl(picture);
+
+
+        const file = event.target.files[0];
+
+        (Data.picture).then((picture)=>{
+            picture.setUrl(file).then((check)=>{
+               if(check){
+                   a.gettingPicData().then(()=>console.log("updated pic") )
+               }
+            })
+            .catch(e=>{
+                console.log(e)
+            });
+
+        });
     }
 
 

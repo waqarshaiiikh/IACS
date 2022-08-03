@@ -5,8 +5,10 @@ import { Api } from "../../integration/apiCall";
 
 
 const NoteState=(props)=>{
- 
-    // const  =  "Loading..." ;
+
+    const [UserType, setUserType] = useState(JSON.parse(localStorage.getItem('UserType')) || "student");
+
+    // workspace for student starts----------------------------------------
 
     const [url              , setUrl            ] = useState();
     const [username         , setUsername       ] = useState("");
@@ -58,6 +60,7 @@ const NoteState=(props)=>{
         setOptions       (skillOptions);
         setHaveSkills    (skill);
     }  
+    
     const gettingPicData =async ()=>{
         const pic = await (await Data.picture).url;
         setUrl  (pic);
@@ -95,25 +98,75 @@ const NoteState=(props)=>{
 
     }
 
-       
 
 
+
+    const a = {
+        gettingData: async () => { await gettingData() },
+        gettingBasicData: async () => { await gettingBasicData() },
+        gettingSkillData: async () => { await gettingSkillData() },
+        gettingPicData: async () => { await gettingPicData() },
+        gettingExperienceData: async () => { await gettingExperienceData() },
+        url, setUrl, username, setUsername, university, setUniversity,
+        departmentName, setDepartmentName, haveExperience, setHaveExperience
+        , aboutUs, setAboutUs, haveSkills, setHaveSkills, Signin, setSignin, DATA, setDATA
+        , DOB, setDOB, phoneNumber, set_phoneNumber, enrollment, set_enrollment, department,
+          set_department, year, set_year, semester, set_semester, CGPA, set_CGPA, gender, set_gender,
+          address, set_address, github, set_github, linkedin, set_linkedin, 
+          instruction, set_instruction , options, setOptions, UserType, setUserType
+    };
+
+    // workspace for student END----------------------------------------
+
+
+
+
+    //workspace of industry starts=============================================
+
+    
+    const [ hrName       , set_hrName      ] = useState(    );
+    const [ website      , set_website     ] = useState(    );
+    const [ CompanyName  , set_CompanyName ] = useState(    );
+    const [ haveService  , setHaveService] = useState([]);
+
+    const gettingServiceData =async ()=>{
+        const serviceInstance = await Data.service;
+        const services = await serviceInstance.client;
+        const serviceOptions = await serviceInstance.options;
+        console.log(services)
+        setOptions       (serviceOptions);
+        setHaveService    (services);
+    }  
+
+
+    const gettingIndData = async () => {
+
+        // await gettingBasicData();
+        await gettingServiceData();
+        // await gettingExperienceData();
+        await gettingPicData();
+    }
+
+    const industry ={
+        gettingIndData: async () => { await gettingIndData() },
+        // gettingBasicData: async () => { await gettingBasicData() },
+        gettingServiceData: async () => { await gettingServiceData() },
+        // gettingPicData: async () => { await gettingPicData() },
+          aboutUs, setAboutUs, phoneNumber, set_phoneNumber, address, set_address,
+          linkedin, set_linkedin, instruction, set_instruction , options, setOptions,
+          hrName, set_hrName, website, set_website ,  CompanyName ,  haveService  , setHaveService
+          , set_CompanyName      
+    };
+
+
+
+
+
+    // workspace for industry END=============================================
+   
 
     return (
-        <noteContext.Provider value={{
-            gettingData: async () => { await gettingData() },
-            gettingBasicData: async () => { await gettingBasicData() },
-            gettingSkillData: async () => { await gettingSkillData() },
-            gettingPicData: async () => { await gettingPicData() },
-            gettingExperienceData: async () => { await gettingExperienceData() },
-            url, setUrl, username, setUsername, university, setUniversity,
-            departmentName, setDepartmentName, haveExperience, setHaveExperience
-            , aboutUs, setAboutUs, haveSkills, setHaveSkills, Signin, setSignin, DATA, setDATA
-            , DOB, setDOB, phoneNumber, set_phoneNumber, enrollment, set_enrollment, department,
-              set_department, year, set_year, semester, set_semester, CGPA, set_CGPA, gender, set_gender,
-              address, set_address, github, set_github, linkedin, set_linkedin, 
-              instruction, set_instruction , options, setOptions, 
-        }} >
+        <noteContext.Provider value={{...a, industry: {...industry}}} >
             {props.children}
         </noteContext.Provider>
     )

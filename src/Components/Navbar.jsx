@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
@@ -47,9 +47,6 @@ const Navbar = () => {
   const a = useContext(noteContext)
 
 
-  const navigate = useNavigate();
-
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -69,21 +66,24 @@ const Navbar = () => {
     setAnchorElUser(null);
     apiCAll('/api/logout','get')
     .then((res)=>{
-      if(res.status>=200 && res.status<=299 ){
         localStorage.clear();
         // navigate("/")
         window.location.href = "/";
-
-      }
-      else{
-        console.log("something went wrong");
-      }
+        window.location.href = "/";
+    }).catch(()=>{
+      
+      localStorage.clear();
+      // navigate("/")
+      window.location.href = "/";
+      window.location.href = "/";
     })
   };
 
-  const handleTo = (link)=>{
-     return a.Signin ? link :"/signin";
-  }
+  // const  = (link)=>{
+  //    return a.Signin ? link :"/signin";
+  // }
+
+
   // const logoutAllfun = () => {
   //   setAnchorElUser(null);
   //   apiCAll('/api/logout/all','get')
@@ -140,22 +140,22 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={handleTo("/softwarehouse")} > Software House</Typography>
+                <Typography textAlign="center" component={Link} to={("/softwarehouse")} > Software House</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={handleTo("/stdjob")} > Jobs</Typography>
+                <Typography textAlign="center" component={Link} to={("/stdjob")} > Jobs</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={handleTo("/stdinternship")}> Internhsips</Typography>
+                <Typography textAlign="center" component={Link} to={("/stdinternship")}> Internhsips</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={handleTo("/stdtraining")}> Trainings</Typography>
+                <Typography textAlign="center" component={Link} to={("/stdtraining")}> Trainings</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={handleTo("/stdproject")}> Projects</Typography>
+                <Typography textAlign="center" component={Link} to={("/stdproject")}> Projects</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={handleTo("/stdscholarship")} >Scholarships</Typography>
+                <Typography textAlign="center" component={Link} to={("/stdscholarship")} >Scholarships</Typography>
               </MenuItem>
               {!a.Signin &&
 
@@ -181,27 +181,27 @@ const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={handleTo("/softwarehouse")}>
+              className={classes.button} component={Link} to={("/softwarehouse")}>
               Software House
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={handleTo("/stdjob")}>
+              className={classes.button} component={Link} to={("/stdjob")}>
               Jobs
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={handleTo("/stdinternship")}>
+              className={classes.button} component={Link} to={("/stdinternship")}>
               Internships
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={handleTo("/stdtraining")}>
+              className={classes.button} component={Link} to={("/stdtraining")}>
               Trainings
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={handleTo("/stdproject")}>
+              className={classes.button} component={Link} to={("/stdproject")}>
               Projects
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={handleTo("/stdscholarship")}>
+              className={classes.button} component={Link} to={("/stdscholarship")}>
               Scholarships
             </Button>
             {!a.Signin &&
@@ -222,14 +222,13 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-
                 <Avatar alt={a.username[0]} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a.username[0]}</Avatar>
-
-
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -247,13 +246,13 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }}  component={Link} to={handleTo("/stddashboard")}>Dashboard</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }}  component={Link} to={("/stddashboard")}>Dashboard</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to={handleTo("/studentProfile")}>Profile</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to={("/studentProfile")}>Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to={handleTo("/studentProfile")}>Account</Typography>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to={("/studentProfile")}>Account</Typography>
               </MenuItem>
             {a.Signin &&
               

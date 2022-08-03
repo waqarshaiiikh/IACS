@@ -291,18 +291,26 @@ function ProfileData(props) {
 function SkillData(props) {
 
     const [skill_update, skill_updation] = useState([]);
+    const [NoChange, setNoChange] = useState();
+
     
     const a = useContext(noteContext)
 
-    const saveSkill = () =>{
-     (Data.skill).then((skill)=>{
-         skill.setClient(skill_update).then((check)=>{
-            if(check){
-                a.gettingSkillData().then(()=>props.handleClose())
-                skill_updation([{tittle: "random"}]);
-            }
-         });
-     });
+    const saveSkill = () => {
+        if (!NoChange) {
+
+            (Data.skill).then((skill) => {
+                skill.setClient(skill_update).then((check) => {
+                    if (check) {
+                        a.gettingSkillData().then(() => props.handleClose())
+                        skill_updation([]);
+                    }
+                });
+            });
+        } else {
+            props.handleClose()
+        }
+
     }
 
     return (
@@ -340,9 +348,14 @@ function SkillData(props) {
                                     disableCloseOnSelect
                                     getOptionLabel={(option) => option.title}
                                     isOptionEqualToValue={(option, value) => option.title === value.title}
-                                    defaultValue={a.haveSkills}
+                                    defaultValue={
+                                        ()=>{
+                                            setNoChange(true)
+                                           return a.haveSkills;
+                                        }}
                                     
                                     onChange={(event, values) => {
+                                        setNoChange(false);
                                         skill_updation(values);
                                     }}
 

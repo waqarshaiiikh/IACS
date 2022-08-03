@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Routes, Route } from "react-router-dom";
 import StudentDashboard from './StudentDashboard';
 import StudentProfile from './StudentProfile';
@@ -25,42 +25,50 @@ import AdminJobs from "../Admin/AdminJobs";
 import AdminInternships from "../Admin/AdminInternships";
 import AdminMessage from "../Admin/AdminMessage";
 import AdminRequest from "../Admin/AdminRequest";
+import NotFound from "../Pages/NotFound.js";
+import noteContext from '../context/notes/noteContext';
 
 
 
 
-
+// NotFound
 const Main = () => {
-    let student = "industry";
+    const a = useContext(noteContext)
+    const user = a.UserType;
+    const signin = a.Signin;
+
     return (
         <>
             <Routes>
-                {student==="industry" && <Route path="//*" element={<Introduction />} />}
-                <Route path='/admin/Home' element={<Admin/>}/>
-                <Route path='/admin/Students' element={<AdminStudents/>}/>
-                <Route path='/admin/SoftwareHouses' element={<AdminSoftwareHouses/>}/>
-                <Route path='/admin/Jobs' element={<AdminJobs/>}/>
-                <Route path='/admin/Internships' element={<AdminInternships/>}/>
-                <Route path='/admin/Request' element={<AdminRequest/>}/>
-                <Route path='/admin/Messages' element={<AdminMessage/>}/>
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path='/clidashboard' element={<ClientDashborad />}/>
-                <Route path="/clientProfile" element={<ClientProfile/>}/>
-                <Route path="/clistudent" element={<ClientStudent />} />
-                <Route path="/clijob" element={<ClientJob />} />
-                <Route path="/cliinternship" element={<ClientInternship />} />
-                <Route path="/cliproject" element={<ClientProject />} />
-                <Route path="/clischolarship" element={<ClientScholarship />} />
-                <Route path="/stddashboard" element={<StudentDashboard />}/>
-                <Route path="/studentProfile" element={<StudentProfile/>}/>
-                <Route path="/stdjob" element={<StudentJob/> }/>
-                <Route path="/softwarehouse" element={<SoftwareHouse />} />
-                <Route path="/stdinternship" element={<StudentInternship/>}/>
-                <Route path="/stdtraining" element={<StudentTraining/>}/>
-                <Route path="/stdproject" element={<StudentProject/>}/>
-                <Route path="/stdscholarship" element={<StudentScholarship/>}/>
-                <Route path="/softwarehouse" element={<SoftwareHouse/>}/>
+                <Route path="//*"                   element={<Introduction/>}/>
+                <Route path="/signin"               element={<Signin/> } />
+                <Route path="/signup"               element={<Signup />}/>
+
+                <Route path='/admin/Home'           element={ signin ?  user==="admin"     ?    <Admin/>               :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/Students'       element={ signin ?  user==="admin"     ?    <AdminStudents/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/SoftwareHouses' element={ signin ?  user==="admin"     ?    <AdminSoftwareHouses/> :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/Jobs'           element={ signin ?  user==="admin"     ?    <AdminJobs/>           :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/Internships'    element={ signin ?  user==="admin"     ?    <AdminInternships/>    :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/Request'        element={ signin ?  user==="admin"     ?    <AdminRequest/>        :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/Messages'       element={ signin ?  user==="admin"     ?    <AdminMessage/>        :<NotFound/>: <Signin/>  }/> 
+
+                <Route path='/clidashboard'         element={ signin ?  user==="industry"  ?    <ClientDashborad/>     :<NotFound/>: <Signin/>  }/> 
+                <Route path="/clientProfile"        element={ signin ?  user==="industry"  ?    <ClientProfile/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path="/clistudent"           element={ signin ?  user==="industry"  ?    <ClientStudent/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path="/clijob"               element={ signin ?  user==="industry"  ?    <ClientJob/>           :<NotFound/>: <Signin/>  }/> 
+                <Route path="/cliinternship"        element={ signin ?  user==="industry"  ?    <ClientInternship/>    :<NotFound/>: <Signin/>  }/> 
+                <Route path="/cliproject"           element={ signin ?  user==="industry"  ?    <ClientProject/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path="/clischolarship"       element={ signin ?  user==="industry"  ?    <ClientScholarship/>   :<NotFound/>: <Signin/>  }/> 
+
+                <Route path="/stddashboard"         element={ signin ?  user==="student"   ?    <StudentDashboard/>    :<NotFound/>: <Signin/>  }/> 
+                <Route path="/studentProfile"       element={ signin ?  user==="student"   ?    <StudentProfile/>      :<NotFound/>: <Signin/>  }/> 
+                <Route path="/stdjob"               element={ signin ?  user==="student"   ?    <StudentJob/>          :<NotFound/>: <Signin/>  }/> 
+                <Route path="/softwarehouse"        element={ signin ?  user==="student"   ?    <SoftwareHouse/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path="/stdinternship"        element={ signin ?  user==="student"   ?    <StudentInternship/>   :<NotFound/>: <Signin/>  }/> 
+                <Route path="/stdtraining"          element={ signin ?  user==="student"   ?    <StudentTraining/>     :<NotFound/>: <Signin/>  }/> 
+                <Route path="/stdproject"           element={ signin ?  user==="student"   ?    <StudentProject/>      :<NotFound/>: <Signin/>  }/> 
+                <Route path="/stdscholarship"       element={ signin ?  user==="student"   ?    <StudentScholarship/>  :<NotFound/>: <Signin/>  }/> 
+                <Route path="/softwarehouse"        element={ signin ?  user==="student"   ?    <SoftwareHouse/>       :<NotFound/>: <Signin/>  }/> 
             </Routes>
         </>
     )

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { picture } from './picture';
 import { Profile } from './Profile';
 import { Skill } from './Skill';
+import { Services } from './Services';
 
 const {Experience}  = require('./Experience');
 
@@ -24,8 +25,14 @@ const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
         },{
             requestType: 'stream'
         }
-        ).catch(e=>{
-            console.log(e);
+        ).catch(e => {
+            console.log({authentication: e?.response?.data?.authentication});
+            if(e?.response?.data?.authentication ===false && e?.response?.status === 401){
+                localStorage.clear();
+                // navigate("/")
+                window.location.href = "/";
+                window.location.href = "/";
+            }
             throw e;
         });
         
@@ -35,8 +42,13 @@ const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
             , { headers: { 'Content-Type': 'application/json' } }
             , { withCredentials: true }
         ).catch(e => {
-            console.log({authentication: e.response.data.authentication});
-
+            console.log({authentication: e?.response?.data?.authentication});
+            if(e?.response?.data?.authentication ===false && e?.response?.status === 401){
+                localStorage.clear();
+                // navigate("/")
+                window.location.href = "/";
+                window.location.href = "/";
+            }
             throw e;
         });
     }
@@ -51,7 +63,7 @@ class Api{
     #skill      = state.empty; 
     #profile    = state.empty;
     #picture    = state.empty;
-    
+    #service    = state.empty;
 
     static DEPARTMENT = {
         SE      :"Software Engineering                  ", 
@@ -102,6 +114,14 @@ class Api{
         }
         console.log("skill getted")
         return Promise.resolve(this.#skill)
+    }
+
+    get service(){
+        if(this.#service===null){
+            this.#service = Services.getService();
+        }
+        console.log("Services getted")
+        return Promise.resolve(this.#service)
     }
 
     get experience(){

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { useContext , useState} from 'react';
+import noteContext from '../context/notes/noteContext';
+const { apiCAll}= require('../integration/apiCall');
 
 
 const useStyles = makeStyles({
@@ -15,7 +18,7 @@ const useStyles = makeStyles({
     letterSpacing: '2px',
     color: 'white !important',
     fontSize: '1.1rem !important',
-    fontWeight: 'bold',
+    fontWeight: 'bold',   
     margin: '0px 20px !important',
 
     '&:focus': {
@@ -28,6 +31,8 @@ const ClientNavbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const classes = useStyles();
+  const a = useContext(noteContext)
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,6 +48,36 @@ const ClientNavbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const logoutFunction = () => {
+    setAnchorElUser(null);
+    apiCAll('/api/logout','get')
+    .then((res)=>{
+        localStorage.clear();
+        window.location.href = "/";
+        window.location.href = "/";
+    }).catch((e)=>{
+      if(e.response !== undefined)
+      {
+        localStorage.clear();
+        window.location.href = "/";
+        window.location.href = "/";
+      }
+    })
+  };
+
+  // const logoutAllfun = () => {
+  //   setAnchorElUser(null);
+  //   apiCAll('/api/logout/all','get')
+  //   .then((res)=>{
+  //     if(res.status>=200 && res.status<=299 ){
+  //       navigate('signin'); 
+  //     }
+  //     else{
+  //       console.log("something went wrong");
+  //     }
+  //   })
+  // };
 
   return (
     <AppBar className={classes.navbar}  >
@@ -101,12 +136,18 @@ const ClientNavbar = () => {
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/clischolarship">Scholarships</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/signup">Sign up</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/signin">Log in</Typography>
-              </MenuItem>
+
+              {!a.Signin &&
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" component={Link} to="/signup">Sign up</Typography>
+                </MenuItem>
+              }
+              {!a.Signin &&
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" component={Link} to="/signin">Log in</Typography>
+                </MenuItem>
+              }
+            
             </Menu>
           </Box>
           <Typography
@@ -138,20 +179,29 @@ const ClientNavbar = () => {
               className={classes.button} component={Link} to="/clischolarship">
               Scholarships
             </Button>
-            <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/signup">
-              Sign up
-            </Button>
-            <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/signin">
-              Log in
-            </Button>
+
+            {!a.Signin &&
+
+              <Button x={{ my: 2, color: 'white', display: 'block' }}
+                className={classes.button} component={Link} to="/signup">
+                Sign up
+              </Button>
+            }
+            {!a.Signin &&
+
+              <Button x={{ my: 2, color: 'white', display: 'block' }}
+                className={classes.button} component={Link} to="/signin">
+                Log in
+              </Button>
+
+            }
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={a?.insdustry?.CompanyName[0]} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a?.insdustry?.CompanyName[0]}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -177,11 +227,14 @@ const ClientNavbar = () => {
                 <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/clientProfile">Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/clientProfile">Account</Typography>
+                <Typography textAlign="center" sx={{ '&:hover': { textDecoration: 'none', color: 'inherit' } }} component={Link} to="/clientProfile">Account</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/">Logout</Typography>
-              </MenuItem>
+              {a.Signin &&
+
+                <MenuItem onClick={logoutFunction}>
+                  <Typography textAlign="center" sx={{ '&:hover': { textDecoration: 'none', color: 'inherit' } }} component={Link} to="/">Logout</Typography>
+                </MenuItem>
+              }
             </Menu>
           </Box>
         </Toolbar>
