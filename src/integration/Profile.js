@@ -29,7 +29,7 @@ class Profile {
             clause1: "  e.g., 'https://www.linkedin.com/in/waqar-shaiiikh/' "
         },
         aboutUs:{
-            clause1: "  Maximum limit is 400 " 
+            clause1: "  Maximum limit is 200 " 
         }
     };
 

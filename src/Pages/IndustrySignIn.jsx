@@ -55,8 +55,9 @@ const IndustrySignIn = () => {
         .catch(error => {
             setLoading(false);
             try{
-                if(error.response.status>=400 || error.response.status<= 499 )
-                    setError("Wrong Password");
+                console.log(error)
+                if(error.response.status>=400 || error.response.status<= 499 ){}
+                    // setError("Wrong Password");
             }
             catch{
                 setError("Something went wrong. Please try again later.")

@@ -3,8 +3,8 @@ import { picture } from './picture';
 import { Profile } from './Profile';
 import { Skill } from './Skill';
 import { Services } from './Services';
-
-const {Experience}  = require('./Experience');
+import { Experience } from './Experience';
+const  { OrgProfile }  = require('./OrgProfile');
 
 const state = { updated: "updated", modified: "modified", empty: null, available: "available", deleted: "deleted", deletedAll: "deletedAll", Add: "added" }
 
@@ -62,6 +62,7 @@ class Api{
     #experience = state.empty;
     #skill      = state.empty; 
     #profile    = state.empty;
+    #orgProfile = state.empty;
     #picture    = state.empty;
     #service    = state.empty;
 
@@ -140,6 +141,17 @@ class Api{
 
         return this.#profile;
     }
+    
+    get orgProfile(){
+        if(this.#orgProfile===null){
+            this.#orgProfile = OrgProfile.getOrgProfile();
+        }
+        console.log("profile getted")
+
+        return this.#orgProfile;
+    }
+
+     
 
     get picture(){
         if(this.#picture===null){

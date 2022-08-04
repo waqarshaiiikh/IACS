@@ -14,7 +14,6 @@ import { useEffect } from 'react';
 import noteContext from '../context/notes/noteContext';
 
 
-
 const { Api } = require('../integration/apiCall');
 const Data = Api.getApi();
 
@@ -57,18 +56,6 @@ function getSafe(fn, defaultVal="loading...") {
     }
 }
 
-// const services = ["Web Development", "Mobile App Development",
-//     "Graphis Designing",
-//     "Data Analytics",
-//     "Desktop Development",
-//     "Devops",
-//     "SQA",
-//     "Database",
-//     "Digital Media Marketing",
-//     "Artificial Intelligence",
-//     "Blockchain",
-//     "AWS",
-//     "Cloud & Web Hosting"]
 
 function ProfileData(props) {
 
@@ -89,21 +76,21 @@ function ProfileData(props) {
         set_website     (a.industry.website)
         set_linkedin    (a.industry.linkedin)
         setAboutUs      (a.industry.aboutUs)
-            
     },[a])
+    // console.log( hrName ,phoneNumber  ,address,website ,linkedin ,aboutUs )
         
 
     const [error, setError] = useState(null);
 
     function handleSave() {
-        (Data.profile).then((clientUpdation) => {
+        (Data.orgProfile).then((clientUpdation) => {
             const fieldData = {
-                hrName,
                 phoneNumber,
                 address,
-                website,
                 linkedin,
                 aboutUs,
+                hrName,
+                website,
             }
             clientUpdation.setclient(fieldData)
                 .then(
@@ -111,7 +98,7 @@ function ProfileData(props) {
                         const errorData = error;
                         setError(errorData);
                         if (errorData === null){
-                            a.gettingBasicData().then(()=>{
+                            a.industry.gettingIndBasicData().then(()=>{
                                 props.handleClose();
                             }
                             )
@@ -138,7 +125,7 @@ function ProfileData(props) {
                         <Grid container spacing={1}>
                         
                             <Grid item lg={12} xs={12}>
-                                <Tooltip title={getSafe(()=>a.instruction.email.clause1)} arrow>
+                                <Tooltip title={getSafe(()=>a.instruction.hrName.clause1)} arrow>
                                     <TextField id="HR NAME"  value={hrName} onChange={(e)=>{set_hrName(e.target.value)}}  fullWidth label="HR NAME" type="text" variant="filled" required />
                                 </Tooltip>
                             </Grid>
@@ -302,7 +289,6 @@ function ServiceData(props) {
     )
 }
 
-
 const useFormInput = initialValue => {
 
     const [value, setValue] = useState(initialValue);
@@ -314,4 +300,5 @@ const useFormInput = initialValue => {
         onChange: handleChange
     }
 }
+
 export { ProfileData, ServiceData}

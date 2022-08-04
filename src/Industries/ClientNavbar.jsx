@@ -201,7 +201,7 @@ const ClientNavbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={a?.insdustry?.CompanyName[0]} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a?.insdustry?.CompanyName[0]}</Avatar>
+                <Avatar alt={a?.insdustry?.CompanyName?.charAt(0)} src={a.url} sx={{ width: 35, height: 35, bgcolor: 'rgb(66, 182, 238)', border: '2px solid white ' }}>{a?.industry?.CompanyName?.charAt(0)}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu

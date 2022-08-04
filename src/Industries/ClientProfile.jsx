@@ -59,6 +59,8 @@ const ClientProfile = () => {
 
     const a = useContext(noteContext);
     const services = a.industry.haveService;
+    // console.log(a.industry)
+
 
     const classes = useStyles();
 
@@ -128,18 +130,16 @@ const ClientProfile = () => {
                                             </label>
                                         }
                                     >
-
-                                        <Avatar alt={a?.insdustry?.CompanyName[0]} src={a.url} sx={{ width: 170, height: 170, bgcolor: 'rgb(66, 182, 238)' }}>{a?.insdustry?.CompanyName[0]}
+                                        <Avatar alt={a?.industry?.CompanyName?.charAt(0)}  src={a.url} sx={{ width: 150, height: 150, bgcolor: 'rgb(66, 182, 238)' }} >{a?.industry?.CompanyName?.charAt(0)}
                                         </Avatar>
-
                                     </Badge>
 
 
                                     <Typography variant='h6' className={classes.typography}>
-                                        {a?.insdustry?.hrName}
+                                        {a?.industry?.hrName}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
-                                        {a?.insdustry?.CompanyName}
+                                        {a?.industry?.CompanyName}
                                     </Typography>
                                     <Typography variant='h6' className={classes.typography}>
                                         <Button variant="contained" sx={{ marginTop: '10px' }} onClick={openProfile}>Update Profile</Button>
@@ -166,7 +166,7 @@ const ClientProfile = () => {
                                 <Grid item lg={12} >
                                     <Typography variant='p' className={classes.about} >
                                         <br />
-                                        a.aboutUs
+                                        {a?.industry?.aboutUs}
                                         <br />
                                     </Typography>
                                 </Grid>

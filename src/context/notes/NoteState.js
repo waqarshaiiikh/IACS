@@ -8,7 +8,7 @@ const NoteState=(props)=>{
 
     const [UserType, setUserType] = useState(JSON.parse(localStorage.getItem('UserType')) || "student");
 
-    // workspace for student starts----------------------------------------
+    // workspace for student starts==========================================================
 
     const [url              , setUrl            ] = useState();
     const [username         , setUsername       ] = useState("");
@@ -138,10 +138,27 @@ const NoteState=(props)=>{
         setHaveService    (services);
     }  
 
+    
+    const gettingIndBasicData = async()=>{
+
+        const profileInstance = await (await Data.orgProfile);
+        const basicInfo = await profileInstance.client;
+        const instruction1  = await profileInstance.instruction;
+        console.log(basicInfo)
+        set_instruction  (instruction1)
+        setAboutUs       (basicInfo.aboutUs)
+        set_phoneNumber  (basicInfo.phoneNumber)
+        set_address      (basicInfo.address)
+        set_linkedin     (basicInfo.linkedin)
+        set_hrName       (basicInfo.hrName)
+        set_website      (basicInfo.website)
+        set_CompanyName  (basicInfo.CompanyName)
+
+    }
 
     const gettingIndData = async () => {
 
-        // await gettingBasicData();
+        await gettingIndBasicData();
         await gettingServiceData();
         // await gettingExperienceData();
         await gettingPicData();
@@ -149,9 +166,9 @@ const NoteState=(props)=>{
 
     const industry ={
         gettingIndData: async () => { await gettingIndData() },
-        // gettingBasicData: async () => { await gettingBasicData() },
+        gettingIndBasicData: async () => { await gettingIndBasicData() },
         gettingServiceData: async () => { await gettingServiceData() },
-        // gettingPicData: async () => { await gettingPicData() },
+        
           aboutUs, setAboutUs, phoneNumber, set_phoneNumber, address, set_address,
           linkedin, set_linkedin, instruction, set_instruction , options, setOptions,
           hrName, set_hrName, website, set_website ,  CompanyName ,  haveService  , setHaveService

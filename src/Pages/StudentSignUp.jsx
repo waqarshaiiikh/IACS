@@ -66,7 +66,6 @@ const StudentSignUp = () => {
         cgpa: {
             clause1: "  In Between 1 to 4"
         }
-
     };
 
     const [pageNo, updatePageNo] = useState(0);
