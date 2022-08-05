@@ -20,6 +20,8 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
+import { Api } from '../integration/apiCall';
+
 
 const useStyles = makeStyles({
   searching: {
@@ -89,8 +91,10 @@ const ClientStudent = () => {
     })
   }
 
+
   const loadStudent = async () => {
     await axios.get(`http://localhost:3001/students`).then((res) => {
+      console.log(res?.data)
       setStudents(res?.data);
       setTotal(res?.data.length);
     }).catch((err) => {
@@ -104,6 +108,7 @@ const ClientStudent = () => {
     e?.preventDefault();
     if (value) {
       await axios.get(`http://localhost:3001/students?q=${value}`).then((res) => {
+        console.log(res?.data)
         setStudents(res.data);
         setTotal(res?.data.length);
         setPostCount(res?.data.length);
@@ -118,6 +123,7 @@ const ClientStudent = () => {
     setLoading(false)
   }
 
+ 
   useEffect(() => {
     loadStudent();
     setLoading(true)
@@ -130,7 +136,7 @@ const ClientStudent = () => {
         <Container maxWidth="xl" sx={{ padding: '0' }}>
           <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
             <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
-              <h1>Client Students</h1>
+              <h1>Students</h1>
             </Grid>
             <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
               <div>
@@ -165,8 +171,8 @@ const ClientStudent = () => {
                           <div className={classes.student_title}>
                             <img className={classes.student_image} src={studentPic} alt="student" />
                             <div>
-                              <Typography variant='h6'>{student.name}</Typography>
-                              <Typography>{student.department}</Typography>
+                              <Typography variant='h6'>{student.fname+" "+student.lname}</Typography>
+                              <Typography>{Api.DEPARTMENT[student.department]}</Typography>
                               <Typography>{student.year}</Typography>
                               <Typography>{student.university}</Typography>
                             </div>
@@ -185,7 +191,7 @@ const ClientStudent = () => {
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          <Accordion>
+                          <Accordion >
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"

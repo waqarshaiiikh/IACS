@@ -1,5 +1,6 @@
 {
-  "softwareHouse": [
+  "softwareHouse":
+   [
     {
       "id": 1,
       "name": "Contour Software",
@@ -325,11 +326,13 @@
       ]
     }
   ],
-  "students": [
+  "students":
+   [
     {
       "id": 1,
-      "name": "Muhammad Khalid",
-      "department": "Software Engineering",
+      "fname": "Muhammad",
+      "lname": "Waqar",
+      "department": "SE",
       "year": "Final Year",
       "university": "NED University",
       "image": "",
@@ -363,8 +366,9 @@
     },
     {
       "id": 2,
-      "name": "Muhammad Waqar",
-      "department": "Software Engineering",
+      "fname": "Muhammad",
+      "lname": "Khalid",
+      "department": "SE",
       "year": "Final Year",
       "university": "NED University",
       "image": "",
@@ -390,8 +394,9 @@
     },
     {
       "id": 3,
-      "name": "Uzair Ahmed",
-      "department": "Software Engineering",
+      "fname": "Uzair",
+      "lname": "Ahmed",
+      "department": "SE",
       "year": "3rd Year",
       "university": "Usman University",
       "image": "",
@@ -404,8 +409,9 @@
     },
     {
       "id": 4,
-      "name": "Maaz-ul-Haq",
-      "department": "Software Engineering",
+      "fname": "Maaz ul",
+      "lname": "Haq",
+      "department": "SE",
       "year": "Final Year",
       "university": "NED University",
       "image": "",
@@ -431,8 +437,9 @@
     },
     {
       "id": 5,
-      "name": "Hamza Murtaza",
-      "department": "Software Engineering",
+      "fname": "Hamza",
+      "lname": "Murtaza",
+      "department": "SE",
       "year": "Final Year",
       "university": "NED University",
       "image": "",
@@ -446,8 +453,9 @@
     },
     {
       "id": 6,
-      "name": "Muhammad Bilal Hanif",
-      "department": "Software Engineering",
+      "fname": "Muhammad Bilal",
+      "lname": "Hanif",
+      "department": "SE",
       "year": "Final Year",
       "university": "NED University",
       "image": "",
@@ -472,8 +480,9 @@
     },
     {
       "id": 7,
-      "name": "Usama Amir",
-      "department": "Software Engineering",
+      "fname": "Usama",
+      "lname": "Amir",
+      "department": "SE",
       "year": "Final Year",
       "university": "NED University",
       "image": "",
@@ -496,7 +505,8 @@
       ]
     }
   ],
-  "jobs": [
+  "jobs":
+   [
     {
       "jobId": 1,
       "companyName": "Techlogix",
@@ -570,7 +580,8 @@
       ]
     }
   ],
-  "internships": [
+  "internships":
+   [
     {
       "internshipId": 1,
       "companyName": "Contour Software",
