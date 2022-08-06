@@ -12,6 +12,27 @@ const port = 8393;
 axios.defaults.withCredentials = true;
 const Domain = 'http://localhost:';
 
+const apiJson =async (apiAddress)=>{
+
+    const port = 3001;
+    
+        return await axios.get(`${Domain}${port}${apiAddress}`
+            // , { headers: { 'Content-Type': 'application/json' } }
+            // , { withCredentials: true }
+        ).catch(e => {
+            console.log({authentication: e?.response?.data?.authentication});
+            if(e?.response?.data?.authentication ===false && e?.response?.status === 401){
+                localStorage.clear();
+                // navigate("/")
+                window.location.href = "/";
+                window.location.href = "/";
+            }
+            throw e;
+        });
+}
+
+
+
 const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
 
     if(reqMethod === "post"){
@@ -164,4 +185,4 @@ class Api{
 }
 
 
-export {apiCAll, Api, state}
+export {apiCAll, apiJson , Api, state}

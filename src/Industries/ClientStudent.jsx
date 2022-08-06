@@ -20,7 +20,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
-import { Api } from '../integration/apiCall';
+import { Api, apiJson } from '../integration/apiCall';
 
 
 const useStyles = makeStyles({
@@ -93,7 +93,8 @@ const ClientStudent = () => {
 
 
   const loadStudent = async () => {
-    await axios.get(`http://localhost:3001/students`).then((res) => {
+    
+    await apiJson(`/students`).then((res) => {
       console.log(res?.data)
       setStudents(res?.data);
       setTotal(res?.data.length);
@@ -107,7 +108,7 @@ const ClientStudent = () => {
     setLoading(true)
     e?.preventDefault();
     if (value) {
-      await axios.get(`http://localhost:3001/students?q=${value}`).then((res) => {
+      await apiJson(`/students?q=${value}`).then((res) => {
         console.log(res?.data)
         setStudents(res.data);
         setTotal(res?.data.length);

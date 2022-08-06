@@ -20,6 +20,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from '../MetaData';
 import "../CSS/Utils.css"
+import { apiJson } from '../integration/apiCall';
 
 const useStyles = makeStyles({
     searching: {
@@ -89,7 +90,8 @@ const SoftwareHouse = () => {
     }
 
     const loadPost = async () => {
-        await axios.get(`http://localhost:3001/softwareHouse`).then((res) => {
+        
+        await apiJson(`/softwareHouse`).then((res) => {
             setSoftwareHouse(res.data);
             setTotal(res?.data.length);
         }).catch((err) => {
@@ -102,7 +104,7 @@ const SoftwareHouse = () => {
         setLoading(true)
         e?.preventDefault();
         if (value) {
-            await axios.get(`http://localhost:3001/softwareHouse?q=${value}`).then((res) => {
+            await apiJson(`/softwareHouse?q=${value}`).then((res) => {
                 setSoftwareHouse(res.data);
                 setTotal(res?.data.length);
                 setValue("");

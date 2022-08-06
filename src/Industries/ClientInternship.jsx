@@ -29,6 +29,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from "../MetaData";
 import "../CSS/Utils.css"
+import { apiJson } from '../integration/apiCall';
 
 const internshipSkills = [
     "HTML CSS & JavaScript",
@@ -222,7 +223,8 @@ const ClientInternship = () => {
     }
 
     const loadStudent = async () => {
-        await axios.get(`http://localhost:3001/internships`).then((res) => {
+        
+        await apiJson(`/internships`).then((res) => {
             setInternships(res?.data);
             setTotal(res?.data.length);
         }).catch((err) => {
@@ -235,7 +237,7 @@ const ClientInternship = () => {
         setLoading(true)
         e?.preventDefault();
         if (value) {
-            await axios.get(`http://localhost:3001/internships?q=${value}`).then((res) => {
+            await apiJson(`/internships?q=${value}`).then((res) => {
                 setInternships(res?.data);
                 setTotal(res?.data.length);
                 setPostCount(res?.data.length);

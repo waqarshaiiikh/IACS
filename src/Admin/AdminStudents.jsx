@@ -22,6 +22,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
 import "../CSS/Utils.css"
+import { apiJson } from '../integration/apiCall';
 
 const useStyles = makeStyles({
   searching: {
@@ -135,7 +136,7 @@ const AdminStudents = () => {
   }
 
   const loadStudent = async () => {
-    await axios.get(`http://localhost:3001/students`).then((res) => {
+    await apiJson(`/students`).then((res) => {
       setStudents(res?.data);
       setTotal(res?.data.length);
     }).catch((err) => {
@@ -148,7 +149,8 @@ const AdminStudents = () => {
     setLoading(true)
     e?.preventDefault();
     if (value) {
-      await axios.get(`http://localhost:3001/students?q=${value}`).then((res) => {
+      
+      await apiJson(`/students?q=${value}`).then((res) => {
         setStudents(res.data);
         setTotal(res?.data.length);
         setPostCount(res?.data.length);
