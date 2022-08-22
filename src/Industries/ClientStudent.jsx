@@ -92,7 +92,7 @@ const ClientStudent = () => {
   const [studentData, setStudentData] = useState()
 
   const classes = useStyles();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(1);
 
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState();
@@ -230,6 +230,9 @@ const ClientStudent = () => {
           console.log(err);
         })
       } break;
+      default:{
+        alert("Please select the category")
+      }
     }
 
 
