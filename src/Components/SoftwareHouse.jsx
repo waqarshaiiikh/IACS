@@ -86,7 +86,7 @@ const SoftwareHouse = () => {
     const [value, setValue] = useState("");
     const classes = useStyles();
 
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState(1);
 
     const onPaginationChange = (start, end) => {
         setPagination({
