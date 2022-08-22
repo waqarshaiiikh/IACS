@@ -118,6 +118,24 @@ const ClientStudent = () => {
     })
   }
 
+  const getStudentYear = (year)=>{
+    switch(year){
+      case "1":
+        return "First year";
+        break;
+      case "2":
+        return "Second Year";
+        break;
+      case "3":
+        return "Third Year";
+        break;
+      case "4":
+        return "Final year";
+        break;
+      default:
+        return "None"
+    }
+  }
   const updateStudentSkill = async (expanded, index, student) => {
     if (!studentData[index]?.skills && expanded) {
 
@@ -317,11 +335,11 @@ const ClientStudent = () => {
                       <Grid Grid item lg={10}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.student_title}>
-                            <img className={classes.student_image} src={studentData.IMAGE} alt="student" />
+                            <img className={classes.student_image} src={student.IMAGE} alt="student" />
                             <div>
                               <Typography variant='h6'>{student.FNAME + " " + student.LNAME}</Typography>
                               <Typography>{Api.DEPARTMENT[student.DEPARTMENT]}</Typography>
-                              <Typography>{student.YEAR}</Typography>
+                              <Typography>{getStudentYear(student.YEAR)}</Typography>
                               <Typography>{student.UNIVERSITY}</Typography>
                             </div>
                           </div>
