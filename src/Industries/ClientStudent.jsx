@@ -317,7 +317,7 @@ const ClientStudent = () => {
                       <Grid Grid item lg={10}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.student_title}>
-                            <img className={classes.student_image} src={IMAGE} alt="student" />
+                            <img className={classes.student_image} src={studentData.IMAGE} alt="student" />
                             <div>
                               <Typography variant='h6'>{student.FNAME + " " + student.LNAME}</Typography>
                               <Typography>{Api.DEPARTMENT[student.DEPARTMENT]}</Typography>
