@@ -31,3 +31,10 @@
   "total": 2
 }
    */
+
+// EXPERIENCE
+// SKILLS
+// COMPNAYNAME
+// JOBROLE
+// STARTDATE
+// ENDDATE

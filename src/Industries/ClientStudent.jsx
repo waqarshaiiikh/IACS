@@ -372,8 +372,8 @@ const ClientStudent = () => {
                                 studentData[ index1+pagination.start].EXPERIENCE && studentData[ index1+pagination.start].EXPERIENCE.map((exp, index) => (
                                   <Typography style={{ marginBottom: '10px' }}>
                                     <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
-                                    <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
-                                    <Typography style={{ fontWeight: 'bold' }}>{exp.startDate} to {exp.endDate}</Typography>
+                                    <Typography style={{ fontWeight: 'bold' }}>{exp.JOBROLE}</Typography>
+                                    <Typography style={{ fontWeight: 'bold' }}>{exp.STARTDATE} to {exp.ENDDATE}</Typography>
                                     <Typography>{exp.description}</Typography>
                                   </Typography>
                                 ))
