@@ -10,7 +10,7 @@ const state = { updated: "updated", modified: "modified", empty: null, available
 
 const port = 8393;
 axios.defaults.withCredentials = true;
-const Domain = 'http://localhost:';
+const Domain = 'http://192.168.225.184:';
 
 const apiJson =async (apiAddress)=>{
 
@@ -47,7 +47,7 @@ const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
             requestType: 'stream'
         }
         ).catch(e => {
-            console.log({authentication: e?.response?.data?.authentication});
+            // console.log({authentication: e?.response?.data?.authentication});
             if(e?.response?.data?.authentication ===false && e?.response?.status === 401){
                 localStorage.clear();
                 // navigate("/")

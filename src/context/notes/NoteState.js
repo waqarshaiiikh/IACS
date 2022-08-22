@@ -1,6 +1,6 @@
 import noteContext from "./noteContext";
 import React, { useState } from "react";
-import { Api } from "../../integration/apiCall";
+import { Api, apiCAll } from "../../integration/apiCall";
 
 
 
@@ -34,7 +34,7 @@ const NoteState=(props)=>{
     const [ address      , set_address     ] = useState( ""     );
     const [ github       , set_github      ] = useState( ""     );
     const [ linkedin     , set_linkedin    ] = useState( ""     );
-    const [ instruction  , set_instruction ] = useState(        );
+    const [ instruction  , set_instruction ] = useState( ""     );
 
     //states used  for skill Data 
     const [options, setOptions] = useState([]);
@@ -128,6 +128,7 @@ const NoteState=(props)=>{
     const [ website      , set_website     ] = useState(    );
     const [ CompanyName  , set_CompanyName ] = useState(    );
     const [ haveService  , setHaveService] = useState([]);
+    const [skilloptions, setSkillOptions] = useState(JSON.parse(localStorage.getItem('Skill_options')) || []);// for industry
 
     const gettingServiceData =async ()=>{
         const serviceInstance = await Data.service;
@@ -156,23 +157,42 @@ const NoteState=(props)=>{
 
     }
 
+    const gettingSkillOption = async ()=>{
+        if( skilloptions?.length === 0 )
+        { 
+           return apiCAll('/api/user/profile/skillOption', 'get').then(
+                (skillOptions) => {
+                    setSkillOptions( skillOptions.data || []);   
+                    console.log(skillOptions.data)
+                    localStorage.setItem('Skill_options', JSON.stringify(skillOptions.data));
+                    return true;
+                }
+            )
+        }
+
+    }
+
     const gettingIndData = async () => {
 
         await gettingIndBasicData();
         await gettingServiceData();
         // await gettingExperienceData();
         await gettingPicData();
+        await gettingSkillOption();
     }
+
+
 
     const industry ={
         gettingIndData: async () => { await gettingIndData() },
         gettingIndBasicData: async () => { await gettingIndBasicData() },
         gettingServiceData: async () => { await gettingServiceData() },
+        gettingSkillOption: async () => { await gettingSkillOption() },
         
           aboutUs, setAboutUs, phoneNumber, set_phoneNumber, address, set_address,
           linkedin, set_linkedin, instruction, set_instruction , options, setOptions,
           hrName, set_hrName, website, set_website ,  CompanyName ,  haveService  , setHaveService
-          , set_CompanyName      
+          , set_CompanyName  , skilloptions, setSkillOptions    
     };
 
 

@@ -325,26 +325,75 @@
         "Machine Learning"
       ]
     }
-  ],
-  "students":
-   [
+  ],"skills":[
     {
-      "id": 1,
-      "fname": "Muhammad",
-      "lname": "Waqar",
-      "department": "SE",
-      "year": "Final Year",
-      "university": "NED University",
-      "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
+      "id" : 1,
+      "skills" :[
         "Web Developer",
         "React Native",
         "MongoDB",
         "Node Js",
         "Express Js",
         "Oracle"
-      ],
+      ]
+    },{
+      "id" : 2,
+      "skills" : [
+        "Web Developer",
+        "C / C++",
+        "Java",
+        "Node Js",
+        "Python",
+        "Oracle"
+      ]
+    },{
+      "id" : 3,
+      "skills" : [
+        "Web Developer",
+        "Node Js",
+        "Python"
+      ]
+    },{
+      "id" : 4,
+      "skills" : [
+        "Web Developer",
+        "C / C++",
+        "Java",
+        "React Native",
+        "Python",
+        "Oracle"
+      ]
+    },{
+      "id" : 5,
+      "skills" : [
+        "C / C++",
+        "Java",
+        "React Native",
+        "Python"
+      ]
+    },{
+      "id" : 6,
+      "skills" : [
+        "Web Developer",
+        "C / C++",
+        "JavaScript",
+        "React Native",
+        "Python"
+      ]
+    },{
+      "id" : 7,
+      "skills" : [
+        "Web Developer",
+        "C / C++",
+        "JavaScript",
+        "React Native",
+        "Python"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
       "experience": [
         {
           "eid": 1,
@@ -363,6 +412,161 @@
           "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
         }
       ]
+    }, {
+      "id": 2,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }, {
+      "id": 3,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }, {
+      "id": 4,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }, {
+      "id": 5,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }, {
+      "id": 6,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }, {
+      "id": 6,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }, {
+      "id": 7,
+      "experience": [
+        {
+          "eid": 1,
+          "companyName": "10 Pearls",
+          "jobRole": "Full Stack Engineer",
+          "startDate": "10-Dec-21",
+          "endDate": "1-Jan-22",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        },
+        {
+          "eid": 2,
+          "companyName": "Interns Pakistan",
+          "jobRole": "Front End Engineer",
+          "startDate": "10-Dec-20",
+          "endDate": "1-Jan-21",
+          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+        }
+      ]
+    }
+  ],
+  "students":
+   [
+    {
+      "id": 1,
+      "fname": "Muhammad",
+      "lname": "Waqar",
+      "department": "SE",
+      "year": "Final Year",
+      "university": "NED University",
+      "image": "",
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."    
+     
+
     },
     {
       "id": 2,
@@ -372,25 +576,9 @@
       "year": "Final Year",
       "university": "NED University",
       "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
-        "Web Developer",
-        "C / C++",
-        "Java",
-        "Node Js",
-        "Python",
-        "Oracle"
-      ],
-      "experience": [
-        {
-          "eid": 1,
-          "companyName": "Contour Software",
-          "jobRole": "Backend End Engineer",
-          "startDate": "10-Jan-20",
-          "endDate": "1-Mar-20",
-          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
-        }
-      ]
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+  
+
     },
     {
       "id": 3,
@@ -400,12 +588,8 @@
       "year": "3rd Year",
       "university": "Usman University",
       "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
-        "Web Developer",
-        "Node Js",
-        "Python"
-      ]
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+
     },
     {
       "id": 4,
@@ -415,25 +599,9 @@
       "year": "Final Year",
       "university": "NED University",
       "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
-        "Web Developer",
-        "C / C++",
-        "Java",
-        "React Native",
-        "Python",
-        "Oracle"
-      ],
-      "experience": [
-        {
-          "eid": 1,
-          "companyName": "KDA",
-          "jobRole": "Data Engineer",
-          "startDate": "10-Jan-21",
-          "endDate": "1-Feb-21",
-          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
-        }
-      ]
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+ 
+
     },
     {
       "id": 5,
@@ -443,13 +611,8 @@
       "year": "Final Year",
       "university": "NED University",
       "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
-        "C / C++",
-        "Java",
-        "React Native",
-        "Python"
-      ]
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
+
     },
     {
       "id": 6,
@@ -459,24 +622,7 @@
       "year": "Final Year",
       "university": "NED University",
       "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
-        "Web Developer",
-        "C / C++",
-        "JavaScript",
-        "React Native",
-        "Python"
-      ],
-      "experience": [
-        {
-          "eid": 1,
-          "companyName": "Techlogix",
-          "jobRole": "Full Stack Developer",
-          "startDate": "1-Mar-22",
-          "endDate": "10-May-22",
-          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
-        }
-      ]
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
     },
     {
       "id": 7,
@@ -486,23 +632,7 @@
       "year": "Final Year",
       "university": "NED University",
       "image": "",
-      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.",
-      "skills": [
-        "JavaScript",
-        "React Native",
-        "Python",
-        "Express Js"
-      ],
-      "experience": [
-        {
-          "eid": 1,
-          "companyName": "Afiniti",
-          "jobRole": "ML Internee",
-          "startDate": "1-Mar-22",
-          "endDate": "10-May-22",
-          "description": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."
-        }
-      ]
+      "about": "Dolorem omnis eveniet impedit et. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad.. Similique omnis assumenda illo quia quam voluptatem. Perspiciatis a nemo hic repudiandae ad."     
     }
   ],
   "jobs":

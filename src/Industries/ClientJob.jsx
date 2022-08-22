@@ -1,68 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ClientNavbar from './ClientNavbar';
 import Pagination from '../Pages/Pagination';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import axios from "axios";
-import {
-    Grid,
-    Accordion,
-    Autocomplete,
-    AccordionSummary,
-    AccordionDetails,
-    Box,
-    Button,
-    Backdrop,
-    Chip,
-    Checkbox,
-    Container,
-    CircularProgress,
-    FormControl,
-    Modal,
-    MenuItem,
-    Typography,
-    TextField,
-    TextareaAutosize,
+import { Grid, Accordion, Autocomplete, AccordionSummary, AccordionDetails, Box, Button, Backdrop, Chip, Checkbox, Container, CircularProgress, FormControl, Modal, MenuItem, Typography, TextField, TextareaAutosize,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from "../MetaData";
 import "../CSS/Utils.css";
-import { apiJson } from '../integration/apiCall';
+import { apiCAll, apiJson } from '../integration/apiCall';
+import noteContext from '../context/notes/noteContext';
 
-const skills = [
-    "HTML CSS & JavaScript",
-    "C# .Net",
-    "C / C++",
-    "Java",
-    "Swift",
-    "Python",
-    "React Js",
-    "Angular",
-    "Next JS",
-    "Rest API",
-    "React Native",
-    "Flutter",
-    "Kotlin",
-    "Machine Learning",
-    "Artificial Intelligence",
-    "Data Science",
-    "Data Analytics",
-    "MERN Stack",
-    "SQL",
-    "MongoDB",
-    "Oracle",
-    "Firebase",
-    "iOS Development",
-    "Android Development",
-    "Desktop Development",
-    "Frontend Development",
-    "Backned Development",
-    "SQA",
-    "Digital Media Marketing",
-    "Blockchain",
-]
 
 const useStyles = makeStyles({
     searching: {
@@ -122,7 +72,49 @@ const requestStyle = {
     p: { lg: 4, xs: 1 },
 }
 
+
+
+
 const PostJob = (props) => {
+
+
+    const [tittle, setTittle]                    = useState("")
+    const [duration,    setDuration     ]        = useState("")
+    const [location,    setLocation     ]        = useState("")
+    const [description, setDescription  ]        = useState("")
+    const [linkedin, setLinkedin] = useState("")
+    const [skill, setSkill] = useState()
+
+    const a = useContext(noteContext)
+    
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+        const jobPostData = { tittle, duration, location, skill, linkedin, description  };
+        console.log(jobPostData)
+       
+        apiCAll('/api/user/job/post', 'post', { jobPostData }).then(
+            (response) => {
+                if (response.data) {
+                    setDuration("")
+                    setLocation("")
+                    setDescription("");
+                    setTittle("")
+                    setLinkedin("")
+                    setSkill()
+                    props.handleClose()
+                    alert("Your Requeest has Submited")
+                }
+            }
+        ).catch(
+            (e) => {
+                console.log(e.response)
+                alert(e.response.data)
+            }
+        )
+    }
+
     return (
         <>
             <Modal
@@ -134,30 +126,39 @@ const PostJob = (props) => {
                     <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
                         Post Job
                     </Typography>
-                    <FormControl>
+                    <form onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
-                            <Grid item lg={6} xs={12}>
-                                <TextField id="title" fullWidth label="Job Title" placeholder='Full Stack' type='text' variant="outlined" required />
+                        <Grid item lg={6} xs={12}>
+                                <TextField id="title" fullWidth label="Job Title" placeholder='Full Stack' type='text' value={tittle} onChange={e=>{setTittle(e.target.value)}} variant="outlined" required />
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="jobType" fullWidth label="Job Type" variant="outlined" required select>
-                                    <MenuItem key="fulltime" value="full">Full Time</MenuItem>
-                                    <MenuItem key="parttime" value="part">Part Time</MenuItem>
+                                <TextField id="jobType" fullWidth label="Duration" value={duration} onChange={e=>setDuration(e.target.value)} variant="outlined" required select>
+                                    <MenuItem key="fulltime" value="Full Time">Full Time</MenuItem>
+                                    <MenuItem key="parttime" value="Part Time">Part Time</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item lg={6} xs={12}>
-                                <TextField id="github" fullWidth label="Github" type="text" variant="outlined" required />
+                             <Grid item lg={6} xs={12}>
+                                <TextField id="jobType" fullWidth label="Location" value={location} onChange={e=>setLocation(e.target.value)} variant="outlined" required select>
+                                    <MenuItem key="remote" value="Remote">Remote</MenuItem>
+                                    <MenuItem key="onsite" value="Onsite">Onsite</MenuItem>
+                                </TextField>
                             </Grid>
+
+
                             <Grid item lg={6} xs={12}>
-                                <TextField id="linkedin" fullWidth label="Linked In" type="text" variant="outlined" required />
+                                <TextField id="links" fullWidth label="Linked In" value={linkedin} onChange={e=>setLinkedin(e.target.value)} type="text" variant="outlined" />
                             </Grid>
-                            <Grid item lg={12} xs={12}>
-                                <Autocomplete
+                            
+                             <Grid item lg={12} xs={12}>
+                                 <Autocomplete
                                     multiple
+                                    required
                                     id="internshipSkills"
-                                    options={skills}
+                                    options={a.industry.skilloptions}
                                     disableCloseOnSelect
-                                    getOptionLabel={(option) => option}
+                                    getOptionLabel={(option) => option.title}
+                                    value = {skill}
+                                    onChange = {(e,value)=>setSkill(value)}
                                     renderOption={(props, option, { selected }) => (
                                         <li {...props}>
                                             <Checkbox
@@ -166,7 +167,7 @@ const PostJob = (props) => {
                                                 style={{ marginRight: 8 }}
                                                 checked={selected}
                                             />
-                                            {option}
+                                            {option.title}
                                         </li>
                                     )}
                                     renderInput={(params) => (
@@ -179,15 +180,19 @@ const PostJob = (props) => {
                                     id="Experience"
                                     maxRows={5}
                                     required
+                                    value={description}  
+                                    onChange={e=>setDescription(e.target.value)}
                                     style={{ width: '100%', padding: '10px' }}
-                                    placeholder="Write About yourself with in 200 words"
+                                    placeholder="Write Description with in 600 words"
                                 />
                             </Grid>
+
                             <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                                <Button variant="contained" onClick={props.handleClose}>Post</Button>
+                                <Button variant="contained" type='submit'>Post</Button>
                             </Grid>
+
                         </Grid>
-                    </FormControl>
+                    </form>
                 </Box>
             </Modal>
         </>

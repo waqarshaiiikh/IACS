@@ -13,7 +13,6 @@ import {
   CircularProgress,
   Backdrop
 } from '@mui/material';
-import axios from 'axios';
 import Pagination from '../Pages/Pagination';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
@@ -22,6 +21,20 @@ import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
 import { Api, apiJson } from '../integration/apiCall';
 
+let student = [
+  {
+    "id": undefined,
+    "fname": "",
+    "lname": "",
+    "department": "",
+    "year": "",
+    "university": "",
+    "image": "",
+    "about": "",
+    "skills": [ ],
+    "experience": [  ]
+  }
+]
 
 const useStyles = makeStyles({
   searching: {
@@ -71,6 +84,9 @@ const useStyles = makeStyles({
 
 
 const ClientStudent = () => {
+
+  const [studentData, setStudentData] = useState()
+
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
@@ -91,12 +107,50 @@ const ClientStudent = () => {
     })
   }
 
+  const updateStudentSkill = async (expanded,index, student) =>{
+    if(! studentData[index]?.skills && expanded ){
+
+      await apiJson(`/skills?id=${student.id}`).then((res) => {
+        
+        let st = studentData;
+        let skill_STD = st[index];
+        skill_STD ={...skill_STD, skills: res.data[0].skills};
+        st[index] = skill_STD;
+        setStudentData([...st])
+        console.log( studentData)
+
+      }).catch((err) => {
+        console.log(err);
+      })
+
+    }
+  }
+
+  const updateStudentExperience = async (expanded,index, student) =>{
+    if(! studentData[index]?.experience && expanded ){
+
+      await apiJson(`/experience?id=${student.id}`).then((res) => {
+        
+        let st = studentData;
+        let experience_STD = st[index];
+        experience_STD ={...experience_STD, experience: res.data[0].experience};
+        st[index] = experience_STD;
+        setStudentData([...st])
+        console.log( studentData)
+
+      }).catch((err) => {
+        console.log(err);
+      })
+
+    }
+  }
 
   const loadStudent = async () => {
     
     await apiJson(`/students`).then((res) => {
-      console.log(res?.data)
-      setStudents(res?.data);
+      console.log(res?.data);
+      setStudentData(res?.data);
+      // setStudents(res?.data);
       setTotal(res?.data.length);
     }).catch((err) => {
       console.log(err);
@@ -166,7 +220,7 @@ const ClientStudent = () => {
                   (<div className='Post_center'>
                     <h1 className='main_heading'>No Result Found</h1>
                   </div>) : (
-                    students && students.slice(pagination.start, pagination.end).map((student, index) => (
+                    studentData && studentData.slice(pagination.start, pagination.end).map((student, index1) => (
                       <Grid Grid item lg={10}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.student_title}>
@@ -192,7 +246,7 @@ const ClientStudent = () => {
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          <Accordion >
+                          <Accordion onChange={(e, expanded)=>updateStudentSkill(expanded,index1, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -203,37 +257,37 @@ const ClientStudent = () => {
                             <AccordionDetails>
                               <Typography>
                                 {
-                                  student.skills && student.skills.map((skill, index) => (
+
+                                    studentData[index1].skills && studentData[index1].skills.map((skill, index) => (
                                     <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                  
                                 }
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          {
-                            student.experience ? (
-                              <Accordion>
-                                <AccordionSummary
-                                  expandIcon={<ExpandMoreIcon />}
-                                  aria-controls="panel1a-content"
-                                  id="skills"
-                                >
-                                  <Typography>Experience</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                  {
-                                    student.experience && student.experience.map((exp, index) => (
-                                      <Typography style={{ marginBottom: '10px' }}>
-                                        <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
-                                        <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
-                                        <Typography style={{ fontWeight: 'bold' }}>{exp.startDate} to {exp.endDate}</Typography>
-                                        <Typography>{exp.description}</Typography>
-                                      </Typography>
-                                    ))
-                                  }
-                                </AccordionDetails>
-                              </Accordion>
-                            ) : null
-                          }
+
+                          <Accordion  onChange={(e, expanded)=>updateStudentExperience(expanded,index1, student)}>
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="skills"
+                            >
+                              <Typography>Experience</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              {
+                                studentData[index1].experience && studentData[index1].experience.map((exp, index) => (
+                                  <Typography style={{ marginBottom: '10px' }}>
+                                    <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
+                                    <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
+                                    <Typography style={{ fontWeight: 'bold' }}>{exp.startDate} to {exp.endDate}</Typography>
+                                    <Typography>{exp.description}</Typography>
+                                  </Typography>
+                                ))
+                              }
+                            </AccordionDetails>
+                          </Accordion>
+
                         </Box>
                       </Grid>
                     ))
