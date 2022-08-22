@@ -317,12 +317,12 @@ const ClientStudent = () => {
                       <Grid Grid item lg={10}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.student_title}>
-                            <img className={classes.student_image} src={studentPic} alt="student" />
+                            <img className={classes.student_image} src={IMAGE} alt="student" />
                             <div>
-                              <Typography variant='h6'>{student.fname + " " + student.lname}</Typography>
-                              <Typography>{Api.DEPARTMENT[student.department]}</Typography>
-                              <Typography>{student.year}</Typography>
-                              <Typography>{student.university}</Typography>
+                              <Typography variant='h6'>{student.FNAME + " " + student.LNAME}</Typography>
+                              <Typography>{Api.DEPARTMENT[student.DEPARTMENT]}</Typography>
+                              <Typography>{student.YEAR}</Typography>
+                              <Typography>{student.UNIVERSITY}</Typography>
                             </div>
                           </div>
                           <Accordion>
@@ -335,7 +335,7 @@ const ClientStudent = () => {
                             </AccordionSummary>
                             <AccordionDetails>
                               <Typography>
-                                {student.about}
+                                {student.ABOUTUS}
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
@@ -351,7 +351,7 @@ const ClientStudent = () => {
                               <Typography>
                                 {
 
-                                  studentData[ index1+pagination.start].skills && studentData[ index1+pagination.start].skills.map((skill, index) => (
+                                  studentData[ index1+pagination.start].skills && studentData[ index1+pagination.start].SKILLS.map((skill, index) => (
                                     <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
 
                                 }
@@ -369,7 +369,7 @@ const ClientStudent = () => {
                             </AccordionSummary>
                             <AccordionDetails>
                               {
-                                studentData[ index1+pagination.start].experience && studentData[ index1+pagination.start].experience.map((exp, index) => (
+                                studentData[ index1+pagination.start].EXPERIENCE && studentData[ index1+pagination.start].EXPERIENCE.map((exp, index) => (
                                   <Typography style={{ marginBottom: '10px' }}>
                                     <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
                                     <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
