@@ -11,7 +11,11 @@ import {
   Typography,
   Chip,
   CircularProgress,
-  Backdrop
+  Backdrop,
+  InputLabel,
+  FormControl,
+  MenuItem,
+  Select
 } from '@mui/material';
 import Pagination from '../Pages/Pagination';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -31,8 +35,8 @@ let student = [
     "university": "",
     "image": "",
     "about": "",
-    "skills": [ ],
-    "experience": [  ]
+    "skills": [],
+    "experience": []
   }
 ]
 
@@ -88,6 +92,7 @@ const ClientStudent = () => {
   const [studentData, setStudentData] = useState()
 
   const classes = useStyles();
+  const [search, setSearch] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState();
@@ -100,24 +105,30 @@ const ClientStudent = () => {
     end: showPerPage
   });
 
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setSearch(event.target.value);
+  };
+
   const onPaginationChange = (start, end) => {
+
     setPagination({
       start: start,
       end: end
     })
   }
 
-  const updateStudentSkill = async (expanded,index, student) =>{
-    if(! studentData[index]?.skills && expanded ){
+  const updateStudentSkill = async (expanded, index, student) => {
+    if (!studentData[index]?.skills && expanded) {
 
       await apiJson(`/skills?id=${student.id}`).then((res) => {
-        
+
         let st = studentData;
         let skill_STD = st[index];
-        skill_STD ={...skill_STD, skills: res.data[0].skills};
+        skill_STD = { ...skill_STD, skills: res.data[0].skills };
         st[index] = skill_STD;
         setStudentData([...st])
-        console.log( studentData)
+        console.log(studentData)
 
       }).catch((err) => {
         console.log(err);
@@ -126,17 +137,17 @@ const ClientStudent = () => {
     }
   }
 
-  const updateStudentExperience = async (expanded,index, student) =>{
-    if(! studentData[index]?.experience && expanded ){
+  const updateStudentExperience = async (expanded, index, student) => {
+    if (!studentData[index]?.experience && expanded) {
 
       await apiJson(`/experience?id=${student.id}`).then((res) => {
-        
+
         let st = studentData;
         let experience_STD = st[index];
-        experience_STD ={...experience_STD, experience: res.data[0].experience};
+        experience_STD = { ...experience_STD, experience: res.data[0].experience };
         st[index] = experience_STD;
         setStudentData([...st])
-        console.log( studentData)
+        console.log(studentData)
 
       }).catch((err) => {
         console.log(err);
@@ -146,7 +157,7 @@ const ClientStudent = () => {
   }
 
   const loadStudent = async () => {
-    
+
     await apiJson(`/students`).then((res) => {
       console.log(res?.data);
       setStudentData(res?.data);
@@ -161,6 +172,67 @@ const ClientStudent = () => {
   const handleSearch = async (e) => {
     setLoading(true)
     e?.preventDefault();
+    
+
+    switch (search){
+      case 1:{
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setStudents(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+      case 2:{
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setStudents(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+      case 3:{
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setStudents(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+      case 4:{
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setStudents(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+      case 5:{
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setStudents(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+    }
+
+
     if (value) {
       await apiJson(`/students?q=${value}`).then((res) => {
         console.log(res?.data)
@@ -178,7 +250,7 @@ const ClientStudent = () => {
     setLoading(false)
   }
 
- 
+
   useEffect(() => {
     loadStudent();
     setLoading(true)
@@ -203,11 +275,29 @@ const ClientStudent = () => {
                   onChange={(e) => { setValue(e.target.value) }}
                   onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
                   size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
-                <SearchIcon
+              </div>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Search By</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={search}
+                    label="Search"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>Name</MenuItem>
+                    <MenuItem value={2}>Department</MenuItem>
+                    <MenuItem value={3}>Year</MenuItem>
+                    <MenuItem value={4}>University</MenuItem>
+                    <MenuItem value={5}>Skills</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <SearchIcon
                   fontSize='large'
                   onClick={handleSearch}
                   sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
-              </div>
             </Grid>
             <Grid item lg={12} xs={12} className={classes.studentList} >
               <Grid container spacing={3} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
@@ -226,7 +316,7 @@ const ClientStudent = () => {
                           <div className={classes.student_title}>
                             <img className={classes.student_image} src={studentPic} alt="student" />
                             <div>
-                              <Typography variant='h6'>{student.fname+" "+student.lname}</Typography>
+                              <Typography variant='h6'>{student.fname + " " + student.lname}</Typography>
                               <Typography>{Api.DEPARTMENT[student.department]}</Typography>
                               <Typography>{student.year}</Typography>
                               <Typography>{student.university}</Typography>
@@ -246,7 +336,7 @@ const ClientStudent = () => {
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          <Accordion onChange={(e, expanded)=>updateStudentSkill(expanded,index1, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -258,15 +348,15 @@ const ClientStudent = () => {
                               <Typography>
                                 {
 
-                                    studentData[index1].skills && studentData[index1].skills.map((skill, index) => (
+                                  studentData[index1].skills && studentData[index1].skills.map((skill, index) => (
                                     <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                  
+
                                 }
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
 
-                          <Accordion  onChange={(e, expanded)=>updateStudentExperience(expanded,index1, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded, index1, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"

@@ -10,7 +10,8 @@ const state = { updated: "updated", modified: "modified", empty: null, available
 
 const port = 8393;
 axios.defaults.withCredentials = true;
-const Domain = 'http://192.168.225.184:';
+// const Domain = 'http://192.168.225.184:';
+const Domain = 'http://localhost:';
 
 const apiJson =async (apiAddress)=>{
 
@@ -24,8 +25,8 @@ const apiJson =async (apiAddress)=>{
             if(e?.response?.data?.authentication ===false && e?.response?.status === 401){
                 localStorage.clear();
                 // navigate("/")
-                window.location.href = "/";
-                window.location.href = "/";
+                // window.location.href = "/";
+                // window.location.href = "/";
             }
             throw e;
         });
@@ -51,8 +52,8 @@ const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
             if(e?.response?.data?.authentication ===false && e?.response?.status === 401){
                 localStorage.clear();
                 // navigate("/")
-                window.location.href = "/";
-                window.location.href = "/";
+                // window.location.href = "/";
+                // window.location.href = "/";
             }
             throw e;
         });
