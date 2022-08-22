@@ -93,6 +93,8 @@ const ClientStudent = () => {
 
   const classes = useStyles();
   const [search, setSearch] = useState(1);
+  const [department, setDepartment] = useState('');
+  const [year, setYear] = useState('')
 
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState();
@@ -110,6 +112,16 @@ const ClientStudent = () => {
     setSearch(event.target.value);
   };
 
+  const handleDepartmentChange = (event) => {
+    console.log(event.target.value)
+    setDepartment(event.target.value);
+  };
+
+  const handleYearChange = (event) => {
+    console.log(event.target.value)
+    setYear(event.target.value);
+  };
+
   const onPaginationChange = (start, end) => {
 
     setPagination({
@@ -118,8 +130,8 @@ const ClientStudent = () => {
     })
   }
 
-  const getStudentYear = (year)=>{
-    switch(year){
+  const getStudentYear = (studentYear) => {
+    switch (studentYear) {
       case "1":
         return "First year";
         break;
@@ -176,7 +188,7 @@ const ClientStudent = () => {
 
   const loadStudent = async () => {
 
-    await apiCAll(`/api/user/student/get`, 'post', {pagination :{starts:0, totalRows: 2 }}).then((res) => {
+    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: 0, totalRows: 2 } }).then((res) => {
       console.log(res?.data);
       setStudentData(res?.data.data);
       // setStudents(res?.data);
@@ -190,10 +202,10 @@ const ClientStudent = () => {
   const handleSearch = async (e) => {
     setLoading(true)
     e?.preventDefault();
-    
 
-    switch (search){
-      case 1:{
+
+    switch (search) {
+      case 1: {
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
           setStudents(res.data);
@@ -204,7 +216,7 @@ const ClientStudent = () => {
           console.log(err);
         })
       } break;
-      case 2:{
+      case 2: {
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
           setStudents(res.data);
@@ -215,7 +227,7 @@ const ClientStudent = () => {
           console.log(err);
         })
       } break;
-      case 3:{
+      case 3: {
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
           setStudents(res.data);
@@ -226,7 +238,7 @@ const ClientStudent = () => {
           console.log(err);
         })
       } break;
-      case 4:{
+      case 4: {
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
           setStudents(res.data);
@@ -237,7 +249,7 @@ const ClientStudent = () => {
           console.log(err);
         })
       } break;
-      case 5:{
+      case 5: {
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
           setStudents(res.data);
@@ -248,7 +260,7 @@ const ClientStudent = () => {
           console.log(err);
         })
       } break;
-      default:{
+      default: {
         alert("Please select the category")
       }
     }
@@ -288,14 +300,78 @@ const ClientStudent = () => {
             </Grid>
             <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
               <div>
-                <TextField
-                  id="search"
-                  label="Search"
-                  variant="outlined"
-                  value={value}
-                  onChange={(e) => { setValue(e.target.value) }}
-                  onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
-                  size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
+                {search == 2 ?
+                  (<Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Department</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        size='medium'
+                        sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                        value={department}
+                        label="Department"
+                        onChange={handleDepartmentChange}
+                      >
+                        <MenuItem key="Software Engineering                  " value="SE"     > Software Engineering                  </MenuItem>
+                        <MenuItem key="Computer Science                      " value="CT"     > Computer Science                      </MenuItem>
+                        <MenuItem key="Computer Systems Engineering          " value="CS"     > Computer Systems Engineering          </MenuItem>
+                        <MenuItem key="Computational Finance                 " value="CF"     > Computational Finance                 </MenuItem>
+                        <MenuItem key="Telecommunications Engineering        " value="TC"     > Telecommunications Engineering        </MenuItem>
+                        <MenuItem key="Economics & Finance                   " value="EC"     > Economics & Finance                   </MenuItem>
+                        <MenuItem key="Electronic Engineering                " value="EL"     > Electronic Engineering                </MenuItem>
+                        <MenuItem key="Civil Engineering                     " value="CE"     > Civil Engineering                     </MenuItem>
+                        <MenuItem key="Petroleum Engineering                 " value="PE"     > Petroleum Engineering                 </MenuItem>
+                        <MenuItem key="Mechanical Engineering                " value="ME"     > Mechanical Engineering                </MenuItem>
+                        <MenuItem key="Textile Engineering                   " value="TE"     > Textile Engineering                   </MenuItem>
+                        <MenuItem key="Industrial & Manufacturing Engineering" value="IM"     > Industrial & Manufacturing Engineering</MenuItem>
+                        <MenuItem key="Automotive Engineering                " value="AU"     > Automotive Engineering                </MenuItem>
+                        <MenuItem key="Electrical Engineering                " value="EE"     > Electrical Engineering                </MenuItem>
+                        <MenuItem key="Materials Engineering                 " value="MM"     > Materials Engineering                 </MenuItem>
+                        <MenuItem key="Chemical Engineering                  " value="CH"     > Chemical Engineering                  </MenuItem>
+                        <MenuItem key="Metallurgical Engineering             " value="MY"     > Metallurgical Engineering             </MenuItem>
+                        <MenuItem key="Polymer & Petrochemical Engineering   " value="PP"     > Polymer & Petrochemical Engineering   </MenuItem>
+                        <MenuItem key="Biomedical Engineering                " value="BM"     > Biomedical Engineering                </MenuItem>
+                        <MenuItem key="Food Engineering                      " value="FD"     > Food Engineering                      </MenuItem>
+                        <MenuItem key="Architecture                          " value="BArch" > Architecture                          </MenuItem>
+                        <MenuItem key="Textile Sciences                      " value="TS"     > Textile Sciences                      </MenuItem>
+                        <MenuItem key="Development Studies                   " value="DS"     > Development Studies                   </MenuItem>
+                        <MenuItem key="Management Sciences                   " value="MG"     > Management Sciences                   </MenuItem>
+                        <MenuItem key="Industrial Chemistry                  " value="IC"     > Industrial Chemistry                  </MenuItem>
+                        <MenuItem key="Applied Physics                       " value="AP"     > Applied Physics                       </MenuItem>
+                        <MenuItem key="English Linguistics                   " value="EG"     > English Linguistics                   </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>) :
+                  (search == 3 ?
+                    (<Box sx={{ minWidth: 120 }}>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Year</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          size='medium'
+                          sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                          value={year}
+                          label="Department"
+                          onChange={handleYearChange}
+                        >
+                          <MenuItem value="1">First Year</MenuItem>
+                          <MenuItem value="2">Second Year</MenuItem>
+                          <MenuItem value="3">Third Year</MenuItem>
+                          <MenuItem value="4">Final Year</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>) :
+                    (<TextField
+                      id="search"
+                      label="Search"
+                      variant="outlined"
+                      value={value}
+                      onChange={(e) => { setValue(e.target.value) }}
+                      onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
+                      size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />))
+                }
               </div>
               <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
@@ -316,9 +392,9 @@ const ClientStudent = () => {
                 </FormControl>
               </Box>
               <SearchIcon
-                  fontSize='large'
-                  onClick={handleSearch}
-                  sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                fontSize='large'
+                onClick={handleSearch}
+                sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
             </Grid>
             <Grid item lg={12} xs={12} className={classes.studentList} >
               <Grid container spacing={3} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
@@ -357,7 +433,7 @@ const ClientStudent = () => {
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1+pagination.start, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1 + pagination.start, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -369,7 +445,7 @@ const ClientStudent = () => {
                               <Typography>
                                 {
 
-                                  studentData[ index1+pagination.start].skills && studentData[ index1+pagination.start].SKILLS.map((skill, index) => (
+                                  studentData[index1 + pagination.start].skills && studentData[index1 + pagination.start].SKILLS.map((skill, index) => (
                                     <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
 
                                 }
@@ -377,7 +453,7 @@ const ClientStudent = () => {
                             </AccordionDetails>
                           </Accordion>
 
-                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded,  index1+pagination.start, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded, index1 + pagination.start, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -387,7 +463,7 @@ const ClientStudent = () => {
                             </AccordionSummary>
                             <AccordionDetails>
                               {
-                                studentData[ index1+pagination.start].EXPERIENCE && studentData[ index1+pagination.start].EXPERIENCE.map((exp, index) => (
+                                studentData[index1 + pagination.start].EXPERIENCE && studentData[index1 + pagination.start].EXPERIENCE.map((exp, index) => (
                                   <Typography style={{ marginBottom: '10px' }}>
                                     <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
                                     <Typography style={{ fontWeight: 'bold' }}>{exp.JOBROLE}</Typography>

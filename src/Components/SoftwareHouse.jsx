@@ -13,7 +13,11 @@ import {
     Chip,
     TextField,
     CircularProgress,
-    Backdrop
+    Backdrop,
+    Select,
+    InputLabel,
+    MenuItem,
+    FormControl,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
@@ -82,6 +86,8 @@ const SoftwareHouse = () => {
     const [value, setValue] = useState("");
     const classes = useStyles();
 
+    const [search, setSearch] = useState
+
     const onPaginationChange = (start, end) => {
         setPagination({
             start: start,
@@ -89,8 +95,13 @@ const SoftwareHouse = () => {
         })
     }
 
+    const handleChange = (event) => {
+        console.log(event.target.value)
+        setSearch(event.target.value);
+    };
+
     const loadPost = async () => {
-        
+
         await apiJson(`/softwareHouse`).then((res) => {
             setSoftwareHouse(res.data);
             setTotal(res?.data.length);
@@ -149,15 +160,32 @@ const SoftwareHouse = () => {
                                 onChange={(e) => { setValue(e.target.value) }}
                                 sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
                                 onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }} />
-                            <SearchIcon
-                                fontSize='large'
-                                onClick={handleSearch}
-                                sx={{
-                                    color: '#42b6EE',
-                                    cursor: 'pointer',
-                                    marginTop: { lg: 'none', xs: '10px' },
-                                }} />
+
                         </div>
+                        <Box sx={{ minWidth: 120 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Search By</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={search}
+                                    label="Search"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={1}>Company Name</MenuItem>
+                                    <MenuItem value={2}>Address</MenuItem>
+                                    <MenuItem value={3}>Services</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <SearchIcon
+                            fontSize='large'
+                            onClick={handleSearch}
+                            sx={{
+                                color: '#42b6EE',
+                                cursor: 'pointer',
+                                marginTop: { lg: 'none', xs: '10px' },
+                            }} />
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>

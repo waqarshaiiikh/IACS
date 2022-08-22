@@ -3,7 +3,27 @@ import ClientNavbar from './ClientNavbar';
 import Pagination from '../Pages/Pagination';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { Grid, Accordion, Autocomplete, AccordionSummary, AccordionDetails, Box, Button, Backdrop, Chip, Checkbox, Container, CircularProgress, FormControl, Modal, MenuItem, Typography, TextField, TextareaAutosize,
+import {
+    Grid,
+    Accordion,
+    Autocomplete,
+    AccordionSummary,
+    AccordionDetails,
+    Box,
+    Button,
+    Backdrop,
+    Chip,
+    Checkbox,
+    Container,
+    CircularProgress,
+    FormControl,
+    Modal,
+    MenuItem,
+    Typography,
+    TextField,
+    TextareaAutosize,
+    Select,
+    InputLabel
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
@@ -78,22 +98,22 @@ const requestStyle = {
 const PostJob = (props) => {
 
 
-    const [tittle, setTittle]                    = useState("")
-    const [duration,    setDuration     ]        = useState("")
-    const [location,    setLocation     ]        = useState("")
-    const [description, setDescription  ]        = useState("")
+    const [tittle, setTittle] = useState("")
+    const [duration, setDuration] = useState("")
+    const [location, setLocation] = useState("")
+    const [description, setDescription] = useState("")
     const [linkedin, setLinkedin] = useState("")
     const [skill, setSkill] = useState()
 
     const a = useContext(noteContext)
-    
+
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        const jobPostData = { tittle, duration, location, skill, linkedin, description  };
+        const jobPostData = { tittle, duration, location, skill, linkedin, description };
         console.log(jobPostData)
-       
+
         apiCAll('/api/user/job/post', 'post', { jobPostData }).then(
             (response) => {
                 if (response.data) {
@@ -128,17 +148,17 @@ const PostJob = (props) => {
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
-                        <Grid item lg={6} xs={12}>
-                                <TextField id="title" fullWidth label="Job Title" placeholder='Full Stack' type='text' value={tittle} onChange={e=>{setTittle(e.target.value)}} variant="outlined" required />
+                            <Grid item lg={6} xs={12}>
+                                <TextField id="title" fullWidth label="Job Title" placeholder='Full Stack' type='text' value={tittle} onChange={e => { setTittle(e.target.value) }} variant="outlined" required />
                             </Grid>
                             <Grid item lg={6} xs={12}>
-                                <TextField id="jobType" fullWidth label="Duration" value={duration} onChange={e=>setDuration(e.target.value)} variant="outlined" required select>
+                                <TextField id="jobType" fullWidth label="Duration" value={duration} onChange={e => setDuration(e.target.value)} variant="outlined" required select>
                                     <MenuItem key="fulltime" value="Full Time">Full Time</MenuItem>
                                     <MenuItem key="parttime" value="Part Time">Part Time</MenuItem>
                                 </TextField>
                             </Grid>
-                             <Grid item lg={6} xs={12}>
-                                <TextField id="jobType" fullWidth label="Location" value={location} onChange={e=>setLocation(e.target.value)} variant="outlined" required select>
+                            <Grid item lg={6} xs={12}>
+                                <TextField id="jobType" fullWidth label="Location" value={location} onChange={e => setLocation(e.target.value)} variant="outlined" required select>
                                     <MenuItem key="remote" value="Remote">Remote</MenuItem>
                                     <MenuItem key="onsite" value="Onsite">Onsite</MenuItem>
                                 </TextField>
@@ -146,19 +166,19 @@ const PostJob = (props) => {
 
 
                             <Grid item lg={6} xs={12}>
-                                <TextField id="links" fullWidth label="Linked In" value={linkedin} onChange={e=>setLinkedin(e.target.value)} type="text" variant="outlined" />
+                                <TextField id="links" fullWidth label="Linked In" value={linkedin} onChange={e => setLinkedin(e.target.value)} type="text" variant="outlined" />
                             </Grid>
-                            
-                             <Grid item lg={12} xs={12}>
-                                 <Autocomplete
+
+                            <Grid item lg={12} xs={12}>
+                                <Autocomplete
                                     multiple
                                     required
                                     id="internshipSkills"
                                     options={a.industry.skilloptions}
                                     disableCloseOnSelect
                                     getOptionLabel={(option) => option.title}
-                                    value = {skill}
-                                    onChange = {(e,value)=>setSkill(value)}
+                                    value={skill}
+                                    onChange={(e, value) => setSkill(value)}
                                     renderOption={(props, option, { selected }) => (
                                         <li {...props}>
                                             <Checkbox
@@ -180,8 +200,8 @@ const PostJob = (props) => {
                                     id="Experience"
                                     maxRows={5}
                                     required
-                                    value={description}  
-                                    onChange={e=>setDescription(e.target.value)}
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
                                     style={{ width: '100%', padding: '10px' }}
                                     placeholder="Write Description with in 600 words"
                                 />
@@ -205,6 +225,9 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const ClientJob = () => {
     const classes = useStyles();
 
+    const [search, setSearch] = useState(1);
+    const [jobRole, setJobRole] = useState('');
+    const [jobType, setJobType] = useState('');
     const [requestJob, setRequestJob] = useState(false);
     const openRequest = () => setRequestJob(true);
     const closeRequest = () => setRequestJob(false);
@@ -227,6 +250,21 @@ const ClientJob = () => {
         })
     }
 
+    const handleChange = (event) => {
+        console.log(event.target.value)
+        setSearch(event.target.value);
+    };
+
+    const handleJobRole = (event) => {
+        console.log(event.target.value)
+        setJobRole(event.target.value);
+    };
+
+    const handleJobType = (event) => {
+        console.log(event.target.value)
+        setJobType(event.target.value);
+    };
+
     const loadJobs = async () => {
         await apiJson(`/jobs`).then((res) => {
             setJobs(res.data);
@@ -240,6 +278,69 @@ const ClientJob = () => {
     const handleSearch = async (e) => {
         setLoading(true)
         e?.preventDefault();
+
+        switch (search) {
+            case 1: {
+                await apiJson(`/students?q=${value}`).then((res) => {
+                    console.log(res?.data)
+                    setJobs(res.data);
+                    setTotal(res?.data.length);
+                    setPostCount(res?.data.length);
+                    setValue("");
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } break;
+            case 2: {
+                await apiJson(`/students?q=${value}`).then((res) => {
+                    console.log(res?.data)
+                    setJobs(res.data);
+                    setTotal(res?.data.length);
+                    setPostCount(res?.data.length);
+                    setValue("");
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } break;
+            case 3: {
+                await apiJson(`/students?q=${value}`).then((res) => {
+                    console.log(res?.data)
+                    setJobs(res.data);
+                    setTotal(res?.data.length);
+                    setPostCount(res?.data.length);
+                    setValue("");
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } break;
+            case 4: {
+                await apiJson(`/students?q=${value}`).then((res) => {
+                    console.log(res?.data)
+                    setJobs(res.data);
+                    setTotal(res?.data.length);
+                    setPostCount(res?.data.length);
+                    setValue("");
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } break;
+            case 5: {
+                await apiJson(`/students?q=${value}`).then((res) => {
+                    console.log(res?.data)
+                    setJobs(res.data);
+                    setTotal(res?.data.length);
+                    setPostCount(res?.data.length);
+                    setValue("");
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } break;
+            default: {
+                alert("Please select the category")
+            }
+        }
+
+
         if (value) {
             await apiJson(`/jobs?q=${value}`).then((res) => {
                 setJobs(res.data);
@@ -282,25 +383,82 @@ const ClientJob = () => {
                             marginTop: { lg: 'none', xs: "10px" }
                         }}>
                         <div>
-                            <TextField
-                                id="search"
-                                label="search"
-                                variant="outlined"
-                                size='medium'
-                                value={value}
-                                sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
-                                onChange={(e) => { setValue(e.target.value) }}
-                                onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
-                            />
-                            <SearchIcon
-                                fontSize='large'
-                                onClick={handleSearch}
-                                sx={{
-                                    color: '#42b6EE',
-                                    cursor: 'pointer',
-                                    marginTop: { lg: 'none', xs: '10px' },
-                                }} />
+                            {
+                                search == 2 ?
+                                    (<Box sx={{ minWidth: 120 }}>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="demo-simple-select-label">Job Role</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={jobRole}
+                                                label="Job Role"
+                                                onChange={handleJobRole}
+                                                sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                            >
+                                                <MenuItem value="fullStack">Full Stack Developer</MenuItem>
+                                                <MenuItem value="frontend">Front End Developer</MenuItem>
+                                                <MenuItem value="backend">Back End Developer</MenuItem>
+                                                <MenuItem value="database">Database Engineer</MenuItem>
+                                                <MenuItem value="softwareEngineer">Software Engineer</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Box>) :
+                                    (search == 4 ?
+                                        (<Box sx={{ minWidth: 120 }}>
+                                            <FormControl fullWidth>
+                                                <InputLabel id="demo-simple-select-label">Job Type</InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={jobType}
+                                                    label="Search"
+                                                    onChange={handleJobType}
+                                                    sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                                >
+                                                    <MenuItem value="onsite">Onsite</MenuItem>
+                                                    <MenuItem value="remote">Remote</MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </Box>) :
+                                        (<TextField
+                                            id="search"
+                                            label="search"
+                                            variant="outlined"
+                                            size='medium'
+                                            value={value}
+                                            sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                                            onChange={(e) => { setValue(e.target.value) }}
+                                            onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
+                                        />))
+                            }
                         </div>
+                        <Box sx={{ minWidth: 120 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Search By</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={search}
+                                    label="Search"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={1}>Company Name</MenuItem>
+                                    <MenuItem value={2}>Job Role</MenuItem>
+                                    <MenuItem value={3}>City</MenuItem>
+                                    <MenuItem value={4}>Type</MenuItem>
+                                    <MenuItem value={5}>Skills</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <SearchIcon
+                            fontSize='large'
+                            onClick={handleSearch}
+                            sx={{
+                                color: '#42b6EE',
+                                cursor: 'pointer',
+                                marginTop: { lg: 'none', xs: '10px' },
+                            }} />
                     </Grid>
                     <Grid item lg={12}>
                         <Button variant='contained' sx={{ marginTop: '10px' }} onClick={openRequest}>Post Job</Button>
