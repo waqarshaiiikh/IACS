@@ -23,7 +23,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
-import { Api, apiJson } from '../integration/apiCall';
+import { Api, apiCAll, apiJson } from '../integration/apiCall';
 
 let student = [
   {
@@ -158,7 +158,7 @@ const ClientStudent = () => {
 
   const loadStudent = async () => {
 
-    await apiJson(`/students`).then((res) => {
+    await apiCAll(`/api/user/student/get`, 'get', {pagination :{starts:0, totalRows: 2 }}).then((res) => {
       console.log(res?.data);
       setStudentData(res?.data);
       // setStudents(res?.data);
@@ -185,7 +185,7 @@ const ClientStudent = () => {
         }).catch((err) => {
           console.log(err);
         })
-      }
+      } break;
       case 2:{
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
@@ -196,7 +196,7 @@ const ClientStudent = () => {
         }).catch((err) => {
           console.log(err);
         })
-      }
+      } break;
       case 3:{
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
@@ -207,7 +207,7 @@ const ClientStudent = () => {
         }).catch((err) => {
           console.log(err);
         })
-      }
+      } break;
       case 4:{
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
@@ -218,7 +218,7 @@ const ClientStudent = () => {
         }).catch((err) => {
           console.log(err);
         })
-      }
+      } break;
       case 5:{
         await apiJson(`/students?q=${value}`).then((res) => {
           console.log(res?.data)
@@ -229,7 +229,7 @@ const ClientStudent = () => {
         }).catch((err) => {
           console.log(err);
         })
-      }
+      } break;
     }
 
 
@@ -336,7 +336,7 @@ const ClientStudent = () => {
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1+pagination.start, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -348,7 +348,7 @@ const ClientStudent = () => {
                               <Typography>
                                 {
 
-                                  studentData[index1].skills && studentData[index1].skills.map((skill, index) => (
+                                  studentData[ index1+pagination.start].skills && studentData[ index1+pagination.start].skills.map((skill, index) => (
                                     <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
 
                                 }
@@ -356,7 +356,7 @@ const ClientStudent = () => {
                             </AccordionDetails>
                           </Accordion>
 
-                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded, index1, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded,  index1+pagination.start, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -366,7 +366,7 @@ const ClientStudent = () => {
                             </AccordionSummary>
                             <AccordionDetails>
                               {
-                                studentData[index1].experience && studentData[index1].experience.map((exp, index) => (
+                                studentData[ index1+pagination.start].experience && studentData[ index1+pagination.start].experience.map((exp, index) => (
                                   <Typography style={{ marginBottom: '10px' }}>
                                     <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
                                     <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
