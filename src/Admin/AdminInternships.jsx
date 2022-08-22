@@ -22,6 +22,8 @@ import {
   Typography,
   TextField,
   TextareaAutosize,
+  Select,
+  InputLabel
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
@@ -123,6 +125,10 @@ const AdminInternships = () => {
 
   const classes = useStyles();
 
+  const [search, setSearch] = useState(1);
+  const [internshipRole, setInternshipRole] = useState('');
+  const [internshipType, setInternshipType] = useState('');
+
   const [internships, setInternships] = useState();
   const [postCount, setPostCount] = useState(null);
   const [showPerPage] = useState(4);
@@ -141,6 +147,21 @@ const AdminInternships = () => {
     })
   }
 
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setSearch(event.target.value);
+  };
+
+  const handleInternshipRole = (event) => {
+    console.log(event.target.value)
+    setInternshipRole(event.target.value);
+  };
+
+  const handleInternshipType = (event) => {
+    console.log(event.target.value)
+    setInternshipType(event.target.value);
+  };
+
   const loadInternship = async () => {
     await apiJson(`/internships`).then((res) => {
       setInternships(res.data);
@@ -154,6 +175,68 @@ const AdminInternships = () => {
   const handleSearch = async (e) => {
     setLoading(true);
     e?.preventDefault();
+
+    switch (search) {
+      case 1: {
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setInternships(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      } break;
+      case 2: {
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setInternships(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      } break;
+      case 3: {
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setInternships(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      } break;
+      case 4: {
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setInternships(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      } break;
+      case 5: {
+        await apiJson(`/students?q=${value}`).then((res) => {
+          console.log(res?.data)
+          setInternships(res.data);
+          setTotal(res?.data.length);
+          setPostCount(res?.data.length);
+          setValue("");
+        }).catch((err) => {
+          console.log(err);
+        })
+      } break;
+      default: {
+        alert("Please select the category")
+      }
+    }
+    
     if (value) {
       await apiJson(`/internships?q=${value}`).then((res) => {
         setInternships(res.data);
@@ -191,19 +274,76 @@ const AdminInternships = () => {
             </Grid>
             <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
               <div>
-                <TextField
-                  id="search"
-                  label="Search"
-                  variant="outlined"
-                  value={value}
-                  onChange={(e) => { setValue(e.target.value) }}
-                  onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
-                  size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />
-                <SearchIcon
-                  fontSize='large'
-                  onClick={handleSearch}
-                  sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                {
+                  search == 2 ?
+                    (<Box sx={{ minWidth: 120 }}>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Job Role</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={internshipRole}
+                          label="Job Role"
+                          onChange={handleInternshipRole}
+                          sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                        >
+                          <MenuItem value="fullStack">Full Stack Developer</MenuItem>
+                          <MenuItem value="frontend">Front End Developer</MenuItem>
+                          <MenuItem value="backend">Back End Developer</MenuItem>
+                          <MenuItem value="database">Database Engineer</MenuItem>
+                          <MenuItem value="softwareEngineer">Software Engineer</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>) :
+                    (search == 4 ?
+                      (<Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-label">Job Type</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={internshipType}
+                            label="Search"
+                            onChange={handleInternshipType}
+                            sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
+                          >
+                            <MenuItem value="onsite">Onsite</MenuItem>
+                            <MenuItem value="remote">Remote</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Box>) :
+                      (<TextField
+                        id="search"
+                        label="Search"
+                        variant="outlined"
+                        value={value}
+                        onChange={(e) => { setValue(e.target.value) }}
+                        onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
+                        size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />))
+                }
               </div>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Search By</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={search}
+                    label="Search"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>Company Name</MenuItem>
+                    <MenuItem value={2}>Job Role</MenuItem>
+                    <MenuItem value={3}>City</MenuItem>
+                    <MenuItem value={4}>Type</MenuItem>
+                    <MenuItem value={5}>Skills</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <SearchIcon
+                fontSize='large'
+                onClick={handleSearch}
+                sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
             </Grid>
             <Grid item lg={10} xs={12} >
               <Grid container spacing={2}>
