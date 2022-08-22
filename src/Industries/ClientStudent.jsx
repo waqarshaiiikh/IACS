@@ -158,11 +158,11 @@ const ClientStudent = () => {
 
   const loadStudent = async () => {
 
-    await apiCAll(`/api/user/student/get`, 'get', {pagination :{starts:0, totalRows: 2 }}).then((res) => {
+    await apiCAll(`/api/user/student/get`, 'post', {pagination :{starts:0, totalRows: 2 }}).then((res) => {
       console.log(res?.data);
-      setStudentData(res?.data);
+      setStudentData(res?.data.data);
       // setStudents(res?.data);
-      setTotal(res?.data.length);
+      setTotal(res?.data.total);
     }).catch((err) => {
       console.log(err);
     })
