@@ -21,24 +21,9 @@ import Pagination from '../Pages/Pagination';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import studentPic from "../Images/student.png";
 import MetaData from '../MetaData';
 import { Api, apiCAll, apiJson } from '../integration/apiCall';
 
-let student = [
-  {
-    "id": undefined,
-    "fname": "",
-    "lname": "",
-    "department": "",
-    "year": "",
-    "university": "",
-    "image": "",
-    "about": "",
-    "skills": [],
-    "experience": []
-  }
-]
 
 const useStyles = makeStyles({
   searching: {
@@ -92,7 +77,7 @@ const ClientStudent = () => {
   const [studentData, setStudentData] = useState()
 
   const classes = useStyles();
-  const [search, setSearch] = useState(1);
+  const [search, setSearch] = useState();
   const [department, setDepartment] = useState('');
   const [year, setYear] = useState('')
 
@@ -122,8 +107,11 @@ const ClientStudent = () => {
     setYear(event.target.value);
   };
 
-  const onPaginationChange = (start, end) => {
+  const onPaginationChange =  (start, end) => {
 
+    handleSearch(null).then(()=>{
+      
+    });
     setPagination({
       start: start,
       end: end
@@ -188,7 +176,7 @@ const ClientStudent = () => {
 
   const loadStudent = async () => {
 
-    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: 0, totalRows: 2 } }).then((res) => {
+    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: pagination.start, totalRows: pagination.end-pagination.start } }).then((res) => {
       console.log(res?.data);
       setStudentData(res?.data.data);
       // setStudents(res?.data);
@@ -261,26 +249,29 @@ const ClientStudent = () => {
         })
       } break;
       default: {
-        alert("Please select the category")
+        await loadStudent();
+        // alert("Please select the category")
       }
     }
 
-
-    if (value) {
-      await apiJson(`/students?q=${value}`).then((res) => {
-        console.log(res?.data)
-        setStudents(res.data);
-        setTotal(res?.data.length);
-        setPostCount(res?.data.length);
-        setValue("");
-      }).catch((err) => {
-        console.log(err);
-      })
-    }
-    else {
-      alert("Enter text to search");
-    }
     setLoading(false)
+
+
+    // if (value) {
+    //   await apiJson(`/students?q=${value}`).then((res) => {
+    //     console.log(res?.data)
+    //     setStudents(res.data);
+    //     setTotal(res?.data.length);
+    //     setPostCount(res?.data.length);
+    //     setValue("");
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   })
+    // }
+    // else {
+    //   alert("Enter text to search");
+    // }
+
   }
 
 

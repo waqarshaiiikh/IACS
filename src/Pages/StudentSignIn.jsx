@@ -40,29 +40,35 @@ const StudentSignIn = () => {
         
         setError(null);
         setLoading(true);
-
-        const reqData = { email: email.value, password: password.value , clientName: "student"};
-        
-        await apiCAll(`/api/login`,'post', reqData )
-        .then(async response => {
-            await gettingData();
-            a.setUserType("student")
+        a.setUserType("student")
             a.setSignin(true);
             localStorage.setItem('UserType', JSON.stringify("student"));
             localStorage.setItem('Signin', JSON.stringify(true));
             setLoading(false);
             navigate('/'); 
-        })
-        .catch(error => {
-            setLoading(false);
-                try{
-                    if(error.response.status>=400 || error.response.status<= 499 )
-                    setError("Invalid Cridential");
-                }
-                catch{
-                    setError("Something went wrong. Please try again later.")
-                }
-            });
+
+        // const reqData = { email: email.value, password: password.value , clientName: "student"};
+        
+        // await apiCAll(`/api/login`,'post', reqData )
+        // .then(async response => {
+        //     await gettingData();
+        //     a.setUserType("student")
+        //     a.setSignin(true);
+        //     localStorage.setItem('UserType', JSON.stringify("student"));
+        //     localStorage.setItem('Signin', JSON.stringify(true));
+        //     setLoading(false);
+        //     navigate('/'); 
+        // })
+        // .catch(error => {
+        //     setLoading(false);
+        //         try{
+        //             if(error.response.status>=400 || error.response.status<= 499 )
+        //             setError("Invalid Cridential");
+        //         }
+        //         catch{
+        //             setError("Something went wrong. Please try again later.")
+        //         }
+        //     });
     }
 
     return (
