@@ -40,12 +40,12 @@ const StudentSignIn = () => {
         
         setError(null);
         setLoading(true);
-        a.setUserType("student")
+        a.setUserType("admin")
             a.setSignin(true);
-            localStorage.setItem('UserType', JSON.stringify("student"));
+            localStorage.setItem('UserType', JSON.stringify("admin"));
             localStorage.setItem('Signin', JSON.stringify(true));
             setLoading(false);
-            navigate('/'); 
+            navigate('/admin/Home'); 
 
         // const reqData = { email: email.value, password: password.value , clientName: "student"};
         
