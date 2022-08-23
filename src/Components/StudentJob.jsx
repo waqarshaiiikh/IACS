@@ -222,97 +222,99 @@ const StudentJob = () => {
         setJobType(event.target.value);
     };
 
-    const loadJobs = async () => {
+    const loadJobs = async (start = 0, end = showPerPage) => {
 
-        await apiJson(`/jobs`).then((res) => {
-            setJobs(res.data);
-            setTotal(res?.data.length);
+        await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+            console.log(res?.data);
+            setJobs(res?.data.data);
+            setTotal(res?.data.total);
+            setPostCount(res?.data.total);
         }).catch((err) => {
             console.log(err);
         })
         setLoading(false);
     }
 
-    const handleSearch = async (e) => {
+    const handleSearch = async (e, start = 0, end = showPerPage) => {
         setLoading(true);
         e?.preventDefault();
 
         switch (search) {
             case 1: {
-                await apiJson(`/students?q=${value}`).then((res) => {
-                    console.log(res?.data)
-                    setJobs(res.data);
-                    setTotal(res?.data.length);
-                    setPostCount(res?.data.length);
-                    setValue("");
+                await apiCAll(`/api/user/student/searchBy/name`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setJobs(res?.data.data);
+                    setPostCount(res?.data.total);
+                    setTotal(res?.data.total);
                 }).catch((err) => {
                     console.log(err);
                 })
+                setLoading(false);
             } break;
             case 2: {
-                await apiJson(`/students?q=${value}`).then((res) => {
-                    console.log(res?.data)
-                    setJobs(res.data);
-                    setTotal(res?.data.length);
-                    setPostCount(res?.data.length);
-                    setValue("");
+                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setJobs(res?.data.data);
+                    setTotal(res?.data.total);
+                    setPostCount(res?.data.total);
                 }).catch((err) => {
                     console.log(err);
                 })
+                setLoading(false);
             } break;
             case 3: {
-                await apiJson(`/students?q=${value}`).then((res) => {
-                    console.log(res?.data)
-                    setJobs(res.data);
-                    setTotal(res?.data.length);
-                    setPostCount(res?.data.length);
-                    setValue("");
+                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setJobs(res?.data.data);
+                    setTotal(res?.data.total);
+                    setPostCount(res?.data.total);
                 }).catch((err) => {
                     console.log(err);
                 })
+                setLoading(false);
             } break;
             case 4: {
-                await apiJson(`/students?q=${value}`).then((res) => {
-                    console.log(res?.data)
-                    setJobs(res.data);
-                    setTotal(res?.data.length);
-                    setPostCount(res?.data.length);
-                    setValue("");
+                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setJobs(res?.data.data);
+                    setTotal(res?.data.total);
+                    setPostCount(res?.data.total);
                 }).catch((err) => {
                     console.log(err);
                 })
+                setLoading(false);
             } break;
             case 5: {
-                await apiJson(`/students?q=${value}`).then((res) => {
-                    console.log(res?.data)
-                    setJobs(res.data);
-                    setTotal(res?.data.length);
-                    setPostCount(res?.data.length);
-                    setValue("");
+                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setJobs(res?.data.data);
+                    setTotal(res?.data.total);
+                    setPostCount(res?.data.total);
                 }).catch((err) => {
                     console.log(err);
                 })
+                setLoading(false);
             } break;
             default: {
                 alert("Please select the category")
             }
         }
 
-        
-        if (value) {
-            await apiJson(`/jobs?q=${value}`).then((res) => {
-                setJobs(res.data);
-                console.log(res?.data)
-                setTotal(res?.data.length);
-                setPostCount(res?.data.length);
-                setValue("");
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
-        else {
-            alert("Please Enter text to search");
-        }
+
+        // if (value) {
+        //     await apiJson(`/jobs?q=${value}`).then((res) => {
+        //         setJobs(res.data);
+        //         console.log(res?.data)
+        //         setTotal(res?.data.length);
+        //         setPostCount(res?.data.length);
+        //         setValue("");
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     })
+        // }
+        // else {
+        //     alert("Please Enter text to search");
+        // }
         setLoading(false);
     }
 
@@ -423,17 +425,24 @@ const StudentJob = () => {
                                                 <h1 className='main_heading'>No Result Found</h1>
                                             </div>
                                         ) :
-                                        (jobs && jobs.slice(pagination.start, pagination.end).map((job, index) => (
+                                        (jobs && jobs.map((job, index) => (
                                             <Grid item lg={12} key={index}>
                                                 <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                     <div className={classes.software_title}>
                                                         <div>
-                                                            <h3 className='mobileHeading'>{job.companyName}</h3>
-                                                            <Typography>{job.jobRole}</Typography>
-                                                            <Typography>{job.city}</Typography>
-                                                            <Typography>{job.type}</Typography>
+                                                            <h3 className='mobileHeading'>{job.COMPANYNAME}</h3>
+                                                            <Typography>{job.TITTLE}</Typography>
+                                                            <Typography>{job.ADDRESS}</Typography>
+                                                            <div>
+                                                                <Typography sx={{ display: 'inline-block' }}>{job.DURATION}</Typography>,&nbsp;
+                                                                <Typography sx={{ display: 'inline-block' }}>{job.LOCATION}</Typography>
+                                                                <a style={{ display: 'block' }} href="https://www.google.com/" target={"_blank"}>Detail</a>
+                                                            </div>
                                                         </div>
-                                                        <img className={classes.software_image} src={job.image} alt="student" />
+                                                        <div>
+                                                            <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>24-8-22</Typography>
+                                                            <img className={classes.software_image} src={job.IMAGE} alt="student" />
+                                                        </div>
                                                     </div>
                                                     <Accordion>
                                                         <AccordionSummary
@@ -445,7 +454,7 @@ const StudentJob = () => {
                                                         </AccordionSummary>
                                                         <AccordionDetails>
                                                             <Typography>
-                                                                {job.description}
+                                                                {job.DESCRIPTION}
                                                             </Typography>
                                                         </AccordionDetails>
                                                     </Accordion>

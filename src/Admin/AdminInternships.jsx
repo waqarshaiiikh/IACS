@@ -32,7 +32,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { makeStyles } from '@material-ui/styles';
 import MetaData from '../MetaData';
 import "../CSS/Utils.css";
-import { apiJson } from '../integration/apiCall';
+import { apiJson, apiCAll } from '../integration/apiCall';
 
 const useStyles = makeStyles({
   searching: {
@@ -162,94 +162,103 @@ const AdminInternships = () => {
     setInternshipType(event.target.value);
   };
 
-  const loadInternship = async () => {
-    await apiJson(`/internships`).then((res) => {
-      setInternships(res.data);
-      setTotal(res?.data.length);
+  const loadInternship = async (start = 0, end = showPerPage) => {
+    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+      console.log(res?.data);
+      setInternships(res?.data.data);
+      setTotal(res?.data.total);
+      setPostCount(res?.data.total);
     }).catch((err) => {
       console.log(err);
     })
-    setLoading(false)
+    setLoading(false);
   }
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e, start = 0, end = showPerPage) => {
     setLoading(true);
     e?.preventDefault();
+    console.log(value, search)
+    if (!value || !search) {
+      return await loadInternship(start, end).then(() => {
+        setLoading(false)
+        return null;
+      });
+    }
 
     switch (search) {
       case 1: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setInternships(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/name`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
+          console.log(res?.data);
+          setInternships(res?.data.data);
+          setPostCount(res?.data.total);
+          setTotal(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       } break;
       case 2: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setInternships(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+          console.log(res?.data);
+          setInternships(res?.data.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       } break;
       case 3: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setInternships(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/year`, 'post', { pagination: { starts: start, totalRows: end - start }, year: { query: value }, }).then((res) => {
+          console.log(res?.data);
+          setInternships(res?.data.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       } break;
       case 4: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setInternships(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/university`, 'post', { pagination: { starts: start, totalRows: end - start }, university: { query: value }, }).then((res) => {
+          console.log(res?.data);
+          setInternships(res?.data.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       } break;
       case 5: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setInternships(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end - start }, skill: { query: value }, }).then((res) => {
+          console.log(res?.data);
+          setInternships(res?.data.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       } break;
       default: {
         alert("Please select the category")
       }
     }
-    
-    if (value) {
-      await apiJson(`/internships?q=${value}`).then((res) => {
-        setInternships(res.data);
-        setTotal(res?.data.length);
-        setPostCount(res?.data.length);
-        setValue("")
-      }).catch((err) => {
-        console.log(err);
-      })
-    }
-    else {
-      alert("Please Enter text to search");
-    }
+
+    // if (value) {
+    //   await apiJson(`/internships?q=${value}`).then((res) => {
+    //     setInternships(res.data);
+    //     setTotal(res?.data.length);
+    //     setPostCount(res?.data.length);
+    //     setValue("")
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   })
+    // }
+    // else {
+    //   alert("Please Enter text to search");
+    // }
     setLoading(false);
   }
 
@@ -333,9 +342,9 @@ const AdminInternships = () => {
                     onChange={handleChange}
                   >
                     <MenuItem value={1}>Company Name</MenuItem>
-                    <MenuItem value={2}>Job Role</MenuItem>
-                    <MenuItem value={3}>City</MenuItem>
-                    <MenuItem value={4}>Type</MenuItem>
+                    <MenuItem value={2}>Title</MenuItem>
+                    <MenuItem value={3}>Address</MenuItem>
+                    <MenuItem value={4}>Location</MenuItem>
                     <MenuItem value={5}>Skills</MenuItem>
                   </Select>
                 </FormControl>
@@ -357,17 +366,24 @@ const AdminInternships = () => {
                     (<div className='Post_center'>
                       <h1 className='main_heading'>No Result Found</h1>
                     </div>) :
-                    (internships && internships.slice(pagination.start, pagination.end).map((intern, index) => (
+                    (internships && internships.map((intern, index) => (
                       <Grid item lg={12} key={index}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.software_title}>
                             <div>
-                              <h3 className='mobileHeading'>{intern.companyName}</h3>
-                              <Typography>{intern.jobRole}</Typography>
-                              <Typography>{intern.city}</Typography>
-                              <Typography>{intern.type}</Typography>
+                              <h3 className='mobileHeading'>{intern.COMPANYNAME}</h3>
+                              <Typography>{intern.TITTLE}</Typography>
+                              <Typography>{intern.ADDRESS}</Typography>
+                              <div>
+                                <Typography sx={{ display: 'inline-block' }}>{intern.DURATION}</Typography>,&nbsp;
+                                <Typography sx={{ display: 'inline-block' }}>{intern.LOCATION}</Typography>
+                                <a style={{ display: 'block' }} href={intern.LINKS} target={"_blank"}>Detail</a>
+                              </div>
                             </div>
-                            <img className={classes.software_image} src={intern.image} alt="student" />
+                            <div>
+                              <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{intern.POSTDATE.split('T')[0]}</Typography>
+                              <img className={classes.software_image} src={intern.IMAGE} alt="student" />
+                            </div>
                           </div>
                           <Accordion>
                             <AccordionSummary

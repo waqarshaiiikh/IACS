@@ -258,8 +258,6 @@ const ClientStudent = () => {
 
       } break;
       case 5: {
-
-        
         await apiCAll(`/api/user/student/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end-start },skill: {query: value}, }).then((res) => {
           console.log(res?.data);
           setStudentData(res?.data.data);
