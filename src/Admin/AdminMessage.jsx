@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AdminNavbar from './AdminNavbar';
+import Pagination from '../Pages/Pagination';
 import "../CSS/AdminDashboard.css";
 import {
   Accordion,
@@ -17,7 +18,8 @@ import {
   TextField,
 } from '@mui/material';
 import MetaData from '../MetaData';
-import "../CSS/Utils.css"
+import "../CSS/Utils.css";
+import { apiCAll, apiJson } from '../integration/apiCall';
 
 const drawerWidth = 200;
 
@@ -54,6 +56,21 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const AdminMessage = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState();
+  const [showPerPage] = useState(4)
+  const [total, setTotal] = useState(0);
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: showPerPage
+  });
+
+  const onPaginationChange = (start, end) => {
+    setPagination({
+      start: start,
+      end: end
+    })
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -62,6 +79,17 @@ const AdminMessage = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const loadMessage = async () => {
+
+    await apiJson(`/internships`).then((res) => {
+      setMessage(res?.data);
+      setTotal(res?.data.length);
+    }).catch((err) => {
+      console.log(err);
+    })
+    setLoading(false);
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -72,7 +100,7 @@ const AdminMessage = () => {
       <Main open={open}>
         <DrawerHeader />
         <MetaData title="Admin Messages" />
-        <Container sx={{ background: '#FAF9F6	', overflow: 'hidden', borderRadius: '20px', padding:'1vmax', width: '100vw', height: { lg: '90vh' }, display: { lg: 'flex' }, alignItems: { lg: 'center' } }}>
+        <Container sx={{ background: '#FAF9F6	', overflow: 'hidden', borderRadius: '20px', padding: '1vmax', width: '100vw', height: { lg: '90vh' }, display: { lg: 'flex' }, alignItems: { lg: 'center' } }}>
           <Grid container spacing={2}>
             <Grid item sx={{ textAlign: 'center' }} lg={12}>
               <h1>Messages</h1>
@@ -107,6 +135,12 @@ const AdminMessage = () => {
             </Grid>
           </Grid>
         </Container>
+        <Box sx={{ margin: '20px 0px' }}>
+          <Pagination showPerPage={showPerPage}
+            onPaginationChange={onPaginationChange}
+            numberOfButtons={Math.ceil(total / showPerPage)}
+          />
+        </Box>
       </Main>
     </Box>
   )
