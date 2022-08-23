@@ -412,26 +412,6 @@ const ClientInternship = () => {
                         }}>
                         <div>
                             {
-                                search == 2 ?
-                                    (<Box sx={{ minWidth: 120 }}>
-                                        <FormControl fullWidth>
-                                            <InputLabel id="demo-simple-select-label">Job Role</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
-                                                value={internshipRole}
-                                                label="Job Role"
-                                                onChange={handleInternshipRole}
-                                                sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
-                                            >
-                                                <MenuItem value="fullStack">Full Stack Developer</MenuItem>
-                                                <MenuItem value="frontend">Front End Developer</MenuItem>
-                                                <MenuItem value="backend">Back End Developer</MenuItem>
-                                                <MenuItem value="database">Database Engineer</MenuItem>
-                                                <MenuItem value="softwareEngineer">Software Engineer</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </Box>) :
                                     (search == 4 ?
                                         (<Box sx={{ minWidth: 120 }}>
                                             <FormControl fullWidth>
@@ -473,9 +453,9 @@ const ClientInternship = () => {
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={1}>Company Name</MenuItem>
-                                    <MenuItem value={2}>Job Role</MenuItem>
-                                    <MenuItem value={3}>City</MenuItem>
-                                    <MenuItem value={4}>Type</MenuItem>
+                                    <MenuItem value={2}>Job Title</MenuItem>
+                                    <MenuItem value={3}>Address</MenuItem>
+                                    <MenuItem value={4}>Location</MenuItem>
                                     <MenuItem value={5}>Skills</MenuItem>
                                 </Select>
                             </FormControl>
