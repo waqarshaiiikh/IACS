@@ -458,9 +458,9 @@ const StudentInternship = () => {
                                     onChange={handleChange}
                                 >
                                     <MenuItem value={1}>Company Name</MenuItem>
-                                    <MenuItem value={2}>Internship Role</MenuItem>
-                                    <MenuItem value={3}>City</MenuItem>
-                                    <MenuItem value={4}>Type</MenuItem>
+                                    <MenuItem value={2}>Title</MenuItem>
+                                    <MenuItem value={3}>Address</MenuItem>
+                                    <MenuItem value={4}>Location</MenuItem>
                                     <MenuItem value={5}>Skills</MenuItem>
                                 </Select>
                             </FormControl>
