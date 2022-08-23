@@ -40,13 +40,14 @@ const StudentSignIn = () => {
         
         setError(null);
         setLoading(true);
-        a.setUserType("admin")
+
+        
+            a.setUserType("admin")
             a.setSignin(true);
             localStorage.setItem('UserType', JSON.stringify("admin"));
             localStorage.setItem('Signin', JSON.stringify(true));
             setLoading(false);
-            navigate('/admin/Home'); 
-
+            navigate('/Admin/home'); 
         // const reqData = { email: email.value, password: password.value , clientName: "student"};
         
         // await apiCAll(`/api/login`,'post', reqData )

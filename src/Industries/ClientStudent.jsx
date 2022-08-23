@@ -99,23 +99,24 @@ const ClientStudent = () => {
 
   const handleDepartmentChange = (event) => {
     console.log(event.target.value)
+    setValue(event.target.value);
     setDepartment(event.target.value);
   };
 
   const handleYearChange = (event) => {
     console.log(event.target.value)
+    setValue(event.target.value);
     setYear(event.target.value);
   };
 
   const onPaginationChange =  (start, end) => {
-
-    handleSearch(null).then(()=>{
-      
-    });
+    
     setPagination({
       start: start,
       end: end
-    })
+    }); 
+    handleSearch(null, start, end).then(()=>{
+    });
   }
 
   const getStudentYear = (studentYear) => {
@@ -138,16 +139,16 @@ const ClientStudent = () => {
   }
   const updateStudentSkill = async (expanded, index, student) => {
     if (!studentData[index]?.skills && expanded) {
-
-      await apiJson(`/skills?id=${student.id}`).then((res) => {
+      await apiCAll(`/api/user/student/skill/get`, 'post', { student:{ id : student.ID } }).then((res) => {
 
         let st = studentData;
         let skill_STD = st[index];
-        skill_STD = { ...skill_STD, skills: res.data[0].skills };
+        skill_STD = { ...skill_STD, skills: res?.data };
         st[index] = skill_STD;
         setStudentData([...st])
-        console.log(studentData)
-
+        // console.log(res?.data);
+        // console.log(studentData)
+        
       }).catch((err) => {
         console.log(err);
       })
@@ -158,15 +159,17 @@ const ClientStudent = () => {
   const updateStudentExperience = async (expanded, index, student) => {
     if (!studentData[index]?.experience && expanded) {
 
-      await apiJson(`/experience?id=${student.id}`).then((res) => {
+      await apiCAll(`/api/user/student/experience/get`, 'post', { student:{ id : student.ID } }).then((res) => {
 
         let st = studentData;
         let experience_STD = st[index];
-        experience_STD = { ...experience_STD, experience: res.data[0].experience };
+        experience_STD = { ...experience_STD, experience:  res?.data  };
         st[index] = experience_STD;
         setStudentData([...st])
-        console.log(studentData)
 
+        // console.log(res?.data);
+        // console.log(studentData)
+        
       }).catch((err) => {
         console.log(err);
       })
@@ -174,103 +177,108 @@ const ClientStudent = () => {
     }
   }
 
-  const loadStudent = async () => {
+  const loadStudent = async ( start = 0, end=showPerPage) => {
 
-    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: pagination.start, totalRows: pagination.end-pagination.start } }).then((res) => {
+    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end-start } }).then((res) => {
       console.log(res?.data);
       setStudentData(res?.data.data);
       // setStudents(res?.data);
       setTotal(res?.data.total);
+      setPostCount(res?.data.total);
     }).catch((err) => {
       console.log(err);
     })
     setLoading(false);
   }
 
-  const handleSearch = async (e) => {
+
+
+  const handleSearch = async (e,start = 0, end=showPerPage) => {
     setLoading(true)
     e?.preventDefault();
-
+    console.log(value, search)
+    if (!value || !search) {
+      return await loadStudent(start, end).then(() => {
+        setLoading(false)
+        return null;
+      });
+    }
 
     switch (search) {
       case 1: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setStudents(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/name`, 'post', { pagination: { starts: start, totalRows: end-start },name: {query: value}, }).then((res) => {
+          console.log(res?.data);
+          setStudentData(res?.data.data);
+          // setStudents(res?.data);
+            setPostCount(res?.data.total);
+          setTotal(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
+
       } break;
       case 2: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setStudents(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end-start },depart: {query: value}, }).then((res) => {
+          console.log(res?.data);
+          setStudentData(res?.data.data);
+          // setStudents(res?.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
+
       } break;
       case 3: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setStudents(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        await apiCAll(`/api/user/student/searchBy/year`, 'post', { pagination: { starts: start, totalRows: end-start },year: {query: value}, }).then((res) => {
+          console.log(res?.data);
+          setStudentData(res?.data.data);
+          // setStudents(res?.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
       } break;
       case 4: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setStudents(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+        
+        await apiCAll(`/api/user/student/searchBy/university`, 'post', { pagination: { starts: start, totalRows: end-start },university: {query: value}, }).then((res) => {
+          console.log(res?.data);
+          setStudentData(res?.data.data);
+          // setStudents(res?.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
+
       } break;
       case 5: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setStudents(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
+
+        
+        await apiCAll(`/api/user/student/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end-start },skill: {query: value}, }).then((res) => {
+          console.log(res?.data);
+          setStudentData(res?.data.data);
+          // setStudents(res?.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
         }).catch((err) => {
           console.log(err);
         })
+        setLoading(false);
+
       } break;
       default: {
-        await loadStudent();
-        // alert("Please select the category")
+        alert("Please select the category")
       }
     }
 
     setLoading(false)
 
-
-    // if (value) {
-    //   await apiJson(`/students?q=${value}`).then((res) => {
-    //     console.log(res?.data)
-    //     setStudents(res.data);
-    //     setTotal(res?.data.length);
-    //     setPostCount(res?.data.length);
-    //     setValue("");
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   })
-    // }
-    // else {
-    //   alert("Enter text to search");
-    // }
 
   }
 
@@ -279,6 +287,7 @@ const ClientStudent = () => {
     loadStudent();
     setLoading(true)
   }, [])
+  
   return (
     <>
       <MetaData title="Students" />
@@ -398,7 +407,8 @@ const ClientStudent = () => {
                   (<div className='Post_center'>
                     <h1 className='main_heading'>No Result Found</h1>
                   </div>) : (
-                    studentData && studentData.slice(pagination.start, pagination.end).map((student, index1) => (
+                    // studentData && studentData.slice(pagination.start, pagination.end).map((student, index1) => (
+                      studentData && studentData.map((student, index1) => (
                       <Grid Grid item lg={10}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.student_title}>
@@ -424,7 +434,7 @@ const ClientStudent = () => {
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
-                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1 + pagination.start, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentSkill(expanded, index1, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -435,16 +445,15 @@ const ClientStudent = () => {
                             <AccordionDetails>
                               <Typography>
                                 {
-
-                                  studentData[index1 + pagination.start].skills && studentData[index1 + pagination.start].SKILLS.map((skill, index) => (
-                                    <Chip label={skill} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                  studentData[index1].skills && studentData[index1].skills.map((skill, index) => (
+                                    <Chip label={skill.title} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
 
                                 }
                               </Typography>
                             </AccordionDetails>
                           </Accordion>
 
-                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded, index1 + pagination.start, student)}>
+                          <Accordion onChange={(e, expanded) => updateStudentExperience(expanded, index1, student)}>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
@@ -454,12 +463,12 @@ const ClientStudent = () => {
                             </AccordionSummary>
                             <AccordionDetails>
                               {
-                                studentData[index1 + pagination.start].EXPERIENCE && studentData[index1 + pagination.start].EXPERIENCE.map((exp, index) => (
+                                studentData[index1 ].experience && studentData[index1].experience.map((exp, index) => (
                                   <Typography style={{ marginBottom: '10px' }}>
                                     <Typography variant='h6' style={{ fontWeight: 'bold' }}>{exp.companyName}</Typography>
-                                    <Typography style={{ fontWeight: 'bold' }}>{exp.JOBROLE}</Typography>
-                                    <Typography style={{ fontWeight: 'bold' }}>{exp.STARTDATE} to {exp.ENDDATE}</Typography>
-                                    <Typography>{exp.description}</Typography>
+                                    <Typography style={{ fontWeight: 'bold' }}>{exp.jobRole}</Typography>
+                                    <Typography style={{ fontWeight: 'bold' }}>{exp.startDate.split('T')[0]} to {exp.endDate.split('T')[0]}</Typography>
+                                    <Typography>{exp.Description}</Typography>
                                   </Typography>
                                 ))
                               }
