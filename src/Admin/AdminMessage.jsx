@@ -52,10 +52,37 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const message = [
+const messages = [
   {
-    NAME:"Khalid"
-  }
+    FULL_NAME: "Khalid",
+    EMAIL: "abc@gmail.com",
+    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
+  },
+  {
+    FULL_NAME: "Waqar",
+    EMAIL: "abc@gmail.com",
+    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
+  },
+  {
+    FULL_NAME: "Uzair",
+    EMAIL: "abc@gmail.com",
+    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
+  },
+  {
+    FULL_NAME: "Maaz",
+    EMAIL: "abc@gmail.com",
+    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
+  },
+  {
+    FULL_NAME: "Maaz",
+    EMAIL: "abc@gmail.com",
+    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
+  },
+  {
+    FULL_NAME: "Maaz",
+    EMAIL: "abc@gmail.com",
+    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
+  },
 ];
 
 
@@ -64,7 +91,8 @@ const AdminMessage = () => {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState();
-  const [showPerPage] = useState(4)
+  const [postCount, setPostCount] = useState(null)
+  const [showPerPage] = useState(6)
   const [total, setTotal] = useState(0);
   const [pagination, setPagination] = useState({
     start: 0,
@@ -86,16 +114,24 @@ const AdminMessage = () => {
     setOpen(false);
   };
 
-  const loadMessage = async () => {
+  const loadMessage = async (start = 0, end = showPerPage) => {
 
-    await apiJson(`/internships`).then((res) => {
-      setMessage(res?.data);
-      setTotal(res?.data.length);
+    await apiCAll(`/api/user/softwareHouse/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+      console.log(res?.data);
+      setMessage(res?.data.data);
+      // setStudents(res?.data);
+      setTotal(res?.data.total);
+      setPostCount(res?.data.total);
     }).catch((err) => {
       console.log(err);
     })
     setLoading(false);
   }
+
+  useEffect(() => {
+    loadMessage();
+    setLoading(true)
+  }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -111,34 +147,19 @@ const AdminMessage = () => {
             <Grid item sx={{ textAlign: 'center' }} lg={12}>
               <h1>Messages</h1>
             </Grid>
-            <Grid item lg={4} xs={12}>
-              <div className="adminMessage">
-                <h2>Name</h2>
-                <span>123@gmail.com</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dicta aperiam repudiandae officia, eveniet adipisci vitae amet culpa? Quidem iure facere nemo reiciendis amet tempore ipsum aut, deleniti sunt nobis?</p>
-              </div>
-            </Grid>
-            <Grid item lg={4} xs={12}>
-              <div className="adminMessage">
-                <h2>Name</h2>
-                <span>123@gmail.com</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dicta aperiam repudiandae officia, eveniet adipisci vitae amet culpa? Quidem iure facere nemo reiciendis amet tempore ipsum aut, deleniti sunt nobis?</p>
-              </div>
-            </Grid>
-            <Grid item lg={4} xs={12}>
-              <div className="adminMessage">
-                <h2>Name</h2>
-                <span>123@gmail.com</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dicta aperiam repudiandae officia, eveniet adipisci vitae amet culpa? Quidem iure facere nemo reiciendis amet tempore ipsum aut, deleniti sunt nobis?</p>
-              </div>
-            </Grid>
-            <Grid item lg={4} xs={12}>
-              <div className="adminMessage">
-                <h2>Name</h2>
-                <span>123@gmail.com</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dicta aperiam repudiandae officia, eveniet adipisci vitae amet culpa? Quidem iure facere nemo reiciendis amet tempore ipsum aut, deleniti sunt nobis?</p>
-              </div>
-            </Grid>
+            {
+              messages.map((message, index1) => (
+                <>
+                  <Grid item lg={4} xs={12} key={index1}>
+                    <div className="adminMessage">
+                      <h2>{message.FULL_NAME}</h2>
+                      <span>{message.EMAIL}</span>
+                      <p>{message.MESSAGE}</p>
+                    </div>
+                  </Grid>
+                </>
+              ))
+            }
           </Grid>
         </Container>
         <Box sx={{ margin: '20px 0px' }}>

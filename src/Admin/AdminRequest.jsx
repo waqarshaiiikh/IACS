@@ -1,39 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import AdminNavbar from './AdminNavbar';
-import "../CSS/Utils.css"
-import Pagination from '../Pages/Pagination';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
+  Container,
+  Grid,
+  TextField,
+  Box,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Autocomplete,
-  Button,
-  Backdrop,
-  Box,
-  Chip,
-  Container,
-  Checkbox,
-  CircularProgress,
-  FormControl,
-  Grid,
-  Modal,
-  MenuItem,
   Typography,
-  TextField,
-  TextareaAutosize,
-  Select,
-  InputLabel
+  Chip,
+  CircularProgress,
+  Backdrop,
+  InputLabel,
+  FormControl,
+  MenuItem,
+  Select
 } from '@mui/material';
+import Pagination from '../Pages/Pagination';
+import AdminNavbar from './AdminNavbar';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from '../MetaData';
-import "../CSS/Utils.css";
-import { apiCAll, apiJson } from '../integration/apiCall';
-
+import { Api, apiCAll, apiJson } from '../integration/apiCall';
+import ClientNavbar from '../Industries/ClientNavbar';
 
 const useStyles = makeStyles({
   searching: {
@@ -45,8 +36,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80%',
+    width: '800px',
     height: '40px',
+    marginRight: '10px',
     border: '1px solid black',
     boxSizing: 'border-box'
   },
@@ -69,15 +61,15 @@ const useStyles = makeStyles({
     alignItems: 'center',
     cursor: 'pointer'
   },
-  software_title: {
+  student_title: {
     display: 'flex',
     justifyContent: 'space-between',
 
   },
-  software_image: {
+  student_image: {
     width: '100px',
     height: '100px'
-  },
+  }
 });
 
 const drawerWidth = 200;
@@ -111,45 +103,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+
 const AdminRequest = () => {
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [search, setSearch] = useState(1);
-  const [jobRole, setJobRole] = useState('');
-  const [jobType, setJobType] = useState('');
-  const [jobs, setJobs] = useState();
-  const [postCount, setPostCount] = useState(null);
-  const [showPerPage] = useState(4);
-  const [total, setTotal] = useState(0);
-  const [pagination, setPagination] = useState({
-    start: 0,
-    end: showPerPage
-  });
-  const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState();
-
-  const onPaginationChange = (start, end) => {
-    setPagination({
-      start: start,
-      end: end
-    })
-  }
-
-  const handleChange = (event) => {
-    console.log(event.target.value)
-    setSearch(event.target.value);
-  };
-
-  const handleJobRole = (event) => {
-    console.log(event.target.value)
-    setJobRole(event.target.value);
-  };
-
-  const handleJobType = (event) => {
-    console.log(event.target.value)
-    setJobType(event.target.value);
-  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -159,197 +118,141 @@ const AdminRequest = () => {
     setOpen(false);
   };
 
+  const [loading, setLoading] = useState(false);
+  const [studentsRequest, setStudentsRequest] = useState(false);
+  const [postCount, setPostCount] = useState();
+  const [showPerPage] = useState(4)
+  const [total, setTotal] = useState(0);
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: showPerPage
+  });
+  const onPaginationChange = (start, end) => {
 
-  const loadJobs = async () => {
+    setPagination({
+      start: start,
+      end: end
+    });
+  }
 
-    await apiJson(`/jobs`).then((res) => {
-      setJobs(res.data);
-      setTotal(res?.data.length);
+  const getStudentYear = (studentYear) => {
+    switch (studentYear) {
+      case "1":
+        return "First year";
+        break;
+      case "2":
+        return "Second Year";
+        break;
+      case "3":
+        return "Third Year";
+        break;
+      case "4":
+        return "Final year";
+        break;
+      default:
+        return "None"
+    }
+  }
+
+  const loadRequest = async (start = 0, end = showPerPage) => {
+
+    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+      console.log(res?.data);
+      setStudentsRequest(res?.data.data);
+      // setStudents(res?.data);
+      setTotal(res?.data.total);
+      setPostCount(res?.data.total);
     }).catch((err) => {
       console.log(err);
     })
     setLoading(false);
   }
 
-  const handleSearch = async (e) => {
-    setLoading(true);
-    e?.preventDefault();
-
-    switch (search) {
-      case 1: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setJobs(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
-        }).catch((err) => {
-          console.log(err);
-        })
-      } break;
-      case 2: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setJobs(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
-        }).catch((err) => {
-          console.log(err);
-        })
-      } break;
-      case 3: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setJobs(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
-        }).catch((err) => {
-          console.log(err);
-        })
-      } break;
-      case 4: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setJobs(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
-        }).catch((err) => {
-          console.log(err);
-        })
-      } break;
-      case 5: {
-        await apiJson(`/students?q=${value}`).then((res) => {
-          console.log(res?.data)
-          setJobs(res.data);
-          setTotal(res?.data.length);
-          setPostCount(res?.data.length);
-          setValue("");
-        }).catch((err) => {
-          console.log(err);
-        })
-      } break;
-      default: {
-        alert("Please select the category")
-      }
-    }
-
-
-    if (value) {
-      await apiJson(`/jobs?q=${value}`).then((res) => {
-        setJobs(res.data);
-        console.log(res?.data)
-        setTotal(res?.data.length);
-        setPostCount(res?.data.length);
-        setValue("");
-      }).catch((err) => {
-        console.log(err);
-      })
-    }
-    else {
-      alert("Please Enter text to search");
-    }
-    setLoading(false);
-  }
-
-
   useEffect(() => {
-    loadJobs();
-    setLoading(true);
+    loadRequest();
+    setLoading(true)
   }, [])
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AdminNavbar open={open}
-        handleDrawerClose={handleDrawerClose}
-        handleDrawerOpen={handleDrawerOpen}
-        theme={theme} />
-      <Main open={open}>
-        <DrawerHeader />
-        <MetaData title="Admin Requests" />
-        <Container maxWidth="xl" sx={{ padding: '0' }}>
-                <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Grid item lg={10} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
-                        <h1>Jobs and Internships Request</h1>
-                    </Grid>
-                    
-                    <Grid item lg={10} xs={12} >
-                        <Grid container spacing={2}>
-                            {
-                                loading ?
-                                    (
-                                        <Backdrop
-                                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
-                                            <CircularProgress color="inherit" />
-                                        </Backdrop>
-                                    ) : ((postCount === 0) ?
-                                        (
-                                            <div className='Post_center'>
-                                                <h1 className='main_heading'>No Result Found</h1>
-                                            </div>
-                                        ) :
-                                        (jobs && jobs.slice(pagination.start, pagination.end).map((job, index) => (
-                                            <Grid item lg={12} key={index}>
-                                                <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                                    <div className={classes.software_title}>
-                                                        <div>
-                                                            <h3 className='mobileHeading'>{job.companyName}</h3>
-                                                            <Typography>{job.jobRole}</Typography>
-                                                            <Typography>{job.city}</Typography>
-                                                            <Typography>{job.type}</Typography>
-                                                        </div>
-                                                        <img className={classes.software_image} src={job.image} alt="student" />
-                                                    </div>
-                                                    <Accordion>
-                                                        <AccordionSummary
-                                                            expandIcon={<ExpandMoreIcon />}
-                                                            aria-controls="panel1a-content"
-                                                            id="about"
-                                                        >
-                                                            <Typography>Description</Typography>
-                                                        </AccordionSummary>
-                                                        <AccordionDetails>
-                                                            <Typography>
-                                                                {job.description}
-                                                            </Typography>
-                                                        </AccordionDetails>
-                                                    </Accordion>
-                                                    <Accordion>
-                                                        <AccordionSummary
-                                                            expandIcon={<ExpandMoreIcon />}
-                                                            aria-controls="panel1a-content"
-                                                            id="skills"
-                                                        >
-                                                            <Typography>Required Skills</Typography>
-                                                        </AccordionSummary>
-                                                        <AccordionDetails>
-                                                            <Typography>
-                                                                {
-                                                                    job.requiredSkill && job.requiredSkill.map((services, i) => (
-                                                                        <Chip label={services} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                                                }
-                                                            </Typography>
-                                                        </AccordionDetails>
-                                                    </Accordion>
-                                                </Box>
-                                            </Grid>
-                                        )))
-                                    )
-                            }
+    <>
+      <Box sx={{ display: 'flex' }}>
+        <AdminNavbar open={open}
+          handleDrawerClose={handleDrawerClose}
+          handleDrawerOpen={handleDrawerOpen}
+          theme={theme} />
+        <Main open={open}>
+          <DrawerHeader />
+          <MetaData title="Students" />
+          <Container maxWidth="xl" sx={{ padding: '0' }}>
+            <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
+                <h1>Jobs and Internships Request</h1>
+              </Grid>
+              <Grid item lg={12} xs={12} className={classes.studentList} >
+                <Grid container spacing={3} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+                  {loading ? (
+                    <Backdrop
+                      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+                      <CircularProgress color="inherit" />
+                    </Backdrop>
+                  ) : ((postCount === 0) ?
+                    (<div className='Post_center'>
+                      <h1 className='main_heading'>No Result Found</h1>
+                    </div>) : (
+                      // studentData && studentData.slice(pagination.start, pagination.end).map((student, index1) => (
+                      studentsRequest && studentsRequest.map((student, index1) => (
+                        <Grid Grid item lg={10}>
+                          <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                            <div className={classes.student_title}>
+                              <img className={classes.student_image} src={student.IMAGE} alt="student" />
+                              <div>
+                                <Typography variant='h6'>{student.FNAME + " " + student.LNAME}</Typography>
+                                <Typography>{Api.DEPARTMENT[student.DEPARTMENT]}</Typography>
+                                <Typography>{getStudentYear(student.YEAR)}</Typography>
+                                <Typography>{student.UNIVERSITY}</Typography>
+                                <Typography>{student.TITTLE}</Typography>
+                                <div>
+                                  <Typography sx={{ display: 'inline-block' }}>{student.DURATION}</Typography>,&nbsp;
+                                  <Typography sx={{ display: 'inline-block' }}>{student.LOCATION}</Typography>
+                                </div>
+                              </div>
+                            </div>
+                            <Accordion>
+                              <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="about"
+                              >
+                                <Typography>Description</Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Typography>
+                                  {student.DESCRIPTION}
+                                </Typography>
+                              </AccordionDetails>
+                            </Accordion>
+                          </Box>
                         </Grid>
-                    </Grid>
-                    <Box sx={{ margin: '20px 0px' }}>
-                        <Pagination showPerPage={showPerPage}
-                            onPaginationChange={onPaginationChange}
-                            numberOfButtons={Math.ceil(total / showPerPage)}
-                        />
-                    </Box>
+                      ))
+                    ))
+                  }
                 </Grid>
-            </Container>
-      </Main>
-    </Box>
+              </Grid>
+              <Box sx={{ margin: '20px 0px' }}>
+                <Pagination showPerPage={showPerPage}
+                  onPaginationChange={onPaginationChange}
+                  numberOfButtons={Math.ceil(total / showPerPage)}
+                />
+              </Box>
+            </Grid>
+          </Container>
+        </Main>
+      </Box>
+      <div>
+
+      </div>
+
+    </>
   )
 }
 
