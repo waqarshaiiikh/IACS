@@ -97,6 +97,10 @@ const PostJob = (props) => {
     const [duration, setDuration] = useState("")
     const [location, setLocation] = useState("")
     const [description, setDescription] = useState("")
+    const [linkedin, setLinkedin] = useState("")
+    const [skill, setSkill] = useState()
+
+    const a = useContext(noteContext)
 
 
     const handleSubmit = (e) => {
@@ -220,7 +224,8 @@ const StudentJob = () => {
     const handleJobType = (event) => {
         console.log(event.target.value)
         setJobType(event.target.value);
-    };
+        setValue(event.target.value);
+      };
 
     const loadJobs = async (start = 0, end = showPerPage) => {
 
@@ -239,66 +244,74 @@ const StudentJob = () => {
         setLoading(true);
         e?.preventDefault();
 
+        console.log(value, search)
+        if (!value || !search) {
+          return await loadJobs(start, end).then(() => {
+            setLoading(false)
+            return null;
+          });
+        }
+
         switch (search) {
             case 1: {
-                await apiCAll(`/api/user/student/searchBy/name`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
-                    console.log(res?.data);
-                    setJobs(res?.data.data);
-                    setPostCount(res?.data.total);
-                    setTotal(res?.data.total);
-                }).catch((err) => {
-                    console.log(err);
-                })
-                setLoading(false);
+              await apiCAll(`/api/user/job/searchBy/companyName`, 'post', { pagination: { starts: start, totalRows: end - start }, companyName: { query: value }, }).then((res) => {
+                console.log(res?.data);
+                setJobs(res?.data.data);
+                setPostCount(res?.data.total);
+                setTotal(res?.data.total);
+              }).catch((err) => {
+                console.log(err);
+              })
+              setLoading(false);
             } break;
             case 2: {
-                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
-                    console.log(res?.data);
-                    setJobs(res?.data.data);
-                    setTotal(res?.data.total);
-                    setPostCount(res?.data.total);
-                }).catch((err) => {
-                    console.log(err);
-                })
-                setLoading(false);
+              await apiCAll(`/api/user/job/searchBy/tittle`, 'post', { pagination: { starts: start, totalRows: end - start }, tittle: { query: value }, }).then((res) => {
+                console.log(res?.data);
+                setJobs(res?.data.data);
+                setTotal(res?.data.total);
+                setPostCount(res?.data.total);
+              }).catch((err) => {
+                console.log(err);
+              })
+              setLoading(false);
             } break;
             case 3: {
-                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
-                    console.log(res?.data);
-                    setJobs(res?.data.data);
-                    setTotal(res?.data.total);
-                    setPostCount(res?.data.total);
-                }).catch((err) => {
-                    console.log(err);
-                })
-                setLoading(false);
+              await apiCAll(`/api/user/job/searchBy/address`, 'post', { pagination: { starts: start, totalRows: end - start }, address: { query: value }, }).then((res) => {
+                console.log(res?.data);
+                setJobs(res?.data.data);
+                setTotal(res?.data.total);
+                setPostCount(res?.data.total);
+              }).catch((err) => {
+                console.log(err);
+              })
+              setLoading(false);
             } break;
             case 4: {
-                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
-                    console.log(res?.data);
-                    setJobs(res?.data.data);
-                    setTotal(res?.data.total);
-                    setPostCount(res?.data.total);
-                }).catch((err) => {
-                    console.log(err);
-                })
-                setLoading(false);
+              await apiCAll(`/api/user/job/searchBy/location`, 'post', { pagination: { starts: start, totalRows: end - start }, location: { query: value }, }).then((res) => {
+                console.log(res?.data);
+                setJobs(res?.data.data);
+                setTotal(res?.data.total);
+                setPostCount(res?.data.total);
+              }).catch((err) => {
+                console.log(err);
+              })
+              setLoading(false);
             } break;
             case 5: {
-                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
-                    console.log(res?.data);
-                    setJobs(res?.data.data);
-                    setTotal(res?.data.total);
-                    setPostCount(res?.data.total);
-                }).catch((err) => {
-                    console.log(err);
-                })
-                setLoading(false);
+              await apiCAll(`/api/user/job/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end - start }, skill: { query: value }, }).then((res) => {
+                console.log(res?.data);
+                setJobs(res?.data.data);
+                setTotal(res?.data.total);
+                setPostCount(res?.data.total);
+              }).catch((err) => {
+                console.log(err);
+              })
+              setLoading(false);
             } break;
             default: {
-                alert("Please select the category")
+              alert("Please select the category")
             }
-        }
+          }
 
 
         // if (value) {
