@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import Pagination from '../Pages/Pagination';
-import axios from "axios";
 import {
     Container,
     Grid,
@@ -24,7 +23,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from '../MetaData';
 import "../CSS/Utils.css"
-import { apiJson } from '../integration/apiCall';
+import { apiCAll } from '../integration/apiCall';
 
 const useStyles = makeStyles({
     searching: {
@@ -73,59 +72,127 @@ const useStyles = makeStyles({
 
 
 const SoftwareHouse = () => {
-
+    
     const [softwareHouse, setSoftwareHouse] = useState(null);
+    const classes = useStyles();
+    const [search, setSearch] = useState();
+    const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState("");
     const [postCount, setPostCount] = useState(null)
-    const [showPerPage] = useState(5)
+    const [showPerPage] = useState(4)
     const [total, setTotal] = useState(0);
     const [pagination, setPagination] = useState({
         start: 0,
         end: showPerPage
     });
-    const [loading, setLoading] = useState(false);
-    const [value, setValue] = useState("");
-    const classes = useStyles();
 
-    const [search, setSearch] = useState(1);
 
-    const onPaginationChange = (start, end) => {
-        setPagination({
-            start: start,
-            end: end
-        })
-    }
 
     const handleChange = (event) => {
         console.log(event.target.value)
         setSearch(event.target.value);
     };
 
-    const loadPost = async () => {
+    const onPaginationChange = (start, end) => {
+        setPagination({
+            start: start,
+            end: end
+        });
+        handleSearch(null, start, end).then(() => {
+        });
+    }
 
-        await apiJson(`/softwareHouse`).then((res) => {
-            setSoftwareHouse(res.data);
-            setTotal(res?.data.length);
+    const updateServices = async (expanded, index, softwareHouses) => {
+        if (!softwareHouse[index]?.services && expanded) {
+          await apiCAll(`/api/user/softwareHouse/service/get`, 'post', { industries :{ id : softwareHouses.ID } }).then((res) => {
+            console.log(res.data)
+            let st = softwareHouse;
+            let skill_STD = st[index];
+            skill_STD = { ...skill_STD, services: res?.data };
+            st[index] = skill_STD;
+            setSoftwareHouse([...st])
+            console.log(st)
+            // console.log(res?.data);
+            // console.log(studentData)
+            
+          }).catch((err) => {
+            console.log(err);
+          })
+    
+        }
+      }
+    
+    const loadPost = async (start = 0, end = showPerPage) => {
+        await apiCAll(`/api/user/softwareHouse/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+            console.log(res?.data);
+            setSoftwareHouse(res?.data.data);
+            // setStudents(res?.data);
+            setTotal(res?.data.total);
+            setPostCount(res?.data.total);
         }).catch((err) => {
             console.log(err);
         })
         setLoading(false);
     }
 
-    const handleSearch = async (e) => {
+
+    const handleSearch = async (e, start = 0, end = showPerPage) => {
         setLoading(true)
         e?.preventDefault();
-        if (value) {
-            await apiJson(`/softwareHouse?q=${value}`).then((res) => {
-                setSoftwareHouse(res.data);
-                setTotal(res?.data.length);
-                setValue("");
-                setPostCount(res?.data.length);
-            }).catch((err) => {
-                console.log(err);
-            })
+
+        console.log(value, search)
+
+
+        if (!value || !search) {
+            return await loadPost(start, end).then(() => {
+                setLoading(false)
+                return null;
+            });
         }
-        else {
-            alert("Enter text to search");
+
+
+        switch (search) {
+            case 1: {
+                await apiCAll(`/api/user/softwareHouse/searchBy/companyName`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setSoftwareHouse(res?.data.data);
+                    // setStudents(res?.data);
+                    setPostCount(res?.data.total);
+                    setTotal(res?.data.total);
+                }).catch((err) => {
+                    console.log(err);
+                })
+                setLoading(false);
+
+            } break;
+            case 2: {
+                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setSoftwareHouse(res?.data.data);
+                    // setStudents(res?.data);
+                    setTotal(res?.data.total);
+                    setPostCount(res?.data.total);
+                }).catch((err) => {
+                    console.log(err);
+                })
+                setLoading(false);
+
+            } break;
+            case 3: {
+                await apiCAll(`/api/user/student/searchBy/year`, 'post', { pagination: { starts: start, totalRows: end - start }, year: { query: value }, }).then((res) => {
+                    console.log(res?.data);
+                    setSoftwareHouse(res?.data.data);
+                    // setStudents(res?.data);
+                    setTotal(res?.data.total);
+                    setPostCount(res?.data.total);
+                }).catch((err) => {
+                    console.log(err);
+                })
+                setLoading(false);
+            } break;
+            default: {
+                alert("Please select the category")
+            }
         }
         setLoading(false)
     }
@@ -200,15 +267,15 @@ const SoftwareHouse = () => {
                                     (<div className='Post_center'>
                                         <h1 className='main_heading'>No Result Found</h1>
                                     </div>) :
-                                    (softwareHouse && softwareHouse.slice(pagination.start, pagination.end).map((softwareHouse, index) => (
-                                        <Grid item lg={12} xs={12} key={index}>
+                                    (softwareHouse && softwareHouse.map((softwareHouse, index1) => (
+                                        <Grid item lg={12} xs={12} key={index1}>
                                             <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                 <div className={classes.software_title}>
                                                     <div>
-                                                        <h3 className='mobileHeading'>{softwareHouse.name}</h3>
-                                                        <Typography>{softwareHouse.city}</Typography>
+                                                        <h3 className='mobileHeading'>{softwareHouse.NAME}</h3>
+                                                        <Typography>{softwareHouse.ADDRESS}</Typography>
                                                     </div>
-                                                    <img className={classes.software_image} src={softwareHouse.image} alt="software" />
+                                                    <img className={classes.software_image} src={softwareHouse.IMAGE} alt="software" />
                                                 </div>
                                                 <Accordion>
                                                     <AccordionSummary
@@ -220,11 +287,11 @@ const SoftwareHouse = () => {
                                                     </AccordionSummary>
                                                     <AccordionDetails>
                                                         <Typography>
-                                                            {softwareHouse.about}
+                                                            {softwareHouse.ABOUT}
                                                         </Typography>
                                                     </AccordionDetails>
                                                 </Accordion>
-                                                <Accordion>
+                                                <Accordion onChange={(e, expanded) => updateServices(expanded, index1, softwareHouse)}>
                                                     <AccordionSummary
                                                         expandIcon={<ExpandMoreIcon />}
                                                         aria-controls="panel1a-content"
@@ -235,8 +302,8 @@ const SoftwareHouse = () => {
                                                     <AccordionDetails>
                                                         <Typography>
                                                             {
-                                                                softwareHouse.services.map((service, index) => (
-                                                                    <Chip label={service} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                                                softwareHouse[index1]?.services && softwareHouse[index1].services.map((service, index) => (
+                                                                    <Chip label={service.title} key={index} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
                                                             }
                                                         </Typography>
                                                     </AccordionDetails>

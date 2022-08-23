@@ -75,7 +75,6 @@ const useStyles = makeStyles({
 const ClientStudent = () => {
 
   const [studentData, setStudentData] = useState()
-
   const classes = useStyles();
   const [search, setSearch] = useState();
   const [department, setDepartment] = useState('');
@@ -137,6 +136,7 @@ const ClientStudent = () => {
         return "None"
     }
   }
+
   const updateStudentSkill = async (expanded, index, student) => {
     if (!studentData[index]?.skills && expanded) {
       await apiCAll(`/api/user/student/skill/get`, 'post', { student:{ id : student.ID } }).then((res) => {
@@ -196,7 +196,9 @@ const ClientStudent = () => {
   const handleSearch = async (e,start = 0, end=showPerPage) => {
     setLoading(true)
     e?.preventDefault();
+    
     console.log(value, search)
+   
     if (!value || !search) {
       return await loadStudent(start, end).then(() => {
         setLoading(false)
@@ -285,7 +287,7 @@ const ClientStudent = () => {
     loadStudent();
     setLoading(true)
   }, [])
-  
+
   return (
     <>
       <MetaData title="Students" />
