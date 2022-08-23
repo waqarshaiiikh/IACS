@@ -52,6 +52,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const message = [
+  {
+    NAME:"Khalid"
+  }
+];
+
 
 const AdminMessage = () => {
   const theme = useTheme();
