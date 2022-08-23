@@ -153,7 +153,7 @@ const SoftwareHouse = () => {
 
         switch (search) {
             case 1: {
-                await apiCAll(`/api/user/softwareHouse/searchBy/companyName`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/softwareHouse/searchBy/companyName`, 'post', { pagination: { starts: start, totalRows: end - start }, companyName: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setSoftwareHouse(res?.data.data);
                     // setStudents(res?.data);
@@ -166,7 +166,7 @@ const SoftwareHouse = () => {
 
             } break;
             case 2: {
-                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/softwareHouse/searchBy/address`, 'post', { pagination: { starts: start, totalRows: end - start }, address: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setSoftwareHouse(res?.data.data);
                     // setStudents(res?.data);
@@ -179,7 +179,7 @@ const SoftwareHouse = () => {
 
             } break;
             case 3: {
-                await apiCAll(`/api/user/student/searchBy/year`, 'post', { pagination: { starts: start, totalRows: end - start }, year: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/softwareHouse/searchBy/service`, 'post', { pagination: { starts: start, totalRows: end - start }, services: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setSoftwareHouse(res?.data.data);
                     // setStudents(res?.data);
@@ -267,15 +267,15 @@ const SoftwareHouse = () => {
                                     (<div className='Post_center'>
                                         <h1 className='main_heading'>No Result Found</h1>
                                     </div>) :
-                                    (softwareHouse && softwareHouse.map((softwareHouse, index1) => (
+                                    (softwareHouse && softwareHouse.map((softwareHouses, index1) => (
                                         <Grid item lg={12} xs={12} key={index1}>
                                             <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                                                 <div className={classes.software_title}>
                                                     <div>
-                                                        <h3 className='mobileHeading'>{softwareHouse.NAME}</h3>
-                                                        <Typography>{softwareHouse.ADDRESS}</Typography>
+                                                        <h3 className='mobileHeading'>{softwareHouses.NAME}</h3>
+                                                        <Typography>{softwareHouses.ADDRESS}</Typography>
                                                     </div>
-                                                    <img className={classes.software_image} src={softwareHouse.IMAGE} alt="software" />
+                                                    <img className={classes.software_image} src={softwareHouses.IMAGE} alt="software" />
                                                 </div>
                                                 <Accordion>
                                                     <AccordionSummary
@@ -287,11 +287,11 @@ const SoftwareHouse = () => {
                                                     </AccordionSummary>
                                                     <AccordionDetails>
                                                         <Typography>
-                                                            {softwareHouse.ABOUT}
+                                                            {softwareHouses.ABOUT}
                                                         </Typography>
                                                     </AccordionDetails>
                                                 </Accordion>
-                                                <Accordion onChange={(e, expanded) => updateServices(expanded, index1, softwareHouse)}>
+                                                <Accordion onChange={(e, expanded) => updateServices(expanded, index1, softwareHouses)}>
                                                     <AccordionSummary
                                                         expandIcon={<ExpandMoreIcon />}
                                                         aria-controls="panel1a-content"
