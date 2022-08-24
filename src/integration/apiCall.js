@@ -8,10 +8,10 @@ const  { OrgProfile }  = require('./OrgProfile');
 
 const state = { updated: "updated", modified: "modified", empty: null, available: "available", deleted: "deleted", deletedAll: "deletedAll", Add: "added" }
 
-const port = 8393;
+const port = process.env.REACT_APP_PORT
 axios.defaults.withCredentials = true;
-const Domain = 'http://43.205.70.15:';
-// const Domain = 'http://localhost:';
+const Domain = `${process.env.REACT_APP_IP}:`;
+
 
 const apiJson =async (apiAddress)=>{
 
@@ -36,6 +36,7 @@ const apiJson =async (apiAddress)=>{
 
 const apiCAll=async (apiAddress, reqMethod="post" , reqData = 'unknown')=>{
 
+    // console.log(process.env.REACT_APP_IP +':'+port)
     if(reqMethod === "post"){
         return axios[reqMethod](`${Domain}${port}${apiAddress}`
         ,{ ...reqData }
