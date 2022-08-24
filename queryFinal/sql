@@ -1,0 +1,1046 @@
+--------------------------------------------------------
+--  File created - Wednesday-August-24-2022   
+--------------------------------------------------------
+DROP TABLE "SYSTEM"."EXPERIENCE";
+DROP TABLE "SYSTEM"."INDSERVICE";
+DROP TABLE "SYSTEM"."INDSOCIALACCOUNT";
+DROP TABLE "SYSTEM"."INDUSTRIES";
+DROP TABLE "SYSTEM"."INTERNS_SKILL";
+DROP TABLE "SYSTEM"."INTERNSHIP";
+DROP TABLE "SYSTEM"."JOBS";
+DROP TABLE "SYSTEM"."JOBSKILL";
+DROP TABLE "SYSTEM"."MESSAGE";
+DROP TABLE "SYSTEM"."REQUESTS";
+DROP TABLE "SYSTEM"."SERVICES";
+DROP TABLE "SYSTEM"."SKILL";
+DROP TABLE "SYSTEM"."SOCIALMEDIA";
+DROP TABLE "SYSTEM"."STDPROFILE";
+DROP TABLE "SYSTEM"."STDSKILL";
+DROP TABLE "SYSTEM"."STDSOCIALACCOUNT";
+DROP TABLE "SYSTEM"."STUDENT";
+DROP TABLE "SYSTEM"."TOKENTBL";
+--------------------------------------------------------
+--  DDL for Table EXPERIENCE
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."EXPERIENCE" 
+   (	"ID" NUMBER(15,0), 
+	"JOBROLE" VARCHAR2(30 BYTE), 
+	"CNAME" VARCHAR2(30 BYTE), 
+	"STARTDATE" DATE, 
+	"DESCRIPTION" VARCHAR2(200 BYTE), 
+	"ENDDATE" DATE, 
+	"STDID" NUMBER(15,0)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table INDSERVICE
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."INDSERVICE" 
+   (	"INDID" NUMBER(15,0), 
+	"SERID" NUMBER(15,0)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table INDSOCIALACCOUNT
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."INDSOCIALACCOUNT" 
+   (	"INDID" NUMBER(15,0), 
+	"SMID" NUMBER(15,0), 
+	"LINK" VARCHAR2(200 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table INDUSTRIES
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."INDUSTRIES" 
+   (	"ID" NUMBER(15,0), 
+	"ORGNAME" VARCHAR2(70 BYTE), 
+	"PASSWORD" VARCHAR2(73 BYTE), 
+	"EMAIL" VARCHAR2(50 BYTE), 
+	"HRNAME" VARCHAR2(30 BYTE), 
+	"CNIC_NTN" NUMBER(13,0), 
+	"CITY" VARCHAR2(15 BYTE), 
+	"COUNTRY" VARCHAR2(15 BYTE), 
+	"ADDRESS" VARCHAR2(100 BYTE), 
+	"PHONENUMBER" VARCHAR2(20 BYTE), 
+	"BIO" VARCHAR2(400 BYTE), 
+	"LOGO" VARCHAR2(200 BYTE), 
+	"WEBURL" VARCHAR2(200 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table INTERNS_SKILL
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."INTERNS_SKILL" 
+   (	"INTID" NUMBER(15,0), 
+	"SKILLID" NUMBER(15,0)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table INTERNSHIP
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."INTERNSHIP" 
+   (	"ID" NUMBER(15,0), 
+	"INDID" NUMBER(15,0), 
+	"TITTLE" VARCHAR2(50 BYTE), 
+	"LOCATION" VARCHAR2(20 BYTE), 
+	"DURATION" VARCHAR2(20 BYTE), 
+	"DESCRIPTION" VARCHAR2(600 BYTE), 
+	"LINKS" VARCHAR2(100 BYTE), 
+	"POSTDATE" TIMESTAMP (6)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table JOBS
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."JOBS" 
+   (	"ID" NUMBER(15,0), 
+	"INDID" NUMBER(15,0), 
+	"TITTLE" VARCHAR2(50 BYTE), 
+	"LOCATION" VARCHAR2(20 BYTE), 
+	"DURATION" VARCHAR2(20 BYTE), 
+	"DESCRIPTION" VARCHAR2(600 BYTE), 
+	"LINKS" VARCHAR2(100 BYTE), 
+	"POSTDATE" TIMESTAMP (6)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table JOBSKILL
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."JOBSKILL" 
+   (	"JOBID" NUMBER(15,0), 
+	"SKILLID" NUMBER(15,0)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MESSAGE
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."MESSAGE" 
+   (	"FULL_NAME" VARCHAR2(50 BYTE), 
+	"MESSAGE" VARCHAR2(200 BYTE), 
+	"EMAIL" VARCHAR2(50 BYTE), 
+	"MES_DATE" TIMESTAMP (6)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table REQUESTS
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."REQUESTS" 
+   (	"STDID" NUMBER(15,0), 
+	"TYPE" VARCHAR2(50 BYTE), 
+	"TITTLE" VARCHAR2(50 BYTE), 
+	"LOCATION" VARCHAR2(20 BYTE), 
+	"DURATION" VARCHAR2(20 BYTE), 
+	"DESCRIPTION" VARCHAR2(600 BYTE), 
+	"REQUESTDATE" TIMESTAMP (6)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SERVICES
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."SERVICES" 
+   (	"ID" NUMBER(15,0), 
+	"SERVICENAME" VARCHAR2(50 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SKILL
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."SKILL" 
+   (	"ID" NUMBER, 
+	"SKILLNAME" VARCHAR2(25 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SOCIALMEDIA
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."SOCIALMEDIA" 
+   (	"ID" NUMBER(15,0), 
+	"MEDIANAME" VARCHAR2(20 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table STDPROFILE
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."STDPROFILE" 
+   (	"STDID" NUMBER(15,0), 
+	"AGE" CHAR(2 BYTE), 
+	"ADDRESS" VARCHAR2(100 BYTE), 
+	"GENDER" CHAR(1 BYTE), 
+	"BIO" VARCHAR2(200 BYTE), 
+	"PIC" BLOB
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" 
+ LOB ("PIC") STORE AS BASICFILE (
+  TABLESPACE "SYSTEM" ENABLE STORAGE IN ROW CHUNK 8192 RETENTION 
+  NOCACHE LOGGING 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)) ;
+--------------------------------------------------------
+--  DDL for Table STDSKILL
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."STDSKILL" 
+   (	"STDID" NUMBER(15,0), 
+	"SKILLID" NUMBER(15,0)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table STDSOCIALACCOUNT
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."STDSOCIALACCOUNT" 
+   (	"STDID" NUMBER(15,0), 
+	"SMID" NUMBER(15,0), 
+	"LINK" VARCHAR2(200 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table STUDENT
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."STUDENT" 
+   (	"ID" NUMBER(15,0), 
+	"FNAME" VARCHAR2(10 BYTE), 
+	"LNAME" VARCHAR2(10 BYTE), 
+	"EMAIL" VARCHAR2(50 BYTE), 
+	"PASSWORD" VARCHAR2(73 BYTE), 
+	"ENROLLMENT" VARCHAR2(20 BYTE), 
+	"CGPA" VARCHAR2(6 BYTE), 
+	"DEPARTMENT" VARCHAR2(10 BYTE), 
+	"UNIVERSITY" VARCHAR2(15 BYTE), 
+	"PHONENUMBER" VARCHAR2(20 BYTE), 
+	"YEAR" CHAR(1 BYTE), 
+	"SEMESTER" CHAR(1 BYTE), 
+	"DOB" DATE, 
+	"ADDRESS" VARCHAR2(100 BYTE), 
+	"GENDER" CHAR(1 BYTE), 
+	"BIO" VARCHAR2(200 BYTE), 
+	"PIC" VARCHAR2(200 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table TOKENTBL
+--------------------------------------------------------
+
+  CREATE TABLE "SYSTEM"."TOKENTBL" 
+   (	"USERID" NUMBER(15,0), 
+	"CLIENTNAME" VARCHAR2(20 BYTE), 
+	"ISSUEDATE" NUMBER(15,0), 
+	"EXPIREDATE" NUMBER(15,0), 
+	"DEVICE" VARCHAR2(20 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into SYSTEM.EXPERIENCE
+SET DEFINE OFF;
+Insert into SYSTEM.EXPERIENCE (ID,JOBROLE,CNAME,STARTDATE,DESCRIPTION,ENDDATE,STDID) values (1,'frontend developer','10 pearls',to_date('12-AUG-22','DD-MON-RR'),'nothing yet, may be added later',to_date('15-AUG-22','DD-MON-RR'),81);
+REM INSERTING into SYSTEM.INDSERVICE
+SET DEFINE OFF;
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,1);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,2);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,3);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,4);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,5);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,6);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,7);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,8);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,9);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,10);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,11);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,12);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (71,13);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,1);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,2);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,3);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,4);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,5);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,6);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,7);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,8);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,9);
+Insert into SYSTEM.INDSERVICE (INDID,SERID) values (81,10);
+REM INSERTING into SYSTEM.INDSOCIALACCOUNT
+SET DEFINE OFF;
+Insert into SYSTEM.INDSOCIALACCOUNT (INDID,SMID,LINK) values (71,2,'https://pk.linkedin.com/company/10pearls');
+Insert into SYSTEM.INDSOCIALACCOUNT (INDID,SMID,LINK) values (81,2,'https://www.linkedin.com/in/muhammad-waqar-b27908238/');
+REM INSERTING into SYSTEM.INDUSTRIES
+SET DEFINE OFF;
+Insert into SYSTEM.INDUSTRIES (ID,ORGNAME,PASSWORD,EMAIL,HRNAME,CNIC_NTN,CITY,COUNTRY,ADDRESS,PHONENUMBER,BIO,LOGO,WEBURL) values (81,'10pearl','$2b$08$baRxXvIH/oDGOPtOoXpAWu34Apxta3kZOCxSRz6d84H5IgS92LV4W','waqarshaiiikh@gmail.com','Waqar',4120494810131,'hyd','Pakistan','Federal B area karachi.','+923423446805','We hire energetic and passionate people.','v1659943366/IACSImages/industry/81.jpg','https://www.10pearl.com/home');
+Insert into SYSTEM.INDUSTRIES (ID,ORGNAME,PASSWORD,EMAIL,HRNAME,CNIC_NTN,CITY,COUNTRY,ADDRESS,PHONENUMBER,BIO,LOGO,WEBURL) values (71,'10Pearls','$2b$08$lM8MHFNsmlfaKCp8DZU0.OVMxZn0O.NO45KDpdoGtj838FopGG3ry','muhammadwaqar99955@+','Muhammad Waqar',4120494810131,'hyd','Pakistan','Main Shahra-e-Faisal  Karachi, PK','+923423446805','10Pearls is a global leading product innovation and software development partner. We have a culture of innovation, uniquely designed to help businesses transform, digitalize and scale leveraging digital technology. We''re recognized by top research firms, including Gartner and Forrester. Washington Post has referred us to as a double-bottom line business, balancing human centric values and profits.','v1659615473/IACSImages/industry/71.jpg','https://10pearls.com/');
+REM INSERTING into SYSTEM.INTERNS_SKILL
+SET DEFINE OFF;
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,1);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (2,1);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,2);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,3);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,4);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,5);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,6);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (1,7);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (2,7);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (2,10);
+Insert into SYSTEM.INTERNS_SKILL (INTID,SKILLID) values (2,26);
+REM INSERTING into SYSTEM.INTERNSHIP
+SET DEFINE OFF;
+Insert into SYSTEM.INTERNSHIP (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (3,71,'React js','Onsite','Full Time','energetic people hiring','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:33:24 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.INTERNSHIP (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (1,81,'backend Developer','Onsite','Full Time','Only passionate and energetic','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('07/08/2022 11:53:30 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.INTERNSHIP (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (2,81,'React js','Onsite','Full Time','energetic people hiring','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:33:24 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+REM INSERTING into SYSTEM.JOBS
+SET DEFINE OFF;
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (1,81,'FRONTEND','Remote','Full Time','We ready to hire the people having these skills','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('07/08/2022 9:57:01 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (3,71,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (4,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (5,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (6,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (7,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (8,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (9,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (10,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (11,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (12,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (13,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (14,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (15,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (16,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (17,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (18,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (19,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (20,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.JOBS (ID,INDID,TITTLE,LOCATION,DURATION,DESCRIPTION,LINKS,POSTDATE) values (21,81,'backend Developer','Remote','Part Time','He are ready hire people having these skill','https://www.linkedin.com/in/muhammad-waqar-b27908238/',to_timestamp('08/08/2022 12:31:31 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+REM INSERTING into SYSTEM.JOBSKILL
+SET DEFINE OFF;
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,1);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,2);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,3);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,4);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,5);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,6);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,7);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,8);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,9);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,10);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,11);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (1,12);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,1);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,2);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,3);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,4);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,5);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,6);
+Insert into SYSTEM.JOBSKILL (JOBID,SKILLID) values (3,7);
+REM INSERTING into SYSTEM.MESSAGE
+SET DEFINE OFF;
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('07/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('06/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('05/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('04/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('03/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('02/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('01/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('08/08/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('01/08/2021 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.MESSAGE (FULL_NAME,MESSAGE,EMAIL,MES_DATE) values ('Muhammad Waqar','hellow from waqar','muhammadwaqar99955@gmail.com',to_timestamp('01/07/2022 12:19:19 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+REM INSERTING into SYSTEM.REQUESTS
+SET DEFINE OFF;
+Insert into SYSTEM.REQUESTS (STDID,TYPE,TITTLE,LOCATION,DURATION,DESCRIPTION,REQUESTDATE) values (81,'JOB','REACT JS','Remote','Full Time','Its very humble request to give us job so that we polish our skill',to_timestamp('07/08/2022 5:24:30 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+Insert into SYSTEM.REQUESTS (STDID,TYPE,TITTLE,LOCATION,DURATION,DESCRIPTION,REQUESTDATE) values (81,'INTERNSHIP','frontend','Remote','Full Time','Its very humble request to give us internship so that we polish our skill',to_timestamp('07/08/2022 5:44:47 PM','DD/MM/RRRR fmHH:fmMI:SS AM'));
+REM INSERTING into SYSTEM.SERVICES
+SET DEFINE OFF;
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (1,'Web Development');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (2,'Mobile App Development');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (3,'Graphis Designing');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (4,'Data Analytics');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (5,'Desktop Development');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (6,'Devops');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (7,'SQA');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (8,'Database');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (9,'Digital Media Marketing');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (10,'Artificial Intelligence');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (11,'Blockchain');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (12,'AWS');
+Insert into SYSTEM.SERVICES (ID,SERVICENAME) values (13,'Cloud & Web Hosting');
+REM INSERTING into SYSTEM.SKILL
+SET DEFINE OFF;
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (1,'HTML CSS & JAVASCRIPT');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (2,'C# .Net');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (3,'C / C++');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (4,'Java');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (5,'Swift');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (6,'Python');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (7,'React Js');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (8,'Angular');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (9,'Next JS');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (10,'Rest API');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (11,'React Native');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (12,'Flutter');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (13,'Kotlin');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (14,'Machine Learning');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (15,'Artificial Intelligence');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (16,'Data Science');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (17,'Data Analytics');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (18,'MERN Stack');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (19,'SQL');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (20,'MongoDB');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (21,'Oracle');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (22,'Firebase');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (23,'iOS Development');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (24,'Android Development');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (25,'Desktop Development');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (26,'Frontend Development');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (27,'Backned Development');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (28,'SQA');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (29,'Digital Media Marketing');
+Insert into SYSTEM.SKILL (ID,SKILLNAME) values (30,'Blockchain');
+REM INSERTING into SYSTEM.SOCIALMEDIA
+SET DEFINE OFF;
+Insert into SYSTEM.SOCIALMEDIA (ID,MEDIANAME) values (1,'github');
+Insert into SYSTEM.SOCIALMEDIA (ID,MEDIANAME) values (2,'linkedin');
+REM INSERTING into SYSTEM.STDPROFILE
+SET DEFINE OFF;
+REM INSERTING into SYSTEM.STDSKILL
+SET DEFINE OFF;
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (75,1);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (75,2);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (75,3);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (75,4);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (75,5);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,1);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,2);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,3);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,4);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,5);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,6);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,7);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,8);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,9);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,10);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,11);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,12);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,13);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,14);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,15);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,16);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,17);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,18);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,19);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,20);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,21);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,22);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,23);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,24);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,25);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,26);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,27);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,28);
+Insert into SYSTEM.STDSKILL (STDID,SKILLID) values (81,29);
+REM INSERTING into SYSTEM.STDSOCIALACCOUNT
+SET DEFINE OFF;
+Insert into SYSTEM.STDSOCIALACCOUNT (STDID,SMID,LINK) values (81,1,'https://github.com/waqarshaiiikh');
+Insert into SYSTEM.STDSOCIALACCOUNT (STDID,SMID,LINK) values (81,2,'https://www.linkedin.com/in/muhammad-waqar-b27908238/');
+Insert into SYSTEM.STDSOCIALACCOUNT (STDID,SMID,LINK) values (75,1,'https://github.com/waqarshaiiikh/KJKJK');
+Insert into SYSTEM.STDSOCIALACCOUNT (STDID,SMID,LINK) values (75,2,'https://www.linkedin.com/in/waqar-shaiiikh/IIU');
+REM INSERTING into SYSTEM.STUDENT
+SET DEFINE OFF;
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (81,'Muhammad','Waqar','waqar4106080@cloud.neduet.edu.pk','$2b$08$yXqfaELvXE2AKk.o02TGPufIqscVqZyxvmUML3iDE.5Oot9OsjaYG','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('01-MAY-14','DD-MON-RR'),'Federal B area karachi.','M','Problem solving, Hard working, Enjoying on solving problems, Aim to be professional....','v1659803659/IACSImages/student/81.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (75,'Muhammad','Waqar','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (85,'Muhammad','Waqar','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (86,'Muhammad','86','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (87,'Muhammad','87','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (88,'Muhammad','88','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (89,'Muhammad','89','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (90,'Muhammad','90','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (91,'Muhammad','91','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (92,'Muhammad','92','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (93,'Muhammad','93','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (94,'Muhammad','94','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (95,'Muhammad','95','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (96,'Muhammad','96','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (97,'Muhammad','97','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (98,'Muhammad','98','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (99,'Muhammad','99','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (100,'Muhammad','100','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (101,'Muhammad','101','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+Insert into SYSTEM.STUDENT (ID,FNAME,LNAME,EMAIL,PASSWORD,ENROLLMENT,CGPA,DEPARTMENT,UNIVERSITY,PHONENUMBER,YEAR,SEMESTER,DOB,ADDRESS,GENDER,BIO,PIC) values (102,'Muhammad','102','waqar416080@cloud.neduet.edu.pk','$2b$08$V8jbXeWvIYTZiCh6f4S1zOKu8cEv0UwYrhPCDuUhAzByR7bFykE3G','NED/1481/2018','3','SE','NED UNIVERSITY','+923423446805','4','2',to_date('07-FEB-99','DD-MON-RR'),'FB Area Karachi, Pakistan','M','Problem solving, Hard working,  Enjoying on solving problems, Aim to be professional....','v1659511175/IACSImages/student/75.jpg');
+REM INSERTING into SYSTEM.TOKENTBL
+SET DEFINE OFF;
+Insert into SYSTEM.TOKENTBL (USERID,CLIENTNAME,ISSUEDATE,EXPIREDATE,DEVICE) values (81,'student',1661297149,1661464799,'unknown');
+--------------------------------------------------------
+--  DDL for Index EXPERIENCE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."EXPERIENCE_PK" ON "SYSTEM"."EXPERIENCE" ("ID", "STDID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index EXPERIENCE_STUDENT_ID
+--------------------------------------------------------
+
+  CREATE INDEX "SYSTEM"."EXPERIENCE_STUDENT_ID" ON "SYSTEM"."EXPERIENCE" ("STDID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index INDSERVICE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."INDSERVICE_PK" ON "SYSTEM"."INDSERVICE" ("INDID", "SERID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index INDSOCIALACCOUNT_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."INDSOCIALACCOUNT_PK" ON "SYSTEM"."INDSOCIALACCOUNT" ("INDID", "SMID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index INDUSTRIES_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."INDUSTRIES_PK" ON "SYSTEM"."INDUSTRIES" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index INTERNS_SKILL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."INTERNS_SKILL_PK" ON "SYSTEM"."INTERNS_SKILL" ("SKILLID", "INTID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index INTERNSHIP_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."INTERNSHIP_PK" ON "SYSTEM"."INTERNSHIP" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index JOBS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."JOBS_PK" ON "SYSTEM"."JOBS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index JOBSKILL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."JOBSKILL_PK" ON "SYSTEM"."JOBSKILL" ("JOBID", "SKILLID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index MESSAGE_DATE_INDEX
+--------------------------------------------------------
+
+  CREATE INDEX "SYSTEM"."MESSAGE_DATE_INDEX" ON "SYSTEM"."MESSAGE" ("MES_DATE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index REQUESTS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."REQUESTS_PK" ON "SYSTEM"."REQUESTS" ("REQUESTDATE", "STDID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SERVICES_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."SERVICES_PK" ON "SYSTEM"."SERVICES" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SKILL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."SKILL_PK" ON "SYSTEM"."SKILL" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SOCIALMEDIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."SOCIALMEDIA_PK" ON "SYSTEM"."SOCIALMEDIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index STDSKILL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."STDSKILL_PK" ON "SYSTEM"."STDSKILL" ("STDID", "SKILLID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index STDSOCIALACCOUNT_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."STDSOCIALACCOUNT_PK" ON "SYSTEM"."STDSOCIALACCOUNT" ("STDID", "SMID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index CLIENT_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."CLIENT_PK" ON "SYSTEM"."STUDENT" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index TOKENTBL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYSTEM"."TOKENTBL_PK" ON "SYSTEM"."TOKENTBL" ("USERID", "CLIENTNAME", "ISSUEDATE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table EXPERIENCE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("JOBROLE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("CNAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("STARTDATE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("DESCRIPTION" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("ENDDATE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."EXPERIENCE" ADD CONSTRAINT "EXPERIENCE_PK" PRIMARY KEY ("ID", "STDID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "SYSTEM"."EXPERIENCE" MODIFY ("STDID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table INDSERVICE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INDSERVICE" MODIFY ("INDID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDSERVICE" MODIFY ("SERID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDSERVICE" ADD CONSTRAINT "INDSERVICE_PK" PRIMARY KEY ("INDID", "SERID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table INDSOCIALACCOUNT
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INDSOCIALACCOUNT" MODIFY ("INDID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDSOCIALACCOUNT" MODIFY ("SMID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDSOCIALACCOUNT" MODIFY ("LINK" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDSOCIALACCOUNT" ADD CONSTRAINT "INDSOCIALACCOUNT_PK" PRIMARY KEY ("INDID", "SMID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table INDUSTRIES
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("ORGNAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("PASSWORD" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" ADD CONSTRAINT "INDUSTRIES_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("HRNAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("CNIC_NTN" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("CITY" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INDUSTRIES" MODIFY ("COUNTRY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table INTERNS_SKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INTERNS_SKILL" MODIFY ("INTID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INTERNS_SKILL" MODIFY ("SKILLID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INTERNS_SKILL" ADD CONSTRAINT "INTERNS_SKILL_PK" PRIMARY KEY ("SKILLID", "INTID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table INTERNSHIP
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INTERNSHIP" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."INTERNSHIP" ADD CONSTRAINT "INTERNSHIP_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table JOBS
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."JOBS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."JOBS" ADD CONSTRAINT "JOBS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table JOBSKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."JOBSKILL" MODIFY ("JOBID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."JOBSKILL" MODIFY ("SKILLID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."JOBSKILL" ADD CONSTRAINT "JOBSKILL_PK" PRIMARY KEY ("JOBID", "SKILLID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table MESSAGE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."MESSAGE" MODIFY ("FULL_NAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."MESSAGE" MODIFY ("MESSAGE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."MESSAGE" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."MESSAGE" MODIFY ("MES_DATE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table REQUESTS
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("STDID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("TITTLE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("LOCATION" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("DURATION" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("DESCRIPTION" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" MODIFY ("REQUESTDATE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."REQUESTS" ADD CONSTRAINT "REQUESTS_PK" PRIMARY KEY ("REQUESTDATE", "STDID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SERVICES
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."SERVICES" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."SERVICES" ADD CONSTRAINT "SERVICES_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."SKILL" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."SKILL" ADD CONSTRAINT "SKILL_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SOCIALMEDIA
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."SOCIALMEDIA" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."SOCIALMEDIA" MODIFY ("MEDIANAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."SOCIALMEDIA" ADD CONSTRAINT "SOCIALMEDIA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table STDPROFILE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STDPROFILE" MODIFY ("AGE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDPROFILE" MODIFY ("ADDRESS" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDPROFILE" MODIFY ("GENDER" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDPROFILE" MODIFY ("BIO" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDPROFILE" MODIFY ("PIC" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDPROFILE" MODIFY ("STDID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STDSKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STDSKILL" ADD CONSTRAINT "STDSKILL_PK" PRIMARY KEY ("STDID", "SKILLID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table STDSOCIALACCOUNT
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STDSOCIALACCOUNT" MODIFY ("STDID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDSOCIALACCOUNT" MODIFY ("SMID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDSOCIALACCOUNT" MODIFY ("LINK" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STDSOCIALACCOUNT" ADD CONSTRAINT "STDSOCIALACCOUNT_PK" PRIMARY KEY ("STDID", "SMID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table STUDENT
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("FNAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("LNAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("PASSWORD" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" ADD CONSTRAINT "CLIENT_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("ENROLLMENT" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("CGPA" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("DEPARTMENT" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("UNIVERSITY" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("PHONENUMBER" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("YEAR" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."STUDENT" MODIFY ("SEMESTER" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TOKENTBL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."TOKENTBL" MODIFY ("USERID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."TOKENTBL" MODIFY ("DEVICE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."TOKENTBL" MODIFY ("CLIENTNAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."TOKENTBL" ADD CONSTRAINT "TOKENTBL_PK" PRIMARY KEY ("USERID", "CLIENTNAME", "ISSUEDATE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "SYSTEM"."TOKENTBL" MODIFY ("ISSUEDATE" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."TOKENTBL" MODIFY ("EXPIREDATE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table EXPERIENCE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."EXPERIENCE" ADD CONSTRAINT "EXPERIENCE_FK1" FOREIGN KEY ("STDID")
+	  REFERENCES "SYSTEM"."STUDENT" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table INDSERVICE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INDSERVICE" ADD CONSTRAINT "INDSERVICE_FK1" FOREIGN KEY ("SERID")
+	  REFERENCES "SYSTEM"."SERVICES" ("ID") ENABLE;
+  ALTER TABLE "SYSTEM"."INDSERVICE" ADD CONSTRAINT "INDSERVICE_FK2" FOREIGN KEY ("INDID")
+	  REFERENCES "SYSTEM"."INDUSTRIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table INDSOCIALACCOUNT
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INDSOCIALACCOUNT" ADD CONSTRAINT "INDSOCIALACCOUNT_FK1" FOREIGN KEY ("SMID")
+	  REFERENCES "SYSTEM"."SOCIALMEDIA" ("ID") ENABLE;
+  ALTER TABLE "SYSTEM"."INDSOCIALACCOUNT" ADD CONSTRAINT "INDSOCIALACCOUNT_FK2" FOREIGN KEY ("INDID")
+	  REFERENCES "SYSTEM"."INDUSTRIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table INTERNS_SKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INTERNS_SKILL" ADD CONSTRAINT "INTERNS_SKILL_FK1" FOREIGN KEY ("SKILLID")
+	  REFERENCES "SYSTEM"."SKILL" ("ID") ENABLE;
+  ALTER TABLE "SYSTEM"."INTERNS_SKILL" ADD CONSTRAINT "INTERNS_SKILL_FK2" FOREIGN KEY ("INTID")
+	  REFERENCES "SYSTEM"."INTERNSHIP" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table INTERNSHIP
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."INTERNSHIP" ADD CONSTRAINT "INTERNSHIP_FK1" FOREIGN KEY ("INDID")
+	  REFERENCES "SYSTEM"."INDUSTRIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table JOBS
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."JOBS" ADD CONSTRAINT "JOBS_FK1" FOREIGN KEY ("INDID")
+	  REFERENCES "SYSTEM"."INDUSTRIES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table JOBSKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."JOBSKILL" ADD CONSTRAINT "JOBSKILL_FK1" FOREIGN KEY ("SKILLID")
+	  REFERENCES "SYSTEM"."SKILL" ("ID") ENABLE;
+  ALTER TABLE "SYSTEM"."JOBSKILL" ADD CONSTRAINT "JOBSKILL_FK2" FOREIGN KEY ("JOBID")
+	  REFERENCES "SYSTEM"."JOBS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table REQUESTS
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."REQUESTS" ADD CONSTRAINT "REQUESTS_FK1" FOREIGN KEY ("STDID")
+	  REFERENCES "SYSTEM"."STUDENT" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table STDPROFILE
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STDPROFILE" ADD CONSTRAINT "STDPROFILE_FK1" FOREIGN KEY ("STDID")
+	  REFERENCES "SYSTEM"."STUDENT" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table STDSKILL
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STDSKILL" ADD CONSTRAINT "STDSKILL_FK1" FOREIGN KEY ("SKILLID")
+	  REFERENCES "SYSTEM"."SKILL" ("ID") ENABLE;
+  ALTER TABLE "SYSTEM"."STDSKILL" ADD CONSTRAINT "STDSKILL_STUDENT_FK2" FOREIGN KEY ("STDID")
+	  REFERENCES "SYSTEM"."STUDENT" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table STDSOCIALACCOUNT
+--------------------------------------------------------
+
+  ALTER TABLE "SYSTEM"."STDSOCIALACCOUNT" ADD CONSTRAINT "STDSOCIALACCOUNT_FK1" FOREIGN KEY ("SMID")
+	  REFERENCES "SYSTEM"."SOCIALMEDIA" ("ID") ENABLE;
+  ALTER TABLE "SYSTEM"."STDSOCIALACCOUNT" ADD CONSTRAINT "STDSOCIALACCOUNT_FK2" FOREIGN KEY ("STDID")
+	  REFERENCES "SYSTEM"."STUDENT" ("ID") ENABLE;

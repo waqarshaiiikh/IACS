@@ -1,0 +1,30 @@
+--------------------------------------------------------
+--  File created - Wednesday-August-24-2022   
+--------------------------------------------------------
+DROP TYPE "SYSTEM"."ARR";
+DROP TYPE "SYSTEM"."SKILLARR";
+DROP TYPE "SYSTEM"."SKILLOBJ";
+--------------------------------------------------------
+--  DDL for Type ARR
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TYPE "SYSTEM"."ARR" AS VARRAY(150) OF varchar2(50);
+
+/
+--------------------------------------------------------
+--  DDL for Type SKILLARR
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TYPE "SYSTEM"."SKILLARR" AS VARRAY(2) OF SKILLOBJ;
+
+/
+--------------------------------------------------------
+--  DDL for Type SKILLOBJ
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TYPE "SYSTEM"."SKILLOBJ" AS OBJECT (
+        title  varchar2(30)
+     );
+    
+
+/

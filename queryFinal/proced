@@ -1,0 +1,659 @@
+--------------------------------------------------------
+--  File created - Wednesday-August-24-2022   
+--------------------------------------------------------
+DROP PROCEDURE "SYSTEM"."ADDEXPERIENCE";
+DROP PROCEDURE "SYSTEM"."ADDSESSION";
+DROP PROCEDURE "SYSTEM"."ADDUSER";
+DROP PROCEDURE "SYSTEM"."BASICINFO";
+DROP PROCEDURE "SYSTEM"."DELETEALLSESSIONS";
+DROP PROCEDURE "SYSTEM"."DELETESESSION";
+DROP PROCEDURE "SYSTEM"."FINDSESSION";
+DROP PROCEDURE "SYSTEM"."INTERNSPOST";
+DROP PROCEDURE "SYSTEM"."JOBPOST";
+DROP PROCEDURE "SYSTEM"."LOGINDATAVALIDATION";
+DROP PROCEDURE "SYSTEM"."MODIFYEXPERIENCE";
+DROP PROCEDURE "SYSTEM"."ORGINFO";
+DROP PROCEDURE "SYSTEM"."UPDATEBASICINFO";
+DROP PROCEDURE "SYSTEM"."UPDATEORGINFO";
+DROP PROCEDURE "SYSTEM"."UPDATESERVICES";
+DROP PROCEDURE "SYSTEM"."UPDATESKILL";
+--------------------------------------------------------
+--  DDL for Procedure ADDEXPERIENCE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."ADDEXPERIENCE" (
+        UID           IN DECIMAL   ,                   
+        eid           IN DECIMAL   ,                   
+        companyName   IN varchar2  ,                       
+        job           IN varchar2  ,                   
+        Descr         IN varchar2  ,
+        startDate     IN varchar2  ,                       
+        endDate       IN varchar2  ,                   
+        isInserted    OUT BOOLEAN
+    )
+        
+    IS
+    BEGIN
+    
+      INSERT INTO EXPERIENCE (ID, CNAME, STARTDATE, ENDDATE, JOBROLE ,DESCRIPTION, STDID) VALUES(eid ,companyName, TO_DATE(startDate, 'DD/MM/YYYY'),TO_DATE(endDate, 'DD/MM/YYYY') ,job ,Descr ,UID);
+
+      IF sql%found THEN 
+        isInserted := true;
+      ELSIF sql%notfound THEN 
+        isInserted := false;
+      END IF; 
+      COMMIT;
+      
+    
+      EXCEPTION
+          WHEN others THEN 
+          isInserted := false;
+      
+      END ADDEXPERIENCE;
+      
+
+/
+--------------------------------------------------------
+--  DDL for Procedure ADDSESSION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."ADDSESSION" (
+        UID IN DECIMAL,
+        clName IN varchar2,
+        Dev IN varchar2,
+        issDate IN DECIMAL,
+        expDate IN DECIMAL,
+        isInserted OUT BOOLEAN
+        )
+    IS
+    BEGIN
+    
+    INSERT INTO TOKENTBL (USERID,CLIENTNAME,ISSUEDATE,EXPIREDATE,DEVICE) VALUES (UID, clName, issDate, expDate, Dev );
+    commit;
+    isInserted:=true; 
+    
+    EXCEPTION
+    WHEN others THEN
+    isInserted:= false; 
+    
+    END addSession;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure ADDUSER
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."ADDUSER" (
+        userHrName       IN varchar2,
+        userCnic         IN varchar2,
+        userCity         IN varchar2,
+        userCountry      IN varchar2,
+        userCGPA         IN varchar2,
+        userDepartment   IN varchar2,
+        userUniversity   IN varchar2,
+        userPhoneNumber  IN varchar2,
+        organizationName IN varchar2,
+        clientName       IN varchar2, 
+        userEmail        IN varchar2,
+        userFname        IN varchar2,
+        userLname        IN varchar2,
+        userYear         IN varchar2,
+        userSemester     IN varchar2,
+        userPassword     IN varchar2,
+        userEnroll       IN varchar2,
+        userID           OUT DECIMAL,
+        isAlready        OUT BOOLEAN
+        )
+    IS
+        I DECIMAL(15,0);
+        uN varchar2(20);
+        pH varchar2(73);
+        DFound BOOLEAN;
+    BEGIN
+        LOGINDATAVALIDATION(clientName, userEmail, I, uN, pH, DFound);
+        IF DFound THEN 
+         isAlready := DFound ;  
+        ELSE  
+            IF clientName = 'student' THEN 
+                 userID :=  STUDENT_SEQ.nextval;
+                 insert INTO STUDENT (ID, CGPA, department, university , phoneNumber, PASSWORD, FNAME, LNAME, YEAR, SEMESTER, EMAIL, ENROLLMENT) VALUES(userID, userCGPA, userDepartment ,userUniversity, userPhoneNumber, userPassword , userFname, userLname, userYear, userSemester,  userEmail, userEnroll);
+                 COMMIT;
+            ELSE  
+                 userID :=  INDUSTRY_SEQ.nextval;
+                 insert INTO INDUSTRIES (ID, HRNAME, CNIC_NTN, CITY, COUNTRY, PASSWORD, ORGNAME, EMAIL) VALUES(userID, userHrName, userCnic, userCity, userCountry, userPassword , organizationName, userEmail);
+                 COMMIT;
+            END IF;    
+        END IF;    
+    END addUser;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure BASICINFO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."BASICINFO" (
+        Uid             IN DECIMAL,
+        clientName     IN varchar2, 
+        phoneNumber    OUT varchar2, 
+        enrollment     OUT varchar2,
+        department     OUT varchar2,
+        year           OUT varchar2,
+        semester       OUT varchar2,
+        CGPA           OUT varchar2,
+        DOB            OUT DATE    ,
+        gender         OUT varchar2,
+        address        OUT varchar2,
+        github         OUT varchar2,
+        linkedin       OUT varchar2,
+        aboutUs        OUT varchar2,
+        fname          OUT varchar2,
+        lname          OUT varchar2,
+        email          OUT varchar2,
+        university     OUT varchar2
+ )
+        
+    IS
+    BEGIN
+    
+
+    Select FNAME, LNAME, EMAIL, ENROLLMENT, CGPA,  DEPARTMENT,  UNIVERSITY,  PHONENUMBER,  YEAR,  SEMESTER,  DOB,  ADDRESS, GENDER ,  BIO  
+    INTO  fname, lname, email, enrollment,  CGPA, department, university,  phoneNumber, year , semester, DOB, address, gender, aboutUs  from STUDENT 
+    where ID = Uid;
+    github   := FIND_ACC_LINK(Uid,clientName,'github');
+    linkedin := FIND_ACC_LINK(Uid,clientName,'linkedin');
+
+    EXCEPTION
+    WHEN others THEN
+        phoneNumber := '' ; 
+        enrollment  := '' ; 
+        department  := '' ; 
+        year        := '' ; 
+        semester    := '' ; 
+        CGPA        := '' ; 
+        DOB         := '' ; 
+        gender      := '' ; 
+        address     := '' ; 
+        github      := '' ; 
+        linkedin    := '' ; 
+        aboutUs     := '' ; 
+        fname       := '' ; 
+        lname       := '' ; 
+        email       := '' ; 
+        university  := '' ; 
+
+    END BASICINFO;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure DELETEALLSESSIONS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."DELETEALLSESSIONS" (
+        UID IN DECIMAL,
+        clName IN varchar2
+        )
+    IS
+    BEGIN
+      
+    DELETE FROM TOKENTBL where USERID = UID AND CLIENTNAME = clName;
+    commit;
+        
+    END deleteAllSessions;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure DELETESESSION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."DELETESESSION" (
+        UID IN DECIMAL,
+        clName IN varchar2,
+        issDate IN DECIMAL
+        )
+    IS
+    BEGIN
+      
+    DELETE FROM TOKENTBL where USERID = UID AND ISSUEDATE = issDate AND CLIENTNAME = clName;
+    commit;
+        
+    END deleteSession;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure FINDSESSION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."FINDSESSION" (
+        UID IN DECIMAL,
+        clName IN varchar2,
+        issDate IN DECIMAL,
+        expDate IN DECIMAL,
+        isfound OUT BOOLEAN
+        )
+    IS
+    I DECIMAL(15,0);
+    BEGIN
+    
+    Select USERID INTO I from TOKENTBL where USERID = UID AND ISSUEDATE = issDate AND CLIENTNAME = clName AND expiredate <= expDate; 
+    isfound := TRUE;
+    
+    EXCEPTION
+    WHEN no_data_found THEN
+    isfound := FALSE;
+        
+    END findSession;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure INTERNSPOST
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."INTERNSPOST" (
+    UID             IN DECIMAL,
+    title           IN VARCHAR2,
+    durtion         IN VARCHAR2,
+    loC             IN VARCHAR2,
+    skill           IN ARR,
+    linkin          IN VARCHAR2,
+    descrip         IN VARCHAR2,
+    PDATE           IN TIMESTAMP,
+    isInserted      OUT BOOLEAN
+
+)
+IS 
+BEGIN
+
+INSERT INTO INTERNSHIP ( ID  , INDID , TITTLE   , LOCATION   , DURATION   , DESCRIPTION    , LINKS   , POSTDATE    ) VALUES (INTERNS_SEQ.nextval, UID, title, loC, durtion ,descrip,  linkin, PDATE   );
+
+FORALL i IN INDICES OF skill
+    INSERT INTO INTERNS_SKILL (INTID, SKILLID) VALUES ( INTERNS_SEQ.CURRVAL,(SELECT SKILL.ID FROM SKILL WHERE SKILL.SKILLNAME = skill(i)) );
+
+IF sql%found THEN 
+isInserted := true;
+ELSIF sql%notfound THEN 
+isInserted := false;
+END IF; 
+COMMIT;
+
+EXCEPTION 
+WHEN others THEN 
+isInserted := false;
+
+END internsPost;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure JOBPOST
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."JOBPOST" (
+        UID             IN DECIMAL,
+        title           IN VARCHAR2,
+        durtion         IN VARCHAR2,
+        loC             IN VARCHAR2,
+        skill           IN ARR,
+        linkin          IN VARCHAR2,
+        descrip         IN VARCHAR2,
+        PDATE           IN TIMESTAMP,
+        isInserted      OUT BOOLEAN
+
+)
+IS 
+BEGIN
+    
+INSERT INTO JOBS ( ID  , INDID , TITTLE   , LOCATION   , DURATION   , DESCRIPTION    , LINKS   , POSTDATE    ) VALUES (JOB_SEQ.nextval, UID, title, loC, durtion ,descrip,  linkin, PDATE   );
+
+FORALL i IN INDICES OF skill
+  INSERT INTO JOBSKILL (JOBID, SKILLID) VALUES ( JOB_SEQ.CURRVAL,(SELECT SKILL.ID FROM SKILL WHERE SKILL.SKILLNAME = skill(i)) );
+
+IF sql%found THEN 
+    isInserted := true;
+ELSIF sql%notfound THEN 
+    isInserted := false;
+END IF; 
+COMMIT;
+
+EXCEPTION 
+WHEN others THEN 
+    isInserted := false;
+ 
+END jobPost;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure LOGINDATAVALIDATION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."LOGINDATAVALIDATION" (
+        clientName IN varchar2,
+        isemail IN varchar2,
+        userId OUT DECIMAL,
+        userName OUT varchar2,
+        passwordHash OUT varchar2,
+        DFound OUT BOOLEAN
+        )
+    IS
+    LastNAME VARCHAR2(10);
+    FirstNAME VARCHAR2(10);
+    
+    BEGIN
+    
+    IF clientName = 'student' THEN
+    
+    Select ID, FNAME, LNAME, PASSWORD INTO  userId, FirstNAME, LastNAME, passwordHash from STUDENT where email = isemail; 
+    userName := FirstNAME||' '||LastNAME;
+    DFound := TRUE;
+    
+    ELSE  
+    
+    Select ID, orgname, PASSWORD INTO  userId, userName, passwordHash from INDUSTRIES where email = isemail; 
+    DFound := TRUE;
+    
+    END IF;
+    
+    
+    EXCEPTION
+    WHEN no_data_found THEN
+    DFound := FALSE;
+    END loginDataValidation;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure MODIFYEXPERIENCE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."MODIFYEXPERIENCE" (
+        UID           IN DECIMAL   ,                   
+        eid           IN DECIMAL   ,                   
+        companyName   IN varchar2  ,                       
+        job           IN varchar2  ,                   
+        Descr         IN varchar2  ,
+        sDate         IN varchar2  ,                       
+        EDate         IN varchar2  ,                   
+        isUpdated     OUT BOOLEAN
+    )
+        
+    IS
+    BEGIN
+    
+      UPDATE EXPERIENCE
+      SET  CNAME= companyName, STARTDATE =TO_DATE(sDate, 'DD/MM/YYYY'), ENDDATE = TO_DATE(EDate, 'DD/MM/YYYY')  , JOBROLE = job,  DESCRIPTION = Descr
+      where ID = eid AND STDID = UID;
+
+      
+      IF sql%found THEN 
+        isUpdated := true;
+      ELSIF sql%notfound THEN 
+       isUpdated := false;
+      END IF; 
+      
+      COMMIT;
+
+      EXCEPTION
+        WHEN others THEN 
+         isUpdated := false;
+      END MODIFYEXPERIENCE;
+      
+
+/
+--------------------------------------------------------
+--  DDL for Procedure ORGINFO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."ORGINFO" (
+        Uid            IN  DECIMAL,
+        clientName     IN  varchar2,
+        pNumber        OUT varchar2, 
+        adrss          OUT varchar2,
+        linkedin       OUT varchar2,
+        aboutUs        OUT varchar2,
+        hrNam          OUT varchar2,
+        webist         OUT varchar2,
+        orgNam         OUT varchar2
+        )
+        
+    IS
+    BEGIN
+    
+    Select PHONENUMBER, ADDRESS, BIO, HRNAME, WEBURL,  ORGNAME INTO  pNumber , adrss, aboutUs, hrNam,  webist, orgNam from INDUSTRIES 
+    where ID = Uid;
+    linkedin := FIND_ACC_LINK(Uid,clientName,'linkedin');
+
+    END orgInfo;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure UPDATEBASICINFO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."UPDATEBASICINFO" (
+        Uid            IN DECIMAL ,
+        clientNam      IN varchar2,
+        mobileNumber   IN varchar2, 
+        enrlment       IN varchar2,
+        depart         IN varchar2,
+        yr             IN varchar2,
+        smster         IN varchar2,
+        GPA            IN varchar2,
+        birthday       IN varchar2,
+        gndr           IN varchar2,
+        addr           IN varchar2,
+        githubLink     IN varchar2,
+        linkedinLink   IN varchar2,
+        aboutUs        IN varchar2,
+        firstName      IN varchar2,
+        lastName       IN varchar2,
+        emailAddr      IN varchar2,
+        uni            IN varchar2,
+        isInserted     OUT BOOLEAN
+    )
+        
+    IS
+     COUNT_ACC NUMBER;
+     GITHUB_ACC NUMBER;
+     LINKEDIN_ACC NUMBER;
+     
+    BEGIN
+    
+    IF clientNam  = 'student' THEN   
+    
+    UPDATE STUDENT
+    SET FNAME = firstName, LNAME= lastName, EMAIL =emailAddr, ENROLLMENT = enrlment  , CGPA = GPA  ,  DEPARTMENT = depart     ,  UNIVERSITY = uni,
+    PHONENUMBER = mobileNumber ,  YEAR = yr  ,  SEMESTER=smster, DOB =  TO_DATE(birthday, 'DD/MM/YYYY'),  ADDRESS = addr, GENDER = gndr ,  BIO = aboutUs
+    where ID = Uid;
+    
+    SELECT COUNT(STDID) INTO COUNT_ACC FROM STDSOCIALACCOUNT WHERE STDID=Uid;
+
+    SELECT ID INTO GITHUB_ACC   FROM socialmedia WHERE MEDIANAME='github';    
+    SELECT ID INTO LINKEDIN_ACC FROM socialmedia WHERE MEDIANAME='linkedin';    
+    
+    IF COUNT_ACC != 0 THEN    
+       UPDATE STDSOCIALACCOUNT set LINK=githubLink   WHERE STDID=Uid AND SMID=GITHUB_ACC;
+       UPDATE STDSOCIALACCOUNT set LINK=linkedinLink WHERE STDID=Uid AND SMID=LINKEDIN_ACC;
+    ELSE
+      INSERT INTO STDSOCIALACCOUNT VALUES(Uid,GITHUB_ACC, githubLink);
+      INSERT INTO STDSOCIALACCOUNT VALUES(Uid,LINKEDIN_ACC, linkedinLink);  
+    END IF;
+
+    IF sql%found THEN 
+        isinserted := true;
+    ELSIF sql%notfound THEN 
+        isinserted := false;
+    END IF; 
+    COMMIT;
+    
+    ELSE  
+    
+    UPDATE STUDENT
+    SET FNAME = firstName, LNAME= lastName, EMAIL =emailAddr, ENROLLMENT = enrlment  , CGPA = GPA  ,  DEPARTMENT = depart,  UNIVERSITY = uni,
+    PHONENUMBER = mobileNumber ,  YEAR = yr  ,  SEMESTER=smster, DOB =  birthday,  ADDRESS = addr, GENDER = gndr ,  BIO = aboutUs
+    where ID = Uid;
+    COMMIT;
+    isinserted := true;
+    
+    END IF;
+    END UPDATEBASICINFO;
+    
+
+/
+--------------------------------------------------------
+--  DDL for Procedure UPDATEORGINFO
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."UPDATEORGINFO" (
+        Uid            IN DECIMAL ,
+        mobileNumber   IN varchar2, 
+        adrss          IN varchar2,
+        linkedinLink   IN varchar2,
+        aboutUs        IN varchar2,
+        hrNam          IN varchar2,
+        webist         IN varchar2,
+        isInserted     OUT BOOLEAN
+    )
+        
+    IS
+     COUNT_ACC NUMBER;
+     LINKEDIN_ACC NUMBER;
+    BEGIN
+    
+    
+    UPDATE INDUSTRIES
+    SET PHONENUMBER = mobileNumber , ADDRESS = adrss ,  BIO = aboutUs, HRNAME = hrNam , WEBURL = webist
+    where ID = Uid;
+    
+    SELECT COUNT(INDID) INTO COUNT_ACC FROM INDSOCIALACCOUNT WHERE INDID=Uid;
+    SELECT ID INTO LINKEDIN_ACC FROM socialmedia WHERE MEDIANAME='linkedin';    
+    
+    IF COUNT_ACC != 0 THEN    
+       UPDATE INDSOCIALACCOUNT set LINK=linkedinLink WHERE INDID=Uid AND SMID=LINKEDIN_ACC;
+    ELSE
+      INSERT INTO INDSOCIALACCOUNT VALUES(Uid,LINKEDIN_ACC, linkedinLink);  
+    END IF;
+
+    IF sql%found THEN 
+        isInserted := true;
+    ELSIF sql%notfound THEN 
+        isInserted := false;
+    END IF; 
+    COMMIT;
+
+    END updateOrgInfo;
+    
+
+/
+--------------------------------------------------------
+--  DDL for Procedure UPDATESERVICES
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."UPDATESERVICES" (
+        UID                 IN DECIMAL,
+        DELETED_SERVICE     IN  ARR,
+        ADDED_SERVICE        IN  ARR,
+        isUPDATED            OUT BOOLEAN
+
+)
+IS 
+INSERTION BOOLEAN;
+UPDATION BOOLEAN;
+BEGIN
+
+FORALL i IN INDICES OF ADDED_SERVICE
+  INSERT INTO INDSERVICE (INDID, SERID) VALUES (UID,(SELECT SERVICES.ID FROM SERVICES WHERE SERVICES.SERVICENAME = ADDED_SERVICE(i)) );
+ 
+  IF sql%found THEN 
+    INSERTION := true;
+ELSIF sql%notfound THEN 
+    INSERTION := false;
+END IF; 
+
+FORALL J IN INDICES OF DELETED_SERVICE
+  DELETE FROM INDSERVICE WHERE INDSERVICE.INDID = UID AND INDSERVICE.SERID = (SELECT SERVICES.ID FROM SERVICES WHERE SERVICES.SERVICENAME = DELETED_SERVICE(J)) ;
+
+IF sql%found THEN 
+    UPDATION := true;
+ELSIF sql%notfound THEN 
+    UPDATION := false;
+END IF; 
+
+IF (INSERTION = true OR  UPDATION = true) THEN 
+isUPDATED := true;
+ELSE 
+isUPDATED := false;
+END IF; 
+
+
+COMMIT;
+
+EXCEPTION 
+WHEN others THEN 
+    isUPDATED := false;
+ 
+    END updateServices;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure UPDATESKILL
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "SYSTEM"."UPDATESKILL" (
+        UID           IN DECIMAL,
+        DELETED_SKILL IN  ARR,
+        ADDED_SKILL   IN  ARR,
+        isUPDATED     OUT BOOLEAN
+
+)
+IS 
+INSERTION BOOLEAN;
+UPDATION BOOLEAN;
+BEGIN
+
+FORALL i IN INDICES OF ADDED_SKILL
+  INSERT INTO stdskill (STDID, SKILLID) VALUES (UID,(SELECT SKILL.ID FROM SKILL WHERE SKILL.SKILLNAME = ADDED_SKILL(i)) );
+ 
+  IF sql%found THEN 
+    INSERTION := true;
+ELSIF sql%notfound THEN 
+    INSERTION := false;
+END IF; 
+
+FORALL J IN INDICES OF DELETED_SKILL
+  DELETE FROM STDSKILL WHERE STDSKILL.stdid = UID AND STDSKILL.SKILLID = (SELECT SKILL.ID FROM SKILL WHERE SKILL.SKILLNAME = DELETED_SKILL(J)) ;
+
+IF sql%found THEN 
+    UPDATION := true;
+ELSIF sql%notfound THEN 
+    UPDATION := false;
+END IF; 
+
+IF (INSERTION = true OR  UPDATION = true) THEN 
+isUPDATED := true;
+ELSE 
+isUPDATED := false;
+END IF; 
+
+
+COMMIT;
+
+EXCEPTION 
+WHEN others THEN 
+    isUPDATED := false;
+ 
+    END updateSkill;
+
+/

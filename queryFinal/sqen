@@ -1,0 +1,33 @@
+--------------------------------------------------------
+--  File created - Wednesday-August-24-2022   
+--------------------------------------------------------
+DROP SEQUENCE "SYSTEM"."INTERNS_SEQ";
+DROP SEQUENCE "SYSTEM"."STUDENT_SEQ";
+DROP SEQUENCE "SYSTEM"."INDUSTRY_SEQ";
+DROP SEQUENCE "SYSTEM"."JOB_SEQ";
+DROP SEQUENCE "SYSTEM"."EXPERIENCE_SEQ";
+--------------------------------------------------------
+--  DDL for Sequence INTERNS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "SYSTEM"."INTERNS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 11 CACHE 10 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence STUDENT_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "SYSTEM"."STUDENT_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 101 CACHE 10 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence INDUSTRY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "SYSTEM"."INDUSTRY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 91 CACHE 10 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence JOB_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "SYSTEM"."JOB_SEQ"  MINVALUE 0 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 11 CACHE 10 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence EXPERIENCE_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "SYSTEM"."EXPERIENCE_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 10 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;

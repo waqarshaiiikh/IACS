@@ -10,7 +10,7 @@ const state = { updated: "updated", modified: "modified", empty: null, available
 
 const port = 8393;
 axios.defaults.withCredentials = true;
-const Domain = 'http://43.205.194.115:';
+const Domain = 'http://52.66.129.232:';
 // const Domain = 'http://localhost:';
 
 const apiJson =async (apiAddress)=>{
