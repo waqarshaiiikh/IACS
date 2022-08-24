@@ -13,12 +13,41 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { makeStyles } from '@material-ui/styles';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import "../CSS/AdminDashboard.css"
+import {  Button } from '@mui/material';
+import { apiCAll } from '../integration/apiCall';
 
 const drawerWidth = 200;
+
+const useStyles = makeStyles({
+    navbar: {
+      background: '#42b6EE !important',
+      position: 'sticky !important',
+      zIndex: 999,
+    },
+    button: {
+      letterSpacing: '2px',
+      color: 'white !important',
+      fontSize: '1.1rem !important',
+      fontWeight: 'bold',
+      margin: '0px 20px !important',
+  
+      '&:focus': {
+        outline: 'none',
+      }
+    },
+    icon:{
+  
+      '&:hover':{
+        color:"white !important",
+        textDecoration : 'none !important'
+      }
+    }
+  });
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -48,6 +77,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
 
+    const logoutFunction = () => {
+        apiCAll('/api/login/admin/logout','post')
+        .then((res)=>{
+            console.log(res.data)
+            localStorage.clear();
+            // navigate("/")
+            window.location.href = "/";
+            window.location.href = "/";
+        }).catch((e)=>{
+          console.log(e)
+          localStorage.clear();
+          // navigate("/")
+          window.location.href = "/";
+          window.location.href = "/";
+        })
+      };
+    
+  const classes = useStyles();
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -67,6 +115,17 @@ const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
                             Admin Panel
                         </Typography>
                     </Link>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'right' }}>
+
+                        <Button x={{ my: 2, color: 'white', display: 'block' }}
+                            className={classes.button} onClick={logoutFunction} component={Link} to="/">
+                            Logout
+                        </Button>
+
+                    </Box>
+
+
+
                 </Toolbar>
             </AppBar>
             <Drawer

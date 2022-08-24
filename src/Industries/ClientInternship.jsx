@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ClientNavbar from './ClientNavbar';
-import axios from 'axios';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Pagination from '../Pages/Pagination';
@@ -34,38 +33,6 @@ import "../CSS/Utils.css"
 import { apiCAll, apiJson } from '../integration/apiCall';
 import noteContext from '../context/notes/noteContext';
 
-const internshipSkills = [
-    "HTML CSS & JavaScript",
-    "C# .Net",
-    "C / C++",
-    "Java",
-    "Swift",
-    "Python",
-    "React Js",
-    "Angular",
-    "Next JS",
-    "Rest API",
-    "React Native",
-    "Flutter",
-    "Kotlin",
-    "Machine Learning",
-    "Artificial Intelligence",
-    "Data Science",
-    "Data Analytics",
-    "MERN Stack",
-    "SQL",
-    "MongoDB",
-    "Oracle",
-    "Firebase",
-    "iOS Development",
-    "Android Development",
-    "Desktop Development",
-    "Frontend Development",
-    "Backned Development",
-    "SQA",
-    "Digital Media Marketing",
-    "Blockchain",
-]
 
 const useStyles = makeStyles({
     searching: {
@@ -257,39 +224,33 @@ const ClientInternship = () => {
     const [requestInternship, setRequestInternship] = useState(false);
     const openRequest = () => setRequestInternship(true);
     const closeRequest = () => setRequestInternship(false);
+
     const [search, setSearch] = useState(1);
     const [internshipRole, setInternshipRole] = useState('');
     const [internshipType, setInternshipType] = useState('');
 
-    const [loading, setLoading] = useState(false);
-    const [value, setValue] = useState();
-    const [internships, setInternships] = useState(false);
-    const [postCount, setPostCount] = useState();
+    const [internships, setInternships] = useState(null);
+    const [postCount, setPostCount] = useState(null);
     const [showPerPage] = useState(4)
     const [total, setTotal] = useState(0);
     const [pagination, setPagination] = useState({
         start: 0,
         end: showPerPage
     });
+    const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState("");
 
     const onPaginationChange = (start, end) => {
         setPagination({
             start: start,
             end: end
         })
+
+        handleSearch(null, start, end).then(() => {
+        });
     }
 
-    const loadStudent = async (start = 0, end = showPerPage) => {
-        await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
-            console.log(res?.data);
-            setInternships(res?.data.data);
-            setTotal(res?.data.total);
-            setPostCount(res?.data.total);
-        }).catch((err) => {
-            console.log(err);
-        })
-        setLoading(false);
-    }
+   
 
     const handleChange = (event) => {
         console.log(event.target.value)
@@ -304,22 +265,61 @@ const ClientInternship = () => {
     const handleInternshipType = (event) => {
         console.log(event.target.value)
         setInternshipType(event.target.value);
+        setValue(event.target.value);
     };
+
+    
+    const updateJobSkill = async (expanded, index, interns) => {
+        if (!internships[index]?.skills && expanded) {
+            await apiCAll(`/api/user/internship/skill/get`, 'post', { job: { id: interns.ID } }).then((res) => {
+
+                console.log(res.data);
+                let st = internships;
+                let skill_STD = st[index];
+                skill_STD = { ...skill_STD, skills: res?.data };
+                st[index] = skill_STD;
+                setInternships([...st])
+                // console.log(res?.data);
+                // console.log(studentData)
+
+            }).catch((err) => {
+                console.log(err);
+            })
+
+        }
+    }
+
+
+    const loadJobs = async (start = 0, end = showPerPage) => {
+        await apiCAll(`/api/user/internship/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+
+            console.log(res?.data);
+            setInternships(res?.data.data);
+            setTotal(res?.data.total);
+            setPostCount(res?.data.total);
+        }).catch((err) => {
+            console.log(err);
+        })
+        setLoading(false);
+    }
+
 
     const handleSearch = async (e, start = 0, end = showPerPage) => {
         setLoading(true)
         e?.preventDefault();
+
         console.log(value, search)
         if (!value || !search) {
-            return await loadStudent(start, end).then(() => {
+            return await loadJobs(start, end).then(() => {
                 setLoading(false)
                 return null;
             });
         }
 
+
         switch (search) {
             case 1: {
-                await apiCAll(`/api/user/student/searchBy/name`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/internship/searchBy/companyName`, 'post', { pagination: { starts: start, totalRows: end - start }, companyName: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setInternships(res?.data.data);
                     setPostCount(res?.data.total);
@@ -330,7 +330,7 @@ const ClientInternship = () => {
                 setLoading(false);
             } break;
             case 2: {
-                await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/internship/searchBy/tittle`, 'post', { pagination: { starts: start, totalRows: end - start }, tittle: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setInternships(res?.data.data);
                     setTotal(res?.data.total);
@@ -341,7 +341,7 @@ const ClientInternship = () => {
                 setLoading(false);
             } break;
             case 3: {
-                await apiCAll(`/api/user/student/searchBy/year`, 'post', { pagination: { starts: start, totalRows: end - start }, year: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/internship/searchBy/address`, 'post', { pagination: { starts: start, totalRows: end - start }, address: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setInternships(res?.data.data);
                     setTotal(res?.data.total);
@@ -352,7 +352,7 @@ const ClientInternship = () => {
                 setLoading(false);
             } break;
             case 4: {
-                await apiCAll(`/api/user/student/searchBy/university`, 'post', { pagination: { starts: start, totalRows: end - start }, university: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/internship/searchBy/location`, 'post', { pagination: { starts: start, totalRows: end - start }, location: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setInternships(res?.data.data);
                     setTotal(res?.data.total);
@@ -363,7 +363,7 @@ const ClientInternship = () => {
                 setLoading(false);
             } break;
             case 5: {
-                await apiCAll(`/api/user/student/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end - start }, skill: { query: value }, }).then((res) => {
+                await apiCAll(`/api/user/internship/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end - start }, skill: { query: value }, }).then((res) => {
                     console.log(res?.data);
                     setInternships(res?.data.data);
                     setTotal(res?.data.total);
@@ -374,28 +374,16 @@ const ClientInternship = () => {
                 setLoading(false);
             } break;
             default: {
-                alert("Please select the category")
+                alert("Enter text to search");
             }
         }
-        // if (value) {
-        //     await apiJson(`/internships?q=${value}`).then((res) => {
-        //         setInternships(res?.data);
-        //         setTotal(res?.data.length);
-        //         setPostCount(res?.data.length);
-        //         setValue("");
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     })
-        // }
-        // else {
-        //     alert("Enter text to search");
-        // }
+
         setLoading(false)
     }
 
     useEffect(() => {
-        loadStudent();
         setLoading(true)
+        loadJobs();
     }, [])
 
 
@@ -425,7 +413,7 @@ const ClientInternship = () => {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                value={internshipType}
+                                                value={value}
                                                 label="Search"
                                                 onChange={handleInternshipType}
                                                 sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
@@ -440,6 +428,7 @@ const ClientInternship = () => {
                                         label="Search"
                                         variant="outlined"
                                         size='medium'
+                                        value={value}
                                         onChange={(e) => { setValue(e.target.value) }}
                                         onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
                                         sx={{
@@ -501,16 +490,16 @@ const ClientInternship = () => {
                                                         <div className={classes.software_title}>
                                                             <div>
                                                                 <h3 className='mobileHeading'>{internship.COMPANYNAME}</h3>
-                                                                <Typography>{internship.TITLE}</Typography>
+                                                                <Typography>{internship.TITTLE}</Typography>
                                                                 <Typography>{internship.ADDRESS}</Typography>
                                                                 <div>
                                                                     <Typography sx={{ display: 'inline-block' }}>{internship.DURATION}</Typography>,&nbsp;
                                                                     <Typography sx={{ display: 'inline-block' }}>{internship.LOCATION}</Typography>
-                                                                    <a style={{ display: 'block' }} href="https://www.google.com/" target={"_blank"}>Detail</a>
+                                                                    <a style={{ display: 'block' }} href={internship.LINKS} target={"_blank"}>Detail</a>
                                                                 </div>
                                                             </div>
                                                             <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
-                                                                internship.POSTDATE.split('T')[0]
+                                                                internship?.POSTDATE?.split('T')[0]
                                                             }</Typography>
                                                             <img className={classes.software_image} src={internship.IMAGE} alt="student" />
                                                         </div>
@@ -528,7 +517,7 @@ const ClientInternship = () => {
                                                                 </Typography>
                                                             </AccordionDetails>
                                                         </Accordion>
-                                                        <Accordion>
+                                                        <Accordion onChange={(e, expanded) => updateJobSkill(expanded, index, internship)} >
                                                             <AccordionSummary
                                                                 expandIcon={<ExpandMoreIcon />}
                                                                 aria-controls="panel1a-content"
@@ -539,8 +528,8 @@ const ClientInternship = () => {
                                                             <AccordionDetails>
                                                                 <Typography>
                                                                     {
-                                                                        internship.requiredSkills && internship.requiredSkills.map((skill, i) => (
-                                                                            <Chip label={skill} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                                                        internships[index].skills && internships[index].skills.map((skill, i) => (
+                                                                            <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
                                                                     }
                                                                 </Typography>
                                                             </AccordionDetails>

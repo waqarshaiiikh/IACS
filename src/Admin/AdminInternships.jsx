@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import axios from "axios";
@@ -33,6 +33,8 @@ import { makeStyles } from '@material-ui/styles';
 import MetaData from '../MetaData';
 import "../CSS/Utils.css";
 import { apiJson, apiCAll } from '../integration/apiCall';
+import noteContext from '../context/notes/noteContext';
+
 
 const useStyles = makeStyles({
   searching: {
@@ -112,6 +114,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 const AdminInternships = () => {
+  
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -125,150 +128,173 @@ const AdminInternships = () => {
 
   const classes = useStyles();
 
+  const [requestInternship, setRequestInternship] = useState(false);
+  const openRequest = () => setRequestInternship(true);
+  const closeRequest = () => setRequestInternship(false);
+
   const [search, setSearch] = useState(1);
   const [internshipRole, setInternshipRole] = useState('');
   const [internshipType, setInternshipType] = useState('');
 
-  const [internships, setInternships] = useState();
+  const [internships, setInternships] = useState(null);
   const [postCount, setPostCount] = useState(null);
-  const [showPerPage] = useState(4);
+  const [showPerPage] = useState(4)
   const [total, setTotal] = useState(0);
   const [pagination, setPagination] = useState({
-    start: 0,
-    end: showPerPage
+      start: 0,
+      end: showPerPage
   });
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
 
   const onPaginationChange = (start, end) => {
-    setPagination({
-      start: start,
-      end: end
-    })
+      setPagination({
+          start: start,
+          end: end
+      })
+
+      handleSearch(null, start, end).then(() => {
+      });
   }
 
+ 
+
   const handleChange = (event) => {
-    console.log(event.target.value)
-    setSearch(event.target.value);
+      console.log(event.target.value)
+      setSearch(event.target.value);
   };
 
   const handleInternshipRole = (event) => {
-    console.log(event.target.value)
-    setInternshipRole(event.target.value);
+      console.log(event.target.value)
+      setInternshipRole(event.target.value);
   };
 
   const handleInternshipType = (event) => {
-    console.log(event.target.value)
-    setInternshipType(event.target.value);
+      console.log(event.target.value)
+      setInternshipType(event.target.value);
+      setValue(event.target.value);
   };
 
-  const loadInternship = async (start = 0, end = showPerPage) => {
-    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
-      console.log(res?.data);
-      setInternships(res?.data.data);
-      setTotal(res?.data.total);
-      setPostCount(res?.data.total);
-    }).catch((err) => {
-      console.log(err);
-    })
-    setLoading(false);
+  
+  const updateJobSkill = async (expanded, index, interns) => {
+      if (!internships[index]?.skills && expanded) {
+          await apiCAll(`/api/user/internship/skill/get`, 'post', { job: { id: interns.ID } }).then((res) => {
+
+              console.log(res.data);
+              let st = internships;
+              let skill_STD = st[index];
+              skill_STD = { ...skill_STD, skills: res?.data };
+              st[index] = skill_STD;
+              setInternships([...st])
+
+          }).catch((err) => {
+              console.log(err);
+          })
+
+      }
   }
 
+
+  const loadJobs = async (start = 0, end = showPerPage) => {
+      await apiCAll(`/api/user/internship/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+
+          console.log(res?.data);
+          setInternships(res?.data.data);
+          setTotal(res?.data.total);
+          setPostCount(res?.data.total);
+      }).catch((err) => {
+          console.log(err);
+      })
+      setLoading(false);
+  }
+
+
   const handleSearch = async (e, start = 0, end = showPerPage) => {
-    setLoading(true);
-    e?.preventDefault();
-    console.log(value, search)
-    if (!value || !search) {
-      return await loadInternship(start, end).then(() => {
-        setLoading(false)
-        return null;
-      });
-    }
+      setLoading(true)
+      e?.preventDefault();
 
-    switch (search) {
-      case 1: {
-        await apiCAll(`/api/user/student/searchBy/name`, 'post', { pagination: { starts: start, totalRows: end - start }, name: { query: value }, }).then((res) => {
-          console.log(res?.data);
-          setInternships(res?.data.data);
-          setPostCount(res?.data.total);
-          setTotal(res?.data.total);
-        }).catch((err) => {
-          console.log(err);
-        })
-        setLoading(false);
-      } break;
-      case 2: {
-        await apiCAll(`/api/user/student/searchBy/depart`, 'post', { pagination: { starts: start, totalRows: end - start }, depart: { query: value }, }).then((res) => {
-          console.log(res?.data);
-          setInternships(res?.data.data);
-          setTotal(res?.data.total);
-          setPostCount(res?.data.total);
-        }).catch((err) => {
-          console.log(err);
-        })
-        setLoading(false);
-      } break;
-      case 3: {
-        await apiCAll(`/api/user/student/searchBy/year`, 'post', { pagination: { starts: start, totalRows: end - start }, year: { query: value }, }).then((res) => {
-          console.log(res?.data);
-          setInternships(res?.data.data);
-          setTotal(res?.data.total);
-          setPostCount(res?.data.total);
-        }).catch((err) => {
-          console.log(err);
-        })
-        setLoading(false);
-      } break;
-      case 4: {
-        await apiCAll(`/api/user/student/searchBy/university`, 'post', { pagination: { starts: start, totalRows: end - start }, university: { query: value }, }).then((res) => {
-          console.log(res?.data);
-          setInternships(res?.data.data);
-          setTotal(res?.data.total);
-          setPostCount(res?.data.total);
-        }).catch((err) => {
-          console.log(err);
-        })
-        setLoading(false);
-      } break;
-      case 5: {
-        await apiCAll(`/api/user/student/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end - start }, skill: { query: value }, }).then((res) => {
-          console.log(res?.data);
-          setInternships(res?.data.data);
-          setTotal(res?.data.total);
-          setPostCount(res?.data.total);
-        }).catch((err) => {
-          console.log(err);
-        })
-        setLoading(false);
-      } break;
-      default: {
-        alert("Please select the category")
+      console.log(value, search)
+      if (!value || !search) {
+          return await loadJobs(start, end).then(() => {
+              setLoading(false)
+              return null;
+          });
       }
-    }
 
-    // if (value) {
-    //   await apiJson(`/internships?q=${value}`).then((res) => {
-    //     setInternships(res.data);
-    //     setTotal(res?.data.length);
-    //     setPostCount(res?.data.length);
-    //     setValue("")
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   })
-    // }
-    // else {
-    //   alert("Please Enter text to search");
-    // }
-    setLoading(false);
+
+      switch (search) {
+          case 1: {
+              await apiCAll(`/api/user/internship/searchBy/companyName`, 'post', { pagination: { starts: start, totalRows: end - start }, companyName: { query: value }, }).then((res) => {
+                  console.log(res?.data);
+                  setInternships(res?.data.data);
+                  setPostCount(res?.data.total);
+                  setTotal(res?.data.total);
+              }).catch((err) => {
+                  console.log(err);
+              })
+              setLoading(false);
+          } break;
+          case 2: {
+              await apiCAll(`/api/user/internship/searchBy/tittle`, 'post', { pagination: { starts: start, totalRows: end - start }, tittle: { query: value }, }).then((res) => {
+                  console.log(res?.data);
+                  setInternships(res?.data.data);
+                  setTotal(res?.data.total);
+                  setPostCount(res?.data.total);
+              }).catch((err) => {
+                  console.log(err);
+              })
+              setLoading(false);
+          } break;
+          case 3: {
+              await apiCAll(`/api/user/internship/searchBy/address`, 'post', { pagination: { starts: start, totalRows: end - start }, address: { query: value }, }).then((res) => {
+                  console.log(res?.data);
+                  setInternships(res?.data.data);
+                  setTotal(res?.data.total);
+                  setPostCount(res?.data.total);
+              }).catch((err) => {
+                  console.log(err);
+              })
+              setLoading(false);
+          } break;
+          case 4: {
+              await apiCAll(`/api/user/internship/searchBy/location`, 'post', { pagination: { starts: start, totalRows: end - start }, location: { query: value }, }).then((res) => {
+                  console.log(res?.data);
+                  setInternships(res?.data.data);
+                  setTotal(res?.data.total);
+                  setPostCount(res?.data.total);
+              }).catch((err) => {
+                  console.log(err);
+              })
+              setLoading(false);
+          } break;
+          case 5: {
+              await apiCAll(`/api/user/internship/searchBy/skill`, 'post', { pagination: { starts: start, totalRows: end - start }, skill: { query: value }, }).then((res) => {
+                  console.log(res?.data);
+                  setInternships(res?.data.data);
+                  setTotal(res?.data.total);
+                  setPostCount(res?.data.total);
+              }).catch((err) => {
+                  console.log(err);
+              })
+              setLoading(false);
+          } break;
+          default: {
+              alert("Enter text to search");
+          }
+      }
+
+      setLoading(false)
   }
 
   useEffect(() => {
-    loadInternship();
-    setLoading(true);
+      setLoading(true)
+      loadJobs();
   }, [])
+
 
   return (
     <Box sx={{ display: 'flex' }}>
+      <MetaData title="Internhsips" />
       <AdminNavbar open={open}
         handleDrawerClose={handleDrawerClose}
         handleDrawerOpen={handleDrawerOpen}
@@ -276,59 +302,49 @@ const AdminInternships = () => {
       <Main open={open}>
         <DrawerHeader />
         <MetaData title="Admin Internships" />
-        <Container maxWidth="xl" sx={{ padding: '0', }}>
+        <Container maxWidth="xl" sx={{ padding: '0' }}>
           <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
             <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
-              <h1>Internship</h1>
+              <h1>Internships</h1>
             </Grid>
-            <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
+            <Grid item lg={12} xs={12}
+              sx={{
+                display: 'flex', flexDirection: { xs: 'column', lg: 'row' },
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: { lg: 'none', xs: "10px" }
+              }}>
               <div>
                 {
-                  search == 2 ?
+                  (search == 4 ?
                     (<Box sx={{ minWidth: 120 }}>
                       <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Job Role</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Job Type</InputLabel>
                         <Select
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
-                          value={internshipRole}
-                          label="Job Role"
-                          onChange={handleInternshipRole}
+                          value={value}
+                          label="Search"
+                          onChange={handleInternshipType}
                           sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
                         >
-                          <MenuItem value="fullStack">Full Stack Developer</MenuItem>
-                          <MenuItem value="frontend">Front End Developer</MenuItem>
-                          <MenuItem value="backend">Back End Developer</MenuItem>
-                          <MenuItem value="database">Database Engineer</MenuItem>
-                          <MenuItem value="softwareEngineer">Software Engineer</MenuItem>
+                          <MenuItem value="onsite">Onsite</MenuItem>
+                          <MenuItem value="remote">Remote</MenuItem>
                         </Select>
                       </FormControl>
                     </Box>) :
-                    (search == 4 ?
-                      (<Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                          <InputLabel id="demo-simple-select-label">Job Type</InputLabel>
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={internshipType}
-                            label="Search"
-                            onChange={handleInternshipType}
-                            sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }}
-                          >
-                            <MenuItem value="onsite">Onsite</MenuItem>
-                            <MenuItem value="remote">Remote</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>) :
-                      (<TextField
-                        id="search"
-                        label="Search"
-                        variant="outlined"
-                        value={value}
-                        onChange={(e) => { setValue(e.target.value) }}
-                        onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
-                        size='medium' sx={{ marginRight: '10px', width: { lg: 500, xs: 250 } }} />))
+                    (<TextField
+                      id="search"
+                      label="Search"
+                      variant="outlined"
+                      size='medium'
+                      value={value}
+                      onChange={(e) => { setValue(e.target.value) }}
+                      onKeyPress={(e) => { if (e.key === "Enter") { handleSearch() } }}
+                      sx={{
+                        marginRight: '10px',
+                        width: { lg: 500, xs: 250 }
+                      }} />))
                 }
               </div>
               <Box sx={{ minWidth: 120 }}>
@@ -352,73 +368,84 @@ const AdminInternships = () => {
               <SearchIcon
                 fontSize='large'
                 onClick={handleSearch}
-                sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
+                sx={{
+                  color: '#42b6EE',
+                  cursor: 'pointer',
+                  marginTop: { lg: 'none', xs: '10px' },
+                }} />
             </Grid>
+            
             <Grid item lg={10} xs={12} >
               <Grid container spacing={2}>
-                {loading ? (
-                  <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
-                    <CircularProgress color="inherit" />
-                  </Backdrop>
-                ) :
-                  ((postCount === 0) ?
-                    (<div className='Post_center'>
-                      <h1 className='main_heading'>No Result Found</h1>
-                    </div>) :
-                    (internships && internships.map((intern, index) => (
-                      <Grid item lg={12} key={index}>
-                        <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                          <div className={classes.software_title}>
-                            <div>
-                              <h3 className='mobileHeading'>{intern.COMPANYNAME}</h3>
-                              <Typography>{intern.TITTLE}</Typography>
-                              <Typography>{intern.ADDRESS}</Typography>
-                              <div>
-                                <Typography sx={{ display: 'inline-block' }}>{intern.DURATION}</Typography>,&nbsp;
-                                <Typography sx={{ display: 'inline-block' }}>{intern.LOCATION}</Typography>
-                                <a style={{ display: 'block' }} href={intern.LINKS} target={"_blank"}>Detail</a>
+                {
+                  loading ?
+                    (
+                      <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+                        <CircularProgress color="inherit" />
+                      </Backdrop>
+                    ) :
+                    ((postCount === 0) ?
+                      (
+                        <div className='Post_center'>
+                          <h1 className='main_heading'>No Result Found</h1>
+                        </div>
+                      ) :
+                      (
+                        internships && internships.map((internship, index) => (
+                          <Grid item lg={12} key={index}>
+                            <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                              <div className={classes.software_title}>
+                                <div>
+                                  <h3 className='mobileHeading'>{internship.COMPANYNAME}</h3>
+                                  <Typography>{internship.TITTLE}</Typography>
+                                  <Typography>{internship.ADDRESS}</Typography>
+                                  <div>
+                                    <Typography sx={{ display: 'inline-block' }}>{internship.DURATION}</Typography>,&nbsp;
+                                    <Typography sx={{ display: 'inline-block' }}>{internship.LOCATION}</Typography>
+                                    <a style={{ display: 'block' }} href={internship.LINKS} target={"_blank"}>Detail</a>
+                                  </div>
+                                </div>
+                                <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
+                                  internship?.POSTDATE?.split('T')[0]
+                                }</Typography>
+                                <img className={classes.software_image} src={internship.IMAGE} alt="student" />
                               </div>
-                            </div>
-                            <div>
-                              <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{intern.POSTDATE.split('T')[0]}</Typography>
-                              <img className={classes.software_image} src={intern.IMAGE} alt="student" />
-                            </div>
-                          </div>
-                          <Accordion>
-                            <AccordionSummary
-                              expandIcon={<ExpandMoreIcon />}
-                              aria-controls="panel1a-content"
-                              id="about"
-                            >
-                              <Typography>Description</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                              <p>
-                                {intern.description}
-                              </p>
-                            </AccordionDetails>
-                          </Accordion>
-                          <Accordion>
-                            <AccordionSummary
-                              expandIcon={<ExpandMoreIcon />}
-                              aria-controls="panel1a-content"
-                              id="skills"
-                            >
-                              <Typography>Required Skills</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                              <p>
-                                {
-                                  intern.requiredSkill && intern.requiredSkill.map((skills, i) => (
-                                    <Chip label={skills} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                }
-                              </p>
-                            </AccordionDetails>
-                          </Accordion>
-                        </Box>
-                      </Grid>
-                    ))))
+                              <Accordion>
+                                <AccordionSummary
+                                  expandIcon={<ExpandMoreIcon />}
+                                  aria-controls="panel1a-content"
+                                  id="about"
+                                >
+                                  <Typography>Description</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  <Typography>
+                                    {internship.DESCRIPTION}
+                                  </Typography>
+                                </AccordionDetails>
+                              </Accordion>
+                              <Accordion onChange={(e, expanded) => updateJobSkill(expanded, index, internship)} >
+                                <AccordionSummary
+                                  expandIcon={<ExpandMoreIcon />}
+                                  aria-controls="panel1a-content"
+                                  id="skills"
+                                >
+                                  <Typography>Required Skills</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  <Typography>
+                                    {
+                                      internships[index].skills && internships[index].skills.map((skill, i) => (
+                                        <Chip label={skill.title} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
+                                    }
+                                  </Typography>
+                                </AccordionDetails>
+                              </Accordion>
+                            </Box>
+                          </Grid>
+                        ))
+                      ))
                 }
               </Grid>
             </Grid>

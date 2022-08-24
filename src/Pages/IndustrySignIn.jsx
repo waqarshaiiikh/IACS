@@ -41,34 +41,58 @@ const IndustrySignIn = () => {
         setError(null);
         setLoading(true);
 
-        a.setUserType("industry")
-        a.setSignin(true);
-        localStorage.setItem('UserType', JSON.stringify("industry"));
-        localStorage.setItem('Signin', JSON.stringify(true));
-        setLoading(false);
-        navigate('/'); 
-        // const reqData = { email: email.value, password: password.value , clientName: "industry"};
-        // apiCAll(`/api/login`,'post', reqData)
-        // .then( async response => {
-        //     await gettingData();
-        //     a.setUserType("industry")
-        //     a.setSignin(true);
-        //     localStorage.setItem('UserType', JSON.stringify("industry"));
-        //     localStorage.setItem('Signin', JSON.stringify(true));
-        //     setLoading(false);
-        //     navigate('/'); 
-        // })
-        // .catch(error => {
-        //     setLoading(false);
-        //     try{
-        //         console.log(error)
-        //         if(error.response.status>=400 || error.response.status<= 499 ){}
-        //             setError("Wrong Password");
-        //     }
-        //     catch{
-        //         setError("Something went wrong. Please try again later.")
-        //     }
-        // });
+
+
+        if (email.value === 'admin') {
+            const reqData = { email: email.value, password: password.value, clientName: "admin" };
+
+            apiCAll(`/api/login/admin`, 'post', reqData)
+                .then(async response => {
+                    a.setUserType("admin")
+                    a.setSignin(true);
+                    localStorage.setItem('UserType', JSON.stringify("admin"));
+                    localStorage.setItem('Signin', JSON.stringify(true));
+                    setLoading(false);
+                    navigate('/Admin/home');
+                })
+                .catch(error => {
+                    setLoading(false);
+                    try {
+                        console.log(error)
+                        if (error.response.status >= 400 || error.response.status <= 499) { }
+                        setError("Wrong Password");
+                    }
+                    catch {
+                        setError("Something went wrong. Please try again later.")
+                    }
+                });
+
+        } else {
+
+            const reqData = { email: email.value, password: password.value, clientName: "industry" };
+
+            apiCAll(`/api/login`, 'post', reqData)
+                .then(async response => {
+                    await gettingData();
+                    a.setUserType("industry")
+                    a.setSignin(true);
+                    localStorage.setItem('UserType', JSON.stringify("industry"));
+                    localStorage.setItem('Signin', JSON.stringify(true));
+                    setLoading(false);
+                    navigate('/');
+                })
+                .catch(error => {
+                    setLoading(false);
+                    try {
+                        console.log(error)
+                        if (error.response.status >= 400 || error.response.status <= 499) { }
+                        setError("Wrong Password");
+                    }
+                    catch {
+                        setError("Something went wrong. Please try again later.")
+                    }
+                });
+        }
     }
 
 

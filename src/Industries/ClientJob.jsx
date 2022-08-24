@@ -91,9 +91,6 @@ const requestStyle = {
   p: { lg: 4, xs: 1 },
 }
 
-
-
-
 const PostJob = (props) => {
 
 
@@ -227,6 +224,7 @@ const ClientJob = () => {
   const [search, setSearch] = useState(1);
   const [jobRole, setJobRole] = useState('');
   const [jobType, setJobType] = useState('');
+
   const [requestJob, setRequestJob] = useState(false);
   const openRequest = () => setRequestJob(true);
   const closeRequest = () => setRequestJob(false);
@@ -289,6 +287,7 @@ const ClientJob = () => {
 
   const loadJobs = async (start = 0, end = showPerPage) => {
     await apiCAll(`/api/user/job/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+      
       console.log(res?.data);
       setJobs(res?.data.data);
       setTotal(res?.data.total);
@@ -490,7 +489,7 @@ const ClientJob = () => {
                               </div>
                             </div>
                             <div>
-                              <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{jobs?.POSTDATE?.split('T')[0]}</Typography>
+                              <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{job?.POSTDATE?.split('T')[0]}</Typography>
                               <img className={classes.software_image} src={job.IMAGE} alt="student" />
                             </div>
                           </div>

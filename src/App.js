@@ -19,8 +19,10 @@ function App() {
               else if (a.UserType === "industry")
                 await a.industry.gettingIndData().catch(e => console.log(e));
              
-              else if (a.UserType === "admin")
-                await a.admin.gettingIndData().catch(e => console.log(e));
+              else if (a.UserType === "admin"){
+                
+              }
+                // await a.admin.gettingIndData().catch(e => console.log(e));
 
             }
             getProfileData(); 

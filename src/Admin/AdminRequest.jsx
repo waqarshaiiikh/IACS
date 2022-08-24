@@ -133,6 +133,8 @@ const AdminRequest = () => {
       start: start,
       end: end
     });
+    loadRequest(start, end).then(() => {
+    });
   }
 
   const getStudentYear = (studentYear) => {
@@ -156,7 +158,7 @@ const AdminRequest = () => {
 
   const loadRequest = async (start = 0, end = showPerPage) => {
 
-    await apiCAll(`/api/user/student/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+    await apiCAll(`/api/user/request/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
       console.log(res?.data);
       setStudentsRequest(res?.data.data);
       // setStudents(res?.data);
@@ -186,7 +188,7 @@ const AdminRequest = () => {
           <Container maxWidth="xl" sx={{ padding: '0' }}>
             <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
               <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
-                <h1>Jobs and Internships Request</h1>
+                <h1>Requests</h1>
               </Grid>
               <Grid item lg={12} xs={12} className={classes.studentList} >
                 <Grid container spacing={3} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
@@ -206,17 +208,23 @@ const AdminRequest = () => {
                             <div className={classes.student_title}>
                               <img className={classes.student_image} src={student.IMAGE} alt="student" />
                               <div>
-                                <Typography variant='h6'>{student.FNAME + " " + student.LNAME}</Typography>
+                                <Typography variant='h6'>{student.NAME}</Typography>
                                 <Typography>{Api.DEPARTMENT[student.DEPARTMENT]}</Typography>
                                 <Typography>{getStudentYear(student.YEAR)}</Typography>
                                 <Typography>{student.UNIVERSITY}</Typography>
-                                <Typography>{student.TITTLE}</Typography>
-                                <div>
-                                  <Typography sx={{ display: 'inline-block' }}>{student.DURATION}</Typography>,&nbsp;
-                                  <Typography sx={{ display: 'inline-block' }}>{student.LOCATION}</Typography>
-                                </div>
+
+
                               </div>
                             </div>
+                            <div>
+                                <Typography><b>Request Tittle : </b>{student.TITTLE}</Typography>
+                                <Typography><b>Request For : </b>{student.REQ_TYPE}</Typography>
+                                <Typography><b>Duration : </b>{student.DURATION}</Typography>
+                                <Typography><b>Location : </b>{student.LOCATION}</Typography>
+                                <Typography><b>Date : </b>{student.REQUESTDATE.split('T')[0]}</Typography>
+                                
+                            </div>
+                          
                             <Accordion>
                               <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}

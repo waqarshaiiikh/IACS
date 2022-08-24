@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -52,37 +52,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const messages = [
+const mss = [
   {
-    FULL_NAME: "Khalid",
-    EMAIL: "abc@gmail.com",
-    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
-  },
-  {
-    FULL_NAME: "Waqar",
-    EMAIL: "abc@gmail.com",
-    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
-  },
-  {
-    FULL_NAME: "Uzair",
-    EMAIL: "abc@gmail.com",
-    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
-  },
-  {
-    FULL_NAME: "Maaz",
-    EMAIL: "abc@gmail.com",
-    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
-  },
-  {
-    FULL_NAME: "Maaz",
-    EMAIL: "abc@gmail.com",
-    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
-  },
-  {
-    FULL_NAME: "Maaz",
-    EMAIL: "abc@gmail.com",
-    MESSAGE: "lorem dkjgd jkfgkdlf bdkfjhdgf dkjhdkg vkbjdkgh kjbhgk bdknbkjdgh bkdhbkdjg kdjhd"
-  },
+    FULL_NAME: "",
+    EMAIL: "",
+    MESSAGE: ""
+  }
 ];
 
 
@@ -90,7 +65,7 @@ const AdminMessage = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState();
+  const [messages, setMessage] = useState(mss);
   const [postCount, setPostCount] = useState(null)
   const [showPerPage] = useState(6)
   const [total, setTotal] = useState(0);
@@ -104,6 +79,8 @@ const AdminMessage = () => {
       start: start,
       end: end
     })
+    loadMessage(start, end).then(() => {
+    });
   }
 
   const handleDrawerOpen = () => {
@@ -116,7 +93,7 @@ const AdminMessage = () => {
 
   const loadMessage = async (start = 0, end = showPerPage) => {
 
-    await apiCAll(`/api/user/softwareHouse/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
+    await apiCAll(`/api/user/message/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
       console.log(res?.data);
       setMessage(res?.data.data);
       // setStudents(res?.data);
@@ -152,9 +129,12 @@ const AdminMessage = () => {
                 <>
                   <Grid item lg={4} xs={12} key={index1}>
                     <div className="adminMessage">
-                      <h2>{message.FULL_NAME}</h2>
-                      <span>{message.EMAIL}</span>
-                      <p>{message.MESSAGE}</p>
+                      
+                      <Typography><b>Name : </b>{message.FULL_NAME}</Typography>
+                      <Typography><b>Email : </b>{message.EMAIL}</Typography>
+                      <Typography><b>Message : </b>{message.MESSAGE}</Typography>
+                      <Typography><b>Date : </b>{message?.MES_DATE?.split('T')[0]}</Typography>
+
                     </div>
                   </Grid>
                 </>
