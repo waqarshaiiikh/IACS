@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.11cc65da.css",
+    "main.js": "/static/js/main.2467e83d.js",
+    "static/js/787.4af44f02.chunk.js": "/static/js/787.4af44f02.chunk.js",
+    "static/media/introduction.jpg": "/static/media/introduction.af6df82b6100194eb592.jpg",
+    "static/media/slider5.png": "/static/media/slider5.b9508251077c795f9208.png",
+    "static/media/slider4.png": "/static/media/slider4.f32484a7a703e61b3aea.png",
+    "static/media/slider3.png": "/static/media/slider3.331b881858b06be3c0a9.png",
+    "static/media/slider1.png": "/static/media/slider1.a942f4949bc269326c48.png",
+    "static/media/slider2.png": "/static/media/slider2.c9a533a6cab454b484d8.png",
+    "static/media/about.png": "/static/media/about.c1e1f5a70fddfc28fa73.png",
+    "static/media/idea.png": "/static/media/idea.8d36763635bf27a94d4e.png",
+    "static/media/student.png": "/static/media/student.4322ff3e5ecc2da96525.png",
+    "static/media/jobServ.png": "/static/media/jobServ.7d1c3d738406f521afde.png",
+    "static/media/scholarship.png": "/static/media/scholarship.edf89b4001f36988b54f.png",
+    "static/media/trainingServ.png": "/static/media/trainingServ.228a60b6bc10824e94cd.png",
+    "static/media/fundingServ.png": "/static/media/fundingServ.e3495b2caa2d66f4a0b2.png",
+    "static/media/job.png": "/static/media/job.fdae616ac605c99f245f.png",
+    "static/media/internship.png": "/static/media/internship.db4ff6f1a1a0d6280b6b.png",
+    "static/media/office.png": "/static/media/office.6699648f4c014b2ee9fe.png",
+    "static/media/internhsipServ.png": "/static/media/internhsipServ.bd20aa1638204e4fd8a5.png",
+    "static/media/scholarshipServ.png": "/static/media/scholarshipServ.d835ac4f164298878d32.png",
+    "index.html": "/index.html",
+    "main.11cc65da.css.map": "/static/css/main.11cc65da.css.map",
+    "main.2467e83d.js.map": "/static/js/main.2467e83d.js.map",
+    "787.4af44f02.chunk.js.map": "/static/js/787.4af44f02.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.11cc65da.css",
+    "static/js/main.2467e83d.js"
+  ]
+}
