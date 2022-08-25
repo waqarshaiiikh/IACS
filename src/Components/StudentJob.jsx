@@ -1,6 +1,5 @@
 import React, { useState, useEffect , useContext} from 'react';
 import Navbar from './Navbar';
-import axios from "axios";
 import Pagination from '../Pages/Pagination';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -98,9 +97,7 @@ const PostJob = (props) => {
     const [duration, setDuration] = useState("")
     const [location, setLocation] = useState("")
     const [description, setDescription] = useState("")
-    const [linkedin, setLinkedin] = useState("")
-    const [skill, setSkill] = useState()
-
+ 
     const a = useContext(noteContext)
 
 
@@ -455,7 +452,9 @@ const StudentJob = () => {
                                 </div>
                               </div>
                               <div>
-                                <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{job?.POSTDATE?.split('T')[0]}</Typography>
+                                <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>
+                                  {job?.POSTDATE?.split('T')[0]}
+                                </Typography>
                                 <img className={classes.software_image} src={job.IMAGE} alt="student" />
                               </div>
                             </div>

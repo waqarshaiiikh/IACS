@@ -498,10 +498,12 @@ const ClientInternship = () => {
                                                                     <a style={{ display: 'block' }} href={internship.LINKS} target={"_blank"}>Detail</a>
                                                                 </div>
                                                             </div>
-                                                            <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
-                                                                internship?.POSTDATE?.split('T')[0]
-                                                            }</Typography>
-                                                            <img className={classes.software_image} src={internship.IMAGE} alt="student" />
+                                                            <div>
+                                                                <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
+                                                                    internship?.POSTDATE?.split('T')[0]
+                                                                }</Typography>
+                                                                <img className={classes.software_image} src={internship.IMAGE} alt="student" />
+                                                            </div>
                                                         </div>
                                                         <Accordion>
                                                             <AccordionSummary

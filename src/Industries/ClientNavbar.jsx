@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
-import { useContext , useState} from 'react';
+import { useContext } from 'react';
 import noteContext from '../context/notes/noteContext';
 const { apiCAll}= require('../integration/apiCall');
 
@@ -66,18 +66,22 @@ const ClientNavbar = () => {
     })
   };
 
-  // const logoutAllfun = () => {
-  //   setAnchorElUser(null);
-  //   apiCAll('/api/logout/all','get')
-  //   .then((res)=>{
-  //     if(res.status>=200 && res.status<=299 ){
-  //       navigate('signin'); 
-  //     }
-  //     else{
-  //       console.log("something went wrong");
-  //     }
-  //   })
-  // };
+  
+  const logoutAllfun = () => {
+    setAnchorElUser(null);
+    apiCAll('/api/logout/all','get')
+    .then((res)=>{
+      localStorage.clear();
+      window.location.href = "/";
+      window.location.href = "/";
+    }).catch(()=>{
+      
+      localStorage.clear();
+      window.location.href = "/";
+      window.location.href = "/";
+    })
+  };
+
 
   return (
     <AppBar className={classes.navbar}  >
@@ -226,14 +230,16 @@ const ClientNavbar = () => {
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} component={Link} to="/clientProfile">Profile</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" sx={{ '&:hover': { textDecoration: 'none', color: 'inherit' } }} component={Link} to="/clientProfile">Account</Typography>
-              </MenuItem>
               {a.Signin &&
 
                 <MenuItem onClick={logoutFunction}>
                   <Typography textAlign="center" sx={{ '&:hover': { textDecoration: 'none', color: 'inherit' } }} component={Link} to="/">Logout</Typography>
                 </MenuItem>
+              }
+              {a.Signin &&
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" sx={{'&:hover': {textDecoration:'none', color : 'inherit'} }} onClick={logoutAllfun}>Logout All</Typography>
+              </MenuItem>
               }
             </Menu>
           </Box>

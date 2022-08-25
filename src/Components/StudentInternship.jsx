@@ -3,22 +3,19 @@ import Pagination from '../Pages/Pagination';
 import Navbar from './Navbar';
 import {
     Accordion,
-    Autocomplete,
     AccordionSummary,
     AccordionDetails,
     Box,
     Button,
     Backdrop,
     Chip,
-    Checkbox,
     Container,
     CircularProgress,
     FormControl,
     Grid,
     Modal,
     MenuItem,
-    Typography,
-    TextField,
+    Typography, TextField,
     TextareaAutosize,
     Select,
     InputLabel
@@ -30,8 +27,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { makeStyles } from '@material-ui/styles';
 import MetaData from '../MetaData';
 import "../CSS/Utils.css";
-import { apiCAll, apiJson } from '../integration/apiCall';
-import noteContext from '../context/notes/noteContext';
+import { apiCAll } from '../integration/apiCall';
 
 
 const useStyles = makeStyles({
@@ -343,6 +339,7 @@ const StudentInternship = () => {
     useEffect(() => {
         setLoading(true)
         loadJobs();
+
     }, [])
 
 
@@ -429,7 +426,7 @@ const StudentInternship = () => {
                                 ((postCount === 0) ?
                                     (<div className='Post_center'>
                                         <h1 className='main_heading'>No Result Found</h1>
-                                    </div>
+                                    </div> 
                                     ) :
                                         (
                                             internships && internships.map((internship, index) => (
@@ -446,10 +443,12 @@ const StudentInternship = () => {
                                                                     <a style={{ display: 'block' }} href={internship.LINKS} target={"_blank"}>Detail</a>
                                                                 </div>
                                                             </div>
-                                                            <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
-                                                                internship?.POSTDATE?.split('T')[0]
-                                                            }</Typography>
-                                                            <img className={classes.software_image} src={internship.IMAGE} alt="student" />
+                                                            <div>
+                                                                <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
+                                                                    internship?.POSTDATE?.split('T')[0]
+                                                                }</Typography>
+                                                                <img className={classes.software_image} src={internship.IMAGE} alt="student" />
+                                                            </div>
                                                         </div>
                                                         <Accordion>
                                                             <AccordionSummary

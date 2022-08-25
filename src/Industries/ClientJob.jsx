@@ -30,7 +30,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from "../MetaData";
 import "../CSS/Utils.css";
-import { apiCAll, apiJson } from '../integration/apiCall';
+import { apiCAll } from '../integration/apiCall';
 import noteContext from '../context/notes/noteContext';
 
 const useStyles = makeStyles({
@@ -222,8 +222,6 @@ const ClientJob = () => {
   const classes = useStyles();
 
   const [search, setSearch] = useState(1);
-  const [jobRole, setJobRole] = useState('');
-  const [jobType, setJobType] = useState('');
 
   const [requestJob, setRequestJob] = useState(false);
   const openRequest = () => setRequestJob(true);
@@ -233,18 +231,12 @@ const ClientJob = () => {
   const [postCount, setPostCount] = useState(null)
   const [showPerPage] = useState(4)
   const [total, setTotal] = useState(0);
-  const [pagination, setPagination] = useState({
-    start: 0,
-    end: showPerPage
-  });
+  
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
 
   const onPaginationChange = (start, end) => {
-    setPagination({
-      start: start,
-      end: end
-    })
+  
     handleSearch(null, start, end).then(()=>{
     });
   }
@@ -254,14 +246,9 @@ const ClientJob = () => {
     setSearch(event.target.value);
   };
 
-  const handleJobRole = (event) => {
-    console.log(event.target.value)
-    setJobRole(event.target.value);
-  };
 
   const handleJobType = (event) => {
     console.log(event.target.value)
-    setJobType(event.target.value);
     setValue(event.target.value);
   };
 
@@ -401,7 +388,7 @@ const ClientJob = () => {
             }}>
             <div>
               {
-                (search == 4 ?
+                (search === 4 ?
                   (<Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Job Type</InputLabel>
@@ -489,7 +476,9 @@ const ClientJob = () => {
                               </div>
                             </div>
                             <div>
-                              <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{job?.POSTDATE?.split('T')[0]}</Typography>
+                              <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>
+                                {job?.POSTDATE?.split('T')[0]}
+                              </Typography>
                               <img className={classes.software_image} src={job.IMAGE} alt="student" />
                             </div>
                           </div>

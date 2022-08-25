@@ -26,14 +26,11 @@ import {
   InputLabel
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import SearchIcon from '@mui/icons-material/Search';
 import { makeStyles } from '@material-ui/styles';
 import MetaData from '../MetaData';
 import "../CSS/Utils.css";
-import { apiJson, apiCAll } from '../integration/apiCall';
-import noteContext from '../context/notes/noteContext';
+import { apiCAll } from '../integration/apiCall';
 
 
 const useStyles = makeStyles({
@@ -406,10 +403,13 @@ const AdminInternships = () => {
                                     <a style={{ display: 'block' }} href={internship.LINKS} target={"_blank"}>Detail</a>
                                   </div>
                                 </div>
-                                <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
-                                  internship?.POSTDATE?.split('T')[0]
-                                }</Typography>
-                                <img className={classes.software_image} src={internship.IMAGE} alt="student" />
+                                <div>
+
+                                  <Typography sx={{ display: 'block', textAlign: 'right', color: '#d3d3d3' }}>{
+                                    internship?.POSTDATE?.split('T')[0]
+                                  }</Typography>
+                                  <img className={classes.software_image} src={internship.IMAGE} alt="student" />
+                                </div>
                               </div>
                               <Accordion>
                                 <AccordionSummary

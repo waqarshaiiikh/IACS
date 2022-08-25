@@ -11,6 +11,8 @@ import {
   Chart,
   PieSeries,
 } from '@devexpress/dx-react-chart-material-ui';
+import { useEffect , useState} from 'react';
+import { apiCAll } from '../integration/apiCall';
 
 const drawerWidth = 200;
 
@@ -33,7 +35,6 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   }),
 );
 
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -44,8 +45,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const Admin = () => {
 
+  const [year, setYear] = useState([]);
+  const [SoftwareHouse, setSoftwareHouse] = useState(0);
+  const [student, setStudent] = useState(0);
+  const [jobs, setJobs] = useState(0);
+  const [internship, setInternship] = useState(0);
+
+
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -55,12 +63,36 @@ const Admin = () => {
     setOpen(false);
   };
 
-  const data = [
-    { argument: 'First Year', value: 20 },
-    { argument: 'Second Year', value: 30 },
-    { argument: 'Third Year', value: 35 },
-    { argument: 'Final Year', value: 40 },
-  ];
+
+  const loadAdminHome = async () => {
+
+    apiCAll(`/api/user/admin/home`, 'get', {  } ).then((res) => {
+      console.log(res);
+
+      setYear([
+        { argument: 'First Year', value: res.data[0].FIRSTYEAR },
+        { argument: 'Second Year', value: res.data[0].SECONDYEAR },
+        { argument: 'Third Year', value: res.data[0].THIRDYEAR },
+        { argument: 'Final Year', value: res.data[0].FINALYEAR },
+      ]);
+      setSoftwareHouse(res.data[0].SOFTWAREHOUSE );
+      setStudent(res.data[0].STUDENT );
+      setJobs(res.data[0].JOBS );
+      setInternship(res.data[0].INTERNSHIP );
+      
+    }).catch((err) => {
+      console.log(err);
+    })
+
+
+
+
+  }
+  
+  useEffect(() => {
+
+    loadAdminHome();
+  }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -78,7 +110,7 @@ const Admin = () => {
                 <Link to="/admin/SoftwareHouses" className='link'>
                   <div className='staticsNumber'>
                     <p>Software House</p>
-                    <h1>15</h1>
+                    <h1>{SoftwareHouse}</h1>
                   </div>
                 </Link>
               </div>
@@ -88,7 +120,7 @@ const Admin = () => {
                 <Link to="/admin/Students" className='link'>
                   <div className='staticsNumber'>
                     <p>Students</p>
-                    <h1>20</h1>
+                    <h1>{student}</h1>
                   </div>
                 </Link>
               </div>
@@ -98,7 +130,7 @@ const Admin = () => {
                 <Link to="/admin/Jobs" className='link'>
                   <div className='staticsNumber'>
                     <p>Jobs</p>
-                    <h1>25</h1>
+                    <h1>{jobs}</h1>
                   </div>
                 </Link>
               </div>
@@ -108,7 +140,7 @@ const Admin = () => {
                 <Link to="/admin/Internships" className='link'>
                   <div className='staticsNumber'>
                     <p>Internships</p>
-                    <h1>30</h1>
+                    <h1>{internship}</h1>
                   </div>
                 </Link>
               </div>
@@ -121,7 +153,7 @@ const Admin = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                       <ul class="staticList">
                         {
-                          data.map((item, index) => (
+                          year.map((item, index) => (
                             <li key={index}>{item.argument}<span style={{ marginLeft: '10px' }}>{item.value}</span></li>
                           ))
                         }
@@ -130,7 +162,7 @@ const Admin = () => {
                   </div>
                   <div>
                     <Chart
-                      data={data}
+                      data={year}
                     >
                       <PieSeries valueField="value" argumentField="argument" />
                     </Chart>

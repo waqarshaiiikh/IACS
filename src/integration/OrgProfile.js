@@ -1,4 +1,4 @@
-import { Api, apiCAll } from './apiCall';
+import { apiCAll } from './apiCall';
 const validator = require("validator");
 
 const state = { updated: "updated", modified: "modified", empty: null, available: "available", deleted: "deleted", deletedAll: "deletedAll", Add: "added" }

@@ -22,7 +22,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MetaData from '../MetaData';
-import { Api, apiCAll, apiJson } from '../integration/apiCall';
+import { Api, apiCAll } from '../integration/apiCall';
 
 
 const useStyles = makeStyles({
@@ -82,7 +82,6 @@ const ClientStudent = () => {
 
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState();
-  const [students, setStudents] = useState(false);
   const [postCount, setPostCount] = useState();
   const [showPerPage] = useState(4)
   const [total, setTotal] = useState(0);
@@ -122,16 +121,12 @@ const ClientStudent = () => {
     switch (studentYear) {
       case "1":
         return "First year";
-        break;
       case "2":
         return "Second Year";
-        break;
       case "3":
         return "Third Year";
-        break;
       case "4":
         return "Final year";
-        break;
       default:
         return "None"
     }
@@ -300,7 +295,7 @@ const ClientStudent = () => {
             </Grid>
             <Grid item lg={12} xs={12} sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between', alignItems: 'center', marginTop: { lg: 'none', xs: "10px" } }}>
               <div>
-                {search == 2 ?
+                {search === 2 ?
                   (<Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Department</InputLabel>
@@ -343,7 +338,7 @@ const ClientStudent = () => {
                       </Select>
                     </FormControl>
                   </Box>) :
-                  (search == 3 ?
+                  (search === 3 ?
                     (<Box sx={{ minWidth: 120 }}>
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Year</InputLabel>

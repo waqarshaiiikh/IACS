@@ -128,8 +128,7 @@ class Api{
     }
     
     constructor(){
-        // this.#Experience.client = experience;
-        // this.#Skill.client = skill;    
+        return(this);
     }
     
     get skill(){
