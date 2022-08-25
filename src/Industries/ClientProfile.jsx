@@ -164,7 +164,7 @@ const ClientProfile = () => {
                                     </h3>
                                 </Grid>
                                 <Grid item lg={12} >
-                                    <Typography variant='p' className={classes.about} >
+                                    <Typography variantMapping='p' className={classes.about} >
                                         <br />
                                         {a?.industry?.aboutUs}
                                         <br />
