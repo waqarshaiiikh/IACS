@@ -461,10 +461,10 @@ const StudentSignUp = () => {
             }
             else if (page === "StudentsDataField") {
 
-                if ((validator.isAlpha(fname.value) && validator.isLength(fname.value, { min: 3, max: 10 })) === false) {
+                if ((validator.isAlpha(fname.value ,['en-US'], {ignore: '/[\s|\-|_]/g'}) && validator.isLength(fname.value, { min: 3, max: 10 })) === false) {
                     Error = { ...Error, fname: "Invalid First Name <br/>" }
                 }
-                if ((validator.isAlpha(lname.value) && validator.isLength(lname.value, { min: 3, max: 10 })) === false) {
+                if ((validator.isAlpha(lname.value ,['en-US'], {ignore: '/[\s|\-|_]/g'}) && validator.isLength(lname.value, { min: 3, max: 10 })) === false) {
                     Error = { ...Error, lname: "Invalid Last Name <br/>" }
                 }
                 if (validator.isMobilePhone(phoneNumber.value, ['en-PK'], { strictMode: true }) === false) {
@@ -475,7 +475,7 @@ const StudentSignUp = () => {
                     && validator.isLength(enrollment.value, { min: 13, max: undefined })) === false) {
                     Error = { ...Error, enrollment: "Invalid Enrollnment No: <br/>" }
                 }
-                if ((validator.isAlpha(university.value) || validator.isAlphanumeric(university.value, ['en-US'], {ignore: '-s'})) === false) {
+                if ((validator.isAlpha(university.value,['en-US'], {ignore: '/[\s|\-|_]/g'}) || validator.isAlphanumeric(university.value,['en-US'], {ignore: '/[\s|\-|_]/g'})) === false) {
                     Error = { ...Error, university: "Invalid university Name <br/>" }
                 }
                 if ((validator.isFloat(CGPA.value, { min: '1.0', max: '4.0' })) === false) {

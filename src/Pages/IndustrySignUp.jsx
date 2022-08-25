@@ -91,15 +91,15 @@ const IndustrySignUp = () => {
 
     const navigate = useNavigate();
     const clientName = "industry";
-    const companyName = useFormInput('waqae');
-    const hrName = useFormInput('waqar');
-    const email = useFormInput('waqarshaiiikh@gmail.com');
-    const phoneNumber = useFormInput('+923423446805');
-    const cnic = useFormInput('4120494810131');
-    const city = useFormInput('hyd');
+    const companyName = useFormInput('');
+    const hrName = useFormInput('');
+    const email = useFormInput('');
+    const phoneNumber = useFormInput('');
+    const cnic = useFormInput('');
+    const city = useFormInput('');
     const country = useFormInput('Pakistan');
-    const password = useFormInput('123@waqar');
-    const cpassword = useFormInput('123@waqar');
+    const password = useFormInput('');
+    const cpassword = useFormInput('');
     const otpField = useFormInput('');
     const [token, updateToken] = useState('');
 
@@ -393,7 +393,8 @@ const IndustrySignUp = () => {
                 if (validator.isEmpty(companyName.value) === true) {
                     Error = { ...Error, companyName: "Company name require <br/>" }
                 }
-                if (validator.isAlpha(hrName.value) === false) {
+                if (validator.isAlpha(hrName.value,['en-US'], {ignore: '/[\s|\-|_]/g'}
+                ) === false) {
                     Error = { ...Error, hrName: "Invalid HR. Name <br/>" }
                 }
                 if (validator.isMobilePhone(phoneNumber.value, ['en-PK'], { strictMode: true }) === false) {
@@ -403,10 +404,10 @@ const IndustrySignUp = () => {
                     && (validator.isLength(cnic.value, { min: 13, max: 13 }) || validator.isLength(cnic.value, { min: 7, max: 7 }))) === false) {
                     Error = { ...Error, cnic: "Invalid CNIC/NIC <br/>" }
                 }
-                if (validator.isAlpha(city.value) === false) {
+                if (validator.isAlpha(city.value,['en-US'], {ignore: '/[\s|\-|_]/g'}) === false) {
                     Error = { ...Error, city: "Invalid City Name <br/>" }
                 }
-                if (validator.isAlpha(country.value) === false) {
+                if (validator.isAlpha(country.value,['en-US'], {ignore: '/[\s|\-|_]/g'}) === false) {
                     Error = { ...Error, country: "Invalid Country <br/>" }
                 }
                 return Error;
