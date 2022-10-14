@@ -8,6 +8,7 @@ import {
   Grid,
   Accordion,
   Autocomplete,
+  Link,
   AccordionSummary,
   AccordionDetails,
   Box,
@@ -403,7 +404,7 @@ const AdminJobs = () => {
                                   <div>
                                     <Typography sx={{ display: 'inline-block' }}>{job.DURATION}</Typography>,&nbsp;
                                     <Typography sx={{ display: 'inline-block' }}>{job.LOCATION}</Typography>
-                                    <a style={{ display: 'block' }} href={job.LINKS} target={"_blank"}>Detail</a>
+                                    <Link style={{ display: 'block'}} underline='none' href={job.LINKS} target={"_blank"}>more...</Link>                                  
                                   </div>
                                 </div>
                                 <div>

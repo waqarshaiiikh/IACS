@@ -14,6 +14,7 @@ import {
     Chip,
     Container,
     Checkbox,
+    Link,
     CircularProgress,
     FormControl,
     Grid,
@@ -32,6 +33,8 @@ import MetaData from '../MetaData';
 import "../CSS/Utils.css";
 import { apiCAll, apiJson } from '../integration/apiCall';
 import noteContext from '../context/notes/noteContext';
+import { color } from '@material-ui/system';
+// import {  } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -448,7 +451,7 @@ const StudentJob = () => {
                                 <div>
                                   <Typography sx={{ display: 'inline-block' }}>{job.DURATION}</Typography>,&nbsp;
                                   <Typography sx={{ display: 'inline-block' }}>{job.LOCATION}</Typography>
-                                  <a style={{ display: 'block' }} href={job.LINKS} target={"_blank"}>Detail</a>
+                                  <Link style={{ display: 'block'}} underline='none' href={job.LINKS} target={"_blank"}>more...</Link>
                                 </div>
                               </div>
                               <div>
