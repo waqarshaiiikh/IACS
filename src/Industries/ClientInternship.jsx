@@ -8,6 +8,7 @@ import {
     Autocomplete,
     AccordionSummary,
     AccordionDetails,
+    Link,
     Box,
     Button,
     Backdrop,
@@ -495,7 +496,7 @@ const ClientInternship = () => {
                                                                 <div>
                                                                     <Typography sx={{ display: 'inline-block' }}>{internship.DURATION}</Typography>,&nbsp;
                                                                     <Typography sx={{ display: 'inline-block' }}>{internship.LOCATION}</Typography>
-                                                                    <a style={{ display: 'block' }} href={internship.LINKS} target={"_blank"}>Detail</a>
+                                                                    <Link style={{ display: 'block' }} underline='none' href={internship.LINKS} target={"_blank"}>more...</Link>                                  
                                                                 </div>
                                                             </div>
                                                             <div>
