@@ -16,7 +16,7 @@ import ClientDashborad from "../Industries/ClientDashboard"
 import ClientStudent from '../Industries/ClientStudent';
 import ClientJob from "../Industries/ClientJob"
 import ClientInternship from '../Industries/ClientInternship';
-import ClientProject from '../Industries/ClientProject';
+import ClientProject from '../Industries/pages/project';
 import ClientScholarship from '../Industries/ClientScholarship';
 import Admin from '../Admin/Admin';
 import AdminStudents from "../Admin/AdminStudents"
@@ -57,8 +57,8 @@ const Main = () => {
                 <Route path="/clistudent"           element={ signin ?  user==="industry"  ?    <ClientStudent/>       :<NotFound/>: <Signin/>  }/> 
                 <Route path="/clijob"               element={ signin ?  user==="industry"  ?    <ClientJob/>           :<NotFound/>: <Signin/>  }/> 
                 <Route path="/cliinternship"        element={ signin ?  user==="industry"  ?    <ClientInternship/>    :<NotFound/>: <Signin/>  }/> 
-                <Route path="/cliproject"           element={ signin ?  user==="industry"  ?    <ClientProject/>       :<NotFound/>: <Signin/>  }/> 
                 <Route path="/clischolarship"       element={ signin ?  user==="industry"  ?    <ClientScholarship/>   :<NotFound/>: <Signin/>  }/> 
+                <Route path="/industry/project"     element={ signin ?  user==="industry"  ?    <ClientProject/>       :<NotFound/>: <Signin/>  }/> 
 
                 <Route path="/stddashboard"         element={ signin ?  user==="student"   ?    <StudentDashboard/>    :<NotFound/>: <Signin/>  }/> 
                 <Route path="/studentProfile"       element={ signin ?  user==="student"   ?    <StudentProfile/>      :<NotFound/>: <Signin/>  }/> 

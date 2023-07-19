@@ -135,7 +135,7 @@ const ClientNavbar = () => {
                 <Typography textAlign="center" component={Link} to="/cliinternship">Internhsips</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to="/cliproject">Projects</Typography>
+                <Typography textAlign="center" component={Link} to="/industry/project">Projects</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to="/clischolarship">Scholarships</Typography>
@@ -176,7 +176,7 @@ const ClientNavbar = () => {
               Internships
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to="/cliproject">
+              className={classes.button} component={Link} to="/industry/project">
               Projects
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}

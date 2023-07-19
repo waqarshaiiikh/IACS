@@ -33,8 +33,6 @@ const StudentSignIn = () => {
     const gettingData = a.gettingData;
 
 
-
-
     // handle button click of login form
     const handleLogin = async () => {
         
