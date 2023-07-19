@@ -45,9 +45,9 @@ const StudentSignIn = () => {
         await apiCAll(`/api/login`,'post', reqData )
         .then(async response => {
             await gettingData();
-            a.setUserType("industry")
+            a.setUserType("student")
             a.setSignin(true);
-            localStorage.setItem('UserType', JSON.stringify("industry"));
+            localStorage.setItem('UserType', JSON.stringify("student"));
             localStorage.setItem('Signin', JSON.stringify(true));
             setLoading(false);
             navigate('/'); 

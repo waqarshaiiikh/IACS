@@ -22,9 +22,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import "../../../../CSS/Utils.css";
-import { apiCAll } from '../../../../integration/apiCall';
-import PostJob from './PostJob';
+import "../../../CSS/Utils.css";
+// import { apiCAll } from '../../../../integration/apiCall';
 import moment from 'moment/moment';
 
 const useStyles = makeStyles({
@@ -345,7 +344,6 @@ const ClientJob = () => {
   return (
     <>
       {/* <ClientNavbar /> */}
-      <PostJob open={requestJob} handleClose={closeRequest} setProjects={addProjects} />
       <Container maxWidth="xl" >
         <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
@@ -396,11 +394,6 @@ const ClientJob = () => {
               }} />
           </Grid>
 
-
-
-          <Grid item lg={12}>
-            <Button variant='contained' sx={{ marginTop: '10px' }} onClick={openRequest}>Post Project</Button>
-          </Grid>
 
 
 
@@ -490,78 +483,6 @@ const ClientJob = () => {
                           </Accordion>
 
 
-                          <Accordion>
-                            <AccordionSummary
-                              expandIcon={<ExpandMoreIcon />}
-                              aria-controls="panel1a-content"
-                              id="Applications"
-                            >
-                              <Typography>Applications</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                
-                              {/*
-                                Students Applications List
-                               */}
-                              <Grid container spacing={2} >
-                                {
-                                  data.appliedStudents && data.appliedStudents.map((data, index) => (
-                                    <Grid item sm={12} key={index}>
-                                      <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                                        <div className={classes.software_title}>
-                                          
-                                          
-                                          <Grid container spacing={2}>
-                                            <Grid item className="studentImg">
-                                              <img
-                                                className={classes.studentImageTag}
-                                                src={data.studentImage}
-                                                alt="studentImage" />
-                                            </Grid>
-                                            <Grid item className="studentDetail">
-                                              <Typography>{data.fname + " " + data.lname}</Typography>
-                                              <Typography>{data.email}</Typography>
-                                              <Typography>{data.rollNo}</Typography>
-                                            </Grid>
-                                          </Grid>
-
-
-                                          <div>
-                                            
-                                            <Typography>{"Skills"}</Typography>
-                                            <Typography>
-                                              {
-                                                data.skills && data.skills.map((skill, i) => (
-                                                  <Chip label={skill } key={i} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                              }
-                                            </Typography>
-                                            <Typography>{"Experience"}</Typography>
-                                            <Typography>{data.experience}</Typography>
-                                            <Typography>{"Contact"}</Typography>
-                                            <Typography>{data.contact}</Typography>
-
-                                            <Typography>{"Advisor Detail"}</Typography>
-
-                                            <Typography> Name</Typography>
-                                            <Typography> {data.advisorName}</Typography>
-                                            <Typography> Email </Typography>
-                                            <Typography> {data.advisorEmail}</Typography>
-                                            <Typography> Contact No </Typography>
-                                            <Typography> {data.advisorContact}</Typography>
-                                        
-
-
-                                          </div>
-                                        </div>
-                                      </Box>
-                                    </Grid>
-                                  ))
-                                }
-                              </Grid>
-                              
-
-                            </AccordionDetails>
-                          </Accordion>
 
                         </Box>
                       </Grid>

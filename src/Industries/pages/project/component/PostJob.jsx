@@ -87,8 +87,6 @@ const PostJob = (props) => {
     const handleSubmit = (e) => {
   
       e.preventDefault();
-
-      // props.setProjects();
       const bodyData = {
         title: tittle,
         statement: statement, 
@@ -104,8 +102,8 @@ const PostJob = (props) => {
         industryId: 123
       };
 
-      console.log(bodyData);
-      props.setProjects(bodyData)
+      props.setProjects(bodyData);
+      props.handleClose();
       // const jobPostData = { tittle, duration, location, skill, linkedin, description };
       // console.log(jobPostData)
   
