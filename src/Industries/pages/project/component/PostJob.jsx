@@ -53,10 +53,13 @@ const departmentsOptions  = [
   {id: 3, departmentName: "3"},
 ]
 
-const teamCompositionOptions = [
-  {id: 1, teamName: "1"},
-  {id: 2, teamName: "2"},
-]
+// const teamCompositionOptions = [
+//   {id: 1, teamName: "1"},
+//   {id: 2, teamName: "2"},
+// ]
+
+const teamCompositionOptions = ["1", "2"];
+
 const PostJob = (props) => {
 
     /**
@@ -80,19 +83,29 @@ const PostJob = (props) => {
     const [department, setDepartment] = useState([]);
     const [contact, setContact] = useState("");
 
-
-
-
-
-
-
-    
-
-  
   
     const handleSubmit = (e) => {
   
       e.preventDefault();
+
+      // props.setProjects();
+      const bodyData = {
+        title: tittle,
+        statement: statement, 
+        skillsId: skill.map(skill => skill.id), 
+        description: description,
+        scope: scope,
+        deliverables: deliverables,
+        methodology:  methodology,
+        teamComposition : teamComposition,
+        departmentsId: department.map(department=> department.id)  ,
+        contact : contact,
+        active: true,
+        industryId: 123
+      };
+
+      console.log(bodyData);
+      props.setProjects(bodyData)
       // const jobPostData = { tittle, duration, location, skill, linkedin, description };
       // console.log(jobPostData)
   
@@ -131,10 +144,10 @@ const PostJob = (props) => {
             <form onSubmit={handleSubmit}>
               <Grid container spacing={1}>
                 <Grid item lg={6} xs={12}>
-                  <TextField id="tittle" fullWidth label="Project Tittle" placeholder='Full Stack' type='text' value={tittle} onChange={e => { setTittle(e.target.value) }} variant="outlined" required />
+                  <TextField id="tittle" fullWidth label="Project Tittle" placeholder='Project Tittle' type='text' value={tittle} onChange={e => { setTittle(e.target.value) }} variant="outlined" required />
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                  <TextField id="title" fullWidth label="Project Statement" placeholder='Full Stack' type='text' value={statement} onChange={e => { setStatement(e.target.value) }} variant="outlined" required />
+                  <TextField id="title" fullWidth label="Project Statement" placeholder='Project Statement' type='text' value={statement} onChange={e => { setStatement(e.target.value) }} variant="outlined" required />
                 </Grid>
                 <Grid item lg={12} xs={12}>
                   <Autocomplete
@@ -207,41 +220,15 @@ const PostJob = (props) => {
                   />
                 </Grid>
                 
-                {/* <Grid item lg={12} xs={12}>
-                  <TextareaAutosize
-                    id="Teams Composition"
-                    maxRows={5}
-                    required
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                    style={{ width: '100%', padding: '10px' }}
-                    placeholder="Teams Compositions"
-                  />
-                </Grid> */}
+              
                 <Grid item lg={12} xs={12}>
                   <Autocomplete
                     multiple
                     required
                     id="Teams Compositions"
-                    // options={a.industry.skilloptions}
-                    // disableCloseOnSelect
-                    // getOptionLabel={(option) => option.title}
                     value={teamComposition}
         
                     onChange={(event, newValue) => {
-                      // if (typeof newValue === 'string') {
-                      //   setValue({
-                      //     title: newValue,
-                      //   });
-                      // } else if (newValue && newValue.inputValue) {
-                      //   // Create a new value from the user input
-                      //   setValue({
-                      //     title: newValue.inputValue,
-                      //   });
-                      // } else {
-                      //   setValue(newValue);
-                      // }
-                      console.log(newValue)
                       setTeamComposition(newValue);
                     }}
                     selectOnFocus
@@ -249,46 +236,25 @@ const PostJob = (props) => {
                     handleHomeEndKeys
                     filterOptions={(options, params) => {
                       const filtered = filter(options, params);
-              
                       const { inputValue } = params;
+                    
                       // Suggest the creation of a new value
-                      const isExisting = options.some((option) => inputValue === option.teamName);
+                      const isExisting = options.some((option) => inputValue === option);
                       if (inputValue !== '' && !isExisting) {
-                        filtered.push({
-                          inputValue,
-                          teamName: `Add "${inputValue}"`,
-                        });
+                        filtered.push(inputValue);
                       }
-              
                       return filtered;
                     }}
-                    options={teamCompositionOptions}
+                    
+                    options={teamComposition}
                     freeSolo
-                    getOptionLabel={(option) => {
-                      // console.log(option)
-                      // Value selected with enter, right from the input
-                      if (typeof option === 'string') {
-                        return option;
-                      }
-                      // Add "xxx" option created dynamically
-                      // if (option.inputValue) {
-                      //   return option.inputValue;
-                      // }
-                      // Regular option
-                      return option.teamName;
-                    }}
+                    getOptionLabel={(option) => option}
 
-                    renderOption={(props, option, { selected }) => (
-                      <li {...props}>
-                        {/* <Checkbox
-                          icon={icon}
-                          checkedIcon={checkedIcon}
-                          style={{ marginRight: 8 }}
-                          checked={selected}
-                        /> */}
-                        {option.teamName}
-                      </li>
-                    )}
+                    renderOption={(props, option) => {
+                      if(teamComposition.filter(o=> o===option).length===0)
+                        return <li {...props}>{`Add "${option}"`}</li>;
+                      return  <li {...props}>{option}</li>
+                  }}
 
                     renderInput={(params) => (
                       <TextField {...params} label="Teams Compositions" />
@@ -318,7 +284,7 @@ const PostJob = (props) => {
                       </li>
                     )}
                     renderInput={(params) => (
-                      <TextField {...params} label="Department" />
+                      <TextField {...params} label="Department"  />
                     )}
                   />
                 </Grid>

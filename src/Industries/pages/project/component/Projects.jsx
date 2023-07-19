@@ -81,7 +81,7 @@ const ClientJob = () => {
   const openRequest = () => setRequestJob(true);
   const closeRequest = () => setRequestJob(false);
 
-  const [jobs, setJobs] = useState(null);
+  const [jobs, setJobs] = useState([]);
   const [postCount, setPostCount] = useState(null)
   const [showPerPage] = useState(4)
   const [total, setTotal] = useState(0);
@@ -217,10 +217,17 @@ const ClientJob = () => {
     loadJobs();
   }, [])
 
+  const  addJob = (job) =>{
+    setJobs(prev=>{
+      console.log(prev)
+      return [job, ...prev];
+    });
+  }
+
   return (
     <>
       {/* <ClientNavbar /> */}
-      <PostJob open={requestJob} handleClose={closeRequest} />
+      <PostJob open={requestJob} handleClose={closeRequest} setProjects={addJob} />
       <Container maxWidth="xl" >
         <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
