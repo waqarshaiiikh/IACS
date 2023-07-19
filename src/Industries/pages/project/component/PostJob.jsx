@@ -241,6 +241,7 @@ const PostJob = (props) => {
                       // } else {
                       //   setValue(newValue);
                       // }
+                      console.log(newValue)
                       setTeamComposition(newValue);
                     }}
                     selectOnFocus
@@ -266,7 +267,6 @@ const PostJob = (props) => {
                     getOptionLabel={(option) => {
                       // console.log(option)
                       // Value selected with enter, right from the input
-                      console.log(option);
                       if (typeof option === 'string') {
                         return option;
                       }
