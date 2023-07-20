@@ -2,32 +2,6 @@ import { useState } from 'react';
 const url = `${process.env.REACT_APP_SPRING_BOOT_IP}`;
 
 // Custom hook to fetch data from the server when triggered
-// export const useFetchDataTrigger = () => {
-//   const [data, setData] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-
-//   const fetchData = async (route) => {
-//     try {
-//       setLoading(true);
-//       const response = await fetch(`${url}${route}`);
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok.');
-//       }
-//       const jsonData = await response.json();
-//       setData(jsonData);
-//     } catch (error) {
-//       setError(error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return { data, loading, error, fetchData };
-// };
-
-
-// Custom hook to fetch data from the server when triggered
 const useFetchData = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -53,8 +27,10 @@ const useFetchData = () => {
       }
 
       const jsonData = await response.json();
-      console.log(jsonData);
+
       setData(jsonData);
+      return jsonData;
+    
     } catch (error) {
       setError(error);
     } finally {

@@ -102,7 +102,7 @@ const projectsStatic = [
     title: 'Tittle of the Project 01',
     companyLogo: '',
     statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    skillsName: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
     description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
     scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
     deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
@@ -1118,7 +1118,7 @@ const ClientJob = () => {
   return (
     <>
       {/* <ClientNavbar /> */}
-      <PostJob open={requestJob} handleClose={closeRequest} setProjects={addProjects} />
+      {requestJob && <PostJob open={requestJob} handleClose={closeRequest} projectModal={requestJob}  setProjects={addProjects} />}
       <Container maxWidth="xl" >
         <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px'}}>
@@ -1222,8 +1222,8 @@ const ClientJob = () => {
 
                             <Typography  sx={{display: 'inline', marginLeft: '10px'}}>
                               {
-                                data.skills && data.skills.map((skill, i) => (
-                                  <Chip label={skill} color= 'primary' sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} />))
+                                data.skillsName && data.skillsName.map((skillsName, i) => (
+                                  <Chip key={i} label={skillsName} color= 'primary' sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} />))
                                 }
                             </Typography>
                             </Box>
@@ -1262,7 +1262,7 @@ const ClientJob = () => {
                             </Typography>
                             <Box sx={{marginTop: '20px'}}>
                               <Typography variant='h6' sx={{display: 'inline'}}> {"Department"} </Typography>
-                              <Typography sx={{display: 'inline'}}> {data.department} </Typography>
+                              <Typography sx={{display: 'inline'}}> {data.departmentName} </Typography>
                             </Box>
                             <Box sx={{marginTop: '20px'}}>
 
