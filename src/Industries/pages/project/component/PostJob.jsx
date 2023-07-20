@@ -17,6 +17,7 @@ import {
 import "../../../../CSS/Utils.css";
 import { apiCAll } from '../../../../integration/apiCall';
 import noteContext from '../../../../context/notes/noteContext';
+import useFetchData from '../Hook/useFetchData';
 
 
 
@@ -53,79 +54,67 @@ const departmentsOptions  = [
   {id: 3, departmentName: "3"},
 ]
 
-// const teamCompositionOptions = [
-//   {id: 1, teamName: "1"},
-//   {id: 2, teamName: "2"},
-// ]
-
-const teamCompositionOptions = ["1", "2"];
 
 const PostJob = (props) => {
+
+     const { data : projectsData, loading: projectLoading, error: projectError, fetchData: postProjects  } = useFetchData();
+    
+     const { data: skillOptions, loading:  skillsLoading, error:  skillError, fetchData: getsSkills } = useFetchData();
+    //  getsSkills('/skill');
+     const { data: departmentOptions, loading:  departmentLoading, error:  departmentError, fetchData: getsDepartments } = useFetchData();
+    //  getsDepartments('/department');
+
 
     /**
      * useContext for global state
      */
-    const a = useContext(noteContext)
+
+    // const a = useContext(noteContext)
+    
     /**
      * these are the state for form.
      */
-    const [tittle, setTittle] = useState("");
-    const [statement, setStatement] = useState("");
+    const [tittle, setTittle] = useState("Tittle of the Project 01");
+    const [statement, setStatement] = useState("lorem ipsum dolor r  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
     /**
      * its contains the array of objects 
      */
-    const [skill, setSkill] = useState([]);
-    const [description, setDescription] = useState(""); 
-    const [scope, setScope] = useState("");
-    const [deliverables, setDeliverables] = useState("");
-    const [methodology, setMethodology] = useState("");
-    const [teamComposition, setTeamComposition] = useState([]);
-    const [department, setDepartment] = useState([]);
-    const [contact, setContact] = useState("");
+    const [skill, setSkill] = useState([
+      {"id": 6, "skillName":"Python"}
+    ]);
+    const [description, setDescription] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et"); 
+    const [scope, setScope] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
+    const [deliverables, setDeliverables] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
+    const [methodology, setMethodology] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
+    const [teamComposition, setTeamComposition] = useState(["waqar", "ali"]);
+    const [department, setDepartment] = useState([ {id: 1, departmentName: "1"}]);
+    const [contact, setContact] = useState("03423446805");
 
   
     const handleSubmit = (e) => {
   
       e.preventDefault();
+     
       const bodyData = {
-        title: tittle,
-        statement: statement, 
-        skillsId: skill.map(skill => skill.id), 
-        description: description,
-        scope: scope,
-        deliverables: deliverables,
-        methodology:  methodology,
-        teamComposition : teamComposition,
-        departmentsId: department.map(department=> department.id)  ,
-        contact : contact,
-        active: true,
-        industryId: 123
-      };
+        "title": tittle,
+        "skillsId":  skill.map(skill => skill.id),
+        "statement": statement,
+        "description": description,
+        "scope": scope,
+        "deliverables": deliverables,
+        "methodology": methodology,
+        "teamComposition": teamComposition,
+        "departmentsId":  department.map(department=> department.id),
+        "contact": contact,
+        "active": true,
+        "industryId":localStorage.getItem('userId')
+      }
 
-      props.setProjects(bodyData);
-      props.handleClose();
-      // const jobPostData = { tittle, duration, location, skill, linkedin, description };
-      // console.log(jobPostData)
-  
-      // apiCAll('/api/user/job/post', 'post', { jobPostData }).then(
-      //   (response) => {
-      //     if (response.data) {
-      //       setDuration("")
-      //       setLocation("")
-      //       setDescription("");
-      //       setTittle("")
-      //       setLinkedin("")
-      //       setSkill()
-      //       props.handleClose()
-      //       alert("Your Requeest has Submited")
-      //     }
-      //   }
-      // ).catch(
-      //   (e) => {
-      //     console.log(e.response)
-      //     alert(e.response.data)
-      //   }
-      // )
+      
+      postProjects('/project', 'POST', bodyData).then(_=>{
+        props.setProjects(bodyData);
+        props.handleClose();
+      });
     }
   
     return (
@@ -156,7 +145,7 @@ const PostJob = (props) => {
                     disableCloseOnSelect
                     getOptionLabel={(option) => option.skillName}
                     value={skill}
-                    onChange={(e, value) =>{ setSkill(value); console.log(value) }}
+                    onChange={(e, value) =>{ setSkill(value);}}
                     renderOption={(props, option, { selected }) => (
                       <li {...props}>
                         <Checkbox
@@ -291,9 +280,16 @@ const PostJob = (props) => {
                   <TextField id="contact" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}  fullWidth label="Contact Information" placeholder='Contact' type='tel' value={contact} onChange={e => { setContact(e.target.value) }} variant="outlined" required />
                 </Grid>
 
+                {projectError &&
+                  (<Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Typography color='red'>Server Error</Typography>
+                  </Grid>)
+                }
+
                 <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                  <Button variant="contained" type='submit'>Post</Button>
+                  <Button disabled={projectLoading} variant="contained" type='submit'>Post</Button>
                 </Grid>
+
   
               </Grid>
             </form>

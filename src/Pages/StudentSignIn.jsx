@@ -47,6 +47,7 @@ const StudentSignIn = () => {
             await gettingData();
             a.setUserType("student")
             a.setSignin(true);
+            localStorage.setItem('userId', JSON.stringify(response.data.id));
             localStorage.setItem('UserType', JSON.stringify("student"));
             localStorage.setItem('Signin', JSON.stringify(true));
             setLoading(false);
