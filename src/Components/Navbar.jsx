@@ -30,8 +30,8 @@ const useStyles = makeStyles({
   },
   icon:{
 
+    color:"white !important",
     '&:hover':{
-      color:"white !important",
       textDecoration : 'none !important'
     }
   }
@@ -101,6 +101,7 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component={Link} to="/"
+          
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, '&:hover': {textDecoration:'none', color : 'white'} }}
           >
             <i className= {`fab fa-typo3  ${classes.icon}`} /> IACS

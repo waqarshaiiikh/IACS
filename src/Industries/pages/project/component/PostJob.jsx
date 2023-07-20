@@ -136,7 +136,7 @@ const PostJob = (props) => {
           sx={{ overflow: { xs: 'scroll' } }}
         >
           <Box sx={requestStyle}>
-            <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', }}>
+            <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem',marginBottom: '20px'  }}>
               Post Project
             </Typography>
             <form onSubmit={handleSubmit}>

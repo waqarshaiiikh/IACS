@@ -25,6 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import "../../../CSS/Utils.css";
 // import { apiCAll } from '../../../../integration/apiCall';
 import moment from 'moment/moment';
+import ApplyProjectForm from './ApplyProjectForm';
 
 const useStyles = makeStyles({
   searching: {
@@ -69,16 +70,20 @@ const useStyles = makeStyles({
   },
   software_image: {
     width: '100px',
-    height: '100px'
+    height: '100px',
+    objectFit : 'none',
+    objectPosition: 'center',
+    borderRadius: '50%'
+
   },
-  logoDateContainer:{
+  logoDateContainer: {
     display: 'flex',
     justifyContent: 'space-between',
 
   },
   studentImageTag:
   {
-    width: '100%',  
+    width: '100%',
     aspectRatio: 1,
     objectPosition: 'center ',
     borderRadius: '10px',
@@ -87,36 +92,34 @@ const useStyles = makeStyles({
 
 });
 
-
-
 const projectsStatic = [
   {
     id: 1,
-    title: 'tittle1',
+    title: 'Tittle of the Project 01',
     companyLogo: '',
-    statement: 'statement', 
-    skills: ['CSS', 'HTML', 'JavaScript'], 
-    description: 'description',
-    scope: 'scope',
-    deliverables: 'deliverables',
-    methodology:  'methodology',
-    teamComposition : ["teamComposition", "teamComposition"],
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
     department: "Software Engineer1",
-    contact : "03423446805",
+    contact: "03423446805",
     date: new Date(),
-    appliedStudents:  [
+    appliedStudents: [
       {
         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
         fname: 'Muhammad',
         lname: 'Waqar',
         email: 'waqarshaiikh@gmail.com',
         rollNo: "NED/SE/1203",
-        skills: ['Css','HTml'],
+        skills: ['Css', 'HTml'],
         experience: 'experience data',
         contact: '03423446805',
         advisorName: 'Advisor Name',
         advisorEmail: 'waqar@gmail.com',
-        advisorContact: '03423446805' 
+        advisorContact: '03423446805'
       },
       {
         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
@@ -125,12 +128,12 @@ const projectsStatic = [
         lname: 'Waqar',
         email: 'waqarshaiikh@gmail.com',
         rollNo: "NED/SE/1203",
-        skills: ['Css','HTml'],
+        skills: ['Css', 'HTml'],
         experience: 'experience data',
         contact: '03423446805',
         advisorName: 'Advisor Name',
         advisorEmail: 'waqar@gmail.com',
-        advisorContact: '03423446805' 
+        advisorContact: '03423446805'
       },
       {
         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
@@ -139,12 +142,12 @@ const projectsStatic = [
         lname: 'Waqar',
         email: 'waqarshaiikh@gmail.com',
         rollNo: "NED/SE/1203",
-        skills: ['Css','HTml'],
+        skills: ['Css', 'HTml'],
         experience: 'experience data',
         contact: '03423446805',
         advisorName: 'Advisor Name',
         advisorEmail: 'waqar@gmail.com',
-        advisorContact: '03423446805' 
+        advisorContact: '03423446805'
       },
       {
         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
@@ -153,12 +156,12 @@ const projectsStatic = [
         lname: 'Waqar',
         email: 'waqarshaiikh@gmail.com',
         rollNo: "NED/SE/1203",
-        skills: ['Css','HTml'],
+        skills: ['Css', 'HTml'],
         experience: 'experience data',
         contact: '03423446805',
         advisorName: 'Advisor Name',
         advisorEmail: 'waqar@gmail.com',
-        advisorContact: '03423446805' 
+        advisorContact: '03423446805'
       },
       {
         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
@@ -167,114 +170,879 @@ const projectsStatic = [
         lname: 'Waqar',
         email: 'waqarshaiikh@gmail.com',
         rollNo: "NED/SE/1203",
-        skills: ['Css','HTml'],
+        skills: ['Css', 'HTml'],
         experience: 'experience data',
         contact: '03423446805',
         advisorName: 'Advisor Name',
         advisorEmail: 'waqar@gmail.com',
-        advisorContact: '03423446805' 
+        advisorContact: '03423446805'
       },
     ]
-  }, {
-    id: 2,
-    title: 'tittle2',
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 02',
     companyLogo: '',
-    statement: 'statement', 
-    skills: ['CSS', 'HTML', 'JavaScript'], 
-    description: 'description',
-    scope: 'scope',
-    deliverables: 'deliverables',
-    methodology:  'methodology',
-    teamComposition : ["teamComposition", "teamComposition"],
-    department: "Software Engineer",
-    contact : "03423446805",
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
     date: new Date(),
-    appliedStudents:  [
-      
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
     ]
-  }, {
-    id: 3,
-    title: 'tittle2',
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 03',
     companyLogo: '',
-    statement: 'statement', 
-    skills: ['CSS', 'HTML', 'JavaScript'], 
-    description: 'description',
-    scope: 'scope',
-    deliverables: 'deliverables',
-    methodology:  'methodology',
-    teamComposition : ["teamComposition", "teamComposition"],
-    department: "Software Engineer",
-    contact : "03423446805",
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
     date: new Date(),
-    appliedStudents:  [
-      
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
     ]
-  }, {
-    id: 4,
-    title: 'tittle2',
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 04',
     companyLogo: '',
-    statement: 'statement', 
-    skills: ['CSS', 'HTML', 'JavaScript'], 
-    description: 'description',
-    scope: 'scope',
-    deliverables: 'deliverables',
-    methodology:  'methodology',
-    teamComposition : ["teamComposition", "teamComposition"],
-    department: "Software Engineer",
-    contact : "03423446805",
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
     date: new Date(),
-    appliedStudents:  [
-      
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
     ]
-  }, {
-    id: 5,
-    title: 'tittle2',
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 05',
     companyLogo: '',
-    statement: 'statement', 
-    skills: ['CSS', 'HTML', 'JavaScript'], 
-    description: 'description',
-    scope: 'scope',
-    deliverables: 'deliverables',
-    methodology:  'methodology',
-    teamComposition : ["teamComposition", "teamComposition"],
-    department: "Software Engineer",
-    contact : "03423446805",
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
     date: new Date(),
-    appliedStudents:  [
-      
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
     ]
-  },
-  {
-    id: 6,
-    title: 'tittle2',
-    statement: 'statement', 
-    skills: ['CSS', 'HTML', 'JavaScript'], 
-    description: 'description',
-    scope: 'scope',
-    deliverables: 'deliverables',
-    methodology:  'methodology',
-    teamComposition : ["teamComposition", "teamComposition"],
-    department: "Software Engineer",
-    contact : "03423446805",
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 06',
+    companyLogo: '',
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
     date: new Date(),
-    appliedStudents:  [
-      
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
     ]
-    },
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 07',
+    companyLogo: '',
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
+    date: new Date(),
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+    ]
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 08',
+    companyLogo: '',
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
+    date: new Date(),
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+    ]
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 09',
+    companyLogo: '',
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
+    date: new Date(),
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+    ]
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 10',
+    companyLogo: '',
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
+    date: new Date(),
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+    ]
+  },  {
+    id: 1,
+    title: 'Tittle of the Project 11 ',
+    companyLogo: '',
+    statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    skills: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
+    description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
+    teamComposition: ["teamComposition", "teamComposition"],
+    department: "Software Engineer1",
+    contact: "03423446805",
+    date: new Date(),
+    appliedStudents: [
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+      {
+        studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
+
+        fname: 'Muhammad',
+        lname: 'Waqar',
+        email: 'waqarshaiikh@gmail.com',
+        rollNo: "NED/SE/1203",
+        skills: ['Css', 'HTml'],
+        experience: 'experience data',
+        contact: '03423446805',
+        advisorName: 'Advisor Name',
+        advisorEmail: 'waqar@gmail.com',
+        advisorContact: '03423446805'
+      },
+    ]
+  }, 
 ]
 const ClientJob = () => {
   const classes = useStyles();
 
-  
+
   const [requestJob, setRequestJob] = useState(false);
   const openRequest = () => setRequestJob(true);
   const closeRequest = () => setRequestJob(false);
 
   const [showPerPage] = useState(4)
   const [search, setSearch] = useState('title');
-  
-  const [projects , setProjects  ] = useState(projectsStatic.slice(0, showPerPage));
-  const [projectData , setProjectData] = useState(projectsStatic);
+
+  const [projects, setProjects] = useState(projectsStatic.slice(0, showPerPage));
+  const [projectData, setProjectData] = useState(projectsStatic);
   const [projectDataSearch, setProjectDataSearch] = useState(projectsStatic);
 
   // const [jobs, setJobs] = useState([]);
@@ -290,7 +1058,7 @@ const ClientJob = () => {
 
   // const loadJobs = async (start = 0, end = showPerPage) => {
   //   await apiCAll(`/api/user/job/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
-      
+
   //     console.log(res?.data);
   //     setJobs(res?.data.data);
   //     setTotal(res?.data.total);
@@ -303,7 +1071,7 @@ const ClientJob = () => {
 
   const handleSearch = async () => {
 
-    const searchData  =  projectDataSearch.filter(project => project[search] === value );
+    const searchData = projectDataSearch.filter(project => project[search] === value);
     setProjectData(searchData);
     setProjects(searchData.slice(0, showPerPage));
 
@@ -327,13 +1095,13 @@ const ClientJob = () => {
 
 
 
-  const  addProjects = (project) =>{
-    setProjects(prev=>{
+  const addProjects = (project) => {
+    setProjects(prev => {
       return [project, ...prev];
     });
   }
 
-  const handlePaginationChange = (e, pageNumber)=>{
+  const handlePaginationChange = (e, pageNumber) => {
     const startingIndex = (pageNumber - 1) * showPerPage;
     const endingIndex = startingIndex + showPerPage <= projectData.length ? startingIndex + showPerPage : projectData.length;
 
@@ -343,7 +1111,7 @@ const ClientJob = () => {
   }
   return (
     <>
-      {/* <ClientNavbar /> */}
+      <ApplyProjectForm open={requestJob} handleClose={closeRequest} setProjects={addProjects} fname='Muhammad' lname='Waqar' rollNo='NED/1482/SE' skills={['HTML','CSS']}  />
       <Container maxWidth="xl" >
         <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
@@ -415,13 +1183,13 @@ const ClientJob = () => {
                       <Grid item lg={12} key={index}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.software_title}>
-                          <div  className={classes.logoDateContainer}>
+                            <div className={classes.logoDateContainer}>
                               <div className="logo">
                                 <img
-                                className={classes.software_image} 
-                                // src={data.companyLogo} 
-                                src='https://pakistanplacement-employers.s3.amazonaws.com/149146986110p%20Logo%203.png'
-                                alt="companyLogo" />
+                                  className={classes.software_image}
+                                  // src={data.companyLogo} 
+                                  src='https://pakistanplacement-employers.s3.amazonaws.com/149146986110p%20Logo%203.png'
+                                  alt="companyLogo" />
                               </div>
                               <Typography sx={{ display: 'block', color: '#d3d3d3' }}>
                                 {moment(data?.date).format('DD MMM YYYY')}
@@ -429,25 +1197,31 @@ const ClientJob = () => {
                             </div>
 
 
-                            <div>
-                              <Typography>{"Project Title"}</Typography>
-                              <Typography>{data.title}</Typography>
-                              <Typography>{"Project Statement"}</Typography>
+                            <Box>
+                              <Box sx={{marginTop: '20px'}}>
+                                <Typography variant='h5' sx={{display: 'inline', fontWeight: 'bold'}} >{data.title}</Typography>
+                                {/* <Typography  sx={{display: 'inline', marginLeft: '10px'}}>{data.title}</Typography> */}
+                              </Box>
+
+                              <Typography  sx={{marginTop: '20px'}} variant='h6' >{"Project Statement"}</Typography>
                               <Typography>{data.statement}</Typography>
-                              <Typography>{"Skills"}</Typography>
-                              <Typography>
+                              <Box sx={{ marginTop: '20px', marginBottom: '10px'}}>
+                              <Typography variant='h6' sx={{display: 'inline', marginTop: '20px'}}>{"Skills"} </Typography>
+
+                              <Typography  sx={{display: 'inline', marginLeft: '10px'}}>
                                 {
                                   data.skills && data.skills.map((skill, i) => (
-                                    <Chip label={skill} sx={{ marginRight: '10px', marginBottom: '5px' }} />))
-                                }
+                                    <Chip label={skill} color= 'primary' sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} />))
+                                  }
                               </Typography>
+                              </Box>
 
-                            </div>
+                            </Box>
 
-                           
+
 
                           </div>
-                          
+
                           <Accordion>
                             <AccordionSummary
                               expandIcon={<ExpandMoreIcon />}
@@ -457,31 +1231,44 @@ const ClientJob = () => {
                               <Typography>Details</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography> {"Description"} </Typography>
-                                <Typography> {data.description} </Typography>
-                                <Typography> {"Scope"} </Typography>
-                                <Typography> {data.scope} </Typography>
-                                <Typography> {"Deliverables"} </Typography>
-                                <Typography> {data.deliverables} </Typography>
-                                <Typography> {"Methodology"} </Typography>
-                                <Typography> {data.methodology} </Typography>
-                                <Typography> {"Team Composition"} </Typography>
-                                <Typography>
+                              <Typography variant='h6' sx={{marginTop: '20px'}}> {"Description"} </Typography>
+                              <Typography> {data.description} </Typography>
+                              <Typography variant='h6' sx={{marginTop: '20px'}}> {"Scope"} </Typography>
+                              <Typography> {data.scope} </Typography>
+                              <Typography variant='h6' sx={{marginTop: '20px'}}> {"Deliverables"} </Typography>
+                              <Typography> {data.deliverables} </Typography>
+                              <Typography  variant='h6' sx={{marginTop: '20px'}}> {"Methodology"} </Typography>
+                              <Typography> {data.methodology} </Typography>
+                              <Typography  variant='h6' sx={{marginTop: '20px'}}> {"Team Composition"} </Typography>
+                              <Typography  >
                                 {
                                   data.teamComposition && data.teamComposition.map((person, i) => (
-                                    <Chip label={person} sx={{ marginRight: '10px', marginBottom: '5px' }} key={i} />))
+                                    <Chip label={person} color="primary" 
+                                    sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} 
+                                     key={i} />))
                                 }
                               </Typography>
-                                <Typography> {"Department"} </Typography>
-                                <Typography> {data.department} </Typography>
+                              <Box sx={{marginTop: '20px'}}>
+                                <Typography variant='h6' sx={{display: 'inline'}}> {"Department"} </Typography>
+                                <Typography sx={{display: 'inline'}}> {data.department} </Typography>
+                              </Box>
+                              <Box sx={{marginTop: '20px'}}>
 
-                                <Typography> {"Contact "} </Typography>
-                                <Typography> {data.contact} </Typography>
+                              <Typography variant='h6' sx={{display: 'inline', marginRight: '10px'}}> {"Contact "} </Typography>
+                              <Typography sx={{display: 'inline'}}> {data.contact} </Typography>
+                              </Box>
 
 
                             </AccordionDetails>
                           </Accordion>
 
+
+
+                          <Grid container spacing={2}>
+                            <Grid item sx={{width:'100%', display: 'flex',justifyContent: 'start'}}>
+                              <Button variant='contained' sx={{ marginTop: '10px', width: '150px ' }} onClick={openRequest}>Apply</Button>
+                            </Grid>
+                          </Grid>
 
 
                         </Box>
@@ -493,10 +1280,10 @@ const ClientJob = () => {
             </Grid>
           </Grid>
           <Box sx={{ margin: '20px 0px' }}>
-            <Pagination 
-            count={Math.ceil(projectData.length / showPerPage) }
-            shape='rounded'
-            onChange={handlePaginationChange}
+            <Pagination
+              count={Math.ceil(projectData.length / showPerPage)}
+              shape='rounded'
+              onChange={handlePaginationChange}
             />
           </Box>
         </Grid>
