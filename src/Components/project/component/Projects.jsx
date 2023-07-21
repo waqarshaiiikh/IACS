@@ -26,6 +26,7 @@ import "../../../CSS/Utils.css";
 // import { apiCAll } from '../../../../integration/apiCall';
 import moment from 'moment/moment';
 import ApplyProjectForm from './ApplyProjectForm';
+import useFetchData from '../../../Hook/useFetchData';
 
 const useStyles = makeStyles({
   searching: {
@@ -1032,48 +1033,54 @@ const projectsStatic = [
 ]
 const ClientJob = () => {
   const classes = useStyles();
+  const { data: projectList, loading: projectListLoading, error: projectListError, fetchData: gettingFetchingList } = useFetchData();
 
 
   const [requestJob, setRequestJob] = useState(false);
   const openRequest = () => setRequestJob(true);
   const closeRequest = () => setRequestJob(false);
-
+  const [projectId, setProjectId] = useState();
+  
   const [showPerPage] = useState(4)
   const [search, setSearch] = useState('title');
 
-  const [projects, setProjects] = useState(projectsStatic.slice(0, showPerPage));
-  const [projectData, setProjectData] = useState(projectsStatic);
-  const [projectDataSearch, setProjectDataSearch] = useState(projectsStatic);
+  const [projects , setProjects  ] = useState([]);
+  const [projectData , setProjectData] = useState([]);
+  const [projectDataSearch, setProjectDataSearch] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+
   const [value, setValue] = useState("");
 
 
+  useEffect(()=>{
+    gettingFetchingList('/project').then(res=>{
+      res = res.map(res=>({...res, allStudents: res.allStudents.map(student=>student.id)}));
+      console.log(res);
+      setProjectDataSearch(res)
+      setProjectData(res)
+      setProjects(res.slice(0, showPerPage))
+    })
+  },[])
 
+  const openProject = (id)=>{
+    setProjectId(id);
+    openRequest();
+  }
   const handleChange = (event) => {
     setSearch(event.target.value);
 
   };
 
-  // const loadJobs = async (start = 0, end = showPerPage) => {
-  //   await apiCAll(`/api/user/job/get`, 'post', { pagination: { starts: start, totalRows: end - start } }).then((res) => {
-
-  //     console.log(res?.data);
-  //     setJobs(res?.data.data);
-  //     setTotal(res?.data.total);
-  //     setPostCount(res?.data.total);
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   })
-  //   setLoading(false);
-  // }
-
+  
   const handleSearch = async () => {
 
     const searchData = projectDataSearch.filter(project => project[search] === value);
     setProjectData(searchData);
     setProjects(searchData.slice(0, showPerPage));
+    setCurrentPage(1); // Reset pagination to the first page
 
 
 
@@ -1095,13 +1102,22 @@ const ClientJob = () => {
 
 
 
-  const addProjects = (project) => {
-    setProjects(prev => {
-      return [project, ...prev];
+  const setApplyProjects = (projectId) => {
+    setProjectDataSearch((prev) => {
+      const projects = prev.filter((project) => project.id === projectId);
+  
+      if (projects.length > 0) {
+        const projectToUpdate = projects[0];
+        projectToUpdate.allStudents.push(parseInt(localStorage.getItem('userId')));
+      }
+  
+      return prev;
     });
-  }
+  };
+  
 
-  const handlePaginationChange = (e, pageNumber) => {
+  const handlePaginationChange = (e, pageNumber)=>{
+    setCurrentPage(pageNumber);
     const startingIndex = (pageNumber - 1) * showPerPage;
     const endingIndex = startingIndex + showPerPage <= projectData.length ? startingIndex + showPerPage : projectData.length;
 
@@ -1111,7 +1127,9 @@ const ClientJob = () => {
   }
   return (
     <>
-      <ApplyProjectForm open={requestJob} handleClose={closeRequest} setProjects={addProjects} fname='Muhammad' lname='Waqar' rollNo='NED/1482/SE' skills={['HTML','CSS']}  />
+      {projectListError && <Box> <Typography color={'red'}>Server Error </Typography></Box>}
+      {requestJob && <ApplyProjectForm projectId={projectId} open={requestJob} handleClose={closeRequest}  setApplyProjects={setApplyProjects} fname='Muhammad' lname='Waqar' rollNo='NED/1482/SE' skills={['HTML','CSS']}  />}
+      
       <Container maxWidth="xl" >
         <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
@@ -1168,7 +1186,7 @@ const ClientJob = () => {
           <Grid item lg={10} xs={12} >
             <Grid container spacing={2} >
               {
-                loading ?
+                projectListLoading ?
                   (
                     <Backdrop
                       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
@@ -1180,6 +1198,7 @@ const ClientJob = () => {
                       <h1 className='main_heading'>No Result Found</h1>
                     </div>) :
                     (projects && projects.map((data, index) => (
+
                       <Grid item lg={12} key={index}>
                         <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.software_title}>
@@ -1188,7 +1207,7 @@ const ClientJob = () => {
                                 <img
                                   className={classes.software_image}
                                   // src={data.companyLogo} 
-                                  src='https://pakistanplacement-employers.s3.amazonaws.com/149146986110p%20Logo%203.png'
+                                  src={`https://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/industry/${data.industryId}.jpg`}
                                   alt="companyLogo" />
                               </div>
                               <Typography sx={{ display: 'block', color: '#d3d3d3' }}>
@@ -1210,7 +1229,7 @@ const ClientJob = () => {
 
                               <Typography  sx={{display: 'inline', marginLeft: '10px'}}>
                                 {
-                                  data.skills && data.skills.map((skill, i) => (
+                                  data.skillsName && data.skillsName.map((skill, i) => (
                                     <Chip label={skill} color= 'primary' sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} />))
                                   }
                               </Typography>
@@ -1250,7 +1269,7 @@ const ClientJob = () => {
                               </Typography>
                               <Box sx={{marginTop: '20px'}}>
                                 <Typography variant='h6' sx={{display: 'inline'}}> {"Department"} </Typography>
-                                <Typography sx={{display: 'inline'}}> {data.department} </Typography>
+                                <Typography sx={{display: 'inline'}}> {data.departmentName} </Typography>
                               </Box>
                               <Box sx={{marginTop: '20px'}}>
 
@@ -1266,7 +1285,10 @@ const ClientJob = () => {
 
                           <Grid container spacing={2}>
                             <Grid item sx={{width:'100%', display: 'flex',justifyContent: 'start'}}>
-                              <Button variant='contained' sx={{ marginTop: '10px', width: '150px ' }} onClick={openRequest}>Apply</Button>
+                              <Button
+                                variant='contained' sx={{ marginTop: '10px', width: '150px ' }}
+                                disabled={data.allStudents.includes(parseInt(localStorage.getItem('userId')))}
+                                 onClick={()=>{openProject(data.id)}}>Apply</Button>
                             </Grid>
                           </Grid>
 
@@ -1280,10 +1302,11 @@ const ClientJob = () => {
             </Grid>
           </Grid>
           <Box sx={{ margin: '20px 0px' }}>
-            <Pagination
-              count={Math.ceil(projectData.length / showPerPage)}
-              shape='rounded'
-              onChange={handlePaginationChange}
+          <Pagination 
+            count={Math.ceil(projectData.length / showPerPage) }
+            shape='rounded'
+            onChange={handlePaginationChange}
+            page={currentPage} 
             />
           </Box>
         </Grid>
@@ -1291,5 +1314,6 @@ const ClientJob = () => {
     </>
   )
 }
+
 
 export default ClientJob

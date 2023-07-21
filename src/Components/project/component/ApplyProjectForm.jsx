@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import {
@@ -17,6 +17,7 @@ import {
 import "../../../CSS/Utils.css";
 import { apiCAll } from '../../../integration/apiCall';
 import noteContext from '../../../context/notes/noteContext';
+import useFetchData from '../../../Hook/useFetchData';
 
 
 const requestStyle = {
@@ -37,24 +38,46 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const filter = createFilterOptions();
 
-const skillsOptionsStatic = [
-{"id": 1, "skillName":"HTML CSS & JAVASCRIPT"},
-{"id": 2, "skillName":"C# .Net"},
-{"id": 3, "skillName":"C / C++"},
-{"id": 4, "skillName":"Java"},
-{"id": 5, "skillName":"Swift"},
-{"id": 6, "skillName":"Python"},
-];
+const convertExperiencesToString = (experiences) => {
+  if (!Array.isArray(experiences) || experiences.length === 0) {
+    return "";
+  }
 
-const departmentsOptions  = [
-  {id: 1, departmentName: "1"},
-  {id: 2, departmentName: "2"},
-  {id: 3, departmentName: "3"},
-]
+  const formattedExperiences = experiences.map((experience) => {
+    return `
+      Company Name: ${experience.companyName}
+      Job Role: ${experience.jobRole}
+      Start Date: ${new Date(experience.startDate).toDateString()}
+      End Date: ${new Date(experience.endDate).toDateString()}
+      Description: ${experience.Description}
+      
+    `;
+  });
+
+  return formattedExperiences.join("\n");
+};
 
 
 const ApplyProjectForm = (props) => {
 
+  
+    const { data: skillOptions, fetchData: getsSkills } = useFetchData();
+   
+    const {fname, lname}  = JSON.parse(localStorage.getItem('Profile_constData'));
+    const studentExperience = JSON.parse(localStorage.getItem('Experience_client'));
+    const {enrollment, phoneNumber} = JSON.parse(localStorage.getItem('Profile_client'));
+    const { data: projectsData, loading: projectLoading, error: projectError, fetchData: applyProject } = useFetchData();
+
+
+    // const { data: studentData, fetchData: getStudentData } = useFetchData();
+    const [skill, setSkill] = useState([]);
+
+    useEffect(() => {
+      getsSkills('/skill');
+      // getStudentData('/student/detail?id='+localStorage.getItem('userId'))
+
+    },[])
+  
     /**
      * OverHere skills name is present instead of ids
      */
@@ -66,11 +89,11 @@ const ApplyProjectForm = (props) => {
     /**
      * these are the state for form.
      */
-    const [fullName, setFullName] = useState( `${props.fname } ${ props.lname}`);
-    const [rollNo, setRollNo] = useState(props.rollNo);
-    const [skills, setSkills] = useState(props.skills);
-    const [experience, setExperience] = useState();
-    const [contact , setContact] = useState("");
+
+    // const [fullName, setFullName] = useState();
+    // const [rollNo, setRollNo] = useState(props.rollNo);
+    const [experience, setExperience] = useState(convertExperiencesToString(studentExperience));
+    const [contact , setContact] = useState(phoneNumber);
     const [advisorName, setAdvisorName] = useState("");
     const [advisorEmail, setAdvisorEmail] = useState("");
     const [advisorContact, setAdvisorContact] = useState("");
@@ -79,44 +102,33 @@ const ApplyProjectForm = (props) => {
     const handleSubmit = (e) => {
   
       e.preventDefault();
+      //   {
+      //     "departmentRollNumber": "ABC123",
+      //     "contact": "1234567890",
+      //     "skillsId": [1, 2, 3],
+      //     "experience": "Some experience details",
+      //     "advisorName": "John Doe",
+      //     "advisorEmail": "john.doe@example.com",
+      //     "advisorContact": "9876543210"
+      // }
+
       const bodyData = {
-        name : fullName,
-        rollNo : rollNo,
-        skills : skills,
+        name : `${fname } ${ lname}`,
+        departmentRollNumber : enrollment,
+        skillsId : skill.map(s=>s.id),
         experience: experience,
         contact : contact,
         advisorName: advisorName,
         advisorEmail: advisorEmail,
         advisorContact: advisorContact,
-        studentId: 123
       };
 
-      // props.setProjects(bodyData);
-      console.log(bodyData)
-      props.handleClose();
-      
-      // const jobPostData = { tittle, duration, location, skill, linkedin, description };
-      // console.log(jobPostData)
-  
-      // apiCAll('/api/user/job/post', 'post', { jobPostData }).then(
-      //   (response) => {
-      //     if (response.data) {
-      //       setDuration("")
-      //       setLocation("")
-      //       setDescription("");
-      //       setTittle("")
-      //       setLinkedin("")
-      //       setSkill()
-      //       props.handleClose()
-      //       alert("Your Requeest has Submited")
-      //     }
-      //   }
-      // ).catch(
-      //   (e) => {
-      //     console.log(e.response)
-      //     alert(e.response.data)
-      //   }
-      // )
+
+      applyProject( `/student/applied?studentId=${localStorage.getItem('userId')}&projectId=${props.projectId}` , 'POST', bodyData)
+       .then((res)=>{
+         props.setApplyProjects(props.projectId);
+         props.handleClose();
+        })
     }
   
     return (
@@ -129,16 +141,20 @@ const ApplyProjectForm = (props) => {
           <Box sx={requestStyle}>
 
             <form onSubmit={handleSubmit}>
-              <Grid container spacing={1}>
+              <Grid container spacing={1} sx={{
+                padding: '10px !important',
+              }}>
                 <Grid item  xs={12}>
-                  <TextField id="Name" fullWidth label="Full Name" placeholder='Full Name' type='text' value={fullName} disabled onChange={e => { setFullName(e.target.value) }} variant="outlined" required />
+                  <TextField id="Name" fullWidth label="Full Name" placeholder='Full Name' type='text' value={`${fname } ${ lname}`} disabled  variant="outlined" required />
                 </Grid>
 
                 <Grid item  xs={12}>
-                  <TextField id="rollNumber" fullWidth label="Roll Number" placeholder='Roll No' type='text' value={rollNo} disabled onChange={e => { setRollNo(e.target.value) }} variant="outlined" required />
+                  <TextField id="rollNumber" fullWidth label="Roll Number" placeholder='Roll No' type='text' value={enrollment} disabled  variant="outlined" required />
                 </Grid>
 
-                <Grid item lg={12} xs={12}>
+                
+
+                {/* <Grid item lg={12} xs={12}>
                   <Autocomplete
                     multiple
                     required
@@ -178,7 +194,7 @@ const ApplyProjectForm = (props) => {
                     )}
                   />
                 </Grid>
-              
+               */}
 
                 <Grid item lg={12} xs={12}>
                   <TextareaAutosize
@@ -191,7 +207,32 @@ const ApplyProjectForm = (props) => {
                     placeholder="Experience"
                   />
                 </Grid>
-                
+                <Grid item lg={12} xs={12}>
+                <Autocomplete
+                  multiple
+                  required
+                  id="Skills"
+                  options={skillOptions ? skillOptions : []}
+                  disableCloseOnSelect
+                  getOptionLabel={(option) => option.skillname}
+                  value={skill}
+                  onChange={(e, value) => { setSkill(value); }}
+                  renderOption={(props, option, { selected }) => (
+                    <li {...props}>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option.skillname}
+                    </li>
+                  )}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Skills" />
+                  )}
+                />
+              </Grid>
                 <Grid item  xs={12}>
                   <TextField id="contact" fullWidth label="contact" placeholder='mobile number' type='text' value={contact} onChange={e => { setContact(e.target.value) }} variant="outlined" required />
                 </Grid>
@@ -208,8 +249,15 @@ const ApplyProjectForm = (props) => {
                   <TextField id="AdvisorContactNo" fullWidth label="Advisor Contact" placeholder='Advisor Contact No' type='text' value={advisorContact} onChange={e => { setAdvisorContact(e.target.value) }} variant="outlined" required />
                 </Grid>
                 
+                {projectError &&
+                (<Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Typography color='red'>Server Error</Typography>
+                </Grid>)
+                }
+
+
                 <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-                  <Button variant="contained" type='submit'>Apply</Button>
+                  <Button disabled={projectLoading}  variant="contained" type='submit'>Apply</Button>
                 </Grid>
   
               </Grid>

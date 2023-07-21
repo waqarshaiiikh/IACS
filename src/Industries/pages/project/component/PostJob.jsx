@@ -15,7 +15,7 @@ import {
   createFilterOptions,
 } from '@mui/material';
 import "../../../../CSS/Utils.css";
-import useFetchData from '../Hook/useFetchData';
+import useFetchData from '../../../../Hook/useFetchData';
 
 
 
@@ -95,11 +95,9 @@ const PostJob = (props) => {
       "industryId": localStorage.getItem('userId')
     }
 
-    console.log(bodyData)
 
     postProjects('/project', 'POST', bodyData).then(res => {
       props.setProjects(res);
-      // console.log(res)
       props.handleClose();
     });
   }
