@@ -97,6 +97,7 @@ const ApplyProjectForm = (props) => {
     const [advisorName, setAdvisorName] = useState("");
     const [advisorEmail, setAdvisorEmail] = useState("");
     const [advisorContact, setAdvisorContact] = useState("");
+    const [teamComposition, setTeamComposition] = useState([])
 
   
     const handleSubmit = (e) => {
@@ -115,12 +116,14 @@ const ApplyProjectForm = (props) => {
       const bodyData = {
         name : `${fname } ${ lname}`,
         departmentRollNumber : enrollment,
-        skillsId : skill.map(s=>s.id),
+        skillsName: skill,
+      // skillsName : skill.map(s=>s.skillname),
         experience: experience,
         contact : contact,
         advisorName: advisorName,
         advisorEmail: advisorEmail,
         advisorContact: advisorContact,
+        teamComposition: teamComposition,
       };
 
 
@@ -152,50 +155,7 @@ const ApplyProjectForm = (props) => {
                   <TextField id="rollNumber" fullWidth label="Roll Number" placeholder='Roll No' type='text' value={enrollment} disabled  variant="outlined" required />
                 </Grid>
 
-                
-
-                {/* <Grid item lg={12} xs={12}>
-                  <Autocomplete
-                    multiple
-                    required
-                    id="Skills"
-                    value={skills}
-        
-                    onChange={(event, newValue) => {
-                      setSkills(newValue);
-                    }}
-                    selectOnFocus
-                    clearOnBlur
-                    handleHomeEndKeys
-                    filterOptions={(options, params) => {
-                      const filtered = filter(options, params);
-                      const { inputValue } = params;
-                    
-                      // Suggest the creation of a new value
-                      const isExisting = options.some((option) => inputValue === option);
-                      if (inputValue !== '' && !isExisting) {
-                        filtered.push(inputValue);
-                      }
-                      return filtered;
-                    }}
-                    
-                    options={skills}
-                    freeSolo
-                    getOptionLabel={(option) => option}
-
-                    renderOption={(props, option) => {
-                      if(skills.filter(o=> o===option).length===0)
-                        return <li {...props}>{`Add "${option}"`}</li>;
-                      return  <li {...props}>{option}</li>
-                  }}
-
-                    renderInput={(params) => (
-                      <TextField {...params} label="Skills" />
-                    )}
-                  />
-                </Grid>
-               */}
-
+               
                 <Grid item lg={12} xs={12}>
                   <TextareaAutosize
                     id="Experience"
@@ -205,34 +165,94 @@ const ApplyProjectForm = (props) => {
                     onChange={e => setExperience(e.target.value)}
                     style={{ width: '100%', padding: '10px' }}
                     placeholder="Experience"
+                    
                   />
                 </Grid>
+
+
+
                 <Grid item lg={12} xs={12}>
                 <Autocomplete
                   multiple
                   required
-                  id="Skills"
-                  options={skillOptions ? skillOptions : []}
-                  disableCloseOnSelect
-                  getOptionLabel={(option) => option.skillname}
+                  id="sKill"
                   value={skill}
-                  onChange={(e, value) => { setSkill(value); }}
-                  renderOption={(props, option, { selected }) => (
-                    <li {...props}>
-                      <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option.skillname}
-                    </li>
-                  )}
+                  onChange={(event, newValue) => {
+                    setSkill(newValue);
+                  }}
+                  selectOnFocus
+                  clearOnBlur
+                  handleHomeEndKeys
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+                    const { inputValue } = params;
+
+                    // Suggest the creation of a new value
+                    const isExisting = options.some((option) => inputValue === option);
+                    if (inputValue !== '' && !isExisting) {
+                      filtered.push(inputValue);
+                    }
+                    return filtered;
+                  }}
+
+                  options={skill}
+                  freeSolo
+                  getOptionLabel={(option) => option}
+
+                  renderOption={(props, option) => {
+                    if (skill.filter(o => o === option).length === 0)
+                      return <li {...props}>{`Add "${option}"`}</li>;
+                    return <li {...props}>{option}</li>
+                  }}
+
                   renderInput={(params) => (
-                    <TextField {...params} label="Skills" />
+                    <TextField {...params} label="Skills" required={skill.length===0} />
                   )}
                 />
               </Grid>
+
+
+              <Grid item lg={12} xs={12}>
+                <Autocomplete
+                  multiple
+                  required
+                  id="Teams Compositions"
+                  value={teamComposition}
+
+                  onChange={(event, newValue) => {
+                    setTeamComposition(newValue);
+                  }}
+                  selectOnFocus
+                  clearOnBlur
+                  handleHomeEndKeys
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+                    const { inputValue } = params;
+
+                    // Suggest the creation of a new value
+                    const isExisting = options.some((option) => inputValue === option);
+                    if (inputValue !== '' && !isExisting) {
+                      filtered.push(inputValue);
+                    }
+                    return filtered;
+                  }}
+
+                  options={teamComposition}
+                  freeSolo
+                  getOptionLabel={(option) => option}
+
+                  renderOption={(props, option) => {
+                    if (teamComposition.filter(o => o === option).length === 0)
+                      return <li {...props}>{`Add "${option}"`}</li>;
+                    return <li {...props}>{option}</li>
+                  }}
+
+                  renderInput={(params) => (
+                    <TextField {...params} label="Teams Compositions" required={teamComposition.length===0} />
+                  )}
+                />
+              </Grid>
+
                 <Grid item  xs={12}>
                   <TextField id="contact" fullWidth label="contact" placeholder='mobile number' type='text' value={contact} onChange={e => { setContact(e.target.value) }} variant="outlined" required />
                 </Grid>

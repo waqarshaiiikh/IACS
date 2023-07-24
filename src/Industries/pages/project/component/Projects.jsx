@@ -95,95 +95,6 @@ const useStyles = makeStyles({
 
 });
 
-// const projectsStatic = [
-//   {
-//     id: 1,
-//     title: 'Tittle of the Project 01',
-//     companyLogo: '',
-//     statement: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-//     skillsName: ['CSS', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript', 'HTML', 'JavaScript'],
-//     description: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-//     scope: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-//     deliverables: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-//     methodology: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-//     teamComposition: ["teamComposition", "teamComposition"],
-//     department: "Software Engineer1",
-//     contact: "03423446805",
-//     date: new Date(),
-//     appliedStudents: [
-//       {
-//         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
-//         fname: 'Muhammad',
-//         lname: 'Waqar',
-//         email: 'waqarshaiikh@gmail.com',
-//         rollNo: "NED/SE/1203",
-//         skills: ['Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml','Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml', 'Css', 'HTml'],
-//         experience: 'lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et',
-//         contact: '03423446805',
-//         advisorName: 'Advisor Name',
-//         advisorEmail: 'waqar@gmail.com',
-//         advisorContact: '03423446805'
-//       },
-//       {
-//         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
-
-//         fname: 'Muhammad',
-//         lname: 'Waqar',
-//         email: 'waqarshaiikh@gmail.com',
-//         rollNo: "NED/SE/1203",
-//         skills: ['Css', 'HTml'],
-//         experience: 'experience data',
-//         contact: '03423446805',
-//         advisorName: 'Advisor Name',
-//         advisorEmail: 'waqar@gmail.com',
-//         advisorContact: '03423446805'
-//       },
-//       {
-//         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
-
-//         fname: 'Muhammad',
-//         lname: 'Waqar',
-//         email: 'waqarshaiikh@gmail.com',
-//         rollNo: "NED/SE/1203",
-//         skills: ['Css', 'HTml'],
-//         experience: 'experience data',
-//         contact: '03423446805',
-//         advisorName: 'Advisor Name',
-//         advisorEmail: 'waqar@gmail.com',
-//         advisorContact: '03423446805'
-//       },
-//       {
-//         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
-
-//         fname: 'Muhammad',
-//         lname: 'Waqar',
-//         email: 'waqarshaiikh@gmail.com',
-//         rollNo: "NED/SE/1203",
-//         skills: ['Css', 'HTml'],
-//         experience: 'experience data',
-//         contact: '03423446805',
-//         advisorName: 'Advisor Name',
-//         advisorEmail: 'waqar@gmail.com',
-//         advisorContact: '03423446805'
-//       },
-//       {
-//         studentImage: "http://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/student/81.jpg",
-
-//         fname: 'Muhammad',
-//         lname: 'Waqar',
-//         email: 'waqarshaiikh@gmail.com',
-//         rollNo: "NED/SE/1203",
-//         skills: ['Css', 'HTml'],
-//         experience: 'experience data',
-//         contact: '03423446805',
-//         advisorName: 'Advisor Name',
-//         advisorEmail: 'waqar@gmail.com',
-//         advisorContact: '03423446805'
-//       },
-//     ]
-//   }
-// ]
-
 
 const ClientJob = () => {
   const classes = useStyles();
@@ -204,15 +115,15 @@ const ClientJob = () => {
   const [projectDataSearch, setProjectDataSearch] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // const [jobs, setJobs] = useState([]);
-  // const [loading, setLoading] = useState(false);
-
   const [value, setValue] = useState("");
 
 
   useEffect(()=>{
     const id = localStorage.getItem('userId');
     gettingFetchingList('/project/industry?id='+id).then(res=>{
+  
+
+      
       setProjectDataSearch(res)
       setProjectData(res)
       setProjects(res.slice(0, showPerPage))
@@ -307,7 +218,7 @@ const ClientJob = () => {
                   onChange={handleChange}
                 >
                   <MenuItem value={'title'}>Tittle</MenuItem>
-                  <MenuItem value={'department'}>Department</MenuItem>
+                  <MenuItem value={'departmentName'}>Department</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -403,15 +314,7 @@ const ClientJob = () => {
                             <Typography> {data.deliverables} </Typography>
                             <Typography  variant='h6' sx={{marginTop: '20px'}}> {"Methodology"} </Typography>
                             <Typography> {data.methodology} </Typography>
-                            <Typography  variant='h6' sx={{marginTop: '20px'}}> {"Team Composition"} </Typography>
-                            <Typography  >
-                              {
-                                data.teamComposition && data.teamComposition.map((person, i) => (
-                                  <Chip label={person} color="primary" 
-                                  sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} 
-                                   key={i} />))
-                              }
-                            </Typography>
+                            
                             <Box sx={{marginTop: '20px'}}>
                               <Typography variant='h6' sx={{display: 'inline'}}> {"Department"} </Typography>
                               <Typography sx={{display: 'inline'}}> {data.departmentName} </Typography>
@@ -453,18 +356,18 @@ const ClientJob = () => {
                                             <Grid item className={classes.studentImg}  >
                                               <img
                                                 className={classes.studentImageTag}
-                                                src={data.studentImage}
+                                                src={`http://res.cloudinary.com/dksfpant5/image/upload/${data.student.pic}`}
                                                 alt="studentImage" />
                                             </Grid>
                                             <Grid item xs={9} className="studentDetail">
-                                              <Typography variant='h5' sx={{textTransform:  'uppercase', fontWeight: '500',}}>{data.fname + " " + data.lname}</Typography>
+                                              <Typography variant='h5' sx={{textTransform:  'uppercase', fontWeight: '500',}}>{data.student.fname + " " + data.student.lname}</Typography>
                                               
-                                              <Typography color= '#0085c6'>{data.email}</Typography>
-                                              <Typography>{data.rollNo}</Typography>                                            
+                                              <Typography color= '#0085c6'>{data.student.email}</Typography>
+                                              <Typography>{data.student.enrollment}</Typography>                                            
                                               <Typography variant='p' sx={{display: 'inline', marginTop: '20px', fontWeight: '500', textTransform: 'uppercase'}}>{"Skills :"}</Typography>
                                               <Typography  sx={{display: 'inline', marginLeft: '10px'}}>
                                                 {
-                                                  data.skills && data.skills.map((skill, i) => (
+                                                  data.skillsName && data.skillsName.map((skill, i) => (
                                                     <Chip label={skill } color= 'primary'
                                                     key={i}
                                                     sx={{ marginRight: '10px', marginBottom: '5px' ,height: '20px !important', borderRadius: '3px !important'}} />))
@@ -474,15 +377,28 @@ const ClientJob = () => {
 
                                           </Grid>
 
-
                                           <div>
                                             
                                             <Typography variant='h6'>{"Experience"}</Typography>
                                             <Typography>{data.experience}</Typography>
                                             <Box sx={{display: 'flex', alignItems: 'baseline', gap: "20px"}}>
-                                              <Typography variant='h6' >{"Contact :"}</Typography>
-                                              <Typography color='#0085c6'>{data.contact}</Typography>
+                                              <Typography variant='h6'  >{"Contact :"}</Typography>
+                                              <Typography color='#0085c6'>{data.student.phonenumber}</Typography>
                                             </Box>
+
+                                            <Box sx={{ display: 'flex', alignItems: 'baseline', gap: "20px" }}>
+                                              <Typography variant='h6' sx={{ marginBottom: '30px' }}> {"Team Composition"} </Typography>
+
+                                              <Typography  >
+                                                {
+                                                  data.teamComposition && data.teamComposition.map((person, i) => (
+                                                    <Chip label={person} color="primary"
+                                                      sx={{ marginRight: '10px', marginBottom: '5px', height: '20px !important', borderRadius: '3px !important' }}
+                                                      key={i} />))
+                                                }
+                                              </Typography>
+                                            </Box>
+
 
                                             <Typography variant='h5' sx={{margin: '20px 0', textTransform: 'uppercase', fontWeight: '500'}} >{"Advisor Detail"}</Typography>
 
@@ -498,8 +414,6 @@ const ClientJob = () => {
                                               <Typography variant='h6'> Contact No :</Typography>
                                               <Typography color='#0085c6'> {data.advisorContact}</Typography>
                                             </Box>
-                                        
-
 
                                           </div>
                                         </div>
@@ -523,7 +437,7 @@ const ClientJob = () => {
           </Grid>
           <Box sx={{ margin: '20px 0px' }}>
             <Pagination 
-            count={Math.ceil(projectData.length / showPerPage) }
+            count={Math.ceil(projectData?.length / showPerPage) }
             shape='rounded'
             onChange={handlePaginationChange}
             page={currentPage} 

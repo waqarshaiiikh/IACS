@@ -42,10 +42,10 @@ const PostJob = (props) => {
 
   const { data: projectsData, loading: projectLoading, error: projectError, fetchData: postProjects } = useFetchData();
 
-  const { data: skillOptions, fetchData: getsSkills } = useFetchData();
+  // const { data: skillOptions, fetchData: getsSkills } = useFetchData();
   const { data: departmentOptions, fetchData: getsDepartments } = useFetchData();
 
-  useEffect(() => { getsSkills('/skill') },[])
+  // useEffect(() => { getsSkills('/skill') },[])
   useEffect(() => { getsDepartments('/department')},[])
 
 
@@ -59,21 +59,18 @@ const PostJob = (props) => {
   /**
    * these are the state for form.
    */
-  const [tittle, setTittle] = useState("Tittle of the Project 01");
-  const [statement, setStatement] = useState("lorem ipsum dolor r  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
+  const [tittle, setTittle] = useState("");
+  const [statement, setStatement] = useState();
   /**
    * its contains the array of objects 
    */
-  const [skill, setSkill] = useState([
-    { "id": 6, "skillname": "Python" }
-  ]);
-  const [description, setDescription] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
-  const [scope, setScope] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
-  const [deliverables, setDeliverables] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
-  const [methodology, setMethodology] = useState("lorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor etlorem ipsum dolor sit amet, consectetur adip incididunt ut labore et dolor  sit amet et dolor et dolor et dolor et dolor et dolor et dolor et");
-  const [teamComposition, setTeamComposition] = useState(["waqar", "ali"]);
+  const [skill, setSkill] = useState([  ]);
+  const [description, setDescription] = useState();
+  const [scope, setScope] = useState();
+  const [deliverables, setDeliverables] = useState();
+  const [methodology, setMethodology] = useState();
   const [department, setDepartment] = useState();
-  const [contact, setContact] = useState("03423446805");
+  const [contact, setContact] = useState();
 
 
   const handleSubmit = (e) => {
@@ -82,13 +79,12 @@ const PostJob = (props) => {
 
     const bodyData = {
       "title": tittle,
-      "skillsId": skill.map(skill => skill.id),
+      "skillsName": skill,
       "statement": statement,
       "description": description,
       "scope": scope,
       "deliverables": deliverables,
       "methodology": methodology,
-      "teamComposition": teamComposition,
       "departmentId": department.id,
       "contact": contact,
       "active": true,
@@ -107,7 +103,7 @@ const PostJob = (props) => {
       <Modal
         open={props.open}
         onClose={props.handleClose}
-        sx={{ overflow: { xs: 'scroll' } }}
+        sx={{ overflow: 'scroll' }}
       >
         <Box sx={requestStyle}>
           <Typography variant="h5" sx={{ textAlign: 'center', fontSize: '2rem', marginBottom: '20px' }}>
@@ -121,32 +117,54 @@ const PostJob = (props) => {
               <Grid item lg={6} xs={12}>
                 <TextField id="title" fullWidth label="Project Statement" placeholder='Project Statement' type='text' value={statement} onChange={e => { setStatement(e.target.value) }} variant="outlined" required />
               </Grid>
+
+              
+
+
               <Grid item lg={12} xs={12}>
                 <Autocomplete
                   multiple
                   required
-                  id="Skills"
-                  options={skillOptions ? skillOptions : []}
-                  disableCloseOnSelect
-                  getOptionLabel={(option) => option.skillname}
+                  id="sKill"
                   value={skill}
-                  onChange={(e, value) => { setSkill(value); }}
-                  renderOption={(props, option, { selected }) => (
-                    <li {...props}>
-                      <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option.skillname}
-                    </li>
-                  )}
+                  onChange={(event, newValue) => {
+                    setSkill(newValue);
+                  }}
+                  selectOnFocus
+                  clearOnBlur
+                  handleHomeEndKeys
+                  filterOptions={(options, params) => {
+                    const filtered = filter(options, params);
+                    const { inputValue } = params;
+
+                    // Suggest the creation of a new value
+                    const isExisting = options.some((option) => inputValue === option);
+                    if (inputValue !== '' && !isExisting) {
+                      filtered.push(inputValue);
+                    }
+                    return filtered;
+                  }}
+
+                  options={skill}
+                  freeSolo
+                  getOptionLabel={(option) => option}
+
+                  renderOption={(props, option) => {
+                    if (skill.filter(o => o === option).length === 0)
+                      return <li {...props}>{`Add "${option}"`}</li>;
+                    return <li {...props}>{option}</li>
+                  }}
+
                   renderInput={(params) => (
-                    <TextField {...params} label="Skills" />
+                    <TextField {...params} label="Skills" required={skill.length===0} />
                   )}
                 />
               </Grid>
+
+
+
+
+
               <Grid item lg={12} xs={12}>
                 <TextareaAutosize
                   id="Project Description"
@@ -193,51 +211,14 @@ const PostJob = (props) => {
               </Grid>
 
 
-              <Grid item lg={12} xs={12}>
-                <Autocomplete
-                  multiple
-                  required
-                  id="Teams Compositions"
-                  value={teamComposition}
 
-                  onChange={(event, newValue) => {
-                    setTeamComposition(newValue);
-                  }}
-                  selectOnFocus
-                  clearOnBlur
-                  handleHomeEndKeys
-                  filterOptions={(options, params) => {
-                    const filtered = filter(options, params);
-                    const { inputValue } = params;
 
-                    // Suggest the creation of a new value
-                    const isExisting = options.some((option) => inputValue === option);
-                    if (inputValue !== '' && !isExisting) {
-                      filtered.push(inputValue);
-                    }
-                    return filtered;
-                  }}
 
-                  options={teamComposition}
-                  freeSolo
-                  getOptionLabel={(option) => option}
-
-                  renderOption={(props, option) => {
-                    if (teamComposition.filter(o => o === option).length === 0)
-                      return <li {...props}>{`Add "${option}"`}</li>;
-                    return <li {...props}>{option}</li>
-                  }}
-
-                  renderInput={(params) => (
-                    <TextField {...params} label="Teams Compositions" />
-                  )}
-                />
-              </Grid>
 
               <Grid item lg={12} xs={12}>
                 <Autocomplete
                   // multiple
-                  required
+                  // required
                   id="Department"
                   options={departmentOptions ? departmentOptions : []}
                   disableCloseOnSelect
@@ -256,13 +237,13 @@ const PostJob = (props) => {
                     </li>
                   )}
                   renderInput={(params) => (
-                    <TextField {...params} label="Department" />
+                    <TextField {...params} label="Department" required={department===''} />
                   )}
                 />
               </Grid>
 
               <Grid item lg={12} xs={12}>
-                <TextField id="contact" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} fullWidth label="Contact Information" placeholder='Contact' type='tel' value={contact} onChange={e => { setContact(e.target.value) }} variant="outlined" required />
+                <TextField id="contact" fullWidth label="Contact Information" placeholder='Contact' type='tel' value={contact} onChange={e => { setContact(e.target.value) }} variant="outlined" required />
               </Grid>
 
               {projectError &&

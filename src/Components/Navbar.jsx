@@ -146,9 +146,6 @@ const Navbar = () => {
                 <Typography textAlign="center" component={Link} to={("/stdinternship")}> Internhsips</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={("/stdtraining")}> Trainings</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to={("/stdproject")}> Projects</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
@@ -189,10 +186,7 @@ const Navbar = () => {
               className={classes.button} component={Link} to={("/stdinternship")}>
               Internships
             </Button>
-            <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={("/stdtraining")}>
-              Trainings
-            </Button>
+            
             <Button x={{ my: 2, color: 'white', display: 'block' }}
               className={classes.button} component={Link} to={("/stdproject")}>
               Projects

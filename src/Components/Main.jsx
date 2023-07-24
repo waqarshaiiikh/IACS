@@ -70,6 +70,7 @@ const Main = () => {
                 <Route path="/stdproject"           element={ signin ?  user==="student"   ?    <Project/>             :<NotFound/>: <Signin/>  }/> 
                 <Route path="/stdscholarship"       element={ signin ?  user==="student"   ?    <StudentScholarship/>  :<NotFound/>: <Signin/>  }/> 
                 <Route path="/softwarehouse"        element={ signin ?  user==="student"   ?    <SoftwareHouse/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path="*"                     element={<NotFound/>}/> 
             </Routes>
         </>
     )
