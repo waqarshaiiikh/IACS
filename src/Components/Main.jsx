@@ -29,6 +29,7 @@ import NotFound from "../Pages/NotFound.js";
 import noteContext from '../context/notes/noteContext';
 import Project from './project';
 
+import Funding from "./Funding"; 
 
 
 
@@ -68,7 +69,7 @@ const Main = () => {
                 <Route path="/stdinternship"        element={ signin ?  user==="student"   ?    <StudentInternship/>   :<NotFound/>: <Signin/>  }/> 
                 <Route path="/stdtraining"          element={ signin ?  user==="student"   ?    <StudentTraining/>     :<NotFound/>: <Signin/>  }/> 
                 <Route path="/stdproject"           element={ signin ?  user==="student"   ?    <Project/>             :<NotFound/>: <Signin/>  }/> 
-                <Route path="/stdscholarship"       element={ signin ?  user==="student"   ?    <StudentScholarship/>  :<NotFound/>: <Signin/>  }/> 
+                <Route path='/student/funding'      element={ signin ?  user==="student"   ?    <Funding/>             :<NotFound/>: <Signin/>  }/>
                 <Route path="/softwarehouse"        element={ signin ?  user==="student"   ?    <SoftwareHouse/>       :<NotFound/>: <Signin/>  }/> 
                 <Route path="*"                     element={<NotFound/>}/> 
             </Routes>

@@ -35,9 +35,9 @@ const theme = createTheme({
 const Project = () => {
   return (
     <ThemeProvider theme={theme}>
-     <MetaData title="Projects"/>
-        <Navbar/>
-        <Projects/>
+      <MetaData title="Projects" />
+      <Navbar />
+      <Projects />
     </ThemeProvider>
   )
 }

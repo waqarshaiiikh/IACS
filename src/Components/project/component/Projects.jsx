@@ -182,9 +182,9 @@ const ClientJob = () => {
     setProjects(projectData.slice(startingIndex, endingIndex));
 
   }
+
   return (
     <>
-      {projectListError && <Box> <Typography color={'red'}>Server Error </Typography></Box>}
       {requestJob && <ApplyProjectForm projectId={projectId} open={requestJob} handleClose={closeRequest}  setApplyProjects={setApplyProjects} fname='Muhammad' lname='Waqar' rollNo='NED/1482/SE' skills={['HTML','CSS']}  />}
       
       <Container maxWidth="xl" >
@@ -242,8 +242,10 @@ const ClientJob = () => {
 
           <Grid item lg={10} xs={12} >
             <Grid container spacing={2} >
+            {projectListError && <Box sx={12}> <Typography color={'red'}>Server Error </Typography></Box>}  
+
               {
-                projectListLoading ?
+              projectListLoading ?
                   (
                     <Backdrop
                       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>

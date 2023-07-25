@@ -149,7 +149,7 @@ const Navbar = () => {
                 <Typography textAlign="center" component={Link} to={("/stdproject")}> Projects</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={("/stdscholarship")} >Scholarships</Typography>
+                <Typography textAlign="center" component={Link} to={("/student/funding")} >Funding</Typography>
               </MenuItem>
               {!a.Signin &&
 
@@ -192,8 +192,8 @@ const Navbar = () => {
               Projects
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={("/stdscholarship")}>
-              Scholarships
+              className={classes.button} component={Link} to={("/student/funding")}>
+              Funding
             </Button>
             {!a.Signin &&
 
