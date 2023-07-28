@@ -86,7 +86,7 @@ const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
             window.location.href = "/";
             window.location.href = "/";
         }).catch((e)=>{
-          console.log(e)
+        //   console.log(e)
           localStorage.clear();
           // navigate("/")
           window.location.href = "/";
@@ -97,9 +97,11 @@ const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
   const classes = useStyles();
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box 
+        // sx={{ display: 'block' }}
+        >
             <CssBaseline />
-            <AppBar position="fixed" sx={{ background: '#42b6EE' }} open={open}>
+            <AppBar sx={{ background: '#42b6EE' }} open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -149,7 +151,7 @@ const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
                 <Divider />
                 <List>
                     {
-                        ['Home', 'Students', 'SoftwareHouses', 'Jobs', 'Internships', 'Request', 'Messages'].map((item, index) => (
+                        ['Home', 'Students', 'SoftwareHouses', 'Jobs', 'Internships', 'Request', 'Messages', 'Funding'].map((item, index) => (
                             <Link style={{ textDecoration: "none" }} to={`/admin/${item}`} key={index}>
                                 <ListItem disablePadding >
                                     <ListItemButton sx={{ '&:hover': { color: '42b6EE' } }} >

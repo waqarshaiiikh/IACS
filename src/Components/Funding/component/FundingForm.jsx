@@ -1,302 +1,265 @@
-// import { Autocomplete, Box, Grid, TextField, TextareaAutosize, Typography, Button, Checkbox } from '@mui/material';
-// import React from 'react'
-
-// /**
-//  * 
-
-// Student Information:
-
-// Name
-// Email address
-// Contact number
-// Student ID/Registration number
-// Department/Faculty // drop down
-
-// Title of the project //textbox
-// Brief description of the project (including objectives and expected outcomes) //textarea
-// Proposed timeline/duration of the project //textbox date
-// Amount of funding requested //textbox number
-// Justification for the funding (explain why the funding is needed and how it will contribute to the project) //textarea
-
-// Supervisor Information:
-// Name of the supervisor //textbox
-// Email address of the supervisor //textbox
-// Department/Faculty of the supervisor //dropdown
-
-// Budget Breakdown: //text area
-// Itemized breakdown of how the requested funding will be utilized (e.g., equipment, materials, travel expenses, etc.)
-
-// Attachments: (optional) //textarea
-// Allow students to upload any additional supporting documents, such as project proposals, detailed budget, etc.
-
-// Terms and Conditions: // aggrement checkbox
-// Include a checkbox or statement where the student agrees to abide by the terms and conditions of the funding.
-
-// Submission Confirmation: // alert box
-
-// */
-
-// const requestStyle = {
-//     // position: 'absolute',
-//     // top: { lg: '50%', xs: '80%' },
-//     // left: '50%',
-//     // transform: 'translate(-50%, -50%)',
-//     width: { xs: '95%', lg: 'auto' },
-//     bgcolor: 'background.paper',
-//     borderRadius: '10px',
-//     // border: '1px solid #000',
-//     margin: 'auto',
-//     marginTop: '30px',
-//     // boxShadow: 24,
-//     p: { lg: 4, xs: 1 },
-// }
-
-
-// const FundingForm = () => {
-
-
-//     const handleSubmit = () => {
-
-//     }
-
-//     return (
-//         <Box sx={requestStyle}>
-
-
-//             <form onSubmit={handleSubmit}>
-//                 <Grid container spacing={1} sx={{
-//                     padding: '10px !important',
-//                 }}>
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Name" fullWidth label="Full Name" placeholder='Full Name' type='text'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" required />
-//                     </Grid>
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Email" fullWidth label="Email" placeholder='Email' type='text'
-//                             //    value={`${fname } ${ lname}`} 
-//                             variant="outlined" required />
-//                     </Grid>
-
-//                     <Grid item xs={12}>
-//                         <TextField id="rollNumber" fullWidth label="Roll Number" placeholder='Roll No'
-//                             type='text'
-//                             //    value={enrollment}
-//                             variant="outlined" required />
-//                     </Grid>
-
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Contact" fullWidth label="Contact" placeholder='Contact Number'
-//                             type='text'
-//                             //    value={`${fname } ${ lname}`} 
-//                             variant="outlined" required />
-//                     </Grid>
-
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Department" fullWidth label="Department Name" placeholder='Department Name'
-//                             type='text'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" required />
-//                     </Grid>
-
-
-
-//                     <Grid item xs={12}>
-//                         <TextField id="title" fullWidth label="Project Title" placeholder='Title of the project'
-//                             type='text'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" required />
-//                     </Grid>
-
-//                     <Grid item lg={12} xs={12}>
-//                         <TextareaAutosize
-//                             id="description"
-//                             maxRows={5}
-//                             required
-//                             // value={experience}
-//                             // onChange={e => setExperience(e.target.value)}
-//                             style={{ width: '100%', padding: '10px' }}
-//                             placeholder="Brief description of the project"
-
-//                         />
-//                     </Grid>
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Project__timeline" fullWidth 
-//                             label="Project Duration" 
-//                         // placeholder='Duration of the project'
-//                             type='date'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" 
-//                             required />
-//                     </Grid>
-//                     {/* <DatePicker
-//                         label="Date Picker"
-//                         format="M/D/YYYY"
-//                         defaultValue={dayjs('2022-04-17')}
-//                         slotProps={{ field: { shouldRespectLeadingZeros: true } }}
-//                     /> */}
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Project__Amount" fullWidth label="Requested Amount" placeholder='Amount of Funding Request '
-//                             type='text'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" required />
-//                     </Grid>
-
-//                     <Grid item lg={12} xs={12}>
-//                         <TextareaAutosize
-//                             id="justification"
-//                             maxRows={5}
-//                             required
-//                             // value={experience}
-//                             // onChange={e => setExperience(e.target.value)}
-//                             style={{ width: '100%', padding: '10px' }}
-//                             placeholder="Justification for the funding"
-
-//                         />
-//                     </Grid>
-
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Supervisor__Name" fullWidth label="Supervisor Name"
-//                          placeholder='Name of the Supervisor'
-//                             type='text'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" required />
-//                     </Grid>
-
-
-
-//                     <Grid item xs={12}>
-//                         <TextField id="Supervisor__Email" fullWidth label="Supervisor Email"
-//                          placeholder='Email of the Supervisor'
-//                             type='email'
-//                             //    value={`${fname } ${ lname}`}
-//                             variant="outlined" required />
-//                     </Grid>
-
-
-
-//                     <Grid item lg={12} xs={12}>
-//                         <Autocomplete
-//                             // multiple
-//                             // required
-//                             id="Department"
-//                             //   options={departmentOptions ? departmentOptions : []}
-//                             disableCloseOnSelect
-//                             getOptionLabel={(option) => option.departmentName}
-//                             //   value={department}
-//                             //   onChange={(e, value) => setDepartment(value)}
-//                             renderOption={(props, option, { selected }) => (
-//                                 <li {...props}>
-//                                     <Checkbox
-//                                         // icon={icon}
-//                                         // checkedIcon={checkedIcon}
-//                                         style={{ marginRight: 8 }}
-//                                         checked={selected}
-//                                     />
-//                                     {option.departmentName}
-//                                 </li>
-//                             )}
-//                             renderInput={(params) => (
-//                                 <TextField {...params} label="Department"
-//                                 // required={department===''} 
-//                                 />
-//                             )}
-//                         />
-//                     </Grid>
-
-
-
-//                     <Grid item lg={12} xs={12}>
-//                         <TextareaAutosize
-//                             id="budget__breakdown"
-//                             maxRows={5}
-//                             required
-//                             // value={experience}
-//                             // onChange={e => setExperience(e.target.value)}
-//                             style={{ width: '100%', padding: '10px' }}
-//                             placeholder="e.g., equipment, materials, travel expenses, etc."
-
-//                         />
-//                     </Grid>
-
-
-                    
-
-
-
-
-//                     {/* <Grid item lg={12} xs={12}>
-//                 <Autocomplete
-//                   multiple
-//                   required
-//                   id="Teams Compositions"
-//                   value={teamComposition}
-
-//                   onChange={(event, newValue) => {
-//                     setTeamComposition(newValue);
-//                   }}
-//                   selectOnFocus
-//                   clearOnBlur
-//                   handleHomeEndKeys
-//                   filterOptions={(options, params) => {
-//                     const filtered = filter(options, params);
-//                     const { inputValue } = params;
-
-//                     // Suggest the creation of a new value
-//                     const isExisting = options.some((option) => inputValue === option);
-//                     if (inputValue !== '' && !isExisting) {
-//                       filtered.push(inputValue);
-//                     }
-//                     return filtered;
-//                   }}
-
-//                   options={teamComposition}
-//                   freeSolo
-//                   getOptionLabel={(option) => option}
-
-//                   renderOption={(props, option) => {
-//                     if (teamComposition.filter(o => o === option).length === 0)
-//                       return <li {...props}>{`Add "${option}"`}</li>;
-//                     return <li {...props}>{option}</li>
-//                   }}
-
-//                   renderInput={(params) => (
-//                     <TextField {...params} label="Teams Compositions" required={teamComposition.length===0} />
-//                   )}
-//                 />
-//               </Grid> */}
-
-             
-
-
-//                     <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'right' }}>
-//                         <Button
-//                             // disabled={projectLoading}
-//                             variant="contained" type='submit'>Apply</Button>
-//                     </Grid>
-
-//                 </Grid>
-//             </form>
-//         </Box>
-//     )
-// }
-
-// export default FundingForm
-
-
-import React from 'react'
-
-const FundingForm = () => {
-  return (
-    <div>FundingForm</div>
-  )
+import { Autocomplete, Box, Grid, TextField, TextareaAutosize, Typography, Button, Checkbox, createFilterOptions } from '@mui/material';
+import { DatePicker, DateRangePicker, LocalizationProvider } from '@mui/lab/';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import React, { useEffect, useState } from 'react'
+import useFetchData from '../../../Hook/useFetchData';
+import FundingTrack from './FundingTrack'
+
+
+const requestStyle = {
+    // position: 'absolute',
+    // top: { lg: '50%', xs: '80%' },
+    // left: '50%',
+    // transform: 'translate(-50%, -50%)',
+    // border: '1px solid #000',
+    // boxShadow: 24,
+    width: { xs: '95%', lg: 'auto' },
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    margin: 'auto',
+    marginTop: '30px',
+    p: { lg: 4, xs: 1 },
+}
+
+
+
+const FundingForm = ({fundingProposalLoading,  getFundingProposal }) => {
+
+    const { data: departmentOptions, fetchData: getsDepartment } = useFetchData();
+
+    const [formFields, setFormFields] = useState({});
+    const [consent, setConsent] = useState(false);
+
+    useEffect(() => {
+        getsDepartment('/department');
+    }, [])
+    
+    const onFormFieldChange = (e) => {
+        setFormFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        getFundingProposal('/funding/apply', 'POST', {...formFields,  studentId: localStorage.getItem('userId')} )
+    }
+
+    return (
+        <Box sx={requestStyle}>
+
+            <form onSubmit={handleSubmit}>
+                <Grid container spacing={1} sx={{
+                    padding: '10px !important',
+                }}>
+
+                    <Grid item xs={12}>
+                        <Typography variant='h4' style={{ margin: '20px 0' }}> Student Detail</Typography>
+                        <TextField id="Name"
+                            value={formFields.studentName || ''}
+                            onChange={onFormFieldChange}
+                            name='studentName'
+                            fullWidth
+                            label="Full Name"
+                            placeholder='Full Name'
+                            type='text'
+                            variant="outlined"
+                            required
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField id="Email" fullWidth label="Email" placeholder='Email' type='text'
+                            value={formFields.studentEmail || ''}
+                            onChange={onFormFieldChange}
+                            name='studentEmail'
+                            variant="outlined" required />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField id="rollNumber" fullWidth label="Roll Number" placeholder='Roll No'
+                            type='text'
+                            value={formFields.studentRollNumber || ''}
+                            onChange={onFormFieldChange}
+                            name='studentRollNumber'
+                            variant="outlined" required />
+                    </Grid>
+
+
+                    <Grid item xs={12}>
+                        <TextField id="Contact" fullWidth label="Contact" placeholder='Contact Number'
+                            type='text'
+                            value={formFields.studentContact || ''}
+                            onChange={onFormFieldChange}
+                            name='studentContact'
+                            variant="outlined" required />
+                    </Grid>
+
+
+                    <Grid item xs={12}>
+                        <Autocomplete
+                            id="studentDepartment"
+                            options={departmentOptions}
+                            required
+                            onChange={(event, newValue) => {
+                                setFormFields(prev => ({ ...prev, studentDepartment: newValue.departmentName }));
+                            }}
+                            getOptionLabel={(option) => option.departmentName}
+                            renderOption={(props, option) => <li {...props}>{option.departmentName}</li>}
+                            renderInput={(params) => (
+                                <TextField {...params} label="Department Name" required={formFields?.studentDepartment?.length === 0}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Typography variant='h4' style={{ margin: '20px 0' }}> Project Detail </Typography>
+                        <TextField
+                            id="title"
+                            fullWidth
+                            label="Title"
+                            placeholder='Title of the project'
+                            type='text'
+                            value={formFields.projectTitle || ''}
+                            onChange={onFormFieldChange}
+                            name='projectTitle'
+                            variant="outlined" required />
+                    </Grid>
+
+
+                    <Grid item xs={12}>
+                        <TextField
+                            multiline
+                            rows={5}
+                            id="description"
+                            label="Description"
+                            placeholder="Brief description of the project"
+                            fullWidth
+                            value={formFields.projectDescription || ''}
+                            onChange={onFormFieldChange}
+                            name='projectDescription'
+                            required
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} >
+                        <TextField
+                            id="duration"
+                            label="Duration"
+                            placeholder="e.g, 30 day, 1 week,  3 month , 1 year ....."
+                            fullWidth
+                            required
+                            value={formFields.projectDuration || ''}
+                            onChange={onFormFieldChange}
+                            name='projectDuration'
+                        />
+
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField id="Project__Amount" fullWidth label="Requested Amount" placeholder='Amount of Funding Request '
+                            type='text'
+                            value={formFields.projectAmount || ''}
+                            onChange={onFormFieldChange}
+                            name='projectAmount'
+                            variant="outlined" required />
+                    </Grid>
+
+                    <Grid item lg={12} xs={12}>
+                        <TextField
+                            multiline
+                            rows={5}
+                            id="Justification"
+                            required
+                            placeholder="Justification for the funding"
+                            fullWidth
+                            label={'Funding Justification'}
+                            value={formFields.amountJustification || ''}
+                            onChange={onFormFieldChange}
+                            name='amountJustification'
+                        />
+                    </Grid>
+
+                    <Grid item lg={12} xs={12}>
+                        <TextField
+                            id="budget"
+                            rows={5}
+                            required
+                            multiline
+                            fullWidth
+                            label={'Budget Breakdown'}
+                            placeholder="e.g., equipment, materials, travel expenses, etc."
+                            value={formFields.amountBreakdown || ''}
+                            onChange={onFormFieldChange}
+                            name='amountBreakdown'
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Typography variant='h4' style={{ margin: '20px 0' }}> Supervisor Detail </Typography>
+                        <TextField
+                            id="Name"
+                            fullWidth
+                            label="Name"
+                            placeholder='Name of the Supervisor'
+                            type='text'
+                            value={formFields.supervisorName || ''}
+                            onChange={onFormFieldChange}
+                            name='supervisorName'
+                            variant="outlined" required />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            id="Supervisor__Email"
+                            fullWidth
+                            label="Email"
+                            placeholder='Email of the Supervisor'
+                            type='email'
+                            freeSolo
+                            value={formFields.supervisorEmail || ''}
+                            onChange={onFormFieldChange}
+                            name='supervisorEmail'
+                            variant="outlined" required />
+                    </Grid>
+
+                    <Grid item lg={12} xs={12}>
+                        <Autocomplete
+                            id="supervisorDepartment"
+                            options={departmentOptions}
+                            required
+                            onChange={(event, newValue) => {
+                                setFormFields(prev => ({ ...prev, supervisorDepartment: newValue.departmentName }));
+                            }}
+                            getOptionLabel={(option) => option.departmentName}
+                            renderOption={(props, option) => <li {...props}>{option.departmentName}</li>}
+                            renderInput={(params) => (
+                                <TextField {...params} label="Department Name" required={formFields?.supervisorDepartment?.length === 0}
+                                />
+                            )}
+                        />
+                    </Grid>
+
+                    <Grid item sx={12} >
+                        <Box display={{ display: 'flex', alignItems: 'center', color: 'rgba(0, 0, 0, 0.6) !important' }}>
+                            <Checkbox defaultValue={false} onChange={() => { setConsent(prev => !prev) }}>
+                            </Checkbox>
+                            <Typography>Are you Sure? You have entered correct information, otherwise we will take action agents You.  </Typography>
+                        </Box>
+
+                    </Grid>
+
+                    <Grid item lg={12} xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                            variant="contained" type='submit' disabled={!consent || fundingProposalLoading} >Apply</Button>
+                    </Grid>
+
+                </Grid>
+            </form>
+
+
+        </Box>
+    )
 }
 
 export default FundingForm
+

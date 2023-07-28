@@ -7,6 +7,13 @@ const useFetchData = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const updateData = (newData) =>{
+    if(!data)
+    setData( newData );
+    else
+    setData(prev=> [...prev, newData])
+  }
+
   const fetchData = async (route, method = 'GET', body = null) => {
     try {
       setLoading(true);
@@ -38,7 +45,7 @@ const useFetchData = () => {
     }
   };
 
-  return { data, loading, error, fetchData };
+  return { data, updateData, loading, error, fetchData };
 };
 
 export default useFetchData;

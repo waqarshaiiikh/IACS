@@ -137,7 +137,7 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" component={Link} to={("/softwarehouse")} > Software House</Typography>
+                <Typography textAlign="center" component={Link} to={("/companies")} > Companies</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" component={Link} to={("/stdjob")} > Jobs</Typography>
@@ -175,8 +175,8 @@ const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
-              className={classes.button} component={Link} to={("/softwarehouse")}>
-              Software House
+              className={classes.button} component={Link} to={("/companies")}>
+              Companies
             </Button>
             <Button x={{ my: 2, color: 'white', display: 'block' }}
               className={classes.button} component={Link} to={("/stdjob")}>

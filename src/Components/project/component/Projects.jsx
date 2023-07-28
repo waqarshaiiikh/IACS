@@ -121,7 +121,6 @@ const ClientJob = () => {
   useEffect(()=>{
     gettingFetchingList('/project').then(res=>{
       res = res.map(res=>({...res, allStudents: res.appliedStudents.map(student=>student.student.id)}));
-      console.log(res);
       setProjectDataSearch(res)
       setProjectData(res)
       setProjects(res.slice(0, showPerPage))
@@ -178,7 +177,6 @@ const ClientJob = () => {
     const startingIndex = (pageNumber - 1) * showPerPage;
     const endingIndex = startingIndex + showPerPage <= projectData.length ? startingIndex + showPerPage : projectData.length;
 
-    console.log(startingIndex, endingIndex);
     setProjects(projectData.slice(startingIndex, endingIndex));
 
   }

@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../Navbar'
 import MetaData from '../../MetaData'
 import FundingForm from './component/FundingForm'
-import { createTheme } from '@mui/material'
+import FundingTrack from './component/FundingTrack';
+import { Typography, createTheme } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
+import useFetchData from '../../Hook/useFetchData';
 
-const index = () => {
+const Index = () => {
     
 const theme = createTheme({
     palette: {
@@ -20,15 +22,39 @@ const theme = createTheme({
       },
     },
  })
+
+
+    const { 
+      loading: fundingProposalLoading, 
+      error: fundingProposalError, 
+      data: fundingProposalData, 
+      fetchData: getFundingProposal } = useFetchData();
+
+      useEffect(()=>{
+        getFundingProposal(`/funding/student?id=${localStorage.getItem('userId')}`)
+      },[])
+
+
+
   return (
     <ThemeProvider theme={theme}>
 
     <Navbar />
     <MetaData title="Projects" />
-    <FundingForm />
+    {/* {fundingProposalError && fundingProposalError != null && <Typography>Server Busy</Typography>} */}
+    {!fundingProposalData &&
+     <FundingForm 
+          fundingProposalLoading={fundingProposalLoading}
+          getFundingProposal={getFundingProposal}
+      />}
+    {fundingProposalData &&
+       <FundingTrack 
+          data={fundingProposalData}
+          
+          />}
 
     </ThemeProvider>
   )
 }
 
-export default index
+export default Index

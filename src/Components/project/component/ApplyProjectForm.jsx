@@ -75,7 +75,6 @@ const ApplyProjectForm = (props) => {
     useEffect(() => {
       getsSkills('/skill');
       // getStudentData('/student/detail?id='+localStorage.getItem('userId'))
-
     },[])
   
     /**
@@ -222,6 +221,7 @@ const ApplyProjectForm = (props) => {
                   onChange={(event, newValue) => {
                     setTeamComposition(newValue);
                   }}
+                  
                   selectOnFocus
                   clearOnBlur
                   handleHomeEndKeys
