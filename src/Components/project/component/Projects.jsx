@@ -176,7 +176,6 @@ const ClientJob = () => {
     setCurrentPage(pageNumber);
     const startingIndex = (pageNumber - 1) * showPerPage;
     const endingIndex = startingIndex + showPerPage <= projectData.length ? startingIndex + showPerPage : projectData.length;
-
     setProjects(projectData.slice(startingIndex, endingIndex));
 
   }
@@ -185,7 +184,7 @@ const ClientJob = () => {
     <>
       {requestJob && <ApplyProjectForm projectId={projectId} open={requestJob} handleClose={closeRequest}  setApplyProjects={setApplyProjects} fname='Muhammad' lname='Waqar' rollNo='NED/1482/SE' skills={['HTML','CSS']}  />}
       
-      <Container maxWidth="xl" >
+      <Container maxWidth="xl"  sx={{ padding: '0', }} >
         <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
             <h1>Projects</h1>
@@ -220,7 +219,7 @@ const ClientJob = () => {
                   label="Search"
                   onChange={handleChange}
                 >
-                  <MenuItem value={'title'}>Tittle</MenuItem>
+                  <MenuItem value={'title'}>Title</MenuItem>
                   <MenuItem value={'department'}>Department</MenuItem>
                 </Select>
               </FormControl>
@@ -257,7 +256,7 @@ const ClientJob = () => {
                     (projects && projects.map((data, index) => (
 
                       <Grid item lg={12} key={index}>
-                        <Box sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
+                        <Box lg={12} sx={{ borderRadius: '10px', padding: '10px', boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
                           <div className={classes.software_title}>
                             <div className={classes.logoDateContainer}>
                               <div className="logo">
@@ -267,8 +266,8 @@ const ClientJob = () => {
                                   src={`https://res.cloudinary.com/dksfpant5/image/upload/v1659803659/IACSImages/industry/${data.industryId}.jpg`}
                                   alt="companyLogo" />
                               </div>
-                              <Typography sx={{ display: 'block', color: '#d3d3d3' }}>
-                                {moment(data?.date).format('DD MMM YYYY')}
+                              <Typography sx={{ display: 'block', opacity: 0.5, fontSize: '0.7rem', fontStyle: 'italic'  }}>
+                                {moment(data?.postDate).format('DD MMM YYYY')}
                               </Typography>
                             </div>
 
@@ -290,6 +289,11 @@ const ClientJob = () => {
                                     <Chip label={skill} color= 'primary' sx={{ marginRight: '10px', marginBottom: '5px',height: '20px !important', borderRadius: '3px !important' }} />))
                                   }
                               </Typography>
+                              </Box>
+                              
+                              <Box sx={{ marginTop: '20px' , opacity: 0.6, textAlign: 'end'}}>
+                                <Typography  sx={{ display: 'inline', fontWeight: 'bold', fontSize: '0.7rem', fontStyle: '', marginRight: '10px' }}> {"Dead Line :"} </Typography>
+                                <Typography sx={{ display: 'inline', fontSize: '0.7rem' }}> {moment(data?.deadlineDate).format('DD MMM YYYY')} </Typography>
                               </Box>
 
                             </Box>
@@ -325,6 +329,7 @@ const ClientJob = () => {
                               <Typography variant='h6' sx={{display: 'inline', marginRight: '10px'}}> {"Contact "} </Typography>
                               <Typography sx={{display: 'inline'}}> {data.contact} </Typography>
                               </Box>
+             
 
 
                             </AccordionDetails>

@@ -413,7 +413,7 @@ const StudentInternship = () => {
                             sx={{ color: '#42b6EE', cursor: 'pointer', marginTop: { lg: 'none', xs: '10px' }, }} />
                     </Grid>
                     <Grid item lg={12} sx={{ width: { xs: '100%' }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <Button variant='contained' onClick={openRequest}>Request Internhsip</Button>
+                        <Button variant='contained' onClick={openRequest}>Request Internship</Button>
                     </Grid>
                     <Grid item lg={10} xs={12} >
                         <Grid container spacing={2}>

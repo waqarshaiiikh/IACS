@@ -51,7 +51,7 @@ const Main = () => {
     
                 <Route path='/admin/Home'                    element={ signin ?  user==="admin"     ?    <Admin/>                     :<NotFound/>: <Signin/>  }/> 
                 <Route path='/admin/Students'                element={ signin ?  user==="admin"     ?    <AdminStudents/>             :<NotFound/>: <Signin/>  }/> 
-                <Route path='/admin/SoftwareHouses'          element={ signin ?  user==="admin"     ?    <AdminSoftwareHouses/>       :<NotFound/>: <Signin/>  }/> 
+                <Route path='/admin/Companies'          element={ signin ?  user==="admin"     ?    <AdminSoftwareHouses/>       :<NotFound/>: <Signin/>  }/> 
                 <Route path='/admin/Jobs'                    element={ signin ?  user==="admin"     ?    <AdminJobs/>                 :<NotFound/>: <Signin/>  }/> 
                 <Route path='/admin/Internships'             element={ signin ?  user==="admin"     ?    <AdminInternships/>          :<NotFound/>: <Signin/>  }/> 
                 <Route path='/admin/Request'                 element={ signin ?  user==="admin"     ?    <AdminRequest/>              :<NotFound/>: <Signin/>  }/> 

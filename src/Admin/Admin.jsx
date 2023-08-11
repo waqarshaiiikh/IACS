@@ -107,9 +107,9 @@ const Admin = () => {
           <Grid container spacing={5} justifyContent="center" alignItems="center" >
             <Grid item lg={3} xs={12}>
               <div className="adminCard adminStatics">
-                <Link to="/admin/SoftwareHouses" className='link'>
+                <Link to="/admin/Companies" className='link'>
                   <div className='staticsNumber'>
-                    <p>Software House</p>
+                    <p>Companies</p>
                     <h1>{SoftwareHouse}</h1>
                   </div>
                 </Link>

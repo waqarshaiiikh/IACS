@@ -18,6 +18,7 @@ import "../../../CSS/Utils.css";
 import { apiCAll } from '../../../integration/apiCall';
 import noteContext from '../../../context/notes/noteContext';
 import useFetchData from '../../../Hook/useFetchData';
+import moment from 'moment';
 
 
 const requestStyle = {
@@ -116,13 +117,12 @@ const ApplyProjectForm = (props) => {
         name : `${fname } ${ lname}`,
         departmentRollNumber : enrollment,
         skillsName: skill,
-      // skillsName : skill.map(s=>s.skillname),
         experience: experience,
         contact : contact,
         advisorName: advisorName,
         advisorEmail: advisorEmail,
         advisorContact: advisorContact,
-        teamComposition: teamComposition,
+        teamComposition: teamComposition
       };
 
 

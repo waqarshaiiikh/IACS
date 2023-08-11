@@ -151,7 +151,7 @@ const AdminNavbar = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
                 <Divider />
                 <List>
                     {
-                        ['Home', 'Students', 'SoftwareHouses', 'Jobs', 'Internships', 'Request', 'Messages', 'Funding'].map((item, index) => (
+                        ['Home', 'Students', 'Companies', 'Jobs', 'Internships', 'Request', 'Messages', 'Funding'].map((item, index) => (
                             <Link style={{ textDecoration: "none" }} to={`/admin/${item}`} key={index}>
                                 <ListItem disablePadding >
                                     <ListItemButton sx={{ '&:hover': { color: '42b6EE' } }} >

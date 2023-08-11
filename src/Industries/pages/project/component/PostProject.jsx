@@ -16,6 +16,9 @@ import {
 } from '@mui/material';
 import "../../../../CSS/Utils.css";
 import useFetchData from '../../../../Hook/useFetchData';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import moment from 'moment';
 
 
 
@@ -30,6 +33,13 @@ const requestStyle = {
   border: '1px solid #000',
   boxShadow: 24,
   p: { lg: 4, xs: 1 },
+  '& textarea': {
+    border: '1px solid #0000004f',
+    borderRadius: '3px',
+    ':hover': {
+      border: '1px solid black',
+    }
+  }
 }
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -38,7 +48,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const filter = createFilterOptions();
 
 
-const PostJob = (props) => {
+const PostProject = (props) => {
 
   const { data: projectsData, loading: projectLoading, error: projectError, fetchData: postProjects } = useFetchData();
 
@@ -46,7 +56,7 @@ const PostJob = (props) => {
   const { data: departmentOptions, fetchData: getsDepartments } = useFetchData();
 
   // useEffect(() => { getsSkills('/skill') },[])
-  useEffect(() => { getsDepartments('/department')},[])
+  useEffect(() => { getsDepartments('/department') }, [])
 
 
 
@@ -64,14 +74,14 @@ const PostJob = (props) => {
   /**
    * its contains the array of objects 
    */
-  const [skill, setSkill] = useState([  ]);
+  const [skill, setSkill] = useState([]);
   const [description, setDescription] = useState();
   const [scope, setScope] = useState();
   const [deliverables, setDeliverables] = useState();
   const [methodology, setMethodology] = useState();
   const [department, setDepartment] = useState();
   const [contact, setContact] = useState();
-
+  const [deadlineDate, setDeadlineDate] = useState(moment(new Date()).add(12, 'M'));
 
   const handleSubmit = (e) => {
 
@@ -88,7 +98,9 @@ const PostJob = (props) => {
       "departmentId": department.id,
       "contact": contact,
       "active": true,
-      "industryId": localStorage.getItem('userId')
+      "industryId": localStorage.getItem('userId'),
+      postDate: new Date(),
+      deadlineDate: deadlineDate
     }
 
 
@@ -111,17 +123,16 @@ const PostJob = (props) => {
           </Typography>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={1}>
+
               <Grid item lg={6} xs={12}>
                 <TextField id="tittle" fullWidth label="Project Tittle" placeholder='Project Tittle' type='text' value={tittle} onChange={e => { setTittle(e.target.value) }} variant="outlined" required />
               </Grid>
+
               <Grid item lg={6} xs={12}>
                 <TextField id="title" fullWidth label="Project Statement" placeholder='Project Statement' type='text' value={statement} onChange={e => { setStatement(e.target.value) }} variant="outlined" required />
               </Grid>
 
-              
-
-
-              <Grid item lg={12} xs={12}>
+              <Grid item lg={12} xs={12} className={requestStyle.gridItem}>
                 <Autocomplete
                   multiple
                   required
@@ -156,14 +167,10 @@ const PostJob = (props) => {
                   }}
 
                   renderInput={(params) => (
-                    <TextField {...params} label="Skills" required={skill.length===0} />
+                    <TextField {...params} label="Skills" required={skill.length === 0} />
                   )}
                 />
               </Grid>
-
-
-
-
 
               <Grid item lg={12} xs={12}>
                 <TextareaAutosize
@@ -176,6 +183,7 @@ const PostJob = (props) => {
                   placeholder="Project Description"
                 />
               </Grid>
+
               <Grid item lg={12} xs={12}>
                 <TextareaAutosize
                   id="Project Scope"
@@ -187,6 +195,7 @@ const PostJob = (props) => {
                   placeholder="Project Scope"
                 />
               </Grid>
+
               <Grid item lg={12} xs={12}>
                 <TextareaAutosize
                   id="Deliverables"
@@ -198,6 +207,7 @@ const PostJob = (props) => {
                   placeholder="Deliverables"
                 />
               </Grid>
+
               <Grid item lg={12} xs={12}>
                 <TextareaAutosize
                   id="Methodology"
@@ -209,11 +219,6 @@ const PostJob = (props) => {
                   placeholder="Methodology"
                 />
               </Grid>
-
-
-
-
-
 
               <Grid item lg={12} xs={12}>
                 <Autocomplete
@@ -237,13 +242,37 @@ const PostJob = (props) => {
                     </li>
                   )}
                   renderInput={(params) => (
-                    <TextField {...params} label="Department" required={department===''} />
+                    <TextField {...params} label="Department" required={department === ''} />
                   )}
                 />
               </Grid>
 
               <Grid item lg={12} xs={12}>
                 <TextField id="contact" fullWidth label="Contact Information" placeholder='Contact' type='tel' value={contact} onChange={e => { setContact(e.target.value) }} variant="outlined" required />
+              </Grid>
+
+              <Grid item lg={12} xs={12}>
+                {/* <TextField id="deadlineDate" fullWidth label="Deadline" placeholder='Contact' type='date' value={deadlineDate} onChange={e => { setDeadlineDate(e.target.value) }} variant="outlined" required /> */}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+
+                  <DatePicker
+                    disablePast
+                    inputFormat='dd/MM/yyyy'
+                    label="Deadline"
+                    openTo="year"
+                    views={['year', 'month', 'day']}
+                    disableHighlightToday
+                    value={deadlineDate}
+                    pl
+                    
+                    onChange={(newValue) => {
+
+                      setDeadlineDate(new Date(newValue));
+
+                    }}
+                    renderInput={(params) => <TextField {...params}  variant="outlined" required fullWidth/>}
+                  />
+                </LocalizationProvider>
               </Grid>
 
               {projectError &&
@@ -266,4 +295,4 @@ const PostJob = (props) => {
 }
 
 
-export default PostJob
+export default PostProject

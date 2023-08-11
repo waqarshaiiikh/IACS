@@ -259,7 +259,7 @@ const AdminSoftwareHouses = () => {
         <Container maxWidth="xl" sx={{ padding: '0' }}>
           <Grid container spacing={2} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
             <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'block' }, marginTop: '10px' }}>
-              <h1>Software House</h1>
+              <h1>Companies</h1>
             </Grid>
             <Grid item lg={12}
               sx={{
