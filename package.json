@@ -41,7 +41,9 @@
     "build": "set PORT=80 && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"json-server --watch db.json --port 3001\" \"npm start\""
+    "dev": "concurrently \"json-server --watch db.json --port 3001\" \"npm start\"",
+    "deploy": "aws s3 sync build/ s3://iacs-live",
+    "prod": "npm run build && npm run deploy"
   },
   "eslintConfig": {
     "extends": [
